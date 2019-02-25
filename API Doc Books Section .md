@@ -1,5 +1,4 @@
 ## BOOKS 
-* mohamed - mokhtar 
 # Add review
 Add book reviews for members using OAuth. You'll need to register your app (required). 
 URL: https://www.goodreads.com/review.xml 

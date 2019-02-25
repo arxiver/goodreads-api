@@ -29,3 +29,23 @@ Add book reviews for members using OAuth.
     $ curl -H 'content-type: application/json' -v -X PUT -d '{"title":"Foo bar","price":"19.99","author":"Foo author","editor":"Foo editor"}' http://localhost:8000/api/books/:id
     $ curl -H 'content-type: application/json' -v -X DELETE http://localhost:8000/api/books/:id
 ```
+
+# Add book shelf
+* Add book shelves for members using OAuth. You'll need to register your app (required). 
+* URL: https://www.goodreads.com/user_shelves.xml 
+* HTTP method: POST 
+* Parameters: 
+* user_shelf[name]: Name of the new shelf
+* user_shelf[exclusive_flag]: 'true' or 'false' (optional, default false)
+* user_shelf[sortable_flag]: 'true' or 'false' (optional, default false)
+* #user_shelf[featured]: 'true' or 'false' (optional, default false)
+
+# Edit book shelf
+* Edit a shelf using OAuth. You'll need to register your app (required). 
+* URL: https://www.goodreads.com/user_shelves/USER_SHELF_ID.xml 
+* HTTP method: PUT 
+* Parameters: 
+* user_shelf[name]: Name of the new shelf
+* user_shelf[exclusive_flag]: 'true' or 'false' (optional, default false)
+* user_shelf[sortable_flag]: 'true' or 'false' (optional, default false)
+* user_shelf[featured]: 'true' or 'false' (optional, default false)

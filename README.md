@@ -2,7 +2,7 @@
 CMP 203 Software Engineering Course`s Project [ Backend repository ]
 ### How to run this appliction in your machine 
 ### windows
-run this command in terminal / cmd / etc
+run this commands in terminal / cmd / etc
 ``` 
 Laravel development local server
 

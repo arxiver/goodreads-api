@@ -37,7 +37,7 @@
 public function add($user_id,$book_id,$shelf_id){
 
 }
-public function add($user_id,$book_id,$shelf_id){
+public function delete($user_id,$book_id,$shelf_id){
 
 }
 ```

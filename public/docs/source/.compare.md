@@ -20,6 +20,7 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
+<<<<<<< HEAD
 #Book
 <!-- START_c84ecb8d4fd02d9a637dac124b62c629 -->
 ## List all books
@@ -781,6 +782,25 @@ curl -X GET -G "http://localhost/api/shlef/list"
 
 ```javascript
 const url = new URL("http://localhost/api/shlef/list");
+=======
+#following management
+
+APIs for managing following process
+<!-- START_5e901bbc73b2f95e077625c8fdf1a97a -->
+## followUser
+ Start following a user
+
+@bodyParam USER_ID int required Goodreads user id of user to follow.
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/" 
+```
+
+```javascript
+const url = new URL("http://localhost/");
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 
 let headers = {
     "Accept": "application/json",
@@ -788,6 +808,7 @@ let headers = {
 }
 
 fetch(url, {
+<<<<<<< HEAD
     method: "GET",
     headers: headers,
 })
@@ -882,6 +903,10 @@ fetch(url, {
     method: "GET",
     headers: headers,
     body: body
+=======
+    method: "POST",
+    headers: headers,
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -890,6 +915,7 @@ fetch(url, {
 > Example response (200):
 
 ```json
+<<<<<<< HEAD
 null
 ```
 
@@ -1029,6 +1055,42 @@ fetch(url, {
     method: "GET",
     headers: headers,
     body: body
+=======
+{
+    "state": true
+}
+```
+
+### HTTP Request
+`POST /`
+
+
+<!-- END_5e901bbc73b2f95e077625c8fdf1a97a -->
+
+<!-- START_668b8efe176aaff0d04b6555c1e4a39c -->
+## unfollowUser
+ Stop following a user
+
+@bodyParam USER_ID int required Goodreads user id of user to stop following.
+
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/" 
+```
+
+```javascript
+const url = new URL("http://localhost/");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -1037,6 +1099,7 @@ fetch(url, {
 > Example response (200):
 
 ```json
+<<<<<<< HEAD
 null
 ```
 
@@ -1100,5 +1163,17 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_50cd03fee8d42aa9c0fa3d943a51f4cf -->
+=======
+{
+    "state": true
+}
+```
+
+### HTTP Request
+`DELETE /`
+
+
+<!-- END_668b8efe176aaff0d04b6555c1e4a39c -->
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 
 

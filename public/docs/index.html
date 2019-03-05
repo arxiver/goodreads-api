@@ -48,6 +48,7 @@
 <p>Welcome to the generated API reference.
 <a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
 <!-- END_INFO -->
+<<<<<<< HEAD
 <h1>Book</h1>
 <!-- START_c84ecb8d4fd02d9a637dac124b62c629 -->
 <h2>List all books</h2>
@@ -254,6 +255,19 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/owned_books" </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/owned_books");
+=======
+<h1>following management</h1>
+<p>APIs for managing following process</p>
+<!-- START_5e901bbc73b2f95e077625c8fdf1a97a -->
+<h2>followUser</h2>
+<p>Start following a user</p>
+<p>@bodyParam USER_ID int required Goodreads user id of user to follow.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/");
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 
 let headers = {
     "Accept": "application/json",
@@ -261,6 +275,7 @@ let headers = {
 }
 
 fetch(url, {
+<<<<<<< HEAD
     method: "GET",
     headers: headers,
 })
@@ -466,12 +481,17 @@ let headers = {
 fetch(url, {
     method: "GET",
     headers: headers,
+=======
+    method: "POST",
+    headers: headers,
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
+<<<<<<< HEAD
 <pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/reviwes</code></p>
@@ -1086,11 +1106,33 @@ let headers = {
 
 let body = {
     "shelf_name": "PbQK1EFqdl0nmy2N"
+=======
+<pre><code class="language-json">{
+    "state": true
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /</code></p>
+<!-- END_5e901bbc73b2f95e077625c8fdf1a97a -->
+<!-- START_668b8efe176aaff0d04b6555c1e4a39c -->
+<h2>unfollowUser</h2>
+<p>Stop following a user</p>
+<p>@bodyParam USER_ID int required Goodreads user id of user to stop following.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://localhost/" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 }
 
 fetch(url, {
     method: "DELETE",
     headers: headers,
+<<<<<<< HEAD
     body: body
 })
     .then(response =&gt; response.json())
@@ -1144,12 +1186,15 @@ fetch(url, {
     method: "GET",
     headers: headers,
     body: body
+=======
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
+<<<<<<< HEAD
 <pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/shelf/{user_id}</code></p>
@@ -1242,6 +1287,14 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_50cd03fee8d42aa9c0fa3d943a51f4cf -->
+=======
+<pre><code class="language-json">{
+    "state": true
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE /</code></p>
+<!-- END_668b8efe176aaff0d04b6555c1e4a39c -->
+>>>>>>> 8848e109a79c05ef98d633ff94c658bab7f344c7
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

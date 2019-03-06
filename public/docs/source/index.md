@@ -24,8 +24,7 @@ Welcome to the generated API reference.
 
 APIs for managing following process
 <!-- START_5e901bbc73b2f95e077625c8fdf1a97a -->
-## followUser
- Start following a user
+## followUser  Start following a user
 
 @bodyParam USER_ID int required Goodreads user id of user to follow.
 
@@ -54,9 +53,7 @@ fetch(url, {
 > Example response (200):
 
 ```json
-{
-    "state": true
-}
+{}
 ```
 
 ### HTTP Request
@@ -66,8 +63,7 @@ fetch(url, {
 <!-- END_5e901bbc73b2f95e077625c8fdf1a97a -->
 
 <!-- START_668b8efe176aaff0d04b6555c1e4a39c -->
-## unfollowUser
- Stop following a user
+## unfollowUser Stop following a user
 
 @bodyParam USER_ID int required Goodreads user id of user to stop following.
 
@@ -96,9 +92,7 @@ fetch(url, {
 > Example response (200):
 
 ```json
-{
-    "state": true
-}
+{}
 ```
 
 ### HTTP Request

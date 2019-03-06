@@ -64,6 +64,13 @@ class BookController extends Controller
     {
         //
     }
-
+    /**
+     * get the needed book 
+     * @bodyParam Query string required Find books by title, author, or ISBN.
+     */
+    public function getBook()
+    {
+        //
+    }
 
 }

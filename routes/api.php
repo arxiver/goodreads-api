@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
+Route::get('query','BookController@getBook');
 
 // Review Section
 Route::get('reviwes','ReviewController@index');
@@ -41,9 +42,17 @@ Route::post('shelf/{shelf_name}/add_book/{book_id}', 'ShelfController@addBook');
 Route::delete('shelf/{shelf_name}', 'ShelfController@destroy');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
+Route::get('user','ShelfController@getBooksOnShelf');
 
 //Owned Books
 Route::get( 'owned_books', 'OwnedBookController@index');
 Route::post( 'owned_books/{book_id}', 'OwnedBookController@create');
 Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
 Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
+
+//Auther section
+Route::get('authorname','AuthorController@getAuthorByName');
+Route::get('authorid','AuthorController@searchAuthor');
+
+//User section
+Route::get('user','UserController@get_user');

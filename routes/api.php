@@ -56,3 +56,7 @@ Route::get('authorid','AuthorController@searchAuthor');
 
 //User section
 Route::get('user','UserController@get_user');
+
+//follow section
+Route::post('followuser','followcontroller@followUser');
+Route::delete('unfollowuser','followcontroller@unfollowUser');

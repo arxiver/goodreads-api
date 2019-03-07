@@ -163,15 +163,15 @@ class UserController extends Controller
 
 
     /**
+     * @authenticated
 	 * Change Name
      * @bodyParam Password string required .
      * @bodyParam New_Name string required .
-     * @response {
+     * @response 404 {
      * "Status": "false",
      * "Errors": [
      * "The Password field is required.",
      * "The New_Name field is required."
-     * @authenticated
      *]
      *}
 	 */
@@ -186,17 +186,17 @@ class UserController extends Controller
 
 
     /**
+     * @authenticated
 	 * Change Password
      * @bodyParam Password string required .
      * @bodyParam New_Password string required .
      * @bodyParam New_Password_confirmation string required .
-     * @response {
+     * @response 404 {
      * "Status": "false",
      * "Errors": [
      * "The password field is required.",
      * "The New_password field is required.",
      * "The New_password_confirmation field is required."
-     * @authenticated
      *]
      *}
 	 */

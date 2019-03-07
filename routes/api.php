@@ -18,6 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+// User
+Route::post('/SignUp', "UserController@SignUp");
+Route::post('/LogIn', "UserController@LogIn");
+Route::post('/ChangePassword', "UserController@ChangePassword");
+Route::post('/ChangeName', "UserController@ChangeName");
+Route::post('/ChangeImage', "UserController@ChangeImage");
+Route::post('/Delete', "UserController@Delete");
+Route::post('/LogOut', "UserController@LogOut");
+
+
 // Book Section
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');

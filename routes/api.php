@@ -27,6 +27,7 @@ Route::post('ChangeImage', "UserController@ChangeImage");
 Route::post('Delete', "UserController@Delete");
 Route::get('Show_Profile', "UserController@Show_Profile");
 Route::get('LogOut', "UserController@LogOut");
+Route::get('User',"UserController@get_user");
 
 
 // Book Section
@@ -65,8 +66,8 @@ Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 Route::get('authorname','AuthorController@getAuthorByName');
 Route::get('authorid','AuthorController@searchAuthor');
 
-//User section
-Route::get('user','UserController@get_user');
+
+
 
 //follow section
 Route::post('followuser','followcontroller@followUser');

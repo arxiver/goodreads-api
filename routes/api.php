@@ -19,13 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 // User
-Route::post('/SignUp', "UserController@SignUp");
-Route::post('/LogIn', "UserController@LogIn");
-Route::post('/ChangePassword', "UserController@ChangePassword");
-Route::post('/ChangeName', "UserController@ChangeName");
-Route::post('/ChangeImage', "UserController@ChangeImage");
-Route::post('/Delete', "UserController@Delete");
-Route::post('/LogOut', "UserController@LogOut");
+Route::post('SignUp', "UserController@SignUp");
+Route::post('LogIn', "UserController@LogIn");
+Route::post('ChangePassword', "UserController@ChangePassword");
+Route::post('ChangeName', "UserController@ChangeName");
+Route::post('ChangeImage', "UserController@ChangeImage");
+Route::post('Delete', "UserController@Delete");
+Route::get('Show_Profile', "UserController@Show_Profile");
+Route::get('LogOut', "UserController@LogOut");
 
 
 // Book Section

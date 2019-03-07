@@ -25,14 +25,19 @@ class UserController extends Controller
      * @bodyParam Password string required .
      * @bodyParam Password_confirmation string required .
      * @bodyParam Gender string required must be [Female , Male or Other].
-     * @response {
-     * "Status": "false",
+     * @response 404 {
      * "Errors": [
      * "The email field is required.",
      * "The password field is required.",
      * "The name field is required.",
      * "The gender field is required."
      *]
+     *}
+     * @response {
+     * "Name" : "",
+     * "id" : "",
+     * "image" : "",
+     * "Gender" : ""
      *}
 	 */
     public function SignUp(Request $request)
@@ -76,12 +81,18 @@ class UserController extends Controller
 	 * LogIn
      * @bodyParam Email string required .
      * @bodyParam Password string required .
-     * @response {
+     * @response 404 {
      * "Status": "false",
      * "Errors": [
      * "The email field is required.",
      * "The password field is required."
      *]
+     *}
+     * @response {
+     * "Name" : "",
+     * "id" : "",
+     * "image" : "",
+     * "Gender" : ""
      *}
 	 */
     public function LogIn(Request $request)
@@ -118,6 +129,13 @@ class UserController extends Controller
     /**
 	 * Show Profile
      * @authenticated
+     * @response {
+     * "Name" : "",
+     * "id" : "",
+     * "image" : "",
+     * "Gender" : "",
+     * "Updates" : []
+     *}
 	 */
     public function Show_Profile(Request $request)
     {
@@ -139,7 +157,6 @@ class UserController extends Controller
 	 */
     public function LogOut(Request $request)
     {
-        die("Log Out");
         // End session
         // redirect to Login page
     }
@@ -160,7 +177,7 @@ class UserController extends Controller
 	 */
     public function ChangeName(Request $request)
     {
-        die("chnageName");
+        
         // Find the record by id
         // Check if the old password is match with this id
         // Check the new name 
@@ -185,7 +202,7 @@ class UserController extends Controller
 	 */
     public function ChangePassword(Request $request)
     {
-        die("chnagePassword");
+       
         // Find The record by id 
         // Check if the old password is match with this id 
         // Check the new password
@@ -200,7 +217,7 @@ class UserController extends Controller
 	 */
     public function ChangeImage(Request $request)
     {
-        die("chnageName");
+      
         // Find the record by id
         // Update the $Change with new pic
     }
@@ -213,7 +230,7 @@ class UserController extends Controller
 	 */
     public function Delete(Request $request)
     {
-        die("chnageDelete");
+       
         // Find the record by id
         // Delete the record
         // return Login.blade.php

@@ -42,38 +42,7 @@ class UserController extends Controller
 	 */
     public function SignUp(Request $request)
     {
-        
-        $Validations    = Array (
-                                    "Email"     => "required|email|unique:users" ,
-                                    "Password"  => "required|confirmed|max:30|min:5",
-                                    "Name"      => "required|string|max:50|min:3" ,
-                                    "Gender"    => "required|string", 
-                                );
-        $Message        = Array (
-                                    
-                                );
-        $NiceName       = Array (
-                                     
-                                );
-
-        $Data = validator::make($request->all() , $Validations);
-       
-        if(!($Data->fails()))
-        {
-            $User = new User;
-            $User->Email        = $request["Email"];
-            $User->Gender       = $request["Gender"];
-            $User->Name         = $request["Name"];
-            $User->Password     = $request["Password"];
-            $User->api_token    = str_random(60);
-            $User->save();
-            return response(["Status" => "true" , "User" => $User , "api_token" => $User->api_token]);
-        }
-        else
-        {
-            return response(["Status" => "false" , "Errors"=> $Data->messages()->all()]);
-        }
-        
+        // body
     }
 
 
@@ -97,32 +66,7 @@ class UserController extends Controller
 	 */
     public function LogIn(Request $request)
     {
-        $Data = $request->all();
-
-        $Validations    = Array (
-                                    "Email"     => "required|email|exists:users,Email" ,
-                                    "Password"  => "required|max:30|min:5|exists:users,Password",
-                                );
-        $Message        = Array (
-                                    
-                                );  
-        $NiceName       = Array (
-                                    "Email"     => "Account",
-                                );
-        $Data = $this->validate($request , $Validations , $Message , $NiceName );
-
-        $user = User::where("Email" , $Data["Email"])->where("Password" , $Data["Password"])->first();
-
-        if($user == null)
-        {
-            return response(["ststus" => false]);
-        }
-        else
-        {
-            $user->api_token = str_random(60);
-            $user->save();
-            return response(["ststus" => true , "user" => $user , "token" =>$user->api_token]);  
-        }
+        // body
     }
 
 
@@ -139,16 +83,7 @@ class UserController extends Controller
 	 */
     public function Show_Profile(Request $request)
     {
-        $Users = User::all();
-
-        for($i =0 ; $i<count($Users) ; $i++)
-        {
-            echo "<p style = \"color:red ; font-size:130%\">". $Users[$i]->Name ."</p>" ;
-            echo "<p>". $Users[$i]->ID ."</p>" ;
-            echo "<p>". $Users[$i]->Email ."</p>" ;
-            echo "<p>". $Users[$i]->Password ."</p>" ;
-            echo "<br><br>";
-        }
+       // body
     }
 
 
@@ -157,8 +92,7 @@ class UserController extends Controller
 	 */
     public function LogOut(Request $request)
     {
-        // End session
-        // redirect to Login page
+        // body
     }
 
 
@@ -177,11 +111,7 @@ class UserController extends Controller
 	 */
     public function ChangeName(Request $request)
     {
-        
-        // Find the record by id
-        // Check if the old password is match with this id
-        // Check the new name 
-        // Change the name
+        // body
     }
 
 
@@ -202,11 +132,7 @@ class UserController extends Controller
 	 */
     public function ChangePassword(Request $request)
     {
-       
-        // Find The record by id 
-        // Check if the old password is match with this id 
-        // Check the new password
-        // Change the password
+       // body 
     }
 
 
@@ -217,9 +143,7 @@ class UserController extends Controller
 	 */
     public function ChangeImage(Request $request)
     {
-      
-        // Find the record by id
-        // Update the $Change with new pic
+      // body 
     }
 
     
@@ -230,9 +154,6 @@ class UserController extends Controller
 	 */
     public function Delete(Request $request)
     {
-       
-        // Find the record by id
-        // Delete the record
-        // return Login.blade.php
+       // body
     }
 }

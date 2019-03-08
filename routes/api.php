@@ -30,27 +30,21 @@ Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 Route::get('reviwes','ReviewController@index');
 Route::post('reviwes/create','ReviewController@create');
 Route::get( 'reviwes/show/{id}','ReviewController@show');
-Route::put('reviwes/{id}', 'ReviewController@edit');
+Route::put('reviwes/edit', 'ReviewController@edit');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
-Route::get('reviwes/recent', 'ReviewController@recentReviews');
+//Route::get('reviwes/recent', 'ReviewController@recentReviews');
 Route::get( 'reviwes/users/{user_id}/books/{book_id}', 'ReviewController@userReview');
 Route::get( 'reviwes/books/{bood_id}', 'ReviewController@bookReview');
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');
-Route::post('shelf/{shelf_name}', 'ShelfController@create');
+Route::post('shelf/create', 'ShelfController@create');
 Route::get('shelf/{shelf_name}', 'ShelfController@show');
-Route::post('shelf/{shelf_name}/add_book/{book_id}', 'ShelfController@addBook');
-Route::delete('shelf/{shelf_name}', 'ShelfController@destroy');
+Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
 Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 
-//Owned Books
-Route::get( 'owned_books', 'OwnedBookController@index');
-Route::post( 'owned_books/{book_id}', 'OwnedBookController@create');
-Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
-Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 //User section
 Route::get('UserController','BookController@index');
 Route::get('UserController/{user}','UserController@getUser');

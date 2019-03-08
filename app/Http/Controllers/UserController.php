@@ -182,4 +182,14 @@ class UserController extends Controller
     {
        // body
     }
+    
+
+    /**
+     * search for an user
+     * @bodyParam username string required search for a user by his/her username.
+     */
+    public function get_user()
+    {
+        // to do 
+    }
 }

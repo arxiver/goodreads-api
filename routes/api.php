@@ -72,3 +72,5 @@ Route::get('authorid','AuthorController@searchAuthor');
 //follow section
 Route::post('followuser','followcontroller@followUser');
 Route::delete('unfollowuser','followcontroller@unfollowUser');
+Route::get('followers','followcontroller@user_followers');
+Route::get('following','followcontroller@user_following');

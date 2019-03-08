@@ -65,12 +65,27 @@ class BookController extends Controller
         //
     }
     /**
-     * get the needed book 
-     * @bodyParam Query string required Find books by title, author, or ISBN.
+     * get the needed book by its name
+     * @bodyParam title string required Find books by title.
      */
-    public function getBook()
+    public function getBookByTitle()
     {
         //
     }
-
+    /**
+     * get the needed book by its ISBN
+     * @bodyParam ISBN int required Find books by ISBN.
+     */
+    public function getBookByIsbn()
+    {
+        //
+    }
+    /**
+     * get the needed book by its Author name
+     * @bodyParam Author_name string required Find books by Authorname.
+     */
+    public function getBookByAuthorName()
+    {
+        //
+    }
 }

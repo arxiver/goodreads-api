@@ -22,7 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
-Route::get('query','BookController@getBook');
+Route::get('Books/book_title','BookController@getBookByTitle');
+Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 // Review Section
 Route::get('reviwes','ReviewController@index');
@@ -49,10 +51,5 @@ Route::get( 'owned_books', 'OwnedBookController@index');
 Route::post( 'owned_books/{book_id}', 'OwnedBookController@create');
 Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
 Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
-
-//Auther section
-Route::get('authorname','AuthorController@getAuthorByName');
-Route::get('authorid','AuthorController@searchAuthor');
-
 //User section
 Route::get('user','UserController@get_user');

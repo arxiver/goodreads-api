@@ -66,7 +66,7 @@ class BookController extends Controller
     }
     /**
      * get the needed book by its name
-     * @bodyParam title string required Find books by title.
+     * @bodyParam title string required Find books by title
      */
     public function getBookByTitle()
     {
@@ -74,7 +74,7 @@ class BookController extends Controller
     }
     /**
      * get the needed book by its ISBN
-     * @bodyParam ISBN int required Find books by ISBN.
+     * @bodyParam ISBN int required Find books by ISBN
      */
     public function getBookByIsbn()
     {
@@ -82,7 +82,7 @@ class BookController extends Controller
     }
     /**
      * get the needed book by its Author name
-     * @bodyParam Author_name string required Find books by Authorname.
+     * @bodyParam Author_name string required Find books by Author's name.
      */
     public function getBookByAuthorName()
     {

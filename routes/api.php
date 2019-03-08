@@ -44,7 +44,7 @@ Route::post('shelf/{shelf_name}/add_book/{book_id}', 'ShelfController@addBook');
 Route::delete('shelf/{shelf_name}', 'ShelfController@destroy');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
-Route::get('user','ShelfController@getBooksOnShelf');
+Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 
 //Owned Books
 Route::get( 'owned_books', 'OwnedBookController@index');
@@ -52,4 +52,5 @@ Route::post( 'owned_books/{book_id}', 'OwnedBookController@create');
 Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
 Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 //User section
-Route::get('user','UserController@get_user');
+Route::get('UserController','BookController@index');
+Route::get('UserController/{user}','UserController@getUser');

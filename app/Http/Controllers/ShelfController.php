@@ -14,6 +14,11 @@ class ShelfController extends Controller
     /**
      * List all shelves of the authenticated user .
      * @authenticated
+     *
+     * @response {
+     * "shelf_name" : "to-read",
+     * "books_count" : 4
+     * }
      */
     public function index()
     {

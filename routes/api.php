@@ -38,7 +38,6 @@ Route::get( 'reviwes/books/{bood_id}', 'ReviewController@bookReview');
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');
-Route::post('shelf/create', 'ShelfController@create');
 Route::get('shelf/{shelf_name}', 'ShelfController@show');
 Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
@@ -46,5 +45,5 @@ Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@remov
 Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 
 //User section
-Route::get('UserController','BookController@index');
+Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');

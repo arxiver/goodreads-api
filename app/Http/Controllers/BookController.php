@@ -22,8 +22,7 @@ class BookController extends Controller
      * @bodyParam page int optional 1-N (default 1).
      * @bodyParam books_per_page int optional (default 10).
      *
-     * @response {[
-     * {
+     * @response {
      * "book_title": "Would you die for me?",
      * "isbn": "1234xxxxxx",
      * "image_url": "lookdown.jpg",
@@ -39,25 +38,7 @@ class BookController extends Controller
      * "author_id" : 1,
      * "author_name" : "author",
      * "genre" : "action"
-     * },
-     * {
-     * "book_title": "dumm2?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
      * }
-     * ]
      *
      */
     public function index()
@@ -67,7 +48,7 @@ class BookController extends Controller
     /**
      * Show book
      * @bodyParam book_id int required The id of the book.
-     * response {
+     * @response {
      * "book_title": "Would you die for me?",
      * "isbn": "1234xxxxxx",
      * "image_url": "lookdown.jpg",
@@ -97,7 +78,8 @@ class BookController extends Controller
      * @bodyParam genreName string required The Genre of list of books.
      * @bodyParam page int optional 1-N (default 1).
      * @bodyParam books_per_page int optional (default 10).
-     * response {
+     *
+     * @response {
      * "book_title": "Would you die for me?",
      * "isbn": "1234xxxxxx",
      * "image_url": "lookdown.jpg",

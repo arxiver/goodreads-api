@@ -15,31 +15,31 @@ class UserController extends Controller
 {
     //
     /**
-     * search for an user
-     * @bodyParam username string required search for a user by his/her username.
-     */
-    /**
 	 * Sign Up
-     * @bodyParam Email string required .
-     * @bodyParam Name string required .
+     * @bodyParam UserName string required .
+     * @bodyParam Full_Name string required .
      * @bodyParam Password string required .
      * @bodyParam Password_confirmation string required .
      * @bodyParam Gender string required must be [Female , Male or Other].
      * @response 404 {
+     * "status" : "false",
      * "Errors": [
-     * "The email field is required.",
+     * "The Username field is required.",
      * "The password field is required.",
-     * "The name field is required.",
+     * "The Full_Name field is required.",
      * "The gender field is required."
      *]
      *}
      * @response {
-     * "Name" : "",
-     * "id" : "",
-     * "image" : "",
-     * "Gender" : ""
+     * "Status": "true",
+     * "User": {
+     *   "UserName": "",
+     *   "Name": "",
+     *   "Image" : ""
+     *}
      *}
 	 */
+
     public function SignUp(Request $request)
     {
         // body
@@ -48,21 +48,23 @@ class UserController extends Controller
 
     /**
 	 * LogIn
-     * @bodyParam Email string required .
+     * @bodyParam UserName string required .
      * @bodyParam Password string required .
      * @response 404 {
      * "Status": "false",
      * "Errors": [
-     * "The email field is required.",
-     * "The password field is required."
+     * "The User_Name field is required.",
+     * "The Password field is required."
      *]
      *}
      * @response {
-     * "Name" : "",
-     * "id" : "",
-     * "image" : "",
-     * "Gender" : ""
+     * "Status": "true",
+     * "User": {
+     *   "UserName": "",
+     *   "Name": "",
+     *   "Image" : ""
      *}
+    * }
 	 */
     public function LogIn(Request $request)
     {
@@ -71,19 +73,21 @@ class UserController extends Controller
 
 
     /**
-	 * Show Profile
+	 * Setting
      * @authenticated
-     * @response {
-     * "Name" : "",
-     * "id" : "",
-     * "image" : "",
-     * "Gender" : "",
-     * "Updates" : []
+    * @response {
+     * "Status": "true",
+     * "User": {
+     *   "User_Name": "",
+     *   "Gender": "",
+     *   "Name": "",
+     *   "Image" : ""
      *}
+    * }
 	 */
-    public function Show_Profile(Request $request)
+    public function Setting(Request $request)
     {
-       // body
+        // body
     }
 
 
@@ -108,10 +112,14 @@ class UserController extends Controller
      * "The New_Name field is required."
      *]
      *}
+     * @response {
+     * "Status": "true",
+     * "Messages": "You have changed your name"
+     *}
 	 */
     public function ChangeName(Request $request)
     {
-        // body
+       // body
     }
 
 
@@ -129,10 +137,14 @@ class UserController extends Controller
      * "The New_password_confirmation field is required."
      *]
      *}
+     * @response {
+     * "Status": "true",
+     * "Messages": "You have changed your password"
+     *}
 	 */
     public function ChangePassword(Request $request)
     {
-       // body 
+        // body
     }
 
 
@@ -140,10 +152,14 @@ class UserController extends Controller
 	 * Change Image
      * @bodyParam Image string required the URL for the image .
      * @authenticated
+     * @response {
+     * "Status": "true",
+     * "Messages": "You have updated your profile picture"
+     *}
 	 */
     public function ChangeImage(Request $request)
     {
-      // body 
+      // body
     }
 
     
@@ -151,6 +167,16 @@ class UserController extends Controller
 	 * Delete
      * @bodyParam Password string required .
      * @authenticated
+     * @response 404 {
+     * "Status": "false",
+     * "Errors": [
+     * "The password is wrong."
+     *]
+     *}
+     * @response {
+     * "Status": "true",
+     * "Messages": "You have deleted your account"
+     *}
 	 */
     public function Delete(Request $request)
     {

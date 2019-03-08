@@ -14,4 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/','followcontroller@followUser');
+Route::delete('/','followcontroller@unfollowUser');

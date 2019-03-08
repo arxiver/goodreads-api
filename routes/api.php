@@ -18,23 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
-// User
-Route::post('SignUp', "UserController@SignUp");
-Route::post('LogIn', "UserController@LogIn");
-Route::post('ChangePassword', "UserController@ChangePassword");
-Route::post('ChangeName', "UserController@ChangeName");
-Route::post('ChangeImage', "UserController@ChangeImage");
-Route::post('Delete', "UserController@Delete");
-Route::get('Show_Profile', "UserController@Show_Profile");
-Route::get('LogOut', "UserController@LogOut");
-Route::get('User',"UserController@get_user");
-
-
 // Book Section
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
-Route::get('query','BookController@getBook');
+Route::get('Books/book_title','BookController@getBookByTitle');
+Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 // Review Section
 Route::get('reviwes','ReviewController@index');
@@ -54,7 +44,7 @@ Route::post('shelf/{shelf_name}/add_book/{book_id}', 'ShelfController@addBook');
 Route::delete('shelf/{shelf_name}', 'ShelfController@destroy');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
-Route::get('user','ShelfController@getBooksOnShelf');
+Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 
 //Owned Books
 Route::get( 'owned_books', 'OwnedBookController@index');
@@ -74,3 +64,6 @@ Route::post('followuser','followcontroller@followUser');
 Route::delete('unfollowuser','followcontroller@unfollowUser');
 Route::get('followers','followcontroller@user_followers');
 Route::get('following','followcontroller@user_following');
+//User section
+Route::get('UserController','BookController@index');
+Route::get('UserController/{user}','UserController@getUser');

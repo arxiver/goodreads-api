@@ -85,7 +85,7 @@ class ShelfController extends Controller
     }
     /**
      * show books on the shelf
-     * @bodyParam user_id integer required Get the books on a members shelf.
+     * @bodyParam user_id integer required Get the books on a member's shelf.
      */
 	public function getBooksOnShelf()
 	{

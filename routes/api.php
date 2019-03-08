@@ -50,13 +50,6 @@ Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 //Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
 //Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 
-//Auther section
-Route::get('authorname','AuthorController@getAuthorByName');
-Route::get('authorid','AuthorController@searchAuthor');
-
-
-
-
 //follow section
 Route::post('followuser','followcontroller@followUser');
 Route::delete('unfollowuser','followcontroller@unfollowUser');
@@ -65,3 +58,4 @@ Route::get('following','followcontroller@user_following');
 //User section
 Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');
+Route::get('UserController/{AllUser}','UserController@getAllUsers');

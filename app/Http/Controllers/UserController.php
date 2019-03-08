@@ -159,4 +159,12 @@ class UserController extends Controller
     {
         // to do
     }
+    /**
+     * list all users of the given name
+     * @bodyParam name string required list all users of the same name.
+     */
+    public function getAllUsers()
+    {
+        // to do
+    }
 }

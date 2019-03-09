@@ -60,8 +60,8 @@ Route::get('authorid','AuthorController@searchAuthor');
 //follow section
 Route::post('followuser','followcontroller@followUser');
 Route::delete('unfollowuser','followcontroller@unfollowUser');
-Route::get('followers','followcontroller@user_followers');
-Route::get('following','followcontroller@user_following');
+Route::get('followers','followcontroller@userFollowers');
+Route::get('following','followcontroller@userFollowing');
 //User section
 Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');

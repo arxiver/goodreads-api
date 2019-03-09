@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 class followcontroller extends Controller
 {
     /**
-     * followUser  Start following a user
+     * followUser  
+     * 
+     * Start following a user
      *
      * @authenticated
      *
@@ -27,7 +29,9 @@ class followcontroller extends Controller
         // to do ...
     }
     /**
-    * unfollowUser Stop following a user
+    * unfollowUser 
+    *
+    * Stop following a user
     *
     * @authenticated
     *
@@ -47,6 +51,8 @@ class followcontroller extends Controller
      * 
      * Get a user's followers
      * 
+     * @authenticated
+     * 
      * @bodyParam page int optional 1-N (default 1).
      * 
      * @response {
@@ -62,6 +68,8 @@ class followcontroller extends Controller
      * userFollowering
      * 
      * Get a user's followering
+     * 
+     * @authenticated
      * 
      * @bodyParam page int optional 1-N (default 1).
      * 

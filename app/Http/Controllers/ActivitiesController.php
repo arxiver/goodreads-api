@@ -62,6 +62,7 @@ class ActivitiesController extends Controller
      * notifications
      * gets a user's notifications
      * @authenticated
+	 * @bodyParam page int optional 1-N (default 1).
      * @response
      * {
 	 *"notifications": {

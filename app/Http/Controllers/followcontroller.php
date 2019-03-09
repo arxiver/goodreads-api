@@ -16,7 +16,7 @@ class followcontroller extends Controller
      *
      * @authenticated
      *
-     * @bodyParam USER_ID int required Goodreads user id of user to follow.
+     * @bodyParam userId int required Goodreads user id of user to follow.
      *
      * @response {
      *  "state" : "true"
@@ -31,7 +31,7 @@ class followcontroller extends Controller
     *
     * @authenticated
     *
-    * @bodyParam USER_ID int required Goodreads user id of user to stop following.
+    * @bodyParam userId int required Goodreads user id of user to stop following.
     *
     * @response {
     *  "state" : "true"
@@ -43,33 +43,33 @@ class followcontroller extends Controller
     }
 
     /**
-     * user_followers
+     * userFollowers
      * 
      * Get a user's followers
      * 
      * @bodyParam page int optional 1-N (default 1).
      * 
      * @response {
-     *  "id_followers" : "123"
+     *  "idFollowers" : "123"
      * }
      */
-    public function user_followers()
+    public function userFollowers()
     {
         //to do ....
     }
 
     /**
-     * user_followering
+     * userFollowering
      * 
      * Get a user's followering
      * 
      * @bodyParam page int optional 1-N (default 1).
      * 
      * @response {
-     *  "id_following" : "123"
+     *  "idFollowing" : "123"
      * }
      */
-    public function user_following()
+    public function userFollowing()
     {
         //to do ....
     }

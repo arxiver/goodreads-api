@@ -20,6 +20,343 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
+#Activities
+
+APIs for users activities
+<!-- START_1c8b56dcc7476331d13beab7a976ba8f -->
+## updates
+Get user&#039;s updates from following users
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/updates" \
+    -H "Content-Type: application/json" \
+    -d '{"user_id":12,"max_updates":9}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/updates");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "user_id": 12,
+    "max_updates": 9
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "updates": {
+        "update": [
+            {
+                "link": "https:\/\/www.goodreads.com\/review\/show\/2742801555",
+                "image_url": "https:\/\/images.gr-assets.com\/books\/1388255167s\/31087.jpg",
+                "actor": {
+                    "id": "000000",
+                    "name": "Salma",
+                    "image_url": "https:\/\/image.jpg",
+                    "link": "https:\/\/www.goodreads.com\/user\/show\/000000-salma"
+                },
+                "updated_at": "Fri, 08 Mar 2019 04:16:55 -0800",
+                "action": {
+                    "rating": "5",
+                    "_type": "rating"
+                },
+                "object": {
+                    "book": {
+                        "id": "31087",
+                        "title": "The Last Boleyn",
+                        "link": "https:\/\/www.goodreads.com\/book\/show\/31087.The_Last_Boleyn",
+                        "authors": {
+                            "author": {
+                                "id": "17450",
+                                "name": "Karen Harper"
+                            }
+                        }
+                    }
+                },
+                "type": "rate"
+            }
+        ],
+        "_type": "array"
+    }
+}
+```
+
+### HTTP Request
+`GET api/updates`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    user_id | integer |  optional  | optional to get the updates made by a specific user (default all following)
+    max_updates | integer |  optional  | optional to get the max limit of updates.
+
+<!-- END_1c8b56dcc7476331d13beab7a976ba8f -->
+
+<!-- START_e65df2963c4f1f0bfdd426ee5170e8b7 -->
+## notifications
+gets a user&#039;s notifications
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/notifications" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/notifications");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{}
+```
+
+### HTTP Request
+`GET api/notifications`
+
+
+<!-- END_e65df2963c4f1f0bfdd426ee5170e8b7 -->
+
+<!-- START_5f591b418d1c653384fb575623715a83 -->
+## comment
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/makeComment" \
+    -H "Content-Type: application/json" \
+    -d '{"id":14,"body":"vtHDg184ODa0YLfw"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/makeComment");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 14,
+    "body": "vtHDg184ODa0YLfw"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{}
+```
+
+### HTTP Request
+`POST api/makeComment`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | id of the commented resource
+    body | string |  required  | the body of the comment
+
+<!-- END_5f591b418d1c653384fb575623715a83 -->
+
+<!-- START_300ec40d807333984a76a264dac57b69 -->
+## list comments
+lists comments for a specific resource(review,update)
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/listComments" \
+    -H "Content-Type: application/json" \
+    -d '{"id":"wmUfefzEQToHmEBJ"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/listComments");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": "wmUfefzEQToHmEBJ"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{}
+```
+
+### HTTP Request
+`GET api/listComments`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | required |  optional  | int id of the commented resource
+
+<!-- END_300ec40d807333984a76a264dac57b69 -->
+
+<!-- START_80dc13044fd2676e9d20409a038a90ab -->
+## like
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/makeLike" \
+    -H "Content-Type: application/json" \
+    -d '{"id":18}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/makeLike");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 18
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{}
+```
+
+### HTTP Request
+`POST api/makeLike`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | id of the liked resource
+
+<!-- END_80dc13044fd2676e9d20409a038a90ab -->
+
+<!-- START_06b447ff2a11ad98e991c70ded4a0c5e -->
+## list likes
+lists likes for a specific resource(review,update)
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/listLikes" \
+    -H "Content-Type: application/json" \
+    -d '{"id":9}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/listLikes");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 9
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{}
+```
+
+### HTTP Request
+`GET api/listLikes`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    id | integer |  required  | id of the liked resource
+
+<!-- END_06b447ff2a11ad98e991c70ded4a0c5e -->
+
 #Book
 <!-- START_c84ecb8d4fd02d9a637dac124b62c629 -->
 ## List all books
@@ -29,7 +366,7 @@ Welcome to the generated API reference.
 ```bash
 curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":8,"books_per_page":16}'
+    -d '{"page":20,"books_per_page":11}'
 
 ```
 
@@ -42,8 +379,8 @@ let headers = {
 }
 
 let body = {
-    "page": 8,
-    "books_per_page": 16
+    "page": 20,
+    "books_per_page": 11
 }
 
 fetch(url, {
@@ -72,7 +409,8 @@ fetch(url, {
     "ratings_count": 1,
     "description": "dummy",
     "author_id": 1,
-    "author_name": "author"
+    "author_name": "author",
+    "genre": "action"
 }
 ```
 
@@ -96,7 +434,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":18}'
+    -d '{"book_id":15}'
 
 ```
 
@@ -109,7 +447,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 18
+    "book_id": 15
 }
 
 fetch(url, {
@@ -124,7 +462,23 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
+}
 ```
 
 ### HTTP Request
@@ -146,7 +500,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"1oHdxxQCfOubl9ki","page":11,"books_per_page":13}'
+    -d '{"genreName":"zseSsymiqU4ZUZRW","page":7,"books_per_page":7}'
 
 ```
 
@@ -159,9 +513,9 @@ let headers = {
 }
 
 let body = {
-    "genreName": "1oHdxxQCfOubl9ki",
-    "page": 11,
-    "books_per_page": 13
+    "genreName": "zseSsymiqU4ZUZRW",
+    "page": 7,
+    "books_per_page": 7
 }
 
 fetch(url, {
@@ -176,7 +530,23 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
+}
 ```
 
 ### HTTP Request
@@ -200,7 +570,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_title" \
     -H "Content-Type: application/json" \
-    -d '{"title":"jClRJuaodRQELO9T"}'
+    -d '{"title":"Taiywe1jAEvpTOXa"}'
 
 ```
 
@@ -213,7 +583,7 @@ let headers = {
 }
 
 let body = {
-    "title": "jClRJuaodRQELO9T"
+    "title": "Taiywe1jAEvpTOXa"
 }
 
 fetch(url, {
@@ -250,7 +620,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_ISBN" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":8}'
+    -d '{"ISBN":18}'
 
 ```
 
@@ -263,7 +633,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 8
+    "ISBN": 18
 }
 
 fetch(url, {
@@ -300,7 +670,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_Authorname" \
     -H "Content-Type: application/json" \
-    -d '{"Author_name":"IhAO0WarxWrYSn2V"}'
+    -d '{"Author_name":"utIbGYd15opXELMG"}'
 
 ```
 
@@ -313,7 +683,7 @@ let headers = {
 }
 
 let body = {
-    "Author_name": "IhAO0WarxWrYSn2V"
+    "Author_name": "utIbGYd15opXELMG"
 }
 
 fetch(url, {
@@ -341,263 +711,6 @@ Parameter | Type | Status | Description
     Author_name | string |  required  | Find books by Author's name.
 
 <!-- END_4ff78ec01f28353c43599b20c5deed9b -->
-
-<!-- START_f354760c4a3de326b7e8d01621b85e5c -->
-## List all books
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/UserController" \
-    -H "Content-Type: application/json" \
-    -d '{"page":16,"books_per_page":8}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/UserController");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "page": 16,
-    "books_per_page": 8
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{
-    "book_title": "Would you die for me?",
-    "isbn": "1234xxxxxx",
-    "image_url": "lookdown.jpg",
-    "small_image_url": "xyz.com\/images\/uvw.jpg",
-    "num_pages": "1000",
-    "publisher": "dummyMan",
-    "publication_day": 13,
-    "publication_year": 1932,
-    "publication_month": 10,
-    "average_rating": 3.532,
-    "ratings_count": 1,
-    "description": "dummy",
-    "author_id": 1,
-    "author_name": "author"
-}
-```
-
-### HTTP Request
-`GET api/UserController`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    page | integer |  optional  | optional 1-N (default 1).
-    books_per_page | integer |  optional  | optional (default 10).
-
-<!-- END_f354760c4a3de326b7e8d01621b85e5c -->
-
-#Owned Books
-
-APIs for GoodReads
-<!-- START_e9f083451756993cd580ea88ccd49589 -->
-## List all owned books of the authenticated user
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/owned_books" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/owned_books");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-null
-```
-
-### HTTP Request
-`GET api/owned_books`
-
-
-<!-- END_e9f083451756993cd580ea88ccd49589 -->
-
-<!-- START_c946a3187edf457113b9279441527ad9 -->
-## Add to books owned
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/owned_books/{book_id}" \
-    -H "Content-Type: application/json" \
-    -d '{"book_id":9,"condition_description":"8w2s53U8cVZhogIh"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/owned_books/{book_id}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "book_id": 9,
-    "condition_description": "8w2s53U8cVZhogIh"
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/owned_books/{book_id}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    book_id | integer |  required  | The id of the book.
-    condition_description | string |  optional  | optional The id of the book.
-
-<!-- END_c946a3187edf457113b9279441527ad9 -->
-
-<!-- START_67ef22acf274405a2c6b22866d49d727 -->
-## List books owned by a user
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/owned_books/list/{user_id}" \
-    -H "Content-Type: application/json" \
-    -d '{"user_id":4,"page":5,"books_per_page":3}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/owned_books/list/{user_id}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "user_id": 4,
-    "page": 5,
-    "books_per_page": 3
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-null
-```
-
-### HTTP Request
-`GET api/owned_books/list/{user_id}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    user_id | integer |  required  | The id of the user.
-    page | integer |  optional  | optional 1-N (default 1).
-    books_per_page | integer |  optional  | optional (default 10).
-
-<!-- END_67ef22acf274405a2c6b22866d49d727 -->
-
-<!-- START_edb449eb06b225a6824b20125f35d474 -->
-## Delete an owned book
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/owned_books/{book_id}" \
-    -H "Content-Type: application/json" \
-    -d '{"book_id":9}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/owned_books/{book_id}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "book_id": 9
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/owned_books/{book_id}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    book_id | integer |  required  | The id of the book record.
-
-<!-- END_edb449eb06b225a6824b20125f35d474 -->
 
 #Review
 <!-- START_b7f52079bc658d3faea44274e95c9859 -->
@@ -647,7 +760,7 @@ null
 ```bash
 curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":13,"shelf":12,"review":"QCGJo46awk2OQhSx","rating":4,"read_at":"wgCcyHd3lwsdTORo"}'
+    -d '{"book_id":20,"shelf":5,"review":"LshglS4PnlunF6VY","rating":2,"read_at":"iXvFWMjsSd7YgAF3"}'
 
 ```
 
@@ -660,11 +773,11 @@ let headers = {
 }
 
 let body = {
-    "book_id": 13,
-    "shelf": 12,
-    "review": "QCGJo46awk2OQhSx",
-    "rating": 4,
-    "read_at": "wgCcyHd3lwsdTORo"
+    "book_id": 20,
+    "shelf": 5,
+    "review": "LshglS4PnlunF6VY",
+    "rating": 2,
+    "read_at": "iXvFWMjsSd7YgAF3"
 }
 
 fetch(url, {
@@ -701,7 +814,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/show/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"id":4}'
+    -d '{"id":5}'
 
 ```
 
@@ -714,7 +827,7 @@ let headers = {
 }
 
 let body = {
-    "id": 4
+    "id": 5
 }
 
 fetch(url, {
@@ -743,21 +856,21 @@ Parameter | Type | Status | Description
 
 <!-- END_e272531e4b47fd7fc24e0458880aed98 -->
 
-<!-- START_53d2a6bdaf9aa89d8d1b91779911dbc9 -->
+<!-- START_f2bf516816a6bd1a29bad51fe25e8a4a -->
 ## Edit a review
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/reviwes/{id}" \
+curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
-    -d '{"id":14,"review":"757J7sASqKYvgmi6","shelf_name":"s7FXB90NyZznlpxo","rating":13,"read_at":"4DnvDm0hvOalJ2FG"}'
+    -d '{"id":10,"review":"OomFoBTFiYkivPbH","shelf_name":"SqzZ0PzCNZQKjxJQ","rating":10,"read_at":"cnjy0PL0o7LjQ2iU"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/reviwes/{id}");
+const url = new URL("http://localhost/api/reviwes/edit");
 
 let headers = {
     "Content-Type": "application/json",
@@ -765,11 +878,11 @@ let headers = {
 }
 
 let body = {
-    "id": 14,
-    "review": "757J7sASqKYvgmi6",
-    "shelf_name": "s7FXB90NyZznlpxo",
-    "rating": 13,
-    "read_at": "4DnvDm0hvOalJ2FG"
+    "id": 10,
+    "review": "OomFoBTFiYkivPbH",
+    "shelf_name": "SqzZ0PzCNZQKjxJQ",
+    "rating": 10,
+    "read_at": "cnjy0PL0o7LjQ2iU"
 }
 
 fetch(url, {
@@ -783,7 +896,7 @@ fetch(url, {
 
 
 ### HTTP Request
-`PUT api/reviwes/{id}`
+`PUT api/reviwes/edit`
 
 #### Body Parameters
 
@@ -795,7 +908,7 @@ Parameter | Type | Status | Description
     rating | integer |  optional  | optional Rating (0-5) default is the same as it was .
     read_at | date |  optional  | optional  default is (the same as it was).
 
-<!-- END_53d2a6bdaf9aa89d8d1b91779911dbc9 -->
+<!-- END_f2bf516816a6bd1a29bad51fe25e8a4a -->
 
 <!-- START_f05a99566a1946530084c8ed20cdce5a -->
 ## Remove a Review
@@ -806,7 +919,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/reviwes/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":13}'
+    -d '{"review_id":1}'
 
 ```
 
@@ -819,7 +932,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 13
+    "review_id": 1
 }
 
 fetch(url, {
@@ -839,47 +952,9 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    book_id | integer |  required  | The ID of book had a review to be deleted.
+    review_id | integer |  required  | The id of review to be deleted.
 
 <!-- END_f05a99566a1946530084c8ed20cdce5a -->
-
-<!-- START_195b30c3b7c669d1520a64d9d7a07a9a -->
-## Recent reviews from all members.
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/reviwes/recent" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/reviwes/recent");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-null
-```
-
-### HTTP Request
-`GET api/reviwes/recent`
-
-
-<!-- END_195b30c3b7c669d1520a64d9d7a07a9a -->
 
 <!-- START_7fb92b5211d2ef6e2ec40d79469401cc -->
 ## Get a user&#039;s review for a given book.
@@ -890,7 +965,7 @@ null
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/users/{user_id}/books/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":9,"book_id":6}'
+    -d '{"user_id":6,"book_id":10}'
 
 ```
 
@@ -903,8 +978,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 9,
-    "book_id": 6
+    "user_id": 6,
+    "book_id": 10
 }
 
 fetch(url, {
@@ -943,7 +1018,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/books/{bood_id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":14}'
+    -d '{"book_id":17}'
 
 ```
 
@@ -956,7 +1031,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 14
+    "book_id": 17
 }
 
 fetch(url, {
@@ -1015,7 +1090,10 @@ fetch(url, {
 > Example response (200):
 
 ```json
-null
+{
+    "shelf_name": "to-read",
+    "books_count": 4
+}
 ```
 
 ### HTTP Request
@@ -1023,52 +1101,6 @@ null
 
 
 <!-- END_8ca8c1ada18abb4fe16799cd67e55e73 -->
-
-<!-- START_7cc029a4af3f3fdc472462b497f87980 -->
-## Create a new book shelf
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/shelf/{shelf_name}" \
-    -H "Content-Type: application/json" \
-    -d '{"shelf_name":"rAmtwyX4enEzwv3o"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/shelf/{shelf_name}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "shelf_name": "rAmtwyX4enEzwv3o"
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/shelf/{shelf_name}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    shelf_name | string |  required  | The name of the new shelf.
-
-<!-- END_7cc029a4af3f3fdc472462b497f87980 -->
 
 <!-- START_f029a85d3a1a2f160cdbf493d58b76da -->
 ## Show a shelf
@@ -1079,7 +1111,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"576tpnT1t5MM1dWr"}'
+    -d '{"shelf_name":"vRUsts7fvTBdhHyq"}'
 
 ```
 
@@ -1092,7 +1124,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "576tpnT1t5MM1dWr"
+    "shelf_name": "vRUsts7fvTBdhHyq"
 }
 
 fetch(url, {
@@ -1121,21 +1153,21 @@ Parameter | Type | Status | Description
 
 <!-- END_f029a85d3a1a2f160cdbf493d58b76da -->
 
-<!-- START_a77cd3ede5b20ff4f8e61434366ec3c2 -->
+<!-- START_1e7cb27e22831e4a6163a5908d6b002b -->
 ## Add a book to a shelf
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/shelf/{shelf_name}/add_book/{book_id}" \
+curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"QI4MCg9cIkdKO1j4","book_id":20}'
+    -d '{"shelf_name":"a6cJiTIuKU1WwqIW","book_id":2}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shelf/{shelf_name}/add_book/{book_id}");
+const url = new URL("http://localhost/api/shelf/add_book");
 
 let headers = {
     "Content-Type": "application/json",
@@ -1143,8 +1175,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "QI4MCg9cIkdKO1j4",
-    "book_id": 20
+    "shelf_name": "a6cJiTIuKU1WwqIW",
+    "book_id": 2
 }
 
 fetch(url, {
@@ -1158,7 +1190,7 @@ fetch(url, {
 
 
 ### HTTP Request
-`POST api/shelf/{shelf_name}/add_book/{book_id}`
+`POST api/shelf/add_book`
 
 #### Body Parameters
 
@@ -1167,53 +1199,7 @@ Parameter | Type | Status | Description
     shelf_name | string |  required  | The name of the shelf.
     book_id | integer |  required  | The id of the book.
 
-<!-- END_a77cd3ede5b20ff4f8e61434366ec3c2 -->
-
-<!-- START_610d22f55c271e3e28256802d04e46f1 -->
-## Destroy a shelf
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/shelf/{shelf_name}" \
-    -H "Content-Type: application/json" \
-    -d '{"shelf_name":"y0niyiPKUgeCZfQS"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/shelf/{shelf_name}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "shelf_name": "y0niyiPKUgeCZfQS"
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/shelf/{shelf_name}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    shelf_name | string |  required  | The name of the shelf.
-
-<!-- END_610d22f55c271e3e28256802d04e46f1 -->
+<!-- END_1e7cb27e22831e4a6163a5908d6b002b -->
 
 <!-- START_dc4e2f12407ce17b65f4e9e9488551dc -->
 ## Get User`s shelves
@@ -1224,7 +1210,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":14,"page":12,"books_per_page":5}'
+    -d '{"user_id":17,"page":17,"books_per_page":8}'
 
 ```
 
@@ -1237,9 +1223,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 14,
-    "page": 12,
-    "books_per_page": 5
+    "user_id": 17,
+    "page": 17,
+    "books_per_page": 8
 }
 
 fetch(url, {
@@ -1279,7 +1265,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"8DXgAK4wrDrcBvEf","book_id":4}'
+    -d '{"shelf_name":"DNk1bZP79puXrdz7","book_id":11}'
 
 ```
 
@@ -1292,8 +1278,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "8DXgAK4wrDrcBvEf",
-    "book_id": 4
+    "shelf_name": "DNk1bZP79puXrdz7",
+    "book_id": 11
 }
 
 fetch(url, {
@@ -1326,7 +1312,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{get_books}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":3}'
+    -d '{"user_id":13,"shelf_name":"NMYuhRU9vnTu4nzG"}'
 
 ```
 
@@ -1339,7 +1325,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 3
+    "user_id": 13,
+    "shelf_name": "NMYuhRU9vnTu4nzG"
 }
 
 fetch(url, {
@@ -1365,6 +1352,7 @@ null
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     user_id | integer |  required  | Get the books on a member's shelf.
+    shelf_name | string |  required  | specified shelf`s name.
 
 <!-- END_85260efa051dfd6095be0d84baf6da98 -->
 
@@ -1380,7 +1368,7 @@ APIs for managing following process
 ```bash
 curl -X POST "http://localhost/api/followuser" \
     -H "Content-Type: application/json" \
-    -d '{"USER_ID":13}'
+    -d '{"userId":12}'
 
 ```
 
@@ -1393,7 +1381,7 @@ let headers = {
 }
 
 let body = {
-    "USER_ID": 13
+    "userId": 12
 }
 
 fetch(url, {
@@ -1420,7 +1408,7 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    USER_ID | integer |  required  | Goodreads user id of user to follow.
+    userId | integer |  required  | Goodreads user id of user to follow.
 
 <!-- END_14b8be892d8419e9f65508229770b44c -->
 
@@ -1433,7 +1421,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/unfollowuser" \
     -H "Content-Type: application/json" \
-    -d '{"USER_ID":20}'
+    -d '{"userId":18}'
 
 ```
 
@@ -1446,7 +1434,7 @@ let headers = {
 }
 
 let body = {
-    "USER_ID": 20
+    "userId": 18
 }
 
 fetch(url, {
@@ -1473,117 +1461,9 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    USER_ID | integer |  required  | Goodreads user id of user to stop following.
+    userId | integer |  required  | Goodreads user id of user to stop following.
 
 <!-- END_4a103eb82f681afeb2e7397eac3f6c99 -->
-
-<!-- START_b8da414973862c44f3f0b86f52cbee94 -->
-## user_followers
-
-Get a user's followers
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/followers" \
-    -H "Content-Type: application/json" \
-    -d '{"page":2}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/followers");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "page": 2
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{
-    "id_followers": "123"
-}
-```
-
-### HTTP Request
-`GET api/followers`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    page | integer |  optional  | optional 1-N (default 1).
-
-<!-- END_b8da414973862c44f3f0b86f52cbee94 -->
-
-<!-- START_00cf70aa133b8675add61a926a8e351b -->
-## user_followering
-
-Get a user's followering
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/following" \
-    -H "Content-Type: application/json" \
-    -d '{"page":3}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/following");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "page": 3
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{
-    "id_following": "123"
-}
-```
-
-### HTTP Request
-`GET api/following`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    page | integer |  optional  | optional 1-N (default 1).
-
-<!-- END_00cf70aa133b8675add61a926a8e351b -->
 
 #general
 <!-- START_ece00276451311bfb3ecbb519986e6e9 -->
@@ -1594,7 +1474,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/authorname" \
     -H "Content-Type: application/json" \
-    -d '{"auther_name":"3EY8UlWEKtmnAZsX"}'
+    -d '{"auther_name":"cxo92lcz0KPcmWLS"}'
 
 ```
 
@@ -1607,7 +1487,7 @@ let headers = {
 }
 
 let body = {
-    "auther_name": "3EY8UlWEKtmnAZsX"
+    "auther_name": "cxo92lcz0KPcmWLS"
 }
 
 fetch(url, {
@@ -1644,7 +1524,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/authorid" \
     -H "Content-Type: application/json" \
-    -d '{"author_id":13}'
+    -d '{"author_id":9}'
 
 ```
 
@@ -1657,7 +1537,7 @@ let headers = {
 }
 
 let body = {
-    "author_id": 13
+    "author_id": 9
 }
 
 fetch(url, {
@@ -1694,7 +1574,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
-    -d '{"username":"oYkRCXIBnUFLZUfY"}'
+    -d '{"username":"NYyPwIX76fPcXihC"}'
 
 ```
 
@@ -1707,7 +1587,7 @@ let headers = {
 }
 
 let body = {
-    "username": "oYkRCXIBnUFLZUfY"
+    "username": "NYyPwIX76fPcXihC"
 }
 
 fetch(url, {

@@ -65,3 +65,11 @@ Route::get('following','followcontroller@user_following');
 //User section
 Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');
+
+//activities section
+Route::get('updates','ActivitiesController@followingUpdates');
+Route::get('notifications','ActivitiesController@notifications');
+Route::post('makeComment','ActivitiesController@makeComment');
+Route::get('listComments','ActivitiesController@listComments');
+Route::post('makeLike','ActivitiesController@makeLike');
+Route::get('listLikes','ActivitiesController@listLikes');

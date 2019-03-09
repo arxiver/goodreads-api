@@ -22,7 +22,6 @@ class BookController extends Controller
      * @bodyParam page int optional 1-N (default 1).
      * @bodyParam books_per_page int optional (default 10).
      *
-     *    *
      * @response {
      * "book_title": "Would you die for me?",
      * "isbn": "1234xxxxxx",
@@ -37,7 +36,8 @@ class BookController extends Controller
      * "ratings_count": 1,
      * "description": "dummy",
      * "author_id" : 1,
-     * "author_name" : "author"
+     * "author_name" : "author",
+     * "genre" : "action"
      * }
      *
      */
@@ -48,8 +48,27 @@ class BookController extends Controller
     /**
      * Show book
      * @bodyParam book_id int required The id of the book.
+     * @response {
+     * "book_title": "Would you die for me?",
+     * "isbn": "1234xxxxxx",
+     * "image_url": "lookdown.jpg",
+     * "small_image_url": "xyz.com/images/uvw.jpg",
+     * "num_pages": "1000",
+     * "publisher": "dummyMan",
+     * "publication_day": 13 ,
+     * "publication_year": 1932 ,
+     * "publication_month": 10  ,
+     * "average_rating": 3.532,
+     * "ratings_count": 1,
+     * "description": "dummy",
+     * "author_id" : 1,
+     * "author_name" : "author",
+     * "genre" : "action"
+     * }
+     *
+
      */
-    public function show ($book_id)
+    public function show ()
     {
         //
     }
@@ -59,18 +78,51 @@ class BookController extends Controller
      * @bodyParam genreName string required The Genre of list of books.
      * @bodyParam page int optional 1-N (default 1).
      * @bodyParam books_per_page int optional (default 10).
+     *
+     * @response {
+     * "book_title": "Would you die for me?",
+     * "isbn": "1234xxxxxx",
+     * "image_url": "lookdown.jpg",
+     * "small_image_url": "xyz.com/images/uvw.jpg",
+     * "num_pages": "1000",
+     * "publisher": "dummyMan",
+     * "publication_day": 13 ,
+     * "publication_year": 1932 ,
+     * "publication_month": 10  ,
+     * "average_rating": 3.532,
+     * "ratings_count": 1,
+     * "description": "dummy",
+     * "author_id" : 1,
+     * "author_name" : "author",
+     * "genre" : "action"
+     * }
      */
-    public function showByGenre($genreName)
+    public function showByGenre()
     {
         //
     }
     /**
-     * get the needed book 
-     * @bodyParam Query string required Find books by title, author, or ISBN.
+     * get the needed book by its name
+     * @bodyParam title string required Find books by title
      */
-    public function getBook()
+    public function getBookByTitle()
     {
         //
     }
-
+    /**
+     * get the needed book by its ISBN
+     * @bodyParam ISBN int required Find books by ISBN
+     */
+    public function getBookByIsbn()
+    {
+        //
+    }
+    /**
+     * search about the needed book by its Author name
+     * @bodyParam Author_name string required Find books by Author's name.
+     */
+    public function getBookByAuthorName()
+    {
+        //
+    }
 }

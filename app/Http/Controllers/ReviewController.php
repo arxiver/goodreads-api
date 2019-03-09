@@ -54,7 +54,7 @@ class ReviewController extends Controller
      * @bodyParam rating int optional Rating (0-5) default is the same as it was .
      * @bodyParam read_at date optional  default is (the same as it was).
      */
-    public function edit($id)
+    public function edit()
     {
         //
     }
@@ -75,7 +75,7 @@ class ReviewController extends Controller
      * @bodyParam book_id int required  id of the book.
      *
      */
-    public function userReview($user_id,$book_id)
+    public function userReview()
     {
         //
     }
@@ -85,14 +85,14 @@ class ReviewController extends Controller
      * @bodyParam book_id int required book_id you want to show its reviews.
      *
      */
-    public function bookReview($book_id)
+    public function bookReview()
     {
 
     }
     /**
      * Remove a Review
      * @authenticated
-     * @bodyParam book_id int required The ID of book had a review to be deleted.
+     * @bodyParam review_id int required The id of review to be deleted.
      */
     public function destroy($id)
     {

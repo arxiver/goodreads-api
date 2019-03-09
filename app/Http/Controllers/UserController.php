@@ -15,7 +15,7 @@ class userController extends Controller
 {
     //
     /**
-	 * Sign Up
+     * Sign Up
      * @bodyParam userName string required .
      * @bodyParam fullName string required .
      * @bodyParam password string required .
@@ -38,7 +38,7 @@ class userController extends Controller
      *   "image" : ""
      *}
      *}
-	 */
+     */
 
     public function signUp(Request $request)
     {
@@ -47,7 +47,7 @@ class userController extends Controller
 
 
     /**
-	 * LogIn
+     * LogIn
      * @bodyParam userName string required .
      * @bodyParam password string required .
      * @response 404 {
@@ -65,7 +65,7 @@ class userController extends Controller
      *   "image" : ""
      *}
     * }
-	 */
+     */
     public function logIn(Request $request)
     {
         // body
@@ -73,9 +73,9 @@ class userController extends Controller
 
 
     /**
-	 * Setting
+     * Show setting
      * @authenticated
-    * @response {
+     * @response {
      * "status": "true",
      * "user": {
      *   "userName": "",
@@ -84,7 +84,7 @@ class userController extends Controller
      *   "image" : ""
      *}
     * }
-	 */
+     */
     public function showSetting(Request $request)
     {
         // body
@@ -92,8 +92,8 @@ class userController extends Controller
 
 
     /**
-	 * Log Out
-	 */
+     * Log Out
+     */
     public function logOut(Request $request)
     {
         // body
@@ -102,7 +102,7 @@ class userController extends Controller
 
     /**
      * @authenticated
-	 * Change Name
+     * Change Name
      * @bodyParam password string required .
      * @bodyParam newName string required .
      * @response 404 {
@@ -116,16 +116,16 @@ class userController extends Controller
      * "status": "true",
      * "message": "You have changed your name"
      *}
-	 */
+     */
     public function changeName(Request $request)
     {
-       // body
+        // body
     }
 
 
     /**
      * @authenticated
-	 * Change password
+     * Change password
      * @bodyParam password string required .
      * @bodyParam newPassword string required .
      * @bodyParam newPassword_confirmation string required this filed is special so it isn't camel case .
@@ -141,30 +141,30 @@ class userController extends Controller
      * "status": "true",
      * "message": "You have changed your password"
      *}
-	 */
-    public function chnagePassword(Request $request)
+     */
+    public function changePassword(Request $request)
     {
         // body
     }
 
 
     /**
-	 * Change Image
+     * Change Image
      * @bodyParam Image string required the URL for the image .
      * @authenticated
      * @response {
      * "status": "true",
      * "message": "You have updated your profile picture"
      *}
-	 */
+     */
     public function changeImage(Request $request)
     {
-      // body
+        // body
     }
 
     
     /**
-	 * Delete
+     * Delete
      * @bodyParam password string required .
      * @authenticated
      * @response 404 {
@@ -177,10 +177,10 @@ class userController extends Controller
      * "status": "true",
      * "message": "You have deleted your account"
      *}
-	 */
+     */
     public function Delete(Request $request)
     {
-       // body
+        // body
     }
     
 
@@ -190,6 +190,6 @@ class userController extends Controller
      */
     public function getUser()
     {
-        // to do 
+        // to do
     }
 }

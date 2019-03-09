@@ -25,7 +25,7 @@ Route::post('changePassword', "UserController@changePassword");
 Route::post('changeName', "UserController@changeName");
 Route::post('changeImage', "UserController@changeImage");
 Route::post('delete', "UserController@delete");
-
+Route::get('showProfile','UserController@showProfile');
 
 Route::get('showSetting', "UserController@showSetting");
 Route::get('logOut', "UserController@logOut");
@@ -54,6 +54,11 @@ Route::delete('reviwes/{id}', 'ReviewController@destroy');
 //Route::get('reviwes/recent', 'ReviewController@recentReviews');
 Route::get( 'reviwes/users/{user_id}/books/{book_id}', 'ReviewController@userReview');
 Route::get( 'reviwes/books/{bood_id}', 'ReviewController@bookReview');
+
+//Rate Section
+Route::post('rate','ReviewController@rate');
+Route::put('rate','ReviewController@editRate');
+Route::delete('rate','ReviewController@deleteRate');
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');
@@ -92,3 +97,5 @@ Route::post('makeComment','ActivitiesController@makeComment');
 Route::get('listComments','ActivitiesController@listComments');
 Route::post('makeLike','ActivitiesController@makeLike');
 Route::get('listLikes','ActivitiesController@listLikes');
+Route::delete('unlike','ActivitiesController@unlike');
+Route::delete('deleteComment','ActivitiesController@deleteComment');

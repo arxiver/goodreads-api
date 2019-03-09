@@ -54,10 +54,20 @@ class followcontroller extends Controller
      * @authenticated
      * 
      * @bodyParam page int optional 1-N (default 1).
-     * 
+     * @bodyParam user_id int optional to get the updates made by a specific user (default authenticated user) 
      * @response {
-     *  "idFollowers" : "123"
-     * }
+	 *"following": {
+	 *	"user": {
+	 * 		"id": "000000",
+	 *		"name": "Salma",
+	 *		"image_url": "https://image.jpg",
+	 *		"link": "https://www.goodreads.com/user/show/000000-salma"
+	 *	},
+	 *	"_start": "1",
+	 *	"_end": "1",
+	 *	"_total": "1"
+	 * }
+     *}
      */
     public function userFollowers()
     {
@@ -72,10 +82,20 @@ class followcontroller extends Controller
      * @authenticated
      * 
      * @bodyParam page int optional 1-N (default 1).
-     * 
+     * @bodyParam user_id int optional to get the updates made by a specific user (default authenticated user)
      * @response {
-     *  "idFollowing" : "123"
-     * }
+	 *"following": {
+	 *	"user": {
+	 * 		"id": "000000",
+	 *		"name": "Salma",
+	 *		"image_url": "https://image.jpg",
+	 *		"link": "https://www.goodreads.com/user/show/000000-salma"
+	 *	},
+	 *	"_start": "1",
+	 *	"_end": "1",
+	 *	"_total": "1"
+	 * }
+     *}
      */
     public function userFollowing()
     {

@@ -3,44 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\user;
 use Validator;
 
 /**
- * @group User management
+ * @group user management
  *
  * APIs for managing users (Sofyan)
  */
-class UserController extends Controller
+class userController extends Controller
 {
     //
     /**
 	 * Sign Up
-     * @bodyParam UserName string required .
-     * @bodyParam Full_Name string required .
-     * @bodyParam Password string required .
-     * @bodyParam Password_confirmation string required .
-     * @bodyParam Gender string required must be [Female , Male or Other].
+     * @bodyParam userName string required .
+     * @bodyParam fullName string required .
+     * @bodyParam password string required .
+     * @bodyParam password_confirmation string required .
+     * @bodyParam gender string required must be [Female , Male or Other].
      * @response 404 {
      * "status" : "false",
-     * "Errors": [
-     * "The Username field is required.",
+     * "errors": [
+     * "The userName field is required.",
      * "The password field is required.",
-     * "The Full_Name field is required.",
+     * "The fullName field is required.",
      * "The gender field is required."
      *]
      *}
      * @response {
-     * "Status": "true",
-     * "User": {
-     *   "UserName": "",
-     *   "Name": "",
-     *   "Image" : ""
+     * "status": "true",
+     * "user": {
+     *   "userName": "",
+     *   "name": "",
+     *   "image" : ""
      *}
      *}
 	 */
 
-    public function SignUp(Request $request)
+    public function signUp(Request $request)
     {
         // body
     }
@@ -48,25 +48,25 @@ class UserController extends Controller
 
     /**
 	 * LogIn
-     * @bodyParam UserName string required .
-     * @bodyParam Password string required .
+     * @bodyParam userName string required .
+     * @bodyParam password string required .
      * @response 404 {
-     * "Status": "false",
-     * "Errors": [
-     * "The User_Name field is required.",
-     * "The Password field is required."
+     * "status": "false",
+     * "errors": [
+     * "The userName field is required.",
+     * "The password field is required."
      *]
      *}
      * @response {
-     * "Status": "true",
-     * "User": {
-     *   "UserName": "",
-     *   "Name": "",
-     *   "Image" : ""
+     * "status": "true",
+     * "user": {
+     *   "userName": "",
+     *   "name": "",
+     *   "image" : ""
      *}
     * }
 	 */
-    public function LogIn(Request $request)
+    public function logIn(Request $request)
     {
         // body
     }
@@ -76,16 +76,16 @@ class UserController extends Controller
 	 * Setting
      * @authenticated
     * @response {
-     * "Status": "true",
-     * "User": {
-     *   "User_Name": "",
-     *   "Gender": "",
-     *   "Name": "",
-     *   "Image" : ""
+     * "status": "true",
+     * "user": {
+     *   "userName": "",
+     *   "gender": "",
+     *   "name": "",
+     *   "image" : ""
      *}
     * }
 	 */
-    public function Setting(Request $request)
+    public function showSetting(Request $request)
     {
         // body
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
     /**
 	 * Log Out
 	 */
-    public function LogOut(Request $request)
+    public function logOut(Request $request)
     {
         // body
     }
@@ -103,21 +103,21 @@ class UserController extends Controller
     /**
      * @authenticated
 	 * Change Name
-     * @bodyParam Password string required .
-     * @bodyParam New_Name string required .
+     * @bodyParam password string required .
+     * @bodyParam newName string required .
      * @response 404 {
-     * "Status": "false",
-     * "Errors": [
-     * "The Password field is required.",
-     * "The New_Name field is required."
+     * "status": "false",
+     * "errors": [
+     * "The password field is required.",
+     * "The newName field is required."
      *]
      *}
      * @response {
-     * "Status": "true",
-     * "Messages": "You have changed your name"
+     * "status": "true",
+     * "message": "You have changed your name"
      *}
 	 */
-    public function ChangeName(Request $request)
+    public function changeName(Request $request)
     {
        // body
     }
@@ -125,24 +125,24 @@ class UserController extends Controller
 
     /**
      * @authenticated
-	 * Change Password
-     * @bodyParam Password string required .
-     * @bodyParam New_Password string required .
-     * @bodyParam New_Password_confirmation string required .
+	 * Change password
+     * @bodyParam password string required .
+     * @bodyParam newPassword string required .
+     * @bodyParam newPassword_confirmation string required this filed is special so it isn't camel case .
      * @response 404 {
-     * "Status": "false",
-     * "Errors": [
+     * "status": "false",
+     * "errors": [
      * "The password field is required.",
-     * "The New_password field is required.",
-     * "The New_password_confirmation field is required."
+     * "The newPassword field is required.",
+     * "The newPassword_confirmation field is required."
      *]
      *}
      * @response {
-     * "Status": "true",
-     * "Messages": "You have changed your password"
+     * "status": "true",
+     * "message": "You have changed your password"
      *}
 	 */
-    public function ChangePassword(Request $request)
+    public function chnagePassword(Request $request)
     {
         // body
     }
@@ -153,11 +153,11 @@ class UserController extends Controller
      * @bodyParam Image string required the URL for the image .
      * @authenticated
      * @response {
-     * "Status": "true",
-     * "Messages": "You have updated your profile picture"
+     * "status": "true",
+     * "message": "You have updated your profile picture"
      *}
 	 */
-    public function ChangeImage(Request $request)
+    public function changeImage(Request $request)
     {
       // body
     }
@@ -165,17 +165,17 @@ class UserController extends Controller
     
     /**
 	 * Delete
-     * @bodyParam Password string required .
+     * @bodyParam password string required .
      * @authenticated
      * @response 404 {
-     * "Status": "false",
-     * "Errors": [
+     * "status": "false",
+     * "errors": [
      * "The password is wrong."
      *]
      *}
      * @response {
-     * "Status": "true",
-     * "Messages": "You have deleted your account"
+     * "status": "true",
+     * "message": "You have deleted your account"
      *}
 	 */
     public function Delete(Request $request)
@@ -186,9 +186,9 @@ class UserController extends Controller
 
     /**
      * search for an user
-     * @bodyParam username string required search for a user by his/her username.
+     * @bodyParam userName string required search for a user by his/her userName.
      */
-    public function get_user()
+    public function getUser()
     {
         // to do 
     }

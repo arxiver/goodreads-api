@@ -25,8 +25,16 @@ Route::post('changePassword', "UserController@changePassword");
 Route::post('changeName', "UserController@changeName");
 Route::post('changeImage', "UserController@changeImage");
 Route::post('delete', "UserController@delete");
+
+
 Route::get('showSetting', "UserController@showSetting");
 Route::get('logOut', "UserController@logOut");
+Route::get('changeBirthday', "UserController@changeBirthday");
+Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
+Route::get('changeCountry', "UserController@changeCountry");
+Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
+Route::get('changeCity', "UserController@changeCity");
+Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
 
 
 // Book Section

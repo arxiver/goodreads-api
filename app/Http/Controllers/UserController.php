@@ -19,8 +19,10 @@ class userController extends Controller
      * @bodyParam userName string required .
      * @bodyParam fullName string required .
      * @bodyParam password string required .
-     * @bodyParam password_confirmation string required .
+     * @bodyParam password_confirmation string required this is a special filed so it's not in camel case.
      * @bodyParam gender string required must be [Female , Male or Other].
+     * @bodyParam location string required .
+     * @bodyParam birthday date required .
      * @response 404 {
      * "status" : "false",
      * "errors": [
@@ -81,7 +83,12 @@ class userController extends Controller
      *   "userName": "",
      *   "gender": "",
      *   "name": "",
-     *   "image" : ""
+     *   "image" : "",
+     *   "location" : "",
+     *   "birthday" : "",
+     *   "seeMyBirthday" : "",
+     *   "seeMyCountry" : "",
+     *   "seeMyCity" : ""
      *}
     * }
      */
@@ -101,8 +108,8 @@ class userController extends Controller
 
 
     /**
-     * @authenticated
      * Change Name
+     * @authenticated
      * @bodyParam password string required .
      * @bodyParam newName string required .
      * @response 404 {
@@ -124,8 +131,8 @@ class userController extends Controller
 
 
     /**
-     * @authenticated
      * Change password
+     * @authenticated
      * @bodyParam password string required .
      * @bodyParam newPassword string required .
      * @bodyParam newPassword_confirmation string required this filed is special so it isn't camel case .
@@ -143,6 +150,93 @@ class userController extends Controller
      *}
      */
     public function changePassword(Request $request)
+    {
+        // body
+    }
+
+
+
+    /**
+     * Change country
+     * @authenticated
+     * @bodyParam country string required .
+     * @response {
+     * "status": "true",
+     * "message": "You have changed your country"
+     *}
+     */
+    public function changeCountry(Request $request)
+    {
+        // body
+    }
+
+    /**
+     * Change city
+     * @authenticated
+     * @bodyParam city string required .
+     * @response {
+     * "status": "true",
+     * "message": "You have changed your city"
+     *}
+     */
+    public function changeCity(Request $request)
+    {
+        // body
+    }
+
+    /**
+     * Change birthday
+     * @authenticated
+     * @bodyParam birthday date required .
+     * @response {
+     * "status": "true",
+     * "message": "You have changed your birthday"
+     *}
+     */
+    public function changeBirthday(Request $request)
+    {
+        // body
+    }
+
+    /**
+     * Who can see my birthday
+     * @authenticated
+     * @bodyParam seeMyBirthday string required Must be ["onlyMe","everyOne" or "friends"].
+     * @response {
+     * "status": "true",
+     * "message": "You have changed who can see your birthday"
+     *}
+     */
+    public function whoCanSeeMyBirthday(Request $request)
+    {
+        // body
+    }
+
+
+    /**
+     * Who can see my country
+     * @authenticated
+     * @bodyParam seeMyCountry string required Must be ["onlyMe","everyOne" or "friends"].
+     * @response {
+     * "status": "true",
+     * "message": "You have changed who can see your country"
+     *}
+     */
+    public function whoCanSeeMyCountry(Request $request)
+    {
+        // body
+    }
+
+    /**
+     * Who can see my city
+     * @authenticated
+     * @bodyParam seeMyCity string required Must be ["onlyMe","everyOne" or "friends"].
+     * @response {
+     * "status": "true",
+     * "message": "You have changed who can see your city"
+     *}
+     */
+    public function whoCanSeeMyCity(Request $request)
     {
         // body
     }
@@ -178,11 +272,11 @@ class userController extends Controller
      * "message": "You have deleted your account"
      *}
      */
-    public function Delete(Request $request)
+    public function delete(Request $request)
     {
         // body
     }
-    
+
 
     /**
      * search for an user

@@ -12,11 +12,13 @@ use Illuminate\Http\Request;
 class followcontroller extends Controller
 {
     /**
-     * followUser  Start following a user
+     * followUser  
+     * 
+     * Start following a user
      *
      * @authenticated
      *
-     * @bodyParam USER_ID int required Goodreads user id of user to follow.
+     * @bodyParam userId int required Goodreads user id of user to follow.
      *
      * @response {
      *  "state" : "true"
@@ -27,11 +29,13 @@ class followcontroller extends Controller
         // to do ...
     }
     /**
-    * unfollowUser Stop following a user
+    * unfollowUser 
+    *
+    * Stop following a user
     *
     * @authenticated
     *
-    * @bodyParam USER_ID int required Goodreads user id of user to stop following.
+    * @bodyParam userId int required Goodreads user id of user to stop following.
     *
     * @response {
     *  "state" : "true"
@@ -43,33 +47,37 @@ class followcontroller extends Controller
     }
 
     /**
-     * user_followers
+     * userFollowers
      * 
      * Get a user's followers
+     * 
+     * @authenticated
      * 
      * @bodyParam page int optional 1-N (default 1).
      * 
      * @response {
-     *  "id_followers" : "123"
+     *  "idFollowers" : "123"
      * }
      */
-    public function user_followers()
+    public function userFollowers()
     {
         //to do ....
     }
 
     /**
-     * user_followering
+     * userFollowering
      * 
      * Get a user's followering
+     * 
+     * @authenticated
      * 
      * @bodyParam page int optional 1-N (default 1).
      * 
      * @response {
-     *  "id_following" : "123"
+     *  "idFollowing" : "123"
      * }
      */
-    public function user_following()
+    public function userFollowing()
     {
         //to do ....
     }

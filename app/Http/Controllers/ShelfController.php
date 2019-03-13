@@ -74,6 +74,28 @@ class ShelfController extends Controller
      * @bodyParam user_id int required The name of the shelf.
      * @bodyParam page int optional 1-N (default 1).
      * @bodyParam books_per_page int optional (default 10).
+     * @response {
+	 *"shelves": {
+	 *	"user_shelf": [
+	 *		{
+	 *			"name": "read",
+	 *			"book_count": "0"
+	 *		},
+	 *		{
+	 *			"name": "currently-reading",
+	 *			"book_count":  "0"
+	 *		
+	 *		},
+	 *		{
+	 *			"name": "to-read",
+	 *			"book_count": "0"			
+	 *		}
+	 *	],
+	 *	"_start": "1",
+	 *	"_end": "3",
+	 *	"_total": "3"
+	 * } 
+     *}
      */
     public function userShelves($user_id)
     {
@@ -92,6 +114,23 @@ class ShelfController extends Controller
      * show books on the shelf
      * @bodyParam user_id integer required Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
+     * @response {
+     * "book_title": "Would you die for me?",
+     * "isbn": "1234xxxxxx",
+     * "image_url": "lookdown.jpg",
+     * "small_image_url": "xyz.com/images/uvw.jpg",
+     * "num_pages": "1000",
+     * "publisher": "dummyMan",
+     * "publication_day": 13 ,
+     * "publication_year": 1932 ,
+     * "publication_month": 10  ,
+     * "average_rating": 3.532,
+     * "ratings_count": 1,
+     * "description": "dummy",
+     * "author_id" : 1,
+     * "author_name" : "author",
+     * "genre" : "action"
+     * }
      */
 	public function getBooksOnShelf()
 	{

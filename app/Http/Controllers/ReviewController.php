@@ -38,7 +38,7 @@ class ReviewController extends Controller
     /**
      * Show a review of a specified book
      * @authenticated
-     * @bodyParam id int required The id of the review .
+     * @bodyParam review_id int required The id of the review .
      */
     public function show($id)
     {
@@ -48,7 +48,7 @@ class ReviewController extends Controller
     /**
      * Edit a review
      * @authenticated
-     * @bodyParam id int required Review Id.
+     * @bodyParam review_id int required Review Id.
      * @bodyParam review text optional The text of the review.
      * @bodyParam shelf_name string optional (read,currently-reading,to-read)  .
      * @bodyParam rating int optional Rating (0-5) default is the same as it was .
@@ -97,5 +97,34 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * rate a book
+     * @authenticated
+     * @bodyParam book_id int required The id of the book to be rated.
+     * @bodyParam rate int required
+     */
+    public function rate()
+    {
+
+    }
+    /**
+     * edit the rate of a book
+     * @authenticated
+     * @bodyParam rate_id int required The id of the rate to be edited.
+     * @bodyParam rate int required
+     */
+    public function editRate()
+    {
+
+    }
+    /**
+     * delete the rate of a book
+     * @authenticated
+     * @bodyParam rate_id int required The id of the rate to be deleted.
+     */
+    public function deleteRate()
+    {
+
     }
 }

@@ -281,9 +281,82 @@ class userController extends Controller
     /**
      * search for an user
      * @bodyParam userName string required search for a user by his/her userName.
+     * @response {"user": {
+	 * 		"id": "000000",
+	 *		"name": "Salma",
+	 *		"image_url": "https://image.jpg",
+	 *		"link": "https://www.goodreads.com/user/show/000000-salma"
+     *	}
+     *}
      */
     public function getUser()
     {
         // to do
     }
+    /**
+     * Show Profile
+     * 
+     * @bodyParam id int optional this parameter to show the info of the other user (default authenticated user) .
+     * 
+     * @authenticated
+     * @response {
+     * "id": "",
+     * "name": "",
+     * "user_name": "",
+     * "link": "",
+     * "image_url": "",
+     * "small_image_url": "",
+     * "about": "",
+     * "age": "",
+     * "gender": "",
+     * "location": "",
+     * "joined": "",
+     * "last_active": "",
+     * "user_shelves": {
+     *   "user_shelf": [
+     *   {
+     *       "id": {
+     *       "_type": "",
+     *       "__text": ""
+     *       },
+     *       "name": "read",
+     *       "book_count": {
+     *      "_type": "integer",
+     *       "__text": ""
+     *       }
+     *   },
+     *   {
+     *       "id": {
+     *       "_type": "",
+     *       "__text": ""
+     *       },
+     *       "name": "currently-reading",
+     *       "book_count": {
+     *       "_type": "integer",
+     *      "__text": "0"
+     *        }
+     *   },
+     *   {
+     *       "id": {
+     *       "_type": "",
+     *       "__text": ""
+     *       },
+     *       "name": "to-read",
+     *       "book_count": {
+     *       "_type": "integer",
+     *       "__text": "2"
+     *       }
+     *   }
+     *   ],
+     *   "_type": "array"
+     * },
+     * "updates": []
+     * }
+     */
+
+    public function showProfile()
+    {
+        // to do
+    }
+
 }

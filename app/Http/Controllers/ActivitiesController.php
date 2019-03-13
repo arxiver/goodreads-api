@@ -96,18 +96,31 @@ class ActivitiesController extends Controller
     /**
      * comment
      * @bodyParam id int required id of the commented resource
+	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
      * @bodyParam body string required the body of the comment
      * @authenticated
-     * @response {true}
+     * @response {state:true}
      */
     public function makeComment()
     {
 
-    }
+	}
+	/**
+     * delete comment
+     * @bodyParam id int required comment id
+     * @authenticated
+     * @response {state:true}
+     */
+	public function deleteComment()
+	{
+
+	}
+
     /**
      * list comments
      * lists comments for a specific resource(review,update)
      * @bodyParam id required int id of the commented resource
+	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
      * @response
      * {
      * comments[
@@ -137,16 +150,30 @@ class ActivitiesController extends Controller
     /**
      * like
      * @bodyParam id int required id of the liked resource
+	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
      * @response {true}
      */
     public function makeLike()
     {
         
-    }
+	}
+	
+    /**
+     * unlike
+     * @bodyParam id int required like id
+     * @authenticated
+     * @response {state:true}
+     */
+	public function unlike()
+	{
+
+	}
+
     /**
      * list likes
      * lists likes for a specific resource(review,update)
      * @bodyParam id int required id of the liked resource
+	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
      * @authenticated
      * @response
      * {

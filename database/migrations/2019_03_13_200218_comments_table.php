@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class LikesTable extends Migration
+class CommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class LikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('userId');
-            // the id of the comment or review 
+            $table->integer('userId'); 
             $table->integer('resourseId');
-            // the type of the resourse which will determine the table the 
-            // resourseId belongs to 
             $table->integer('resourseType');
             $table->datetime('lastUpdate');
+            $table->string('body'); 
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class LikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('comments');
     }
 }

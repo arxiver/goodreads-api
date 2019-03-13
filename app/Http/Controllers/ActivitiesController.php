@@ -65,7 +65,7 @@ class ActivitiesController extends Controller
 	 * @bodyParam page int optional 1-N (default 1).
      * @response
      * {
-	 *"notifications": {
+	 *  "notifications": {
 	 *	"notification": [
 	 *		{
 	 *			"id": "1",

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShelvesTable extends Migration
+class LikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,7 @@ class CreateShelvesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shelves', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('userId');
-            $table->integer('bookId');
-            $table->string('type');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -29,6 +23,6 @@ class CreateShelvesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shelves');
+        //
     }
 }

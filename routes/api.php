@@ -46,19 +46,13 @@ Route::get('Books/book_ISBN','BookController@getBookByIsbn');
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 // Review Section
-Route::get('reviwes','ReviewController@index');
-Route::post('reviwes/create','ReviewController@create');
-Route::get( 'reviwes/show/{id}','ReviewController@show');
-Route::put('reviwes/edit', 'ReviewController@edit');
+Route::get('reviwes','ReviewController@recentReviews');
+Route::post('reviwes/create','ReviewController@createReview');
+Route::put('reviwes/edit', 'ReviewController@editReview');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
-//Route::get('reviwes/recent', 'ReviewController@recentReviews');
-Route::get( 'reviwes/users/{user_id}/books/{book_id}', 'ReviewController@userReview');
-Route::get( 'reviwes/books/{bood_id}', 'ReviewController@bookReview');
+Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
+Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
 
-//Rate Section
-Route::post('rate','ReviewController@rate');
-Route::put('rate','ReviewController@editRate');
-Route::delete('rate','ReviewController@deleteRate');
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');

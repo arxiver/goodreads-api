@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->integer('userId');
             $table->integer('bookId');
             $table->text('body');
-            //$table->('type');
+            $table->string('type');
             $table->timestamps();
         });
     }

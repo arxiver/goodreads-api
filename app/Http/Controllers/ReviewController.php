@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
  */
 class ReviewController extends Controller
 {
-
-    /**
-     * List all reviews of the authenticated user
-     * @authenticated
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Create a review
      * @authenticated
@@ -30,17 +20,7 @@ class ReviewController extends Controller
      * @bodyParam rating int optional Rating (0-5) default is 0 (No rating).
      * @bodyParam read_at date optional (YYYY-MM-DD format, e.g. 2008-02-01).
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Show a review of a specified book
-     * @authenticated
-     * @bodyParam review_id int required The id of the review .
-     */
-    public function show($id)
+    public function createReview()
     {
         //
     }
@@ -54,7 +34,7 @@ class ReviewController extends Controller
      * @bodyParam rating int optional Rating (0-5) default is the same as it was .
      * @bodyParam read_at date optional  default is (the same as it was).
      */
-    public function edit()
+    public function editReview()
     {
         //
     }
@@ -67,28 +47,6 @@ class ReviewController extends Controller
     {
 
     }
-    //
-    /**
-     * Get a user's review for a given book.
-     * @authenticated
-     * @bodyParam user_id int required id of the user.
-     * @bodyParam book_id int required  id of the book.
-     *
-     */
-    public function userReview()
-    {
-        //
-    }
-    /**
-     * Get a book`s reviews by users.
-     * @authenticated
-     * @bodyParam book_id int required book_id you want to show its reviews.
-     *
-     */
-    public function bookReview()
-    {
-
-    }
     /**
      * Remove a Review
      * @authenticated
@@ -98,33 +56,30 @@ class ReviewController extends Controller
     {
         //
     }
-    /**
-     * rate a book
-     * @authenticated
-     * @bodyParam book_id int required The id of the book to be rated.
-     * @bodyParam rate int required
-     */
-    public function rate()
-    {
 
-    }
     /**
-     * edit the rate of a book
+     * Get review statistics given a list of ISBNs
+     * take alist of books and then return their reviews And Rates
+     * and i will use it to get the review for one book array of one element
      * @authenticated
-     * @bodyParam rate_id int required The id of the rate to be edited.
-     * @bodyParam rate int required
+     * @bodyParam isbns ArrayofInt required  Array of ISBNs(1000 ISBNs per request max.).
+     * 
      */
-    public function editRate()
+    public function getReviewsForListOfBooks()
     {
+        //
+    } 
 
-    }
+
     /**
-     * delete the rate of a book
+     * Get the reviews for a book given a title string
      * @authenticated
-     * @bodyParam rate_id int required The id of the rate to be deleted.
+     * @bodyParam title string required The title of the book to lookup.
+     * @bodyParam author string optional The author name of the book to lookup.
+     * @bodyParam rating int optional Show only reviews with a particular rating.
      */
-    public function deleteRate()
+    public function getReviewsByTitle()
     {
-
-    }
+        //
+    } 
 }

@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('imgUrl');
             $table->date('publicationDate');
             $table->string('publisher');
+            $table->string('language');
             $table->string('description');
             $table->integer('reviewsCount');
             $table->integer('ratingsCount');

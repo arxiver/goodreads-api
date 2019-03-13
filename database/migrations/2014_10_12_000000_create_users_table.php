@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->datetime('lastActive');
             $table->integer('followersCount');
             $table->integer('followingCounts');
-            $table->float('rating');
+            $table->float('ratingAvg');
             $table->integer('ratingCount');
 
             $table->rememberToken();

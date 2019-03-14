@@ -69,8 +69,8 @@ Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 //Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 
 //Auther section
-Route::get('authorname','AuthorController@getAuthorByName');
-Route::get('authorid','AuthorController@searchAuthor');
+//Route::get('authorname','AuthorController@getAuthorByName');
+//Route::get('authorid','AuthorController@searchAuthor');
 
 
 

@@ -82,4 +82,48 @@ class ReviewController extends Controller
     {
         //
     } 
+
+    /**
+     * List all reviews of the authenticated user
+     * @authenticated
+     * 
+     */
+    public function listMyReviews()
+    {
+        //
+    }
+
+
+
+    /**
+     * List thee reviews for a specific user 
+     * @authenticated
+     * @bodyParam userId required id of the user
+     */
+    public function listReviewOfUser()
+    {
+        //
+    }
+
+    /**
+     * get a specific review with it's comments and likes 
+     * @authenticated
+     * @bodyParam reviewId required id of the of the review to get it's body when notification happens 
+     */
+    public function showReviewOfBook()
+    {
+        //
+    }
+
+
+    /**
+     * Get the review for specific user on a specific Book 
+     * @authenticated
+     * @bodyParam userId required id of the of the user
+     * @bodyParam bookId required id of the of the book 
+     */
+    public function showReviewForBookForUser()
+    {
+        //
+    }
 }

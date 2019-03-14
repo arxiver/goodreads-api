@@ -52,6 +52,13 @@ Route::put('reviwes/edit', 'ReviewController@editReview');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
 Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
+Route::get('listmyreviews','ReviewController@listMyReviews');
+Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+
+
+
 
 
 // Shelf Section

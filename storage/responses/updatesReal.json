@@ -1,0 +1,151 @@
+{
+   "updates":{
+      "update":[
+         {
+            "id":"0000000",
+            "actor":{
+               "id":"65993249",
+               "name":"Salma Ibrahim",
+               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+            },
+            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+            "numComments":"",
+            "numLikes":"",
+            "action":{
+               "id":"5",
+               "type":"0",
+               "rating":"",
+               "body":"",
+               "book":{
+                  "id":"31087",
+                  "title":"The Last Boleyn",
+                  "imgUrl":"",
+                  "shelf":"",
+                  "rating":""
+               }
+            }
+         },
+         {
+            "id":"000001",
+            "actor":{
+               "id":"65993249",
+               "name":"Salma Ibrahim",
+               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+            },
+            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+            "numComments":"",
+            "numLikes":"",
+            "action":{
+               "id":"",
+               "type":"2",
+               "user":{
+                  "name":"",
+                  "imageLink":"",
+                  "ratingAvg":"",
+                  "ratingCount":""
+               }
+            }
+         },
+         {
+            "id":"0000000",
+            "actor":{
+               "id":"65993249",
+               "name":"Salma Ibrahim",
+               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+            },
+            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+            "numComments":"",
+            "numLikes":"",
+            "action":{
+               "id":"5",
+               "type":"1",
+               "shelf":"wants to read",
+               "book":{
+                  "id":"31087",
+                  "title":"The Last Boleyn",
+                  "imgUrl":"",
+                  "shelf":"",
+                  "rating":""
+               }
+            }
+         },
+         {
+            "id":"0000000",
+            "actor":{
+               "id":"65993249",
+               "name":"Salma Ibrahim",
+               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+            },
+            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+            "action":{
+               "id":"7",
+               "type":"3",
+               "resourceType":"1",
+               "update":{
+                  "id":"0000000",
+                  "actor":{
+                     "id":"65993249",
+                     "name":"Salma Ibrahim",
+                     "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+                  },
+                  "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+                  "numComments":"",
+                  "numLikes":"",
+                  "action":{
+                     "id":"5",
+                     "type":"1",
+                     "shelf":"wants to read",
+                     "book":{
+                        "id":"31087",
+                        "title":"The Last Boleyn",
+                        "imgUrl":"",
+                        "shelf":"",
+                        "rating":""
+                     }
+                  }
+               }
+            }
+         },
+         {
+            "id":"0000000",
+            "actor":{
+               "id":"65993249",
+               "name":"Salma Ibrahim",
+               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+            },
+            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+            "action":{
+               "id":"7",
+               "type":"4",
+               "resourceType":"0",
+               "body":"",
+               "update":{
+                  "id":"0000000",
+                  "actor":{
+                     "id":"65993249",
+                     "name":"Salma Ibrahim",
+                     "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
+                  },
+                  "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
+                  "numComments":"",
+                  "numLikes":"",
+                  "action":{
+                     "id":"5",
+                     "type":"0",
+                     "rating":"",
+                     "body":"",
+                     "book":{
+                        "id":"31087",
+                        "title":"The Last Boleyn",
+                        "imgUrl":"",
+                        "shelf":"",
+                        "rating":""
+                     }
+                  }
+               }
+            }
+         }
+      ],
+      "_type":"array"
+   }
+}

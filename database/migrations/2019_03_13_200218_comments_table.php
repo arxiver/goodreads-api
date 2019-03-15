@@ -19,7 +19,7 @@ class CommentsTable extends Migration
             $table->integer('resourseId');
             $table->integer('resourseType');
             $table->datetime('lastUpdate');
-            $table->string('body'); 
+            $table->text('body'); 
             $table->timestamps();
         });
     }

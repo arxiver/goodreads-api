@@ -95,11 +95,13 @@ class ActivitiesController extends Controller
     }
     /**
      * comment
-     * @bodyParam id int required id of the commented resource
-	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
-     * @bodyParam body string required the body of the comment
-     * @authenticated
-     * @response {state:true}
+     * @bodyParam id int required id of the commented resource.
+	 * @bodyParam type int required type of the resource (1 for user status and 2 for review).
+     * @bodyParam body string required the body of the comment .
+     * @authenticated.
+     * @response {
+	 * 	"state":"true"
+	 * }
      */
     public function makeComment()
     {
@@ -109,7 +111,9 @@ class ActivitiesController extends Controller
      * delete comment
      * @bodyParam id int required comment id
      * @authenticated
-     * @response {state:true}
+     * @response {
+	 * 	"state":"true"
+	 * }
      */
 	public function deleteComment()
 	{
@@ -117,32 +121,34 @@ class ActivitiesController extends Controller
 	}
 
     /**
-     * list comments
-     * lists comments for a specific resource(review,update)
-     * @bodyParam id required int id of the commented resource
-	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
-     * @response
-     * {
-     * comments[
-	 *"comment": {
-	 *	"id": "0000000",
-	 *	"user": {
-	 *		"id": "000000",
-	 *		"name": "aa",
-	 *		"location": "The United States",
-	 *		"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	 *		"image_url": "\nhttps://s.gr-assets.png\n",
-	 *		"has_image": "false"
-	 *	},
-	 *	
-	 *	"date_added": "Fri Mar 08 16:25:10 -0800 2019",
-	 *	"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
-	 *	"link": "\nhttps://www.goodreads.comshow/00000\n",
-	 *	"body":"a great book"
-	 *  }
-     * ]
-     *}
-     */    
+    * list comments
+    * lists comments for a specific resource(review,update)
+    * @bodyParam id required int id of the commented resource
+	* @bodyParam type int required type of the resource (1 for user status and 2 for review)
+ 	* @response
+    * {
+	*	"comment": {
+    * 	"comments"[
+	*		"comment": {
+	*			"id": "0000000",
+	*			"user": {
+	*				"id": "000000",
+	*				"name": "aa",
+	*				"location": "The United States",
+	*				"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
+	*				"image_url": "\nhttps://s.gr-assets.png\n",
+	*				"has_image": "false"
+	*				},
+	*			"date_added": "Fri Mar 08 16:25:10 -0800 2019",
+	*			"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
+	*			"link": "\nhttps://www.goodreads.comshow/00000\n",
+	*			"body":"a great book"
+	*  		}
+	* 		],
+	*		"_type": "array"
+	*	}
+    * }
+    */    
     public function listComments()
     {
         

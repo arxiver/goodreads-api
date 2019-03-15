@@ -14,21 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 /*
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 */
 // User section
-Route::post('signUp', "UserController@signUp");
-Route::post('logIn', "UserController@logIn");
-Route::post('changePassword', "UserController@changePassword");
-Route::post('changeName', "UserController@changeName");
-Route::post('changeImage', "UserController@changeImage");
-Route::post('delete', "UserController@delete");
-Route::get('showProfile','UserController@showProfile');
+Route::group(["middleware" => "authorized"] , function(){
+    Route::post('signUp', "UserController@signUp");
+    Route::post('logIn', "UserController@logIn");
+});
+Route::group(["middleware" => "unAuthorized"] , function(){
+    Route::post('changePassword', "UserController@changePassword");
+    Route::post('changeName', "UserController@changeName");
+    Route::post('changeImage', "UserController@changeImage");
+    Route::post('delete', "UserController@delete");
+    Route::get('showSetting', "UserController@showSetting");
+    Route::get('logOut', "UserController@logOut");
+    Route::get('showProfile','UserController@showProfile');
+});
 
-Route::get('showSetting', "UserController@showSetting");
-Route::get('logOut', "UserController@logOut");
 Route::get('changeBirthday', "UserController@changeBirthday");
 Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
 Route::get('changeCountry', "UserController@changeCountry");
@@ -52,6 +54,13 @@ Route::put('reviwes/edit', 'ReviewController@editReview');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
 Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
+Route::get('listmyreviews','ReviewController@listMyReviews');
+Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+
+
+
 
 
 // Shelf Section
@@ -69,8 +78,8 @@ Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 //Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
 
 //Auther section
-Route::get('authorname','AuthorController@getAuthorByName');
-Route::get('authorid','AuthorController@searchAuthor');
+//Route::get('authorname','AuthorController@getAuthorByName');
+//Route::get('authorid','AuthorController@searchAuthor');
 
 
 

@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\user;
+
+use JWTAuth;
 use Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @group user management
@@ -13,64 +16,147 @@ use Validator;
  */
 class userController extends Controller
 {
+    
+    
     //
     /**
      * Sign Up
-     * @bodyParam userName string required .
-     * @bodyParam fullName string required .
+     * @bodyParam email string required .
      * @bodyParam password string required .
      * @bodyParam password_confirmation string required this is a special filed so it's not in camel case.
+     * @bodyParam name string required .
      * @bodyParam gender string required must be [Female , Male or Other].
-     * @bodyParam location string required .
      * @bodyParam birthday date required .
+     * @bodyParam country string required .
+     * @bodyParam city string required .
      * @response 404 {
      * "status" : "false",
      * "errors": [
+     * "The email field is required.",
      * "The userName field is required.",
      * "The password field is required.",
-     * "The fullName field is required.",
+     * "The name field is required.",
      * "The gender field is required."
      *]
      *}
      * @response {
      * "status": "true",
      * "user": {
-     *   "userName": "",
-     *   "name": "",
-     *   "image" : ""
-     *}
-     *}
+     *    "email": "",
+     *    "name": "",
+     *    "age": "",
+     *    "birthDay": "",
+     *    "joinedAt": "",
+     *    "username": "",
+     *    "gender": "",
+     *    "lastActive": "",
+     *    "country": "",
+     *    "city": "",
+     *    "ratingCount": "",
+     *    "ratingAvg": "",
+     *    "followingCounts": "",
+     *    "followersCount": "",
+     *    "imageLink": ""
+     *},
+     * "token": "",
+     * "token_type": "",
+     * "expires_in": ""
+     * }
      */
 
     public function signUp(Request $request)
     {
-        // body
+        // body 
     }
 
 
     /**
      * LogIn
-     * @bodyParam userName string required .
+     * @bodyParam email string required .
      * @bodyParam password string required .
      * @response 404 {
      * "status": "false",
      * "errors": [
-     * "The userName field is required.",
+     * "The email field is required.",
      * "The password field is required."
      *]
      *}
      * @response {
      * "status": "true",
      * "user": {
-     *   "userName": "",
-     *   "name": "",
-     *   "image" : ""
+     *    "email": "",
+     *    "name": "",
+     *    "age": "",
+     *    "birthDay": "",
+     *    "joinedAt": "",
+     *    "username": "",
+     *    "gender": "",
+     *    "lastActive": "",
+     *    "country": "",
+     *    "city": "",
+     *    "ratingCount": "",
+     *    "ratingAvg": "",
+     *    "followingCounts": "",
+     *    "followersCount": "",
+     *    "imageLink": ""
+     *},
+     *"token": "",
+     *"token_type": "",
+     *"expires_in": ""
      *}
-    * }
      */
     public function logIn(Request $request)
     {
-        // body
+        // response
+        
+        $HashedPassword = Hash::make($request["password"]);
+        $Validations    = array(
+                                    "email"             => "required|email|exists:users,Email" ,
+                                    "password"          => "required|max:30|min:5",
+                                    "HshedPassword"     => "exists:users,Password",
+                                );
+        $Messages      = array(
+                                    "email.exists"              => "The email or password is invalid",
+                                    "HashedPassword.exists"     => "The email or Password is invalid"
+                                );
+        $Data = validator::make($request->all(), $Validations , $Messages);
+
+        if($Data->fails())
+        {
+            return response(["status" => "false" , "errors" => $Data->messages()->first()]);
+        }
+        else
+        {
+            if($token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]))
+            {
+                $GettingData = array(   
+                                        "email" ,
+                                        "name" ,
+                                        "age" ,
+                                        "birthDay",
+                                        "joinedAt",
+                                        "username" ,
+                                        "gender" ,
+                                        "lastActive" ,
+                                        "country" ,
+                                        "city" ,
+                                        "ratingCount" ,
+                                        "ratingAvg" ,
+                                        "followingCounts" ,
+                                        "followersCount",
+                                        "imageLink"
+                                    );
+                $User = User::where("email" , $request["email"])->first();
+                $User->lastActive=now();
+                $User->save();
+                $Show = User::where("email" , $request["email"])->first($GettingData);
+                return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
+            }
+            else
+            {
+                return response(["status" => "false" , "errors" => "The email or password is invalid"]);
+            }
+        }
     }
 
 
@@ -94,16 +180,48 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-        // body
+        $GettingData = array(   
+                                "email" ,
+                                "name" ,
+                                "age" ,
+                                "birthDay",
+                                "joinedAt",
+                                "username" ,
+                                "gender" ,
+                                "lastActive" ,
+                                "country" ,
+                                "city" ,
+                                "ratingCount" ,
+                                "ratingAvg" ,
+                                "followingCounts" ,
+                                "followersCount",
+                                "imageLink"
+                            );
+        $User =  User::find($this->ID)->first($GettingData);
+        return response(["user" => $User]);
     }
 
 
     /**
      * Log Out
+     * @authenticated
+     * @response {
+     * "status": "true",
+     * "message": "You have logged out"
+     *}
+     * @response {
+     * "status": "false",
+     * "message": "Unauthorized"
+     *}
      */
     public function logOut(Request $request)
     {
-        // body
+        
+        $User = User::find($this->ID);
+        $User->lastActive = now();
+        $User->save();
+        auth()->logout();
+        return response(["status" => "true" , "message" => "You have loged out"]);
     }
 
 

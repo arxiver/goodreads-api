@@ -75,11 +75,12 @@ Route::get('authorid','AuthorController@searchAuthor');
 
 
 
-//follow section
-Route::post('followuser','followcontroller@followUser');
-Route::delete('unfollowuser','followcontroller@unfollowUser');
-Route::get('followers','followcontroller@userFollowers');
-Route::get('following','followcontroller@userFollowing');
+//Following section
+Route::post('follow','FollowingController@followUser');
+Route::delete('unfollow','FollowingController@unfollowUser');
+Route::get('followers','FollowingController@userFollowers');
+Route::get('following','FollowingController@userFollowing');
+
 //User section
 Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');

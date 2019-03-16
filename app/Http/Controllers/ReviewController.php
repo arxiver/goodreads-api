@@ -161,8 +161,9 @@ class ReviewController extends Controller
      */
     public function showReviewsForBook($book_id)
     {
-        //
-        $results = DB::select('select * from reviews  where bookId = ?', [$book_id]);
+       // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+       $results = DB::select('select r.id,r.bookId,r.body,r.rating,r.lastUpdate,r.numberLikes,r.numberComments,r.userId,u.name as username, u.imageLink as userimagelink from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use Illuminate\Http\Request;
+use DB;
+use Response;
 /**
  * @group Review
  * @authenticated
@@ -110,9 +112,22 @@ class ReviewController extends Controller
      * @authenticated
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens 
      */
-    public function showReviewOfBook()
+    public function showReviewOfBook($id)
     {
         //
+        $results = DB::select('select * from reviews where id = ?', [$id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
     }
 
 
@@ -122,8 +137,21 @@ class ReviewController extends Controller
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book 
      */
-    public function showReviewForBookForUser()
+    public function showReviewForBookForUser($user_id , $book_id)
     {
         //
+        $results = DB::select('select * from reviews  where userId = ? and bookId = ?', [$user_id,$book_id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
     }
 }

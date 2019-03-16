@@ -43,9 +43,9 @@ Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
-Route::get('Books/book_title','BookController@getBookByTitle');
-Route::get('Books/book_ISBN','BookController@getBookByIsbn');
-Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+Route::get('Books/book_title/{book_title}','BookController@getBookByTitle');
+Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
 
 // Review Section
 Route::get('reviwes','ReviewController@recentReviews');
@@ -56,8 +56,8 @@ Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForList
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
 Route::get('listmyreviews','ReviewController@listMyReviews');
 Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
+Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
 
 
 
@@ -69,7 +69,7 @@ Route::get('shelf/{shelf_name}', 'ShelfController@show');
 Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
-Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
+Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
 
 //Owned Books
 //Route::get( 'owned_books', 'OwnedBookController@index');

@@ -92,8 +92,18 @@ class FollowingController extends Controller
         * Checking is the optional paramater is sent or not
         * Case it is not sent : then we list the authenticated-user `s followers
         */
-        $userId = $request->has(['user_id']) ? $request->user_id : 3 ; //Auth::id();
-        $page = $request->has(['page']) ? $request->page : 1 ;
+        $userId = $request->has(['user_id']) ? $request->user_id : 3; //Auth::id();
+
+        /**
+         *  if the user doesn`t exist .
+         */
+        User::findOrFail($userId);
+
+        /**
+         * Viewing page index . its divided into pages each page contain 30 (max) items.
+         */
+        $page = $request->has(['page']) ? $request->page : 1;
+
         /**
          * Page paramater is used to get sub-list of the followers
          * eg: page = 1 it will retreive only 30 followers of the user per page
@@ -130,12 +140,21 @@ class FollowingController extends Controller
     public function userFollowing(Request $request)
     {
         /**
-         * Checking is the optional paramater is sent or not
-         * Case it is not sent : then we list the authenticated-user `s followers
-         * other wise we use the given user_id to get his/her followers .
-         */
+        * Checking is the optional paramater is sent or not
+        * Case it is not sent : then we list the authenticated-user `s followers
+        */
         $userId = $request->has(['user_id']) ? $request->user_id : 3; //Auth::id();
+
+        /**
+         *  if the user doesn`t exist .
+         */
+        User::findOrFail($userId);
+
+        /**
+         * Viewing page index . its divided into pages each page contain 30 (max) items.
+         */
         $page = $request->has(['page']) ? $request->page : 1 ;
+
         /**
          * Page paramater is used to get sub-list of the followers
          * eg: page = 1 it will retreive only 30 followers of the user per page
@@ -146,7 +165,6 @@ class FollowingController extends Controller
         /**
          * Eloquent query
          */
-
         $data =
             DB::select( 'SELECT id , name , imageLink , smallImageUrl ,
                         email , link ,followersCount
@@ -155,7 +173,6 @@ class FollowingController extends Controller
         /**
          * Response paramaters and return
          */
-
         $_start = sizeof($data) == 0 ? 0 : ($page - 1) * $listSize + 1;
         $_end = sizeof($data) == 0 ? 0: ($page  - 1) * $listSize + sizeof($data) ;
         return response()->json(['following'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);

@@ -19,7 +19,6 @@ class CreateReviewsTable extends Migration
             $table->integer('bookId');
             $table->text('body');
             $table->integer('rating');
-            $table->datetime('lastUpdate');
             $table->integer('numberLikes');
             $table->integer('numberComments');
             $table->timestamps();

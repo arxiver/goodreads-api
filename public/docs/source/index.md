@@ -33,7 +33,7 @@ Get user&#039;s updates from following users
 ```bash
 curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":2,"max_updates":4}'
+    -d '{"user_id":20,"max_updates":10}'
 
 ```
 
@@ -46,8 +46,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 2,
-    "max_updates": 4
+    "user_id": 20,
+    "max_updates": 10
 }
 
 fetch(url, {
@@ -111,7 +111,6 @@ Parameter | Type | Status | Description
     max_updates | integer |  optional  | optional to get the max limit of updates.
 
 <!-- END_1c8b56dcc7476331d13beab7a976ba8f -->
-
 <!-- START_e65df2963c4f1f0bfdd426ee5170e8b7 -->
 ## notifications
 gets a user&#039;s notifications
@@ -122,7 +121,7 @@ gets a user&#039;s notifications
 ```bash
 curl -X GET -G "http://localhost/api/notifications" \
     -H "Content-Type: application/json" \
-    -d '{"page":5}'
+    -d '{"page":20}'
 
 ```
 
@@ -135,7 +134,7 @@ let headers = {
 }
 
 let body = {
-    "page": 5
+    "page": 20
 }
 
 fetch(url, {
@@ -163,7 +162,6 @@ Parameter | Type | Status | Description
     page | integer |  optional  | optional 1-N (default 1).
 
 <!-- END_e65df2963c4f1f0bfdd426ee5170e8b7 -->
-
 <!-- START_5f591b418d1c653384fb575623715a83 -->
 ## comment
 
@@ -173,7 +171,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":18,"type":12,"body":"7nj9K5YHgBW64i59"}'
+    -d '{"id":18,"type":16,"body":"KjLeeI3MNrOrPCpe"}'
 
 ```
 
@@ -187,8 +185,8 @@ let headers = {
 
 let body = {
     "id": 18,
-    "type": 12,
-    "body": "7nj9K5YHgBW64i59"
+    "type": 16,
+    "body": "KjLeeI3MNrOrPCpe"
 }
 
 fetch(url, {
@@ -220,7 +218,6 @@ Parameter | Type | Status | Description
     body | string |  required  | the body of the comment .
 
 <!-- END_5f591b418d1c653384fb575623715a83 -->
-
 <!-- START_300ec40d807333984a76a264dac57b69 -->
 ## list comments
 lists comments for a specific resource(review,update)
@@ -230,7 +227,7 @@ lists comments for a specific resource(review,update)
 ```bash
 curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
-    -d '{"id":"heRN7pm8zz1qdwaW","type":4}'
+    -d '{"id":"U0mMc4vgngGldbjV","type":9}'
 
 ```
 
@@ -243,8 +240,8 @@ let headers = {
 }
 
 let body = {
-    "id": "heRN7pm8zz1qdwaW",
-    "type": 4
+    "id": "U0mMc4vgngGldbjV",
+    "type": 9
 }
 
 fetch(url, {
@@ -273,7 +270,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_300ec40d807333984a76a264dac57b69 -->
-
 <!-- START_80dc13044fd2676e9d20409a038a90ab -->
 ## like
 
@@ -282,7 +278,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
-    -d '{"id":12,"type":5}'
+    -d '{"id":14,"type":10}'
 
 ```
 
@@ -295,8 +291,8 @@ let headers = {
 }
 
 let body = {
-    "id": 12,
-    "type": 5
+    "id": 14,
+    "type": 10
 }
 
 fetch(url, {
@@ -325,7 +321,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_80dc13044fd2676e9d20409a038a90ab -->
-
 <!-- START_06b447ff2a11ad98e991c70ded4a0c5e -->
 ## list likes
 lists likes for a specific resource(review,update)
@@ -336,7 +331,7 @@ lists likes for a specific resource(review,update)
 ```bash
 curl -X GET -G "http://localhost/api/listLikes" \
     -H "Content-Type: application/json" \
-    -d '{"id":11,"type":4}'
+    -d '{"id":10,"type":5}'
 
 ```
 
@@ -349,8 +344,8 @@ let headers = {
 }
 
 let body = {
-    "id": 11,
-    "type": 4
+    "id": 10,
+    "type": 5
 }
 
 fetch(url, {
@@ -379,7 +374,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_06b447ff2a11ad98e991c70ded4a0c5e -->
-
 <!-- START_3d49e7be6b108116b78dde56f94b4d52 -->
 ## unlike
 
@@ -440,7 +434,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":15}'
+    -d '{"id":1}'
 
 ```
 
@@ -453,7 +447,7 @@ let headers = {
 }
 
 let body = {
-    "id": 15
+    "id": 1
 }
 
 fetch(url, {
@@ -483,7 +477,6 @@ Parameter | Type | Status | Description
     id | integer |  required  | comment id
 
 <!-- END_c46bc7cda5782151e86d302b69be7ef7 -->
-
 #Book
 <!-- START_c84ecb8d4fd02d9a637dac124b62c629 -->
 ## List all books
@@ -493,7 +486,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":18,"books_per_page":11}'
+    -d '{"page":14,"books_per_page":13}'
 
 ```
 
@@ -506,8 +499,8 @@ let headers = {
 }
 
 let body = {
-    "page": 18,
-    "books_per_page": 11
+    "page": 14,
+    "books_per_page": 13
 }
 
 fetch(url, {
@@ -552,7 +545,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_c84ecb8d4fd02d9a637dac124b62c629 -->
-
 <!-- START_5b18d0a1476d11513f07c9427a8f479b -->
 ## Show book
 
@@ -561,7 +553,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":3}'
+    -d '{"book_id":20}'
 
 ```
 
@@ -574,7 +566,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 3
+    "book_id": 20
 }
 
 fetch(url, {
@@ -618,7 +610,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_5b18d0a1476d11513f07c9427a8f479b -->
-
 <!-- START_1ebf60b0f5e42ff9b1cbdcd9f468d722 -->
 ## Show books by genre
 
@@ -627,7 +618,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"DP0axEa7lpDJ2VNr","page":13,"books_per_page":7}'
+    -d '{"genreName":"DmNmmgKMnFIPNIVh","page":13,"books_per_page":8}'
 
 ```
 
@@ -640,9 +631,9 @@ let headers = {
 }
 
 let body = {
-    "genreName": "DP0axEa7lpDJ2VNr",
+    "genreName": "DmNmmgKMnFIPNIVh",
     "page": 13,
-    "books_per_page": 7
+    "books_per_page": 8
 }
 
 fetch(url, {
@@ -688,7 +679,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_1ebf60b0f5e42ff9b1cbdcd9f468d722 -->
-
 <!-- START_5d187f4ec204cb84ae6ab7d7ec4726e8 -->
 ## get the needed book by its name
 
@@ -1167,7 +1157,7 @@ null
 ```bash
 curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":12,"shelf":10,"review":"Bh2kfvkBoX89d51T","rating":10,"read_at":"W2sRGggbfkJgVJOu"}'
+    -d '{"bookId":16,"shelf":20,"body":"5LhksGVnxlxLpbaH","rating":11}'
 
 ```
 
@@ -1180,11 +1170,10 @@ let headers = {
 }
 
 let body = {
-    "book_id": 12,
-    "shelf": 10,
-    "review": "Bh2kfvkBoX89d51T",
-    "rating": 10,
-    "read_at": "W2sRGggbfkJgVJOu"
+    "bookId": 16,
+    "shelf": 20,
+    "body": "5LhksGVnxlxLpbaH",
+    "rating": 11
 }
 
 fetch(url, {
@@ -1196,6 +1185,27 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+> Example response (200):
+
+```json
+{
+    "state": "Invalid review you must make rate"
+}
+```
+> Example response (200):
+
+```json
+{
+    "state": "you cannot make review without rating"
+}
+```
+> Example response (200):
+
+```json
+{
+    "state": "your review is saved "
+}
+```
 
 ### HTTP Request
 `POST api/reviwes/create`
@@ -1204,14 +1214,12 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    book_id | integer |  required  | The book id has reviewed  to be created.
-    shelf | integer |  required  | (read,currently-reading,to-read) default is (read) .
-    review | optional |  optional  | string optional The text of the review.
+    bookId | integer |  required  | The book id has reviewed  to be created.
+    shelf | integer |  required  | (read->0,currently-reading->1,to-read->2) default is (read) .
+    body | optional |  optional  | string optional The text of the review.
     rating | integer |  optional  | optional Rating (0-5) default is 0 (No rating).
-    read_at | date |  optional  | optional (YYYY-MM-DD format, e.g. 2008-02-01).
 
 <!-- END_1521f8492a220ccff8293eeac79158d1 -->
-
 <!-- START_f2bf516816a6bd1a29bad51fe25e8a4a -->
 ## Edit a review
 
@@ -1221,7 +1229,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
-    -d '{"review_id":12,"review":"ObwkhdSJiCwLMYkB","shelf_name":"ushoWkVNtjc1UkM1","rating":2,"read_at":"ZfGXEXzoSw2qHKHA"}'
+    -d '{"reviewId":5,"body":"DHWsQZTUD5jBZeh7","rating":11}'
 
 ```
 
@@ -1234,11 +1242,9 @@ let headers = {
 }
 
 let body = {
-    "review_id": 12,
-    "review": "ObwkhdSJiCwLMYkB",
-    "shelf_name": "ushoWkVNtjc1UkM1",
-    "rating": 2,
-    "read_at": "ZfGXEXzoSw2qHKHA"
+    "reviewId": 5,
+    "body": "DHWsQZTUD5jBZeh7",
+    "rating": 11
 }
 
 fetch(url, {
@@ -1250,6 +1256,27 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+> Example response (200):
+
+```json
+{
+    "state": "Invalid review update"
+}
+```
+> Example response (200):
+
+```json
+{
+    "state": "you cannot make review update without rating"
+}
+```
+> Example response (200):
+
+```json
+{
+    "state": "your review is updated "
+}
+```
 
 ### HTTP Request
 `PUT api/reviwes/edit`
@@ -1258,14 +1285,11 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    review_id | integer |  required  | Review Id.
-    review | text |  optional  | optional The text of the review.
-    shelf_name | string |  optional  | optional (read,currently-reading,to-read)  .
-    rating | integer |  optional  | optional Rating (0-5) default is the same as it was .
-    read_at | date |  optional  | optional  default is (the same as it was).
+    reviewId | integer |  required  | Review Id.
+    body | text |  optional  | optional The text of the review.
+    rating | integer |  required  | Rating (0-5) default is the same as it was .
 
 <!-- END_f2bf516816a6bd1a29bad51fe25e8a4a -->
-
 <!-- START_f05a99566a1946530084c8ed20cdce5a -->
 ## Remove a Review
 
@@ -1275,7 +1299,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/reviwes/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"review_id":13}'
+    -d '{"reviewId":20}'
 
 ```
 
@@ -1288,7 +1312,7 @@ let headers = {
 }
 
 let body = {
-    "review_id": 13
+    "reviewId": 20
 }
 
 fetch(url, {
@@ -1300,6 +1324,13 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
+> Example response (200):
+
+```json
+{
+    "state": "delete is done"
+}
+```
 
 ### HTTP Request
 `DELETE api/reviwes/{id}`
@@ -1308,10 +1339,9 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    review_id | integer |  required  | The id of review to be deleted.
+    reviewId | integer |  required  | The id of review to be deleted.
 
 <!-- END_f05a99566a1946530084c8ed20cdce5a -->
-
 <!-- START_b5b6c6d01bc0058683ce95a3bd41d9ed -->
 ## Get review statistics given a list of ISBNs
 take alist of books and then return their reviews And Rates
@@ -1323,7 +1353,7 @@ and i will use it to get the review for one book array of one element
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"isbns":"Ccr1AIQnQHSHNuBj"}'
+    -d '{"isbns":"4mTzyIaySiBML3lA"}'
 
 ```
 
@@ -1336,7 +1366,7 @@ let headers = {
 }
 
 let body = {
-    "isbns": "Ccr1AIQnQHSHNuBj"
+    "isbns": "4mTzyIaySiBML3lA"
 }
 
 fetch(url, {
@@ -1364,7 +1394,6 @@ Parameter | Type | Status | Description
     isbns | ArrayofInt |  required  | Array of ISBNs(1000 ISBNs per request max.).
 
 <!-- END_b5b6c6d01bc0058683ce95a3bd41d9ed -->
-
 <!-- START_ceef72433d94fbcde535849da946b411 -->
 ## Get the reviews for a book given a title string
 
@@ -1374,7 +1403,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"OP9Cn1vUoHFkkxga","author":"Mqmjc6urZaOXc1Z5","rating":12}'
+    -d '{"title":"b7IX7wU50c0GUYgU","author":"CyilC8oRBBh1biar","rating":3}'
 
 ```
 
@@ -1387,9 +1416,9 @@ let headers = {
 }
 
 let body = {
-    "title": "OP9Cn1vUoHFkkxga",
-    "author": "Mqmjc6urZaOXc1Z5",
-    "rating": 12
+    "title": "b7IX7wU50c0GUYgU",
+    "author": "CyilC8oRBBh1biar",
+    "rating": 3
 }
 
 fetch(url, {
@@ -1419,7 +1448,6 @@ Parameter | Type | Status | Description
     rating | integer |  optional  | optional Show only reviews with a particular rating.
 
 <!-- END_ceef72433d94fbcde535849da946b411 -->
-
 <!-- START_5ed232d83e284046b3a323e6e8f98533 -->
 ## List all reviews of the authenticated user
 
@@ -1467,7 +1495,7 @@ null
 ```bash
 curl -X GET -G "http://localhost/api/listReviewOfUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"J9af0JNF5Qs3jPhU"}'
+    -d '{"userId":"CKW7wox5x4kELJt8"}'
 
 ```
 
@@ -1480,7 +1508,7 @@ let headers = {
 }
 
 let body = {
-    "userId": "J9af0JNF5Qs3jPhU"
+    "userId": "CKW7wox5x4kELJt8"
 }
 
 fetch(url, {
@@ -1508,7 +1536,6 @@ Parameter | Type | Status | Description
     userId | required |  optional  | id of the user
 
 <!-- END_3b8bc689333e11a42e9435563eb81d81 -->
-
 <!-- START_372361de1939f63d652e087d8a0247c1 -->
 ## get a specific review with it&#039;s comments and likes
 
@@ -1762,7 +1789,7 @@ fetch(url, {
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"IrvSMgEinB7qnxlE"}'
+    -d '{"shelf_name":"jg39jWoA1yANZQ0p"}'
 
 ```
 
@@ -1775,7 +1802,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "IrvSMgEinB7qnxlE"
+    "shelf_name": "jg39jWoA1yANZQ0p"
 }
 
 fetch(url, {
@@ -1803,7 +1830,6 @@ Parameter | Type | Status | Description
     shelf_name | string |  required  | The name of the shelf.
 
 <!-- END_f029a85d3a1a2f160cdbf493d58b76da -->
-
 <!-- START_1e7cb27e22831e4a6163a5908d6b002b -->
 ## Add a book to a shelf
 
@@ -1813,7 +1839,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"bPC9lIqL3GfMBpzF","book_id":20}'
+    -d '{"shelf_name":"EIfzODNVAuPtGXxp","book_id":3}'
 
 ```
 
@@ -1826,8 +1852,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "bPC9lIqL3GfMBpzF",
-    "book_id": 20
+    "shelf_name": "EIfzODNVAuPtGXxp",
+    "book_id": 3
 }
 
 fetch(url, {
@@ -1851,7 +1877,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_1e7cb27e22831e4a6163a5908d6b002b -->
-
 <!-- START_dc4e2f12407ce17b65f4e9e9488551dc -->
 ## Get User`s shelves
 
@@ -1861,7 +1886,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":9,"page":9,"books_per_page":7}'
+    -d '{"user_id":6,"page":19,"books_per_page":5}'
 
 ```
 
@@ -1874,9 +1899,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 9,
-    "page": 9,
-    "books_per_page": 7
+    "user_id": 6,
+    "page": 19,
+    "books_per_page": 5
 }
 
 fetch(url, {
@@ -1926,7 +1951,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_dc4e2f12407ce17b65f4e9e9488551dc -->
-
 <!-- START_50cd03fee8d42aa9c0fa3d943a51f4cf -->
 ## Remove a book from a shelf
 
@@ -1936,7 +1960,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"HsQzMUdbyOUEGS5Z","book_id":11}'
+    -d '{"shelf_name":"jxnDkAbG0ZtqJrQy","book_id":15}'
 
 ```
 
@@ -1949,8 +1973,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "HsQzMUdbyOUEGS5Z",
-    "book_id": 11
+    "shelf_name": "jxnDkAbG0ZtqJrQy",
+    "book_id": 15
 }
 
 fetch(url, {
@@ -1974,7 +1998,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_50cd03fee8d42aa9c0fa3d943a51f4cf -->
-
 <!-- START_87fd9bac6b43987c27c7179f6bc63f4d -->
 ## show books on the shelf
 
@@ -2054,7 +2077,7 @@ APIs for managing users (Sofyan)
 ```bash
 curl -X POST "http://localhost/api/signUp" \
     -H "Content-Type: application/json" \
-    -d '{"email":"59ksUrxvCGJjRLhY","password":"xRhxQw1C7QkHWHEq","password_confirmation":"bMbOprpDN5rBjTKr","name":"gyoBbcc0NKxcZOX2","gender":"1pqOt5zgG5Aligng","birthday":"48tiplmlv16RdT7u","country":"ly3hYAW74KKRPoU1","city":"wtV577dqGd50bjyd"}'
+    -d '{"email":"ZYc68DYavY6VH3am","password":"2jC5DFCRqGB0CIJp","password_confirmation":"rMpiVOdP4EGuHguN","name":"yhw16YqXTQ8TdGWS","gender":"Yyl4HJOCHWpjGmYT","birthday":"rMbB7zPlmCCrZjrn","country":"GkSZm42SvvJyYgBg","city":"UqfYvXLVhRvzKTE8"}'
 
 ```
 
@@ -2067,14 +2090,14 @@ let headers = {
 }
 
 let body = {
-    "email": "59ksUrxvCGJjRLhY",
-    "password": "xRhxQw1C7QkHWHEq",
-    "password_confirmation": "bMbOprpDN5rBjTKr",
-    "name": "gyoBbcc0NKxcZOX2",
-    "gender": "1pqOt5zgG5Aligng",
-    "birthday": "48tiplmlv16RdT7u",
-    "country": "ly3hYAW74KKRPoU1",
-    "city": "wtV577dqGd50bjyd"
+    "email": "ZYc68DYavY6VH3am",
+    "password": "2jC5DFCRqGB0CIJp",
+    "password_confirmation": "rMpiVOdP4EGuHguN",
+    "name": "yhw16YqXTQ8TdGWS",
+    "gender": "Yyl4HJOCHWpjGmYT",
+    "birthday": "rMbB7zPlmCCrZjrn",
+    "country": "GkSZm42SvvJyYgBg",
+    "city": "UqfYvXLVhRvzKTE8"
 }
 
 fetch(url, {
@@ -2145,7 +2168,6 @@ Parameter | Type | Status | Description
     city | string |  required  | .
 
 <!-- END_68ff8c9e5dd1db295b6f780b9fcfbeb2 -->
-
 <!-- START_c301d148df10074b99c7c734cf8eeb47 -->
 ## LogIn
 
@@ -2154,7 +2176,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/logIn" \
     -H "Content-Type: application/json" \
-    -d '{"email":"tHy9zGnyj1Nkxt46","password":"O7tYInVoCVVNfv8b"}'
+    -d '{"email":"un9U0GckJWeV7zoN","password":"aWncgSfJ6nhowYMH"}'
 
 ```
 
@@ -2167,8 +2189,8 @@ let headers = {
 }
 
 let body = {
-    "email": "tHy9zGnyj1Nkxt46",
-    "password": "O7tYInVoCVVNfv8b"
+    "email": "un9U0GckJWeV7zoN",
+    "password": "aWncgSfJ6nhowYMH"
 }
 
 fetch(url, {
@@ -2230,7 +2252,6 @@ Parameter | Type | Status | Description
     password | string |  required  | .
 
 <!-- END_c301d148df10074b99c7c734cf8eeb47 -->
-
 <!-- START_dd73fe89d9872ce37d284636141ae526 -->
 ## Change password
 
@@ -2240,7 +2261,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changePassword" \
     -H "Content-Type: application/json" \
-    -d '{"password":"lAuMHlHT8md8U6s3","newPassword":"0hwv6bOIfl388ty4","newPassword_confirmation":"fkjZJG1bsFmTQwdP"}'
+    -d '{"password":"1wjXRL0kUVXdjWiL","newPassword":"U8ARoZJ7oZemKY0y","newPassword_confirmation":"bZDmmpsBGxskumLP"}'
 
 ```
 
@@ -2253,9 +2274,9 @@ let headers = {
 }
 
 let body = {
-    "password": "lAuMHlHT8md8U6s3",
-    "newPassword": "0hwv6bOIfl388ty4",
-    "newPassword_confirmation": "fkjZJG1bsFmTQwdP"
+    "password": "1wjXRL0kUVXdjWiL",
+    "newPassword": "U8ARoZJ7oZemKY0y",
+    "newPassword_confirmation": "bZDmmpsBGxskumLP"
 }
 
 fetch(url, {
@@ -2300,7 +2321,6 @@ Parameter | Type | Status | Description
     newPassword_confirmation | string |  required  | this filed is special so it isn't camel case .
 
 <!-- END_dd73fe89d9872ce37d284636141ae526 -->
-
 <!-- START_02c8bbcf77a96f67abe8f7b90efa9eac -->
 ## Change Name
 
@@ -2310,7 +2330,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changeName" \
     -H "Content-Type: application/json" \
-    -d '{"password":"yfc2iUeDwUimqtyp","newName":"iN4az4qGgadb9bpN"}'
+    -d '{"password":"4M8DPEcMyab9jkrz","newName":"JzABvIyWYm5kdQcn"}'
 
 ```
 
@@ -2323,8 +2343,8 @@ let headers = {
 }
 
 let body = {
-    "password": "yfc2iUeDwUimqtyp",
-    "newName": "iN4az4qGgadb9bpN"
+    "password": "4M8DPEcMyab9jkrz",
+    "newName": "JzABvIyWYm5kdQcn"
 }
 
 fetch(url, {
@@ -2367,7 +2387,6 @@ Parameter | Type | Status | Description
     newName | string |  required  | .
 
 <!-- END_02c8bbcf77a96f67abe8f7b90efa9eac -->
-
 <!-- START_763d0e0624078ef7007bb9dd454eb3d8 -->
 ## Change Image
 
@@ -2377,7 +2396,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
-    -d '{"Image":"NZUTUGBzgZRl8m5C"}'
+    -d '{"Image":"kubzy7BTqrvfmnFx"}'
 
 ```
 
@@ -2390,7 +2409,7 @@ let headers = {
 }
 
 let body = {
-    "Image": "NZUTUGBzgZRl8m5C"
+    "Image": "kubzy7BTqrvfmnFx"
 }
 
 fetch(url, {
@@ -2421,7 +2440,6 @@ Parameter | Type | Status | Description
     Image | string |  required  | the URL for the image .
 
 <!-- END_763d0e0624078ef7007bb9dd454eb3d8 -->
-
 <!-- START_b7ec010166214c7cca3a1d83a4a25e51 -->
 ## Delete
 
@@ -2431,7 +2449,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
-    -d '{"password":"ujiASZCkGILqfYvF"}'
+    -d '{"password":"Z8xyWZi66tvb6FSU"}'
 
 ```
 
@@ -2444,7 +2462,7 @@ let headers = {
 }
 
 let body = {
-    "password": "ujiASZCkGILqfYvF"
+    "password": "Z8xyWZi66tvb6FSU"
 }
 
 fetch(url, {
@@ -2485,7 +2503,6 @@ Parameter | Type | Status | Description
     password | string |  required  | .
 
 <!-- END_b7ec010166214c7cca3a1d83a4a25e51 -->
-
 <!-- START_7440a9fcfb88e4af573ebf8289099bad -->
 ## Show setting
 
@@ -2595,7 +2612,7 @@ fetch(url, {
 ```bash
 curl -X GET -G "http://localhost/api/showProfile" \
     -H "Content-Type: application/json" \
-    -d '{"id":5}'
+    -d '{"id":4}'
 
 ```
 
@@ -2608,7 +2625,7 @@ let headers = {
 }
 
 let body = {
-    "id": 5
+    "id": 4
 }
 
 fetch(url, {
@@ -2688,7 +2705,6 @@ Parameter | Type | Status | Description
     id | integer |  optional  | optional this parameter to show the info of the other user (default authenticated user) .
 
 <!-- END_02b571ee5bd2fac11f2edd358ef66b79 -->
-
 <!-- START_420023f5c9516339d727125164ebdc76 -->
 ## Change birthday
 
@@ -2698,7 +2714,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"birthday":"wZDVGbADyn7hD2TK"}'
+    -d '{"birthday":"Avs6c2pswiNjNjZb"}'
 
 ```
 
@@ -2711,7 +2727,7 @@ let headers = {
 }
 
 let body = {
-    "birthday": "wZDVGbADyn7hD2TK"
+    "birthday": "Avs6c2pswiNjNjZb"
 }
 
 fetch(url, {
@@ -2742,7 +2758,6 @@ Parameter | Type | Status | Description
     birthday | date |  required  | .
 
 <!-- END_420023f5c9516339d727125164ebdc76 -->
-
 <!-- START_c5472ce7ed0d1881fe1dcf1f2c1b1b1b -->
 ## Who can see my birthday
 
@@ -2752,7 +2767,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyBirthday":"Mx2GgzNSmVwsxAff"}'
+    -d '{"seeMyBirthday":"9sJmQEXt8nQjFP3n"}'
 
 ```
 
@@ -2765,7 +2780,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyBirthday": "Mx2GgzNSmVwsxAff"
+    "seeMyBirthday": "9sJmQEXt8nQjFP3n"
 }
 
 fetch(url, {
@@ -2796,7 +2811,6 @@ Parameter | Type | Status | Description
     seeMyBirthday | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_c5472ce7ed0d1881fe1dcf1f2c1b1b1b -->
-
 <!-- START_68706dcbebdc287c69bcb4d30a5dead4 -->
 ## Change country
 
@@ -2806,7 +2820,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
-    -d '{"country":"rJuBoEk1ZB16jt6i"}'
+    -d '{"country":"pWugxFfGteQKOZEN"}'
 
 ```
 
@@ -2819,7 +2833,7 @@ let headers = {
 }
 
 let body = {
-    "country": "rJuBoEk1ZB16jt6i"
+    "country": "pWugxFfGteQKOZEN"
 }
 
 fetch(url, {
@@ -2850,7 +2864,6 @@ Parameter | Type | Status | Description
     country | string |  required  | .
 
 <!-- END_68706dcbebdc287c69bcb4d30a5dead4 -->
-
 <!-- START_8ad0d2cfe08824d432faa04811393b65 -->
 ## Who can see my country
 
@@ -2860,7 +2873,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCountry":"8dsT8Vd5L6X2muDd"}'
+    -d '{"seeMyCountry":"Lzk8FJkZ1fc7MTWN"}'
 
 ```
 
@@ -2873,7 +2886,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCountry": "8dsT8Vd5L6X2muDd"
+    "seeMyCountry": "Lzk8FJkZ1fc7MTWN"
 }
 
 fetch(url, {
@@ -2904,7 +2917,6 @@ Parameter | Type | Status | Description
     seeMyCountry | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_8ad0d2cfe08824d432faa04811393b65 -->
-
 <!-- START_7bff2655a3a8b1bce575fb23029c1fa7 -->
 ## Change city
 
@@ -2914,7 +2926,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
-    -d '{"city":"rI0vyTV9TZvTMDy2"}'
+    -d '{"city":"gliZKLRcwSVinbdG"}'
 
 ```
 
@@ -2927,7 +2939,7 @@ let headers = {
 }
 
 let body = {
-    "city": "rI0vyTV9TZvTMDy2"
+    "city": "gliZKLRcwSVinbdG"
 }
 
 fetch(url, {
@@ -2958,7 +2970,6 @@ Parameter | Type | Status | Description
     city | string |  required  | .
 
 <!-- END_7bff2655a3a8b1bce575fb23029c1fa7 -->
-
 <!-- START_744779377169b48280074aac19ad6760 -->
 ## Who can see my city
 
@@ -2968,7 +2979,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCity":"HA3JLGtUSVsTCRGL"}'
+    -d '{"seeMyCity":"NhIfQfjV5XUPDoVE"}'
 
 ```
 
@@ -2981,7 +2992,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCity": "HA3JLGtUSVsTCRGL"
+    "seeMyCity": "NhIfQfjV5XUPDoVE"
 }
 
 fetch(url, {
@@ -3012,7 +3023,6 @@ Parameter | Type | Status | Description
     seeMyCity | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_744779377169b48280074aac19ad6760 -->
-
 <!-- START_f10126ad0059168e8104f2a086e75abe -->
 ## search for an user
 
@@ -3021,7 +3031,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
-    -d '{"userName":"KevL0XW9m1XU7HiT"}'
+    -d '{"userName":"oN00ALnRyJ2fwBET"}'
 
 ```
 
@@ -3034,7 +3044,7 @@ let headers = {
 }
 
 let body = {
-    "userName": "KevL0XW9m1XU7HiT"
+    "userName": "oN00ALnRyJ2fwBET"
 }
 
 fetch(url, {
@@ -3069,5 +3079,4 @@ Parameter | Type | Status | Description
     userName | string |  required  | search for a user by his/her userName.
 
 <!-- END_f10126ad0059168e8104f2a086e75abe -->
-
 

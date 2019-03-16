@@ -58,6 +58,8 @@ Route::get('listmyreviews','ReviewController@listMyReviews');
 Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
 Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
 Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
+Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+
 
 
 

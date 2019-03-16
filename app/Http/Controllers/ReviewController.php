@@ -154,4 +154,26 @@ class ReviewController extends Controller
                 200);
         }
     }
+    /**
+     * Get the review for specific user on a specific Book 
+     * @authenticated
+     * @bodyParam bookId integer required id of the of the book 
+     */
+    public function showReviewsForBook($book_id)
+    {
+        //
+        $results = DB::select('select * from reviews  where bookId = ?', [$book_id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
+    }
 }

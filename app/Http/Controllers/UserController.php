@@ -374,7 +374,7 @@ class userController extends Controller
         // body
     }
 
-    
+
     /**
      * Delete
      * @bodyParam password string required .
@@ -413,9 +413,9 @@ class userController extends Controller
     }
     /**
      * Show Profile
-     * 
+     *
      * @bodyParam id int optional this parameter to show the info of the other user (default authenticated user) .
-     * 
+     *
      * @authenticated
      * @response {
      * "id": "",
@@ -472,9 +472,24 @@ class userController extends Controller
      * }
      */
 
-    public function showProfile()
+    public function showProfile(Request $request)
     {
-        // to do
+        /**
+        * Checking is the optional paramater is sent or not
+        * Case it is not sent : then we list the authenticated-user `s followers
+        * other wise we use the given user_id to get profile detailed info  .
+        */
+        if ($request->id == null)
+            $id = Auth::id();
+        else
+            $id = $request->user->id;
+
+        $data = User::select('id','name','email','link','imageLink',
+                             'smallImageUrl','about','age','gender')
+                             ->where('id', $id)->get();
+
+        return response()->json($data);
+
     }
 
 }

@@ -59,7 +59,15 @@
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"user_id":16,"max_updates":15}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":16,"max_updates":9}'
+=======
+    -d '{"user_id":16,"max_updates":15}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/updates");
 
@@ -70,7 +78,15 @@ let headers = {
 
 let body = {
     "user_id": 16,
+<<<<<<< HEAD
     "max_updates": 15
+=======
+<<<<<<< HEAD
+    "max_updates": 9
+=======
+    "max_updates": 15
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -156,7 +172,11 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/notifications" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
+    -d '{"page":8}'
+=======
     -d '{"page":14}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/notifications");
 
@@ -166,7 +186,11 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+    "page": 8
+=======
     "page": 14
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 }
 
 fetch(url, {
@@ -210,7 +234,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"id":9,"type":4,"body":"HUWf0ouVks3nU4Tx"}'
+=======
+<<<<<<< HEAD
+    -d '{"id":18,"type":11,"body":"KOiwEbzpqlIgw2JP"}'
+=======
+    -d '{"id":9,"type":4,"body":"HUWf0ouVks3nU4Tx"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/makeComment");
 
@@ -220,9 +252,21 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "id": 9,
     "type": 4,
     "body": "HUWf0ouVks3nU4Tx"
+=======
+<<<<<<< HEAD
+    "id": 18,
+    "type": 11,
+    "body": "KOiwEbzpqlIgw2JP"
+=======
+    "id": 9,
+    "type": 4,
+    "body": "HUWf0ouVks3nU4Tx"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -280,7 +324,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"id":"YHSy3d5ajVeCoEzT","type":16}'
+=======
+<<<<<<< HEAD
+    -d '{"id":"gWVgwiSqfrzzi1xY","type":11}'
+=======
+    -d '{"id":"YHSy3d5ajVeCoEzT","type":16}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listComments");
 
@@ -290,8 +342,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "id": "YHSy3d5ajVeCoEzT",
     "type": 16
+=======
+<<<<<<< HEAD
+    "id": "gWVgwiSqfrzzi1xY",
+    "type": 11
+=======
+    "id": "YHSy3d5ajVeCoEzT",
+    "type": 16
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -340,7 +402,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"id":12,"type":5}'
+=======
+<<<<<<< HEAD
+    -d '{"id":13,"type":13}'
+=======
+    -d '{"id":12,"type":5}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/makeLike");
 
@@ -350,8 +420,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "id": 12,
     "type": 5
+=======
+<<<<<<< HEAD
+    "id": 13,
+    "type": 13
+=======
+    "id": 12,
+    "type": 5
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -402,7 +482,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listLikes" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"id":18,"type":15}'
+=======
+<<<<<<< HEAD
+    -d '{"id":6,"type":15}'
+=======
+    -d '{"id":18,"type":15}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listLikes");
 
@@ -412,7 +500,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "id": 18,
+=======
+<<<<<<< HEAD
+    "id": 6,
+=======
+    "id": 18,
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
     "type": 15
 }
 
@@ -517,7 +613,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"id":19}'
+=======
+<<<<<<< HEAD
+    -d '{"id":18}'
+=======
+    -d '{"id":19}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/deleteComment");
 
@@ -527,7 +631,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "id": 19
+=======
+<<<<<<< HEAD
+    "id": 18
+=======
+    "id": 19
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -573,7 +685,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"page":15,"books_per_page":18}'
+=======
+<<<<<<< HEAD
+    -d '{"page":13,"books_per_page":2}'
+=======
+    -d '{"page":15,"books_per_page":18}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books");
 
@@ -583,8 +703,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "page": 15,
     "books_per_page": 18
+=======
+<<<<<<< HEAD
+    "page": 13,
+    "books_per_page": 2
+=======
+    "page": 15,
+    "books_per_page": 18
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -649,7 +779,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"book_id":10}'
+=======
+<<<<<<< HEAD
+    -d '{"book_id":11}'
+=======
+    -d '{"book_id":10}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books/show/{book_id}");
 
@@ -659,7 +797,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "book_id": 10
+=======
+<<<<<<< HEAD
+    "book_id": 11
+=======
+    "book_id": 10
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -728,9 +874,21 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "genreName": "wZchfSEDAbjheasp",
     "page": 1,
     "books_per_page": 11
+=======
+<<<<<<< HEAD
+    "genreName": "sAq2lhbqVKhZQYqv",
+    "page": 5,
+    "books_per_page": 6
+=======
+    "genreName": "wZchfSEDAbjheasp",
+    "page": 1,
+    "books_per_page": 11
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -801,7 +959,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_title" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"title":"dZ19NB5YPl2NDaQM"}'
+=======
+<<<<<<< HEAD
+    -d '{"title":"0BSXcNZCVAuMhPAK"}'
+=======
+    -d '{"title":"dZ19NB5YPl2NDaQM"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_title");
 
@@ -811,7 +977,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "title": "dZ19NB5YPl2NDaQM"
+=======
+<<<<<<< HEAD
+    "title": "0BSXcNZCVAuMhPAK"
+=======
+    "title": "dZ19NB5YPl2NDaQM"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -870,7 +1044,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_ISBN" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"ISBN":14}'
+=======
+<<<<<<< HEAD
+    -d '{"ISBN":7}'
+=======
+    -d '{"ISBN":14}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_ISBN");
 
@@ -880,7 +1062,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "ISBN": 14
+=======
+<<<<<<< HEAD
+    "ISBN": 7
+=======
+    "ISBN": 14
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -939,7 +1129,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_Authorname" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"Author_name":"UfRqrU3mwTVASuN3"}'
+=======
+<<<<<<< HEAD
+    -d '{"Author_name":"zBUek09h7l2rfDR8"}'
+=======
+    -d '{"Author_name":"UfRqrU3mwTVASuN3"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_Authorname");
 
@@ -949,7 +1147,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "Author_name": "UfRqrU3mwTVASuN3"
+=======
+<<<<<<< HEAD
+    "Author_name": "zBUek09h7l2rfDR8"
+=======
+    "Author_name": "UfRqrU3mwTVASuN3"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1037,7 +1243,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"book_id":1,"shelf":4,"review":"InmxTtXRgh3BwRvc","rating":16,"read_at":"LblVhqMjxNmBEPJm"}'
+=======
+<<<<<<< HEAD
+    -d '{"book_id":1,"shelf":12,"review":"7IayPzcRUTVF76qf","rating":3,"read_at":"S7IaVf0vhpBMyz91"}'
+=======
+    -d '{"book_id":1,"shelf":4,"review":"InmxTtXRgh3BwRvc","rating":16,"read_at":"LblVhqMjxNmBEPJm"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/create");
 
@@ -1048,10 +1262,23 @@ let headers = {
 
 let body = {
     "book_id": 1,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "shelf": 12,
+    "review": "7IayPzcRUTVF76qf",
+    "rating": 3,
+    "read_at": "S7IaVf0vhpBMyz91"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
     "shelf": 4,
     "review": "InmxTtXRgh3BwRvc",
     "rating": 16,
     "read_at": "LblVhqMjxNmBEPJm"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1115,7 +1342,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"review_id":19,"review":"6ISaZ4yRuG7t4iR6","shelf_name":"ydcbFfTWCbcFEkpH","rating":13,"read_at":"CsOTP5myEPahEbQT"}'
+=======
+<<<<<<< HEAD
+    -d '{"review_id":3,"review":"dQcRjLqKGggwWSiv","shelf_name":"0I6BP6Tc2DMgLbt5","rating":6,"read_at":"lXn8SgTKZnmNtVNE"}'
+=======
+    -d '{"review_id":19,"review":"6ISaZ4yRuG7t4iR6","shelf_name":"ydcbFfTWCbcFEkpH","rating":13,"read_at":"CsOTP5myEPahEbQT"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/edit");
 
@@ -1125,11 +1360,25 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "review_id": 3,
+    "review": "dQcRjLqKGggwWSiv",
+    "shelf_name": "0I6BP6Tc2DMgLbt5",
+    "rating": 6,
+    "read_at": "lXn8SgTKZnmNtVNE"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
     "review_id": 19,
     "review": "6ISaZ4yRuG7t4iR6",
     "shelf_name": "ydcbFfTWCbcFEkpH",
     "rating": 13,
     "read_at": "CsOTP5myEPahEbQT"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1193,7 +1442,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/reviwes/{id}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"review_id":1}'
+=======
+<<<<<<< HEAD
+    -d '{"review_id":16}'
+=======
+    -d '{"review_id":1}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/{id}");
 
@@ -1203,7 +1460,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "review_id": 1
+=======
+<<<<<<< HEAD
+    "review_id": 16
+=======
+    "review_id": 1
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1245,7 +1510,15 @@ and i will use it to get the review for one book array of one element</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"isbns":"amC7EeUMJsgSY3lW"}'
+=======
+<<<<<<< HEAD
+    -d '{"isbns":"GpOhz9myoHYbJdqD"}'
+=======
+    -d '{"isbns":"amC7EeUMJsgSY3lW"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/users/books/{book_id}");
 
@@ -1255,7 +1528,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "isbns": "amC7EeUMJsgSY3lW"
+=======
+<<<<<<< HEAD
+    "isbns": "GpOhz9myoHYbJdqD"
+=======
+    "isbns": "amC7EeUMJsgSY3lW"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1299,7 +1580,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"title":"9b3XcuaKdlQVljKG","author":"SmyNHy3gnrRg4iKi","rating":4}'
+=======
+<<<<<<< HEAD
+    -d '{"title":"xEvKR0fd5jDnEDL8","author":"KL45uVNuJeDH7Dm1","rating":20}'
+=======
+    -d '{"title":"9b3XcuaKdlQVljKG","author":"SmyNHy3gnrRg4iKi","rating":4}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/books/{boodTitle}");
 
@@ -1309,9 +1598,21 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "title": "9b3XcuaKdlQVljKG",
     "author": "SmyNHy3gnrRg4iKi",
     "rating": 4
+=======
+<<<<<<< HEAD
+    "title": "xEvKR0fd5jDnEDL8",
+    "author": "KL45uVNuJeDH7Dm1",
+    "rating": 20
+=======
+    "title": "9b3XcuaKdlQVljKG",
+    "author": "SmyNHy3gnrRg4iKi",
+    "rating": 4
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1594,7 +1895,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"shelf_name":"F0GWSetwxFGZenvK"}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"U3sddD9pcaz3xYh3"}'
+=======
+    -d '{"shelf_name":"F0GWSetwxFGZenvK"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{shelf_name}");
 
@@ -1604,7 +1913,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "shelf_name": "F0GWSetwxFGZenvK"
+=======
+<<<<<<< HEAD
+    "shelf_name": "U3sddD9pcaz3xYh3"
+=======
+    "shelf_name": "F0GWSetwxFGZenvK"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1648,7 +1965,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"shelf_name":"5cs1FPk1jRCP1g3p","book_id":17}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"HAzXPPv2amcsqNka","book_id":7}'
+=======
+    -d '{"shelf_name":"5cs1FPk1jRCP1g3p","book_id":17}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/add_book");
 
@@ -1658,8 +1983,16 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "shelf_name": "HAzXPPv2amcsqNka",
+    "book_id": 7
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
     "shelf_name": "5cs1FPk1jRCP1g3p",
     "book_id": 17
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 }
 
 fetch(url, {
@@ -1705,7 +2038,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"user_id":20,"page":10,"books_per_page":20}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":14,"page":14,"books_per_page":11}'
+=======
+    -d '{"user_id":20,"page":10,"books_per_page":20}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{user_id}");
 
@@ -1715,9 +2056,21 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "user_id": 20,
     "page": 10,
     "books_per_page": 20
+=======
+<<<<<<< HEAD
+    "user_id": 14,
+    "page": 14,
+    "books_per_page": 11
+=======
+    "user_id": 20,
+    "page": 10,
+    "books_per_page": 20
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1793,7 +2146,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"shelf_name":"YsNKquvhlVla3IRc","book_id":2}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"riJbhMIaqZx5lKmv","book_id":17}'
+=======
+    -d '{"shelf_name":"YsNKquvhlVla3IRc","book_id":2}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}");
 
@@ -1803,8 +2164,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "shelf_name": "YsNKquvhlVla3IRc",
     "book_id": 2
+=======
+<<<<<<< HEAD
+    "shelf_name": "riJbhMIaqZx5lKmv",
+    "book_id": 17
+=======
+    "shelf_name": "YsNKquvhlVla3IRc",
+    "book_id": 2
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1849,7 +2220,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{get_books}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"user_id":15,"shelf_name":"37oxVPvnkZycilNe"}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":10,"shelf_name":"LI7ly6j4eBShVsqm"}'
+=======
+    -d '{"user_id":15,"shelf_name":"37oxVPvnkZycilNe"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{get_books}");
 
@@ -1859,8 +2238,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "user_id": 15,
     "shelf_name": "37oxVPvnkZycilNe"
+=======
+<<<<<<< HEAD
+    "user_id": 10,
+    "shelf_name": "LI7ly6j4eBShVsqm"
+=======
+    "user_id": 15,
+    "shelf_name": "37oxVPvnkZycilNe"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1918,20 +2307,21 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_85260efa051dfd6095be0d84baf6da98 -->
-<h1>following management</h1>
-<p>APIs for managing following process</p>
-<!-- START_14b8be892d8419e9f65508229770b44c -->
-<h2>followUser</h2>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Start following a user</p>
+<h1>general</h1>
+<!-- START_ece00276451311bfb3ecbb519986e6e9 -->
+<h2>get the author by name</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/followuser" \
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/authorname" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
+    -d '{"auther_name":"7lnO7qArfH8ndlBq"}'
+=======
     -d '{"userId":11}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/followuser");
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/authorname");
 
 let headers = {
     "Content-Type": "application/json",
@@ -1939,7 +2329,144 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+    "auther_name": "7lnO7qArfH8ndlBq"
+=======
     "userId": 11
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/authorname</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auther_name</td>
+<td>string</td>
+<td>required</td>
+<td>Find an author by name.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_ece00276451311bfb3ecbb519986e6e9 -->
+<!-- START_8cafc490d5987eeebb7ffd6b85beae0f -->
+<h2>search the author by id</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/authorid" \
+    -H "Content-Type: application/json" \
+<<<<<<< HEAD
+    -d '{"author_id":11}'
+=======
+    -d '{"userId":8}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/authorid");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+<<<<<<< HEAD
+    "author_id": 11
+=======
+    "userId": 8
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/authorid</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>author_id</td>
+<td>integer</td>
+<td>required</td>
+<td>the ID of the author you search for.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_8cafc490d5987eeebb7ffd6b85beae0f -->
+<!-- START_5b980adc7cae0a3850861e87e9eb4fdc -->
+<h2>followUser</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Start following a user</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/follow" \
+    -H "Content-Type: application/json" \
+<<<<<<< HEAD
+    -d '{"userId":11}'
+=======
+<<<<<<< HEAD
+    -d '{"userId":18}'
+=======
+    -d '{"page":4,"user_id":6}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/follow");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+<<<<<<< HEAD
+    "userId": 11
+=======
+<<<<<<< HEAD
+    "userId": 18
+=======
+    "page": 4,
+    "user_id": 6
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -1956,7 +2483,7 @@ fetch(url, {
     "state": "true"
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/followuser</code></p>
+<p><code>POST api/follow</code></p>
 <h4>Body Parameters</h4>
 <table>
 <thead>
@@ -1976,19 +2503,23 @@ fetch(url, {
 </tr>
 </tbody>
 </table>
-<!-- END_14b8be892d8419e9f65508229770b44c -->
-<!-- START_4a103eb82f681afeb2e7397eac3f6c99 -->
+<!-- END_5b980adc7cae0a3850861e87e9eb4fdc -->
+<!-- START_53eaa2aeb494ad42904302950b418b5c -->
 <h2>unfollowUser</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 Stop following a user</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X DELETE "http://localhost/api/unfollowuser" \
+<pre><code class="language-bash">curl -X DELETE "http://localhost/api/unfollow" \
     -H "Content-Type: application/json" \
-    -d '{"userId":8}'
+<<<<<<< HEAD
+    -d '{"userId":3}'
+=======
+    -d '{"page":10,"user_id":18}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/unfollowuser");
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/unfollow");
 
 let headers = {
     "Content-Type": "application/json",
@@ -1996,7 +2527,12 @@ let headers = {
 }
 
 let body = {
-    "userId": 8
+<<<<<<< HEAD
+    "userId": 3
+=======
+    "page": 10,
+    "user_id": 18
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 }
 
 fetch(url, {
@@ -2013,7 +2549,7 @@ fetch(url, {
     "state": "true"
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>DELETE api/unfollowuser</code></p>
+<p><code>DELETE api/unfollow</code></p>
 <h4>Body Parameters</h4>
 <table>
 <thead>
@@ -2033,19 +2569,24 @@ fetch(url, {
 </tr>
 </tbody>
 </table>
-<!-- END_4a103eb82f681afeb2e7397eac3f6c99 -->
-<!-- START_b8da414973862c44f3f0b86f52cbee94 -->
+<<<<<<< HEAD
+<!-- END_53eaa2aeb494ad42904302950b418b5c -->
+<!-- START_7976c3b1a58aad890c3eb3678103c519 -->
 <h2>userFollowers</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 Get a user's followers</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/followers" \
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/followers/{id?}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"page":4,"user_id":6}'
+=======
+    -d '{"page":14,"user_id":19}'
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/followers");
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/followers/{id?}");
 
 let headers = {
     "Content-Type": "application/json",
@@ -2053,8 +2594,13 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "page": 4,
     "user_id": 6
+=======
+    "page": 14,
+    "user_id": 19
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2081,7 +2627,7 @@ fetch(url, {
     }
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET api/followers</code></p>
+<p><code>GET api/followers/{id?}</code></p>
 <h4>Body Parameters</h4>
 <table>
 <thead>
@@ -2107,19 +2653,23 @@ fetch(url, {
 </tr>
 </tbody>
 </table>
-<!-- END_b8da414973862c44f3f0b86f52cbee94 -->
-<!-- START_00cf70aa133b8675add61a926a8e351b -->
+<!-- END_7976c3b1a58aad890c3eb3678103c519 -->
+<!-- START_7b7ec5a32d9f5fac54fafacc7c1a6b0c -->
 <h2>userFollowering</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 Get a user's followering</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/following" \
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/following/{id?}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"page":10,"user_id":18}'
+=======
+    -d '{"page":6,"user_id":12}'
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/following");
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/following/{id?}");
 
 let headers = {
     "Content-Type": "application/json",
@@ -2127,8 +2677,13 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "page": 10,
     "user_id": 18
+=======
+    "page": 6,
+    "user_id": 12
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2155,7 +2710,7 @@ fetch(url, {
     }
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET api/following</code></p>
+<p><code>GET api/following/{id?}</code></p>
 <h4>Body Parameters</h4>
 <table>
 <thead>
@@ -2181,7 +2736,10 @@ fetch(url, {
 </tr>
 </tbody>
 </table>
+<!-- END_7b7ec5a32d9f5fac54fafacc7c1a6b0c -->
+=======
 <!-- END_00cf70aa133b8675add61a926a8e351b -->
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
 <h1>user management</h1>
 <p>APIs for managing users (Sofyan)</p>
 <!-- START_68ff8c9e5dd1db295b6f780b9fcfbeb2 -->
@@ -2191,7 +2749,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/signUp" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"email":"uLk1U7CE2ybdBB5A","password":"NpQ8iHACdcjwa0tb","password_confirmation":"qGLX9sEk26xVe0Nz","name":"zC604TJ0zWU80mEa","gender":"rnelJ2NeifbJPjev","birthday":"bSzpe13Wf8EjcsCa","country":"QBtAJNZkdYMyhGYt","city":"tb7CAqyvLLxej1wp"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"tpyWiJlfbHEeph17","fullName":"VJPOHHxqCYxVcPQB","password":"HDOvTghn85jDkrKN","password_confirmation":"J5GqC3zNVOXn00V9","gender":"idzr3NF1OoU49vhj","location":"yUJ6j5XEyqgbyCRi","birthday":"7h2kck29289Zaqug"}'
+=======
+    -d '{"email":"uLk1U7CE2ybdBB5A","password":"NpQ8iHACdcjwa0tb","password_confirmation":"qGLX9sEk26xVe0Nz","name":"zC604TJ0zWU80mEa","gender":"rnelJ2NeifbJPjev","birthday":"bSzpe13Wf8EjcsCa","country":"QBtAJNZkdYMyhGYt","city":"tb7CAqyvLLxej1wp"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/signUp");
 
@@ -2201,6 +2767,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "userName": "tpyWiJlfbHEeph17",
+    "fullName": "VJPOHHxqCYxVcPQB",
+    "password": "HDOvTghn85jDkrKN",
+    "password_confirmation": "J5GqC3zNVOXn00V9",
+    "gender": "idzr3NF1OoU49vhj",
+    "location": "yUJ6j5XEyqgbyCRi",
+    "birthday": "7h2kck29289Zaqug"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
     "email": "uLk1U7CE2ybdBB5A",
     "password": "NpQ8iHACdcjwa0tb",
     "password_confirmation": "qGLX9sEk26xVe0Nz",
@@ -2209,6 +2787,10 @@ let body = {
     "birthday": "bSzpe13Wf8EjcsCa",
     "country": "QBtAJNZkdYMyhGYt",
     "city": "tb7CAqyvLLxej1wp"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2328,7 +2910,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/logIn" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"email":"UZt8rMy210Yia1fr","password":"L6PngkSNd1XFWKZJ"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"3PfwJP61PRHpgaGO","password":"C6VHfVUpCXs4kS9u"}'
+=======
+    -d '{"email":"UZt8rMy210Yia1fr","password":"L6PngkSNd1XFWKZJ"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/logIn");
 
@@ -2338,8 +2928,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "email": "UZt8rMy210Yia1fr",
     "password": "L6PngkSNd1XFWKZJ"
+=======
+<<<<<<< HEAD
+    "userName": "3PfwJP61PRHpgaGO",
+    "password": "C6VHfVUpCXs4kS9u"
+=======
+    "email": "UZt8rMy210Yia1fr",
+    "password": "L6PngkSNd1XFWKZJ"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2421,7 +3021,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changePassword" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"password":"eH1xOKHql8A6V2LT","newPassword":"ktxdaqChe9Epprmw","newPassword_confirmation":"txpjpRIQb98cdHNS"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"xzw48w0pNq7mMqTt","newPassword":"l8Pvju1gJDgW6Hls","newPassword_confirmation":"NZozq44TXJ718wt9"}'
+=======
+    -d '{"password":"eH1xOKHql8A6V2LT","newPassword":"ktxdaqChe9Epprmw","newPassword_confirmation":"txpjpRIQb98cdHNS"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changePassword");
 
@@ -2431,9 +3039,21 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "password": "eH1xOKHql8A6V2LT",
     "newPassword": "ktxdaqChe9Epprmw",
     "newPassword_confirmation": "txpjpRIQb98cdHNS"
+=======
+<<<<<<< HEAD
+    "password": "xzw48w0pNq7mMqTt",
+    "newPassword": "l8Pvju1gJDgW6Hls",
+    "newPassword_confirmation": "NZozq44TXJ718wt9"
+=======
+    "password": "eH1xOKHql8A6V2LT",
+    "newPassword": "ktxdaqChe9Epprmw",
+    "newPassword_confirmation": "txpjpRIQb98cdHNS"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2503,7 +3123,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changeName" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"password":"QT2oI37eQX4wO0MZ","newName":"enCxmzRp2kKKiNGO"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"AlpZHGGhJjLBvkab","newName":"euEgEgwWjydb5tWS"}'
+=======
+    -d '{"password":"QT2oI37eQX4wO0MZ","newName":"enCxmzRp2kKKiNGO"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeName");
 
@@ -2513,8 +3141,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "password": "QT2oI37eQX4wO0MZ",
     "newName": "enCxmzRp2kKKiNGO"
+=======
+<<<<<<< HEAD
+    "password": "AlpZHGGhJjLBvkab",
+    "newName": "euEgEgwWjydb5tWS"
+=======
+    "password": "QT2oI37eQX4wO0MZ",
+    "newName": "enCxmzRp2kKKiNGO"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2577,7 +3215,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"Image":"Ui7kwv31tvpz7Uxn"}'
+=======
+<<<<<<< HEAD
+    -d '{"Image":"ukd1FX1ZrWtwWsQA"}'
+=======
+    -d '{"Image":"Ui7kwv31tvpz7Uxn"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeImage");
 
@@ -2587,7 +3233,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "Image": "Ui7kwv31tvpz7Uxn"
+=======
+<<<<<<< HEAD
+    "Image": "ukd1FX1ZrWtwWsQA"
+=======
+    "Image": "Ui7kwv31tvpz7Uxn"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2634,7 +3288,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"password":"KIdj9yrxMI1KnEth"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"Jm8KdaQGgcWLHWY4"}'
+=======
+    -d '{"password":"KIdj9yrxMI1KnEth"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/delete");
 
@@ -2644,7 +3306,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "password": "KIdj9yrxMI1KnEth"
+=======
+<<<<<<< HEAD
+    "password": "Jm8KdaQGgcWLHWY4"
+=======
+    "password": "KIdj9yrxMI1KnEth"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2883,7 +3553,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"birthday":"HFVUhw7tbq6kMEA0"}'
+=======
+<<<<<<< HEAD
+    -d '{"birthday":"0EaM0nrC9uCghEB3"}'
+=======
+    -d '{"birthday":"HFVUhw7tbq6kMEA0"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeBirthday");
 
@@ -2893,7 +3571,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "birthday": "HFVUhw7tbq6kMEA0"
+=======
+<<<<<<< HEAD
+    "birthday": "0EaM0nrC9uCghEB3"
+=======
+    "birthday": "HFVUhw7tbq6kMEA0"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2940,7 +3626,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"seeMyBirthday":"Ok0VMyL1Btc6cXvE"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyBirthday":"C6uE0ro04Tk80nEB"}'
+=======
+    -d '{"seeMyBirthday":"Ok0VMyL1Btc6cXvE"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyBirthday");
 
@@ -2950,7 +3644,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "seeMyBirthday": "Ok0VMyL1Btc6cXvE"
+=======
+<<<<<<< HEAD
+    "seeMyBirthday": "C6uE0ro04Tk80nEB"
+=======
+    "seeMyBirthday": "Ok0VMyL1Btc6cXvE"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -2997,7 +3699,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"country":"RrBLAaOqH62wwfpS"}'
+=======
+<<<<<<< HEAD
+    -d '{"country":"smKMbJs7Xe4cMzIN"}'
+=======
+    -d '{"country":"RrBLAaOqH62wwfpS"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeCountry");
 
@@ -3007,7 +3717,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "country": "RrBLAaOqH62wwfpS"
+=======
+<<<<<<< HEAD
+    "country": "smKMbJs7Xe4cMzIN"
+=======
+    "country": "RrBLAaOqH62wwfpS"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -3054,7 +3772,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"seeMyCountry":"fq6X3CRT0myFJzAB"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyCountry":"aO1fKDLMDKMTKYrj"}'
+=======
+    -d '{"seeMyCountry":"fq6X3CRT0myFJzAB"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyCountry");
 
@@ -3064,7 +3790,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "seeMyCountry": "fq6X3CRT0myFJzAB"
+=======
+<<<<<<< HEAD
+    "seeMyCountry": "aO1fKDLMDKMTKYrj"
+=======
+    "seeMyCountry": "fq6X3CRT0myFJzAB"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -3111,7 +3845,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"city":"skUjaYn1Cqhj4puo"}'
+=======
+<<<<<<< HEAD
+    -d '{"city":"qUrmOTSlo9kBxEYV"}'
+=======
+    -d '{"city":"skUjaYn1Cqhj4puo"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeCity");
 
@@ -3121,7 +3863,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "city": "skUjaYn1Cqhj4puo"
+=======
+<<<<<<< HEAD
+    "city": "qUrmOTSlo9kBxEYV"
+=======
+    "city": "skUjaYn1Cqhj4puo"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -3168,7 +3918,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"seeMyCity":"qRV8S8awjdpGGpLx"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyCity":"jTan8aNhdsrn8IWv"}'
+=======
+    -d '{"seeMyCity":"qRV8S8awjdpGGpLx"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyCity");
 
@@ -3178,7 +3936,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "seeMyCity": "qRV8S8awjdpGGpLx"
+=======
+<<<<<<< HEAD
+    "seeMyCity": "jTan8aNhdsrn8IWv"
+=======
+    "seeMyCity": "qRV8S8awjdpGGpLx"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {
@@ -3224,7 +3990,15 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"userName":"o2FhYFrwdSOPNnfX"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"wInVBZ6d3F07Xg7c"}'
+=======
+    -d '{"userName":"o2FhYFrwdSOPNnfX"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/UserController/{user}");
 
@@ -3234,7 +4008,15 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "userName": "o2FhYFrwdSOPNnfX"
+=======
+<<<<<<< HEAD
+    "userName": "wInVBZ6d3F07Xg7c"
+=======
+    "userName": "o2FhYFrwdSOPNnfX"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 }
 
 fetch(url, {

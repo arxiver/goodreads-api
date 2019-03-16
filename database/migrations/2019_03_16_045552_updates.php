@@ -22,6 +22,8 @@ class Updates extends Migration
             $table->integer('numComments');
             $table->integer('numLikes');
             $table->timestamps();
+    
+        });
     }
 
     /**

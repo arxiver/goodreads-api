@@ -20,10 +20,9 @@ class CreateReviewsTable extends Migration
             $table->text('body');
             $table->text('shelf_name');
             $table->integer('rating');
-            $table->datetime('last_update');
             $table->integer('number_likes');
             $table->integer('number_comments');
-           // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

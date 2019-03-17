@@ -29,6 +29,8 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('showSetting', "UserController@showSetting");
     Route::get('logOut', "UserController@logOut");
     Route::get('profile','UserController@showProfile');
+    Route::get('myreviews','ReviewController@listMyReviews');
+
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -54,7 +56,7 @@ Route::put('reviwes/edit', 'ReviewController@editReview');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
 Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
-Route::get('listmyreviews','ReviewController@listMyReviews');
+//
 Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
 Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
 Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');

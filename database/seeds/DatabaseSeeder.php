@@ -12,30 +12,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $i = 4;
-        while ($i <= 250) {
-            factory(App\Following::class)->create(
-                [
-                    'user_id' => 3,
-                    'follower_id' => $i,
-                ]
-            );
-            $i++;
+        factory(App\User::class, 100)->create();
+        //factory(App\Following::class,10)->create();
+        factory(App\Review::class, 100)->create();
+
    }
         //factory(App\User::class, 10)->create();
         //factory(App\Following::class,10)->create();
+    public function seedFollowing()
+    {
+    $i = 2;
+    while ($i <= 100) {
+        factory(App\Following::class)->create(
+            [
+                'user_id' => 1,
+                'follower_id' => $i,
+            ]
+        );
+        $i++;
+    }
     }
 }
-/**
-    * $i = 2;
-    *
-    *    while ($i <= 250) {
-    *        factory(App\Following::class)->create(
-    *            [
-    *                'user_id' => $i,
-    *                'follower_id' => 1,
-    *            ]
-    *        );
-    *        $i++;
-    *    }
-*/

@@ -15,37 +15,48 @@ class FollowingController extends Controller
 
     /**
      * Follow User
+     *
      * @authenticated
+     *
      * [ Start following a user ]
      * @bodyParam user_id int required Goodreads user id of user to follow.
+     * STATUS CODE : 201 // following created successfully [ 1st response ]
      * @response {
      *  "status" : 1
+     * }
+     * STATUS CODE : 404 // user_id not found [ 2nd response ]
+     * @response {
+     *  "status" : 0
+     * }
+     * STATUS CODE : 400 // something gone error [ 3rd response ]
+     * @response {
+     *  "status" : 0
      * }
      */
     public function followUser(Request $request)
     {
         /**
-         * Validation Segment to check if there is dublication error could happen
+         * Checking user_id existance
          */
-        $followerId = 1;//Auth::id();
-        $userId = $request->user_id ;
-        if (User::where('id', $userId )->count() != 1) {
+        $followerId = $this->ID;
+        $userId = $request->user_id;
+        User::findOrFail($userId);
+        /**
+         * Validation Segment to check if there is dublication error could happen
+         * Creating Following Relation
+         */
+        if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1) {
             $response = array('status' =>0);
-            $responseCode = 404;
+            $responseCode = 400;
         } else {
-            if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1) {
-                $response = array('status' =>0);
-                $responseCode = 400;
-            } else {
-                $following = new Following();
-                $following->follower_id = $followerId;
-                $following->user_id = $userId;
-                $following->save();
-                User::find($userId)->increment('followersCount');
-                User::find($followerId)->increment('followingCount');
-                $response = array('status' =>1) ;
-                $responseCode = 201;
-            }
+            $following = new Following();
+            $following->follower_id = $followerId;
+            $following->user_id = $userId;
+            $following->save();
+            User::find($userId)->increment('followersCount');
+            User::find($followerId)->increment('followingCount');
+            $response = array('status' =>1) ;
+            $responseCode = 201;
         }
         return response()->json($response, $responseCode);
     }
@@ -65,7 +76,7 @@ class FollowingController extends Controller
     public function unfollowUser(Request $request)
     {
         $userId = $request->user_id;
-        $followerId = 1 ;//Auth::id();
+        $followerId = $this->ID;
         $following = Following::where('user_id', $userId)->where('follower_id', $followerId);
         $status = $following->delete();
         if($status == 1)
@@ -92,7 +103,7 @@ class FollowingController extends Controller
         * Checking is the optional paramater is sent or not
         * Case it is not sent : then we list the authenticated-user `s followers
         */
-        $userId = $request->has(['user_id']) ? $request->user_id : 3; //Auth::id();
+        $userId = $request->has(['user_id']) ? $request->user_id : $this->ID ;
 
         /**
          *  if the user doesn`t exist .
@@ -169,7 +180,7 @@ class FollowingController extends Controller
             DB::select( 'SELECT id , name , imageLink , smallImageUrl ,
                         email , link ,followersCount
                         FROM followings F,users U WHERE follower_id = ?
-                        AND F.user_id = U.id limit ? offset ?', [$userId,$listSize,$skipCount]);
+                        AND F.user_id = U.id LIMIT ? OFFSET ?', [$userId,$listSize,$skipCount]);
         /**
          * Response paramaters and return
          */

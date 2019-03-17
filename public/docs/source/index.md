@@ -226,7 +226,6 @@ Parameter | Type | Status | Description
     max_updates | integer |  optional  | optional to get the max limit of updates.
 
 <!-- END_1c8b56dcc7476331d13beab7a976ba8f -->
-
 <!-- START_e65df2963c4f1f0bfdd426ee5170e8b7 -->
 ## notifications
 gets a user&#039;s notifications
@@ -278,7 +277,6 @@ Parameter | Type | Status | Description
     page | integer |  optional  | optional 1-N (default 1).
 
 <!-- END_e65df2963c4f1f0bfdd426ee5170e8b7 -->
-
 <!-- START_5f591b418d1c653384fb575623715a83 -->
 ## comment
 
@@ -335,7 +333,6 @@ Parameter | Type | Status | Description
     body | string |  required  | the body of the comment .
 
 <!-- END_5f591b418d1c653384fb575623715a83 -->
-
 <!-- START_300ec40d807333984a76a264dac57b69 -->
 ## list comments
 lists comments for a specific resource(review,update)
@@ -388,7 +385,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_300ec40d807333984a76a264dac57b69 -->
-
 <!-- START_80dc13044fd2676e9d20409a038a90ab -->
 ## like
 
@@ -440,7 +436,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_80dc13044fd2676e9d20409a038a90ab -->
-
 <!-- START_06b447ff2a11ad98e991c70ded4a0c5e -->
 ## list likes
 lists likes for a specific resource(review,update)
@@ -494,7 +489,6 @@ Parameter | Type | Status | Description
     type | integer |  required  | type of the resource (1 for user status and 2 for review)
 
 <!-- END_06b447ff2a11ad98e991c70ded4a0c5e -->
-
 <!-- START_3d49e7be6b108116b78dde56f94b4d52 -->
 ## unlike
 
@@ -545,7 +539,6 @@ Parameter | Type | Status | Description
     id | integer |  required  | like id
 
 <!-- END_3d49e7be6b108116b78dde56f94b4d52 -->
-
 <!-- START_c46bc7cda5782151e86d302b69be7ef7 -->
 ## delete comment
 
@@ -598,7 +591,6 @@ Parameter | Type | Status | Description
     id | integer |  required  | comment id
 
 <!-- END_c46bc7cda5782151e86d302b69be7ef7 -->
-
 #Book
 <!-- START_c84ecb8d4fd02d9a637dac124b62c629 -->
 ## List all books
@@ -667,7 +659,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_c84ecb8d4fd02d9a637dac124b62c629 -->
-
 <!-- START_5b18d0a1476d11513f07c9427a8f479b -->
 ## Show book
 
@@ -733,7 +724,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_5b18d0a1476d11513f07c9427a8f479b -->
-
 <!-- START_1ebf60b0f5e42ff9b1cbdcd9f468d722 -->
 ## Show books by genre
 
@@ -803,7 +793,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_1ebf60b0f5e42ff9b1cbdcd9f468d722 -->
-
 <!-- START_5d187f4ec204cb84ae6ab7d7ec4726e8 -->
 ## get the needed book by its name
 
@@ -869,7 +858,6 @@ Parameter | Type | Status | Description
     title | string |  required  | Find books by title
 
 <!-- END_5d187f4ec204cb84ae6ab7d7ec4726e8 -->
-
 <!-- START_d202bd96c80394da054916bbad4afec8 -->
 ## get the needed book by its ISBN
 
@@ -878,7 +866,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":15}'
+    -d '{"ISBN":10}'
 
 ```
 
@@ -891,7 +879,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 15
+    "ISBN": 10
 }
 
 fetch(url, {
@@ -1001,7 +989,6 @@ Parameter | Type | Status | Description
     Author_name | string |  required  | Find books by Author's name.
 
 <!-- END_7c9556875434f41a3ca5be8622e54c58 -->
-
 #Following
 <!-- START_5b980adc7cae0a3850861e87e9eb4fdc -->
 ## Follow User
@@ -1055,7 +1042,6 @@ Parameter | Type | Status | Description
     user_id | integer |  required  | Goodreads user id of user to follow.
 
 <!-- END_5b980adc7cae0a3850861e87e9eb4fdc -->
-
 <!-- START_53eaa2aeb494ad42904302950b418b5c -->
 ## Unfollow User
 Stop following a user
@@ -1111,7 +1097,6 @@ Parameter | Type | Status | Description
     user_id | integer |  required  | Goodreads user id of user to stop following.
 
 <!-- END_53eaa2aeb494ad42904302950b418b5c -->
-
 <!-- START_b8da414973862c44f3f0b86f52cbee94 -->
 ## Followers List
 gets the followers of a user.
@@ -1441,7 +1426,6 @@ Parameter | Type | Status | Description
     user_id | integer |  optional  | optional to get the followers list of a specific user (default authenticated user)
 
 <!-- END_b8da414973862c44f3f0b86f52cbee94 -->
-
 <!-- START_00cf70aa133b8675add61a926a8e351b -->
 ## Following List
 gets the following list of a user .
@@ -1519,7 +1503,6 @@ Parameter | Type | Status | Description
     user_id | integer |  optional  | optional to get the following list of a specific user (default authenticated user)
 
 <!-- END_00cf70aa133b8675add61a926a8e351b -->
-
 #Review
 <!-- START_b7f52079bc658d3faea44274e95c9859 -->
 ## Recent reviews from all members.
@@ -1612,7 +1595,6 @@ Parameter | Type | Status | Description
     read_at | date |  optional  | optional (YYYY-MM-DD format, e.g. 2008-02-01).
 
 <!-- END_1521f8492a220ccff8293eeac79158d1 -->
-
 <!-- START_f2bf516816a6bd1a29bad51fe25e8a4a -->
 ## Edit a review
 
@@ -1666,7 +1648,6 @@ Parameter | Type | Status | Description
     read_at | date |  optional  | optional  default is (the same as it was).
 
 <!-- END_f2bf516816a6bd1a29bad51fe25e8a4a -->
-
 <!-- START_f05a99566a1946530084c8ed20cdce5a -->
 ## Remove a Review
 
@@ -1712,7 +1693,6 @@ Parameter | Type | Status | Description
     review_id | integer |  required  | The id of review to be deleted.
 
 <!-- END_f05a99566a1946530084c8ed20cdce5a -->
-
 <!-- START_b5b6c6d01bc0058683ce95a3bd41d9ed -->
 ## Get review statistics given a list of ISBNs
 take alist of books and then return their reviews And Rates
@@ -1765,7 +1745,6 @@ Parameter | Type | Status | Description
     isbns | ArrayofInt |  required  | Array of ISBNs(1000 ISBNs per request max.).
 
 <!-- END_b5b6c6d01bc0058683ce95a3bd41d9ed -->
-
 <!-- START_ceef72433d94fbcde535849da946b411 -->
 ## Get the reviews for a book given a title string
 
@@ -1820,7 +1799,6 @@ Parameter | Type | Status | Description
     rating | integer |  optional  | optional Show only reviews with a particular rating.
 
 <!-- END_ceef72433d94fbcde535849da946b411 -->
-
 <!-- START_5ed232d83e284046b3a323e6e8f98533 -->
 ## List all reviews of the authenticated user
 
@@ -1909,7 +1887,6 @@ Parameter | Type | Status | Description
     userId | required |  optional  | id of the user
 
 <!-- END_3b8bc689333e11a42e9435563eb81d81 -->
-
 <!-- START_372361de1939f63d652e087d8a0247c1 -->
 ## get a specific review with it&#039;s comments and likes
 
@@ -1963,7 +1940,6 @@ Parameter | Type | Status | Description
     reviewId | required |  optional  | id of the of the review to get it's body when notification happens
 
 <!-- END_372361de1939f63d652e087d8a0247c1 -->
-
 <!-- START_35312a6c43c9e348424ab1410c1f4202 -->
 ## Get the review for specific user on a specific Book
 
@@ -2019,6 +1995,59 @@ Parameter | Type | Status | Description
     bookId | required |  optional  | id of the of the book
 
 <!-- END_35312a6c43c9e348424ab1410c1f4202 -->
+<!-- START_b59d8c710c80a5c61528f8e003c4b30a -->
+## Get the review for specific user on a specific Book
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/showReviewsForABook/{book_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"bookId":20}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/showReviewsForABook/{book_id}");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "bookId": 20
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "status": "failed",
+    "pages": []
+}
+```
+
+### HTTP Request
+`GET api/showReviewsForABook/{book_id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    bookId | integer |  required  | id of the of the book
+
+<!-- END_b59d8c710c80a5c61528f8e003c4b30a -->
 
 #Shelf
 <!-- START_8ca8c1ada18abb4fe16799cd67e55e73 -->
@@ -2112,7 +2141,6 @@ Parameter | Type | Status | Description
     shelf_name | string |  required  | The name of the shelf.
 
 <!-- END_f029a85d3a1a2f160cdbf493d58b76da -->
-
 <!-- START_1e7cb27e22831e4a6163a5908d6b002b -->
 ## Add a book to a shelf
 
@@ -2160,7 +2188,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_1e7cb27e22831e4a6163a5908d6b002b -->
-
 <!-- START_dc4e2f12407ce17b65f4e9e9488551dc -->
 ## Get User`s shelves
 
@@ -2235,7 +2262,6 @@ Parameter | Type | Status | Description
     books_per_page | integer |  optional  | optional (default 10).
 
 <!-- END_dc4e2f12407ce17b65f4e9e9488551dc -->
-
 <!-- START_50cd03fee8d42aa9c0fa3d943a51f4cf -->
 ## Remove a book from a shelf
 
@@ -2283,7 +2309,6 @@ Parameter | Type | Status | Description
     book_id | integer |  required  | The id of the book.
 
 <!-- END_50cd03fee8d42aa9c0fa3d943a51f4cf -->
-
 <!-- START_87fd9bac6b43987c27c7179f6bc63f4d -->
 ## show books on the shelf
 
@@ -2351,7 +2376,6 @@ Parameter | Type | Status | Description
     shelf_name | string |  required  | specified shelf`s name.
 
 <!-- END_87fd9bac6b43987c27c7179f6bc63f4d -->
-
 #user management
 
 APIs for managing users (Sofyan)
@@ -2454,7 +2478,6 @@ Parameter | Type | Status | Description
     city | string |  required  | .
 
 <!-- END_68ff8c9e5dd1db295b6f780b9fcfbeb2 -->
-
 <!-- START_c301d148df10074b99c7c734cf8eeb47 -->
 ## LogIn
 
@@ -2539,7 +2562,6 @@ Parameter | Type | Status | Description
     password | string |  required  | .
 
 <!-- END_c301d148df10074b99c7c734cf8eeb47 -->
-
 <!-- START_dd73fe89d9872ce37d284636141ae526 -->
 ## Change password
 
@@ -2609,7 +2631,6 @@ Parameter | Type | Status | Description
     newPassword_confirmation | string |  required  | this filed is special so it isn't camel case .
 
 <!-- END_dd73fe89d9872ce37d284636141ae526 -->
-
 <!-- START_02c8bbcf77a96f67abe8f7b90efa9eac -->
 ## Change Name
 
@@ -2676,7 +2697,6 @@ Parameter | Type | Status | Description
     newName | string |  required  | .
 
 <!-- END_02c8bbcf77a96f67abe8f7b90efa9eac -->
-
 <!-- START_763d0e0624078ef7007bb9dd454eb3d8 -->
 ## Change Image
 
@@ -2730,7 +2750,6 @@ Parameter | Type | Status | Description
     Image | string |  required  | the URL for the image .
 
 <!-- END_763d0e0624078ef7007bb9dd454eb3d8 -->
-
 <!-- START_b7ec010166214c7cca3a1d83a4a25e51 -->
 ## Delete
 
@@ -2794,7 +2813,6 @@ Parameter | Type | Status | Description
     password | string |  required  | .
 
 <!-- END_b7ec010166214c7cca3a1d83a4a25e51 -->
-
 <!-- START_7440a9fcfb88e4af573ebf8289099bad -->
 ## Show setting
 
@@ -2997,7 +3015,6 @@ Parameter | Type | Status | Description
     id | integer |  optional  | optional this parameter to show the info of the other user (default authenticated user) .
 
 <!-- END_02b571ee5bd2fac11f2edd358ef66b79 -->
-
 <!-- START_420023f5c9516339d727125164ebdc76 -->
 ## Change birthday
 
@@ -3051,7 +3068,6 @@ Parameter | Type | Status | Description
     birthday | date |  required  | .
 
 <!-- END_420023f5c9516339d727125164ebdc76 -->
-
 <!-- START_c5472ce7ed0d1881fe1dcf1f2c1b1b1b -->
 ## Who can see my birthday
 
@@ -3105,7 +3121,6 @@ Parameter | Type | Status | Description
     seeMyBirthday | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_c5472ce7ed0d1881fe1dcf1f2c1b1b1b -->
-
 <!-- START_68706dcbebdc287c69bcb4d30a5dead4 -->
 ## Change country
 
@@ -3159,7 +3174,6 @@ Parameter | Type | Status | Description
     country | string |  required  | .
 
 <!-- END_68706dcbebdc287c69bcb4d30a5dead4 -->
-
 <!-- START_8ad0d2cfe08824d432faa04811393b65 -->
 ## Who can see my country
 
@@ -3213,7 +3227,6 @@ Parameter | Type | Status | Description
     seeMyCountry | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_8ad0d2cfe08824d432faa04811393b65 -->
-
 <!-- START_7bff2655a3a8b1bce575fb23029c1fa7 -->
 ## Change city
 
@@ -3267,7 +3280,6 @@ Parameter | Type | Status | Description
     city | string |  required  | .
 
 <!-- END_7bff2655a3a8b1bce575fb23029c1fa7 -->
-
 <!-- START_744779377169b48280074aac19ad6760 -->
 ## Who can see my city
 
@@ -3321,7 +3333,6 @@ Parameter | Type | Status | Description
     seeMyCity | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_744779377169b48280074aac19ad6760 -->
-
 <!-- START_f10126ad0059168e8104f2a086e75abe -->
 ## search for an user
 
@@ -3378,5 +3389,4 @@ Parameter | Type | Status | Description
     userName | string |  required  | search for a user by his/her userName.
 
 <!-- END_f10126ad0059168e8104f2a086e75abe -->
-
 

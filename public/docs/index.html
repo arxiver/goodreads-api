@@ -985,7 +985,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":15}'
+    -d '{"ISBN":10}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_ISBN/{book_isbn}");
 
@@ -995,7 +995,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 15
+    "ISBN": 10
 }
 
 fetch(url, {
@@ -2216,6 +2216,63 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_35312a6c43c9e348424ab1410c1f4202 -->
+<!-- START_b59d8c710c80a5c61528f8e003c4b30a -->
+<h2>Get the review for specific user on a specific Book</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewsForABook/{book_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"bookId":20}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewsForABook/{book_id}");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "bookId": 20
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failed",
+    "pages": []
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/showReviewsForABook/{book_id}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bookId</td>
+<td>integer</td>
+<td>required</td>
+<td>id of the of the book</td>
+</tr>
+</tbody>
+</table>
+<!-- END_b59d8c710c80a5c61528f8e003c4b30a -->
 <h1>Shelf</h1>
 <!-- START_8ca8c1ada18abb4fe16799cd67e55e73 -->
 <h2>List all shelves of the authenticated user .</h2>

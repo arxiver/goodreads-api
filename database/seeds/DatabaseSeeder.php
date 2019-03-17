@@ -12,18 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $i = 4;
-        while ($i <= 250) {
+        factory(App\User::class, 100)->create();
+        //factory(App\Following::class,10)-> create();
+        $i = 1;
+        while ($i <= 100) {
             factory(App\Following::class)->create(
                 [
-                    'user_id' => 3,
+                    'user_id' => 1,
                     'follower_id' => $i,
                 ]
             );
             $i++;
-   }
-        //factory(App\User::class, 10)->create();
-        //factory(App\Following::class,10)->create();
+        }
     }
 }
 /**

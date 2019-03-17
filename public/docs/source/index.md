@@ -33,7 +33,7 @@ Get user&#039;s updates from following users
 ```bash
 curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":16,"max_updates":15}'
+    -d '{"user_id":17,"max_updates":13}'
 
 ```
 
@@ -46,8 +46,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 16,
-    "max_updates": 15
+    "user_id": 17,
+    "max_updates": 13
 }
 
 fetch(url, {
@@ -237,7 +237,7 @@ gets a user&#039;s notifications
 ```bash
 curl -X GET -G "http://localhost/api/notifications" \
     -H "Content-Type: application/json" \
-    -d '{"page":7}'
+    -d '{"page":15}'
 
 ```
 
@@ -250,7 +250,7 @@ let headers = {
 }
 
 let body = {
-    "page": 7
+    "page": 15
 }
 
 fetch(url, {
@@ -288,7 +288,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":12,"type":16,"body":"3tP7FvIYDOnsCUEN"}'
+    -d '{"id":13,"type":14,"body":"4FeCaTe9f6jpAp5S"}'
 
 ```
 
@@ -301,9 +301,9 @@ let headers = {
 }
 
 let body = {
-    "id": 12,
-    "type": 16,
-    "body": "3tP7FvIYDOnsCUEN"
+    "id": 13,
+    "type": 14,
+    "body": "4FeCaTe9f6jpAp5S"
 }
 
 fetch(url, {
@@ -345,7 +345,7 @@ lists comments for a specific resource(review,update)
 ```bash
 curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
-    -d '{"id":"pi8DpBMFNkrnumtm","type":4}'
+    -d '{"id":"51PNi9ZvVTY1hQJ5","type":3}'
 
 ```
 
@@ -358,8 +358,8 @@ let headers = {
 }
 
 let body = {
-    "id": "pi8DpBMFNkrnumtm",
-    "type": 4
+    "id": "51PNi9ZvVTY1hQJ5",
+    "type": 3
 }
 
 fetch(url, {
@@ -397,7 +397,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
-    -d '{"id":16,"type":5}'
+    -d '{"id":6,"type":10}'
 
 ```
 
@@ -410,8 +410,8 @@ let headers = {
 }
 
 let body = {
-    "id": 16,
-    "type": 5
+    "id": 6,
+    "type": 10
 }
 
 fetch(url, {
@@ -451,7 +451,7 @@ lists likes for a specific resource(review,update)
 ```bash
 curl -X GET -G "http://localhost/api/listLikes" \
     -H "Content-Type: application/json" \
-    -d '{"id":4,"type":4}'
+    -d '{"id":8,"type":14}'
 
 ```
 
@@ -464,8 +464,8 @@ let headers = {
 }
 
 let body = {
-    "id": 4,
-    "type": 4
+    "id": 8,
+    "type": 14
 }
 
 fetch(url, {
@@ -504,7 +504,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/unlike" \
     -H "Content-Type: application/json" \
-    -d '{"id":9}'
+    -d '{"id":13}'
 
 ```
 
@@ -517,7 +517,7 @@ let headers = {
 }
 
 let body = {
-    "id": 9
+    "id": 13
 }
 
 fetch(url, {
@@ -555,7 +555,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":8}'
+    -d '{"id":14}'
 
 ```
 
@@ -568,7 +568,7 @@ let headers = {
 }
 
 let body = {
-    "id": 8
+    "id": 14
 }
 
 fetch(url, {
@@ -608,7 +608,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":5,"books_per_page":14}'
+    -d '{"page":1,"books_per_page":2}'
 
 ```
 
@@ -621,8 +621,8 @@ let headers = {
 }
 
 let body = {
-    "page": 5,
-    "books_per_page": 14
+    "page": 1,
+    "books_per_page": 2
 }
 
 fetch(url, {
@@ -676,7 +676,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":8}'
+    -d '{"book_id":12}'
 
 ```
 
@@ -689,7 +689,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 8
+    "book_id": 12
 }
 
 fetch(url, {
@@ -742,7 +742,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"skXGJUgf5WUXRotb","page":9,"books_per_page":3}'
+    -d '{"genreName":"4HF54FVFtLndkHcV","page":7,"books_per_page":17}'
 
 ```
 
@@ -755,9 +755,9 @@ let headers = {
 }
 
 let body = {
-    "genreName": "skXGJUgf5WUXRotb",
-    "page": 9,
-    "books_per_page": 3
+    "genreName": "4HF54FVFtLndkHcV",
+    "page": 7,
+    "books_per_page": 17
 }
 
 fetch(url, {
@@ -812,7 +812,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_title/{book_title}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"IUIFo6YoIb5t6K8E"}'
+    -d '{"title":"wBaOf28xlCHstQHM"}'
 
 ```
 
@@ -825,7 +825,7 @@ let headers = {
 }
 
 let body = {
-    "title": "IUIFo6YoIb5t6K8E"
+    "title": "wBaOf28xlCHstQHM"
 }
 
 fetch(url, {
@@ -878,7 +878,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":15}'
+    -d '{"ISBN":18}'
 
 ```
 
@@ -891,7 +891,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 15
+    "ISBN": 18
 }
 
 fetch(url, {
@@ -944,7 +944,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_Authorname/{author_name}" \
     -H "Content-Type: application/json" \
-    -d '{"Author_name":"NXUXrHtv3KNCwEAE"}'
+    -d '{"Author_name":"FrAgu8t65BlVILaN"}'
 
 ```
 
@@ -957,7 +957,7 @@ let headers = {
 }
 
 let body = {
-    "Author_name": "NXUXrHtv3KNCwEAE"
+    "Author_name": "FrAgu8t65BlVILaN"
 }
 
 fetch(url, {
@@ -1012,7 +1012,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/follow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":6}'
+    -d '{"user_id":15}'
 
 ```
 
@@ -1025,7 +1025,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 6
+    "user_id": 15
 }
 
 fetch(url, {
@@ -1068,7 +1068,7 @@ Stop following a user
 ```bash
 curl -X DELETE "http://localhost/api/unfollow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":7}'
+    -d '{"user_id":3}'
 
 ```
 
@@ -1081,7 +1081,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 7
+    "user_id": 3
 }
 
 fetch(url, {
@@ -1122,7 +1122,7 @@ gets the followers of a user.
 ```bash
 curl -X GET -G "http://localhost/api/followers" \
     -H "Content-Type: application/json" \
-    -d '{"page":4,"user_id":7}'
+    -d '{"page":4,"user_id":9}'
 
 ```
 
@@ -1136,7 +1136,7 @@ let headers = {
 
 let body = {
     "page": 4,
-    "user_id": 7
+    "user_id": 9
 }
 
 fetch(url, {
@@ -1152,281 +1152,8 @@ fetch(url, {
 
 ```json
 {
-    "followers": [
-        {
-            "id": 1,
-            "name": "Miss Madaline Wisozk V",
-            "imageLink": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-            "smallImageUrl": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-            "email": "nels.farrell@example.net",
-            "link": "http:\/\/treutel.biz\/",
-            "followersCount": 0
-        },
-        {
-            "id": 4,
-            "name": "Annabelle Upton V",
-            "imageLink": "http:\/\/bartell.org\/quisquam-natus-non-error-iste-iure-architecto",
-            "smallImageUrl": "http:\/\/conn.com\/",
-            "email": "erika.herzog@example.net",
-            "link": "http:\/\/www.heathcote.com\/libero-aut-maiores-nam-corporis-ullam-et",
-            "followersCount": 0
-        },
-        {
-            "id": 5,
-            "name": "Velda Rosenbaum",
-            "imageLink": "http:\/\/www.hane.net\/",
-            "smallImageUrl": "http:\/\/www.beatty.com\/rerum-eos-recusandae-molestiae-et-iusto",
-            "email": "javier.hegmann@example.com",
-            "link": "http:\/\/www.mante.biz\/",
-            "followersCount": 0
-        },
-        {
-            "id": 6,
-            "name": "Dr. Reagan Little",
-            "imageLink": "http:\/\/www.haley.org\/ut-ut-architecto-eius-sit-qui-aliquam",
-            "smallImageUrl": "http:\/\/connelly.com\/optio-consequuntur-expedita-tenetur-similique",
-            "email": "eveline01@example.org",
-            "link": "http:\/\/lakin.com\/sunt-animi-ab-quas-iste-pariatur",
-            "followersCount": 0
-        },
-        {
-            "id": 7,
-            "name": "Valentin Pagac DVM",
-            "imageLink": "http:\/\/connelly.com\/ut-ad-quam-odit-eaque.html",
-            "smallImageUrl": "https:\/\/hartmann.com\/earum-omnis-praesentium-placeat-vero-rerum-et-hic-odit.html",
-            "email": "sydnee45@example.com",
-            "link": "https:\/\/kunde.com\/eum-sit-iusto-sint.html",
-            "followersCount": 0
-        },
-        {
-            "id": 8,
-            "name": "Alayna Skiles",
-            "imageLink": "http:\/\/www.nienow.com\/eligendi-incidunt-ex-officia-minus-molestias-fugiat",
-            "smallImageUrl": "http:\/\/www.denesik.com\/",
-            "email": "irenner@example.org",
-            "link": "http:\/\/www.metz.info\/voluptatem-modi-necessitatibus-ipsum-ut-nihil-minima.html",
-            "followersCount": 0
-        },
-        {
-            "id": 9,
-            "name": "Ms. Bert Kshlerin III",
-            "imageLink": "http:\/\/www.jenkins.org\/et-aut-libero-eveniet-suscipit",
-            "smallImageUrl": "http:\/\/www.fahey.info\/delectus-ut-ut-id-neque-alias-sint-odio",
-            "email": "wlehner@example.com",
-            "link": "http:\/\/www.pacocha.net\/quisquam-quo-aut-dolorem-qui-quisquam.html",
-            "followersCount": 0
-        },
-        {
-            "id": 10,
-            "name": "Miss Christelle Orn",
-            "imageLink": "http:\/\/bins.com\/vero-culpa-molestias-neque-perferendis",
-            "smallImageUrl": "http:\/\/www.bernier.com\/aliquam-a-animi-quam",
-            "email": "shawna97@example.com",
-            "link": "https:\/\/www.treutel.info\/sit-enim-rerum-unde-quam",
-            "followersCount": 0
-        },
-        {
-            "id": 11,
-            "name": "Mrs. Katrina Kirlin",
-            "imageLink": "http:\/\/www.wuckert.net\/amet-consectetur-dolores-ipsa-sunt-numquam-nemo",
-            "smallImageUrl": "http:\/\/herzog.net\/non-soluta-laboriosam-molestiae-repellat",
-            "email": "hickle.rocio@example.net",
-            "link": "http:\/\/wolf.com\/soluta-sunt-vel-est-illo.html",
-            "followersCount": 0
-        },
-        {
-            "id": 12,
-            "name": "Jennifer Borer",
-            "imageLink": "http:\/\/www.kreiger.biz\/",
-            "smallImageUrl": "http:\/\/kemmer.com\/nemo-voluptatum-illo-sed-consequatur-quam-expedita-suscipit-dolorum.html",
-            "email": "ngottlieb@example.org",
-            "link": "http:\/\/www.corwin.biz\/repellendus-et-quibusdam-molestiae-ea-dolores-et-sint.html",
-            "followersCount": 0
-        },
-        {
-            "id": 13,
-            "name": "Prof. Eleanora Keeling",
-            "imageLink": "https:\/\/www.friesen.com\/vitae-nisi-eos-asperiores-architecto-consequatur-totam-ipsam",
-            "smallImageUrl": "http:\/\/armstrong.org\/et-veritatis-odit-dolorem-laborum-aliquid-sunt-voluptatem",
-            "email": "ferry.chloe@example.com",
-            "link": "https:\/\/grimes.com\/eaque-et-autem-odio-adipisci-sit-nostrum.html",
-            "followersCount": 0
-        },
-        {
-            "id": 14,
-            "name": "Prof. Orval Koelpin",
-            "imageLink": "http:\/\/rowe.net\/",
-            "smallImageUrl": "http:\/\/www.grady.net\/dolorem-repellat-repellendus-rerum-amet.html",
-            "email": "rath.jaquan@example.com",
-            "link": "http:\/\/www.herzog.com\/quis-aut-quidem-voluptatem-reiciendis-tempore-sunt-voluptatem.html",
-            "followersCount": 0
-        },
-        {
-            "id": 15,
-            "name": "Kiara Bergstrom",
-            "imageLink": "http:\/\/buckridge.com\/dolores-dolorem-modi-enim-porro-beatae",
-            "smallImageUrl": "http:\/\/www.langosh.com\/in-praesentium-et-et-expedita-harum.html",
-            "email": "gbednar@example.com",
-            "link": "http:\/\/www.howell.com\/nobis-quod-nesciunt-sapiente-doloribus-voluptatem-quia-dolor-ea",
-            "followersCount": 0
-        },
-        {
-            "id": 16,
-            "name": "Celine Shanahan",
-            "imageLink": "http:\/\/kohler.net\/nobis-enim-veniam-nobis-eligendi",
-            "smallImageUrl": "https:\/\/www.jerde.com\/accusamus-ipsum-qui-eligendi-reprehenderit-quos-dolore-deserunt",
-            "email": "pdamore@example.org",
-            "link": "http:\/\/connelly.org\/sed-eveniet-qui-quaerat-labore-voluptas",
-            "followersCount": 0
-        },
-        {
-            "id": 17,
-            "name": "Prof. Greg Watsica",
-            "imageLink": "http:\/\/white.biz\/est-facilis-iusto-officiis-incidunt",
-            "smallImageUrl": "http:\/\/conn.biz\/",
-            "email": "cbeer@example.org",
-            "link": "http:\/\/www.reilly.com\/delectus-eaque-nesciunt-eos-pariatur-enim-eius-soluta",
-            "followersCount": 0
-        },
-        {
-            "id": 18,
-            "name": "Mrs. Laurie Reichel MD",
-            "imageLink": "http:\/\/www.friesen.com\/",
-            "smallImageUrl": "http:\/\/barton.org\/iure-dolores-voluptatem-totam-qui-enim",
-            "email": "pwilliamson@example.com",
-            "link": "http:\/\/pollich.com\/magni-ut-nemo-unde-quidem-adipisci-eum-adipisci",
-            "followersCount": 0
-        },
-        {
-            "id": 19,
-            "name": "Kirsten Lowe II",
-            "imageLink": "http:\/\/hilpert.com\/et-omnis-cum-animi-fuga-et",
-            "smallImageUrl": "http:\/\/lowe.biz\/velit-ullam-ut-aut-quidem-est-voluptatem",
-            "email": "pink67@example.org",
-            "link": "http:\/\/herman.info\/dolorum-molestiae-consequuntur-non-reprehenderit",
-            "followersCount": 0
-        },
-        {
-            "id": 20,
-            "name": "Harmon Schiller I",
-            "imageLink": "https:\/\/ferry.info\/aliquid-quo-sunt-aspernatur-omnis-laboriosam-qui-recusandae-eum.html",
-            "smallImageUrl": "https:\/\/www.hane.com\/est-vero-sint-dolore",
-            "email": "aohara@example.org",
-            "link": "http:\/\/www.mclaughlin.com\/rerum-neque-quos-exercitationem-nam-dolore.html",
-            "followersCount": 0
-        },
-        {
-            "id": 21,
-            "name": "Emely Fahey",
-            "imageLink": "http:\/\/schulist.com\/ipsam-explicabo-autem-est-rem",
-            "smallImageUrl": "http:\/\/www.bogan.net\/reiciendis-voluptates-delectus-provident-possimus-eos-hic.html",
-            "email": "alisha87@example.org",
-            "link": "http:\/\/www.williamson.com\/sit-numquam-corporis-itaque-in-autem-a.html",
-            "followersCount": 0
-        },
-        {
-            "id": 22,
-            "name": "Dr. Isaac Volkman",
-            "imageLink": "http:\/\/schinner.biz\/",
-            "smallImageUrl": "http:\/\/renner.net\/et-quia-et-nihil-incidunt.html",
-            "email": "jordon41@example.com",
-            "link": "https:\/\/www.leffler.biz\/facilis-debitis-consequuntur-quas-saepe",
-            "followersCount": 0
-        },
-        {
-            "id": 23,
-            "name": "Dr. Nat Nikolaus",
-            "imageLink": "http:\/\/schowalter.info\/",
-            "smallImageUrl": "http:\/\/muller.biz\/",
-            "email": "pagac.delaney@example.org",
-            "link": "https:\/\/www.veum.com\/quidem-harum-omnis-doloremque-ut",
-            "followersCount": 0
-        },
-        {
-            "id": 24,
-            "name": "Tara Von",
-            "imageLink": "https:\/\/www.collier.com\/inventore-molestiae-eum-soluta-quisquam-at-repellendus-corrupti",
-            "smallImageUrl": "http:\/\/bailey.com\/enim-dolor-occaecati-adipisci-voluptates-aut-esse",
-            "email": "gerhold.electa@example.com",
-            "link": "https:\/\/buckridge.net\/eveniet-commodi-rem-quod-quam.html",
-            "followersCount": 0
-        },
-        {
-            "id": 25,
-            "name": "Paxton Durgan",
-            "imageLink": "http:\/\/www.renner.net\/",
-            "smallImageUrl": "http:\/\/www.altenwerth.com\/",
-            "email": "jmurphy@example.net",
-            "link": "http:\/\/green.org\/sed-suscipit-in-porro-consequatur-aut-suscipit-iure",
-            "followersCount": 0
-        },
-        {
-            "id": 26,
-            "name": "Kraig Bogan",
-            "imageLink": "http:\/\/kemmer.biz\/",
-            "smallImageUrl": "https:\/\/runolfsdottir.com\/eos-est-quo-omnis-qui-hic-rem-fugiat-id.html",
-            "email": "jazmin16@example.net",
-            "link": "http:\/\/gleichner.com\/fuga-aut-ratione-in-neque-ab-nemo-delectus",
-            "followersCount": 0
-        },
-        {
-            "id": 27,
-            "name": "Mrs. Odessa Bogan",
-            "imageLink": "http:\/\/www.hills.org\/necessitatibus-consequatur-omnis-eum-reiciendis-tenetur",
-            "smallImageUrl": "http:\/\/www.halvorson.net\/reprehenderit-ex-voluptas-reiciendis-qui",
-            "email": "otho.ullrich@example.org",
-            "link": "http:\/\/west.com\/nostrum-quod-dolores-quod-consequatur-quo-et-ea",
-            "followersCount": 0
-        },
-        {
-            "id": 28,
-            "name": "Mia Schimmel",
-            "imageLink": "http:\/\/www.parker.biz\/eius-et-sint-esse-dolorem-officiis-sunt-aliquam",
-            "smallImageUrl": "http:\/\/cormier.info\/at-reiciendis-nihil-qui-et-vitae-amet.html",
-            "email": "hayes.hassie@example.net",
-            "link": "http:\/\/stark.com\/iure-perferendis-deserunt-aspernatur-quos-unde-et-sed",
-            "followersCount": 0
-        },
-        {
-            "id": 29,
-            "name": "Kaylin Hermann",
-            "imageLink": "http:\/\/ritchie.org\/",
-            "smallImageUrl": "http:\/\/www.reilly.org\/porro-ut-numquam-quas.html",
-            "email": "alemke@example.org",
-            "link": "http:\/\/www.cartwright.com\/qui-sint-accusantium-omnis-est-dolorum-et-tempora",
-            "followersCount": 0
-        },
-        {
-            "id": 30,
-            "name": "Prof. Terry Simonis",
-            "imageLink": "http:\/\/hilpert.info\/et-vitae-ea-beatae-sed-est-perspiciatis",
-            "smallImageUrl": "http:\/\/www.reinger.com\/",
-            "email": "bernie48@example.com",
-            "link": "https:\/\/www.sauer.org\/aut-rem-dolorem-molestiae-libero-architecto-ipsa",
-            "followersCount": 0
-        },
-        {
-            "id": 31,
-            "name": "Lavina Schinner PhD",
-            "imageLink": "http:\/\/www.windler.com\/voluptas-hic-nihil-et-voluptatibus",
-            "smallImageUrl": "http:\/\/cronin.info\/",
-            "email": "walker.michelle@example.org",
-            "link": "http:\/\/gutmann.com\/",
-            "followersCount": 0
-        },
-        {
-            "id": 32,
-            "name": "Everett Schneider",
-            "imageLink": "http:\/\/www.runte.com\/voluptatum-corrupti-ut-maxime-voluptas-ut-iure",
-            "smallImageUrl": "https:\/\/www.west.com\/et-reiciendis-veritatis-rem-voluptas",
-            "email": "skylar.prohaska@example.com",
-            "link": "http:\/\/www.sporer.com\/animi-inventore-sit-quia-est",
-            "followersCount": 0
-        }
-    ],
-    "_start": 1,
-    "_end": 30,
-    "_total": 30
+    "status": "false",
+    "message": "UnAuthorized"
 }
 ```
 
@@ -1452,7 +1179,7 @@ gets the following list of a user .
 ```bash
 curl -X GET -G "http://localhost/api/following" \
     -H "Content-Type: application/json" \
-    -d '{"page":1,"user_id":15}'
+    -d '{"page":20,"user_id":9}'
 
 ```
 
@@ -1465,8 +1192,8 @@ let headers = {
 }
 
 let body = {
-    "page": 1,
-    "user_id": 15
+    "page": 20,
+    "user_id": 9
 }
 
 fetch(url, {
@@ -1482,29 +1209,8 @@ fetch(url, {
 
 ```json
 {
-    "following": [
-        {
-            "id": 1,
-            "name": "Miss Madaline Wisozk V",
-            "imageLink": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-            "smallImageUrl": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-            "email": "nels.farrell@example.net",
-            "link": "http:\/\/treutel.biz\/",
-            "followersCount": 0
-        },
-        {
-            "id": 2,
-            "name": "Jany Stoltenberg II",
-            "imageLink": "http:\/\/www.fisher.com\/et-non-et-deserunt",
-            "smallImageUrl": "http:\/\/www.heathcote.com\/",
-            "email": "yschiller@example.org",
-            "link": "http:\/\/www.kshlerin.com\/eius-nulla-quidem-voluptates-ad-pariatur-voluptatem-ducimus-doloribus",
-            "followersCount": 0
-        }
-    ],
-    "_start": 1,
-    "_end": 2,
-    "_total": 2
+    "status": "false",
+    "message": "UnAuthorized"
 }
 ```
 
@@ -1568,7 +1274,7 @@ null
 ```bash
 curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":4,"shelf":14,"review":"wCFJKagK29fSYXNg","rating":13,"read_at":"4iXRBZ9dsX1uauxP"}'
+    -d '{"book_id":18,"shelf":8,"review":"fQDdZrdM97Wm8nMF","rating":17,"read_at":"IXl5IG0mFAtLE9w1"}'
 
 ```
 
@@ -1581,11 +1287,11 @@ let headers = {
 }
 
 let body = {
-    "book_id": 4,
-    "shelf": 14,
-    "review": "wCFJKagK29fSYXNg",
-    "rating": 13,
-    "read_at": "4iXRBZ9dsX1uauxP"
+    "book_id": 18,
+    "shelf": 8,
+    "review": "fQDdZrdM97Wm8nMF",
+    "rating": 17,
+    "read_at": "IXl5IG0mFAtLE9w1"
 }
 
 fetch(url, {
@@ -1622,7 +1328,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
-    -d '{"review_id":4,"review":"2nXpTasCVfzprti1","shelf_name":"3YcJF2FWGRcgqZvw","rating":3,"read_at":"4FiYbapi5nWtOlBJ"}'
+    -d '{"review_id":13,"review":"z6nzISuGLlEw5V9s","shelf_name":"EgflfR6gACKdEII4","rating":5,"read_at":"kNJPDGsjp3PcPjs1"}'
 
 ```
 
@@ -1635,11 +1341,11 @@ let headers = {
 }
 
 let body = {
-    "review_id": 4,
-    "review": "2nXpTasCVfzprti1",
-    "shelf_name": "3YcJF2FWGRcgqZvw",
-    "rating": 3,
-    "read_at": "4FiYbapi5nWtOlBJ"
+    "review_id": 13,
+    "review": "z6nzISuGLlEw5V9s",
+    "shelf_name": "EgflfR6gACKdEII4",
+    "rating": 5,
+    "read_at": "kNJPDGsjp3PcPjs1"
 }
 
 fetch(url, {
@@ -1676,7 +1382,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/reviwes/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"review_id":13}'
+    -d '{"review_id":16}'
 
 ```
 
@@ -1689,7 +1395,7 @@ let headers = {
 }
 
 let body = {
-    "review_id": 13
+    "review_id": 16
 }
 
 fetch(url, {
@@ -1724,7 +1430,7 @@ and i will use it to get the review for one book array of one element
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"isbns":"2A9Wm3UsjdiWjyCg"}'
+    -d '{"isbns":"vHtGfHEib1G97EHm"}'
 
 ```
 
@@ -1737,7 +1443,7 @@ let headers = {
 }
 
 let body = {
-    "isbns": "2A9Wm3UsjdiWjyCg"
+    "isbns": "vHtGfHEib1G97EHm"
 }
 
 fetch(url, {
@@ -1775,7 +1481,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"sZ4Atd6YUs6Hosdo","author":"kJJFzrzE9ioFyh58","rating":18}'
+    -d '{"title":"QzSZCG8gEk7pwU8c","author":"xc60mtatCGPxDQoB","rating":6}'
 
 ```
 
@@ -1788,9 +1494,9 @@ let headers = {
 }
 
 let body = {
-    "title": "sZ4Atd6YUs6Hosdo",
-    "author": "kJJFzrzE9ioFyh58",
-    "rating": 18
+    "title": "QzSZCG8gEk7pwU8c",
+    "author": "xc60mtatCGPxDQoB",
+    "rating": 6
 }
 
 fetch(url, {
@@ -1868,7 +1574,7 @@ null
 ```bash
 curl -X GET -G "http://localhost/api/listReviewOfUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"fYInqGW9dIL67uYG"}'
+    -d '{"userId":"DhiPrOPJVudZdpgL"}'
 
 ```
 
@@ -1881,7 +1587,7 @@ let headers = {
 }
 
 let body = {
-    "userId": "fYInqGW9dIL67uYG"
+    "userId": "DhiPrOPJVudZdpgL"
 }
 
 fetch(url, {
@@ -1919,7 +1625,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/showReviewOfBook/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":"9ZQbQQ8qrOgIQzYc"}'
+    -d '{"reviewId":"f6AIIf6nrTofAkjR"}'
 
 ```
 
@@ -1932,7 +1638,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": "9ZQbQQ8qrOgIQzYc"
+    "reviewId": "f6AIIf6nrTofAkjR"
 }
 
 fetch(url, {
@@ -1973,7 +1679,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/showReviewForBookForUser/{user_id}/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"VsMS0HQ80swzayh0","bookId":"6cZGdHPcVLYi5oMv"}'
+    -d '{"userId":"M6lM5uBgbuAOsk4C","bookId":"co1Hqc29e9KINPUw"}'
 
 ```
 
@@ -1986,8 +1692,8 @@ let headers = {
 }
 
 let body = {
-    "userId": "VsMS0HQ80swzayh0",
-    "bookId": "6cZGdHPcVLYi5oMv"
+    "userId": "M6lM5uBgbuAOsk4C",
+    "bookId": "co1Hqc29e9KINPUw"
 }
 
 fetch(url, {
@@ -2019,6 +1725,60 @@ Parameter | Type | Status | Description
     bookId | required |  optional  | id of the of the book
 
 <!-- END_35312a6c43c9e348424ab1410c1f4202 -->
+
+<!-- START_b59d8c710c80a5c61528f8e003c4b30a -->
+## Get the review for specific user on a specific Book
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/showReviewsForABook/{book_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"bookId":9}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/showReviewsForABook/{book_id}");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "bookId": 9
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "status": "failed",
+    "pages": []
+}
+```
+
+### HTTP Request
+`GET api/showReviewsForABook/{book_id}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    bookId | integer |  required  | id of the of the book
+
+<!-- END_b59d8c710c80a5c61528f8e003c4b30a -->
 
 #Shelf
 <!-- START_8ca8c1ada18abb4fe16799cd67e55e73 -->
@@ -2071,7 +1831,7 @@ fetch(url, {
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"NurQZv4RmxNQTlQ9"}'
+    -d '{"shelf_name":"zuuAGo7bk5mI3Zql"}'
 
 ```
 
@@ -2084,7 +1844,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "NurQZv4RmxNQTlQ9"
+    "shelf_name": "zuuAGo7bk5mI3Zql"
 }
 
 fetch(url, {
@@ -2122,7 +1882,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"P0PcbhcGLO0mbmGc","book_id":19}'
+    -d '{"shelf_name":"6LUeUikj0khViXXP","book_id":20}'
 
 ```
 
@@ -2135,8 +1895,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "P0PcbhcGLO0mbmGc",
-    "book_id": 19
+    "shelf_name": "6LUeUikj0khViXXP",
+    "book_id": 20
 }
 
 fetch(url, {
@@ -2170,7 +1930,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":5,"page":9,"books_per_page":7}'
+    -d '{"user_id":4,"page":12,"books_per_page":2}'
 
 ```
 
@@ -2183,9 +1943,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 5,
-    "page": 9,
-    "books_per_page": 7
+    "user_id": 4,
+    "page": 12,
+    "books_per_page": 2
 }
 
 fetch(url, {
@@ -2245,7 +2005,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"VaHhUX9V1vTL2yRY","book_id":18}'
+    -d '{"shelf_name":"Z1zueKkWBTClyGbh","book_id":20}'
 
 ```
 
@@ -2258,8 +2018,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "VaHhUX9V1vTL2yRY",
-    "book_id": 18
+    "shelf_name": "Z1zueKkWBTClyGbh",
+    "book_id": 20
 }
 
 fetch(url, {
@@ -2292,7 +2052,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{user_id}/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":1,"shelf_name":"AIJhypOUDeOTkxeO"}'
+    -d '{"user_id":10,"shelf_name":"jcP7AO5WmEtkl6ZF"}'
 
 ```
 
@@ -2305,8 +2065,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 1,
-    "shelf_name": "AIJhypOUDeOTkxeO"
+    "user_id": 10,
+    "shelf_name": "jcP7AO5WmEtkl6ZF"
 }
 
 fetch(url, {
@@ -2363,7 +2123,7 @@ APIs for managing users (Sofyan)
 ```bash
 curl -X POST "http://localhost/api/signUp" \
     -H "Content-Type: application/json" \
-    -d '{"email":"HxXlpvH7wFvDJTjW","password":"rhIoHsGkh3ag9yIw","password_confirmation":"cXXE2GsjuZe50vIe","name":"AlSPZB363mgGvQ70","gender":"wHW4yVf0zlOh1fX1","birthday":"xcQGMoSnc8JjXndz","country":"cdwHYiLOHirtTlVm","city":"kl71jTuv4FiApONv"}'
+    -d '{"email":"mJHT60c5GsijoZ3n","password":"ZTszjYkcYkbF04XC","password_confirmation":"JvtZU1hrmjFUk3Ux","name":"grN3v9rR1nUfNTfs","gender":"L6GvN0CAkEiD9kVv","birthday":"tB2zCX9Jrzhgfwku","country":"QfGULxPUXrfAuIj0","city":"nrVl4LGrVLbc6p7Q"}'
 
 ```
 
@@ -2376,14 +2136,14 @@ let headers = {
 }
 
 let body = {
-    "email": "HxXlpvH7wFvDJTjW",
-    "password": "rhIoHsGkh3ag9yIw",
-    "password_confirmation": "cXXE2GsjuZe50vIe",
-    "name": "AlSPZB363mgGvQ70",
-    "gender": "wHW4yVf0zlOh1fX1",
-    "birthday": "xcQGMoSnc8JjXndz",
-    "country": "cdwHYiLOHirtTlVm",
-    "city": "kl71jTuv4FiApONv"
+    "email": "mJHT60c5GsijoZ3n",
+    "password": "ZTszjYkcYkbF04XC",
+    "password_confirmation": "JvtZU1hrmjFUk3Ux",
+    "name": "grN3v9rR1nUfNTfs",
+    "gender": "L6GvN0CAkEiD9kVv",
+    "birthday": "tB2zCX9Jrzhgfwku",
+    "country": "QfGULxPUXrfAuIj0",
+    "city": "nrVl4LGrVLbc6p7Q"
 }
 
 fetch(url, {
@@ -2463,7 +2223,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/logIn" \
     -H "Content-Type: application/json" \
-    -d '{"email":"PFhtH8ECRDKL2JIh","password":"K5N5ZhPWr1iXSruV"}'
+    -d '{"email":"UN4umzHSagSMF8PT","password":"k5PVwpCJK9tieKV7"}'
 
 ```
 
@@ -2476,8 +2236,8 @@ let headers = {
 }
 
 let body = {
-    "email": "PFhtH8ECRDKL2JIh",
-    "password": "K5N5ZhPWr1iXSruV"
+    "email": "UN4umzHSagSMF8PT",
+    "password": "k5PVwpCJK9tieKV7"
 }
 
 fetch(url, {
@@ -2549,7 +2309,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changePassword" \
     -H "Content-Type: application/json" \
-    -d '{"password":"gz6wbE8g8ZxwhMuA","newPassword":"dLZxLzmlO5q7VIhf","newPassword_confirmation":"0HWnTIuIXVDsKilA"}'
+    -d '{"password":"nMou3iXpWraAnoW1","newPassword":"yU5B6oZIlPb5Rppe","newPassword_confirmation":"AspFQ9NcsjwISYwe"}'
 
 ```
 
@@ -2562,9 +2322,9 @@ let headers = {
 }
 
 let body = {
-    "password": "gz6wbE8g8ZxwhMuA",
-    "newPassword": "dLZxLzmlO5q7VIhf",
-    "newPassword_confirmation": "0HWnTIuIXVDsKilA"
+    "password": "nMou3iXpWraAnoW1",
+    "newPassword": "yU5B6oZIlPb5Rppe",
+    "newPassword_confirmation": "AspFQ9NcsjwISYwe"
 }
 
 fetch(url, {
@@ -2619,7 +2379,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changeName" \
     -H "Content-Type: application/json" \
-    -d '{"password":"LhGqidB1TwRQAu52","newName":"ElKXJrB8xrTmNNW0"}'
+    -d '{"password":"sgEYV4SJwBoCZuxE","newName":"EjJQmyvpjt1JY0Xq"}'
 
 ```
 
@@ -2632,8 +2392,8 @@ let headers = {
 }
 
 let body = {
-    "password": "LhGqidB1TwRQAu52",
-    "newName": "ElKXJrB8xrTmNNW0"
+    "password": "sgEYV4SJwBoCZuxE",
+    "newName": "EjJQmyvpjt1JY0Xq"
 }
 
 fetch(url, {
@@ -2686,7 +2446,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
-    -d '{"Image":"bVZhrxRjPXA6p7P4"}'
+    -d '{"Image":"zAw8xGRdNqaKmznf"}'
 
 ```
 
@@ -2699,7 +2459,7 @@ let headers = {
 }
 
 let body = {
-    "Image": "bVZhrxRjPXA6p7P4"
+    "Image": "zAw8xGRdNqaKmznf"
 }
 
 fetch(url, {
@@ -2740,7 +2500,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
-    -d '{"password":"0XTgTDxzCVoUW5pl"}'
+    -d '{"password":"vzz4za033xEV9w6x"}'
 
 ```
 
@@ -2753,7 +2513,7 @@ let headers = {
 }
 
 let body = {
-    "password": "0XTgTDxzCVoUW5pl"
+    "password": "vzz4za033xEV9w6x"
 }
 
 fetch(url, {
@@ -2895,21 +2655,21 @@ fetch(url, {
 
 <!-- END_efe26608e73efafa8f34757f14dbcf54 -->
 
-<!-- START_02b571ee5bd2fac11f2edd358ef66b79 -->
+<!-- START_3c520b0ccdbf5100b6f6994368e1b344 -->
 ## Show Profile
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/showProfile" \
+curl -X GET -G "http://localhost/api/profile" \
     -H "Content-Type: application/json" \
-    -d '{"id":8}'
+    -d '{"id":4}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/showProfile");
+const url = new URL("http://localhost/api/profile");
 
 let headers = {
     "Content-Type": "application/json",
@@ -2917,7 +2677,7 @@ let headers = {
 }
 
 let body = {
-    "id": 8
+    "id": 4
 }
 
 fetch(url, {
@@ -2988,7 +2748,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`GET api/showProfile`
+`GET api/profile`
 
 #### Body Parameters
 
@@ -2996,7 +2756,7 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     id | integer |  optional  | optional this parameter to show the info of the other user (default authenticated user) .
 
-<!-- END_02b571ee5bd2fac11f2edd358ef66b79 -->
+<!-- END_3c520b0ccdbf5100b6f6994368e1b344 -->
 
 <!-- START_420023f5c9516339d727125164ebdc76 -->
 ## Change birthday
@@ -3007,7 +2767,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"birthday":"kL2B9B6KUgFp1xK0"}'
+    -d '{"birthday":"T5PqeEsar2qPa5qf"}'
 
 ```
 
@@ -3020,7 +2780,7 @@ let headers = {
 }
 
 let body = {
-    "birthday": "kL2B9B6KUgFp1xK0"
+    "birthday": "T5PqeEsar2qPa5qf"
 }
 
 fetch(url, {
@@ -3061,7 +2821,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyBirthday":"s8EJPsJvA1bK2FzZ"}'
+    -d '{"seeMyBirthday":"6yjPwZC1oSbPuqtI"}'
 
 ```
 
@@ -3074,7 +2834,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyBirthday": "s8EJPsJvA1bK2FzZ"
+    "seeMyBirthday": "6yjPwZC1oSbPuqtI"
 }
 
 fetch(url, {
@@ -3115,7 +2875,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
-    -d '{"country":"qspjPR3tmEQ5eEDJ"}'
+    -d '{"country":"GX4bVUAjmHdEGxrW"}'
 
 ```
 
@@ -3128,7 +2888,7 @@ let headers = {
 }
 
 let body = {
-    "country": "qspjPR3tmEQ5eEDJ"
+    "country": "GX4bVUAjmHdEGxrW"
 }
 
 fetch(url, {
@@ -3169,7 +2929,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCountry":"exn566pUNKEmdfiK"}'
+    -d '{"seeMyCountry":"jf37xuC9gUjT6D9F"}'
 
 ```
 
@@ -3182,7 +2942,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCountry": "exn566pUNKEmdfiK"
+    "seeMyCountry": "jf37xuC9gUjT6D9F"
 }
 
 fetch(url, {
@@ -3223,7 +2983,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
-    -d '{"city":"Erkik3eD5Qdjtayn"}'
+    -d '{"city":"f5Bl7HlBvtPkRezU"}'
 
 ```
 
@@ -3236,7 +2996,7 @@ let headers = {
 }
 
 let body = {
-    "city": "Erkik3eD5Qdjtayn"
+    "city": "f5Bl7HlBvtPkRezU"
 }
 
 fetch(url, {
@@ -3277,7 +3037,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCity":"WiNN3FkRXjr6spXU"}'
+    -d '{"seeMyCity":"SBQ4pktrYT3zKVkM"}'
 
 ```
 
@@ -3290,7 +3050,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCity": "WiNN3FkRXjr6spXU"
+    "seeMyCity": "SBQ4pktrYT3zKVkM"
 }
 
 fetch(url, {
@@ -3330,7 +3090,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
-    -d '{"userName":"I1Q7MT2kkZhyznk2"}'
+    -d '{"userName":"V0ZyfAZBIBo9h6LN"}'
 
 ```
 
@@ -3343,7 +3103,7 @@ let headers = {
 }
 
 let body = {
-    "userName": "I1Q7MT2kkZhyznk2"
+    "userName": "V0ZyfAZBIBo9h6LN"
 }
 
 fetch(url, {

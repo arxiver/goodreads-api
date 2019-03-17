@@ -479,7 +479,7 @@ class userController extends Controller
         * Case it is not sent : then we list the authenticated-user `s followers
         * other wise we use the given user_id to get profile detailed info  .
         */
-        $userId = $request->has(['id']) ? $request->user->id : $this->ID;
+        $userId = $request->has(['id']) ? $request->id : $this->ID;
         User::findOrFail($userId);
 
         $data = User::select('id','name','email','link','imageLink',

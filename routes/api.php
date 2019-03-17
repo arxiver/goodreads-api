@@ -28,7 +28,7 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::post('delete', "UserController@delete");
     Route::get('showSetting', "UserController@showSetting");
     Route::get('logOut', "UserController@logOut");
-    Route::get('showProfile','UserController@showProfile');
+    Route::get('profile','UserController@showProfile');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -83,14 +83,13 @@ Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
 //Route::get('authorname','AuthorController@getAuthorByName');
 //Route::get('authorid','AuthorController@searchAuthor');
 
-
-
-
 //Following section
-Route::post('follow','FollowingController@followUser');
-Route::delete('unfollow','FollowingController@unfollowUser');
-Route::get('followers','FollowingController@userFollowers');
-Route::get('following','FollowingController@userFollowing');
+Route::group(["middleware" => "unAuthorized"], function () {
+    Route::post('follow','FollowingController@followUser');
+    Route::delete('unfollow','FollowingController@unfollowUser');
+    Route::get('followers','FollowingController@userFollowers');
+    Route::get('following','FollowingController@userFollowing');
+});
 
 //User section
 Route::get('UserController', 'UserController@index');

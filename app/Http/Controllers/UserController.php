@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class userController extends Controller
 {
-    
-    
+
+
     //
     /**
      * Sign Up
@@ -66,7 +66,7 @@ class userController extends Controller
 
     public function signUp(Request $request)
     {
-        // body 
+        // body
     }
 
 
@@ -108,7 +108,7 @@ class userController extends Controller
     public function logIn(Request $request)
     {
         // response
-        
+
         $HashedPassword = Hash::make($request["password"]);
         $Validations    = array(
                                     "email"             => "required|email|exists:users,Email" ,
@@ -129,7 +129,7 @@ class userController extends Controller
         {
             if($token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]))
             {
-                $GettingData = array(   
+                $GettingData = array(
                                         "email" ,
                                         "name" ,
                                         "age" ,
@@ -142,7 +142,7 @@ class userController extends Controller
                                         "city" ,
                                         "ratingCount" ,
                                         "ratingAvg" ,
-                                        "followingCounts" ,
+                                        "followingCount" ,
                                         "followersCount",
                                         "imageLink"
                                     );
@@ -180,7 +180,7 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-        $GettingData = array(   
+        $GettingData = array(
                                 "email" ,
                                 "name" ,
                                 "age" ,
@@ -216,7 +216,7 @@ class userController extends Controller
      */
     public function logOut(Request $request)
     {
-        
+
         $User = User::find($this->ID);
         $User->lastActive = now();
         $User->save();
@@ -479,14 +479,12 @@ class userController extends Controller
         * Case it is not sent : then we list the authenticated-user `s followers
         * other wise we use the given user_id to get profile detailed info  .
         */
-        if ($request->id == null)
-            $id = Auth::id();
-        else
-            $id = $request->user->id;
+        $userId = $request->has(['id']) ? $request->user->id : $this->ID;
+        User::findOrFail($userId);
 
         $data = User::select('id','name','email','link','imageLink',
                              'smallImageUrl','about','age','gender')
-                             ->where('id', $id)->get();
+                             ->where('id', $userId)->get();
 
         return response()->json($data);
 

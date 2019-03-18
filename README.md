@@ -24,7 +24,16 @@ git commit -m "your comment here"
 git remote add origin https://github.com/mohamed-mokhtar/goodreads-api
 git push -u origin master
 ```
-#### Incase you dont have the latest pushed version  
+#### Incase you dont have the latest pushed version you `ll need to
 ```
-you `ll need to git pull :)
+ git pull 
 ```
+# Authentication Edition 
+you `ll need to run
+```
+ php artisan jwt:secret
+ php artisan migrate:refresh
+ php artisan db:seed
+```
+open you db , you `ll have 100 users created .
+each user has an e-mail . and default hashed password is " password " .

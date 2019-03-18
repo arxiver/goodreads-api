@@ -27,16 +27,3 @@ class DatabaseSeeder extends Seeder
 
     }
 }
-/**
-    * $i = 2;
-    *
-    *    while ($i <= 250) {
-    *        factory(App\Following::class)->create(
-    *            [
-    *                'user_id' => $i,
-    *                'follower_id' => 1,
-    *            ]
-    *        );
-    *        $i++;
-    *    }
-*/

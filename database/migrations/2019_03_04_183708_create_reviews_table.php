@@ -15,12 +15,14 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('userId');
-            $table->integer('bookId');
+            $table->integer('user_id');
+            $table->integer('book_id');
             $table->text('body');
+            $table->text('shelf_name');
             $table->integer('rating');
             $table->integer('numberLikes');
             $table->integer('numberComments');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

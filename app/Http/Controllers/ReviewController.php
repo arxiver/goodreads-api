@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use App\Review;
 use App\Shelf;
 use Illuminate\Http\Request;
@@ -167,12 +167,12 @@ class ReviewController extends Controller
      * and i will use it to get the review for one book array of one element
      * @authenticated
      * @bodyParam isbns ArrayofInt required  Array of ISBNs(1000 ISBNs per request max.).
-     * 
+     *
      */
     public function getReviewsForListOfBooks()
     {
         //
-    } 
+    }
 
 
     /**
@@ -185,22 +185,25 @@ class ReviewController extends Controller
     public function getReviewsByTitle()
     {
         //
-    } 
+    }
 
     /**
      * List all reviews of the authenticated user
      * @authenticated
-     * 
+     *
      */
     public function listMyReviews()
     {
-        //
+        $userId =$this->ID;
+        User::findOrFail($userId);
+        $data = Review::where('user_id', $userId)->get();
+        return response()->json(array('my_reviews'=>$data),200);
     }
 
 
 
     /**
-     * List thee reviews for a specific user 
+     * List thee reviews for a specific user
      * @authenticated
      * @bodyParam userId required id of the user
      */
@@ -210,9 +213,9 @@ class ReviewController extends Controller
     }
 
     /**
-     * get a specific review with it's comments and likes 
+     * get a specific review with it's comments and likes
      * @authenticated
-     * @bodyParam reviewId required id of the of the review to get it's body when notification happens 
+     * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
     public function showReviewOfBook($id)
     {
@@ -234,10 +237,10 @@ class ReviewController extends Controller
 
 
     /**
-     * Get the review for specific user on a specific Book 
+     * Get the review for specific user on a specific Book
      * @authenticated
      * @bodyParam userId required id of the of the user
-     * @bodyParam bookId required id of the of the book 
+     * @bodyParam bookId required id of the of the book
      */
     public function showReviewForBookForUser($user_id , $book_id)
     {
@@ -257,14 +260,15 @@ class ReviewController extends Controller
         }
     }
     /**
-     * Get the review for specific user on a specific Book 
+     * Get the review for specific user on a specific Book
      * @authenticated
-     * @bodyParam bookId integer required id of the of the book 
+     * @bodyParam bookId integer required id of the of the book
      */
     public function showReviewsForBook($book_id)
     {
-        //
-        $results = DB::select('select * from reviews  where bookId = ?', [$book_id]);
+       // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+       $results = DB::select('select r.id,r.bookId,r.body,r.rating,r.lastUpdate,r.numberLikes,r.numberComments,r.userId,u.name as username, u.imageLink as userimagelink from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

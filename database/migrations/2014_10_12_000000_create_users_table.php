@@ -30,8 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('city');                                        // The city of the user
             $table->date('joinedAt')->nullable();                                      // The date of his joining in the website
             $table->datetime('lastActive')->nullable();                                // Last active
-            $table->integer('followersCount');                             // followers count
-            $table->integer('followingCounts');                            // following count
+            $table->integer('followersCount')->nullable();                             // followers count
+            $table->integer('followingCounts')->nullable();                            // following count
             $table->float('ratingAvg');                                    // Raging average
             $table->integer('ratingCount'); 
             $table->integer('bookCount')->nullable();                                // Book count

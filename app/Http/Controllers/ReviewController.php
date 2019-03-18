@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Review;
 use App\Shelf;
 use Illuminate\Http\Request;
+use DB;
+use Response;
 /**
  * @group Review
  * @authenticated
@@ -35,30 +37,40 @@ class ReviewController extends Controller
      *  "state" : "your review is saved "
      * }
      */
-    public function createReview($bookID,$shelf,$body=NULL,$rating=NULL)
+    public function createReview(Request $request)
     {
-       if(($rating == NULL) && ($body == NULL))
-       {
+        if(!empty($request["rating"]))
+        {
+            die("good function");
+        }
+        else
+        {
+            die("bad functoin");
+        }
+        if(($request["rating"] == 4) && ($request["body"] == 5))
+        {
+            die("im here");
+            //die();
             return response()->json([
                 'state' => 'Invalid review you must make rate'
             ]);
        } 
-
-       elseif(($rating == NULL) && ($body != NULL))
+       
+       elseif(($request["rating"] == NULL) && ($request["body"] != NULL))
        {
             return response()->json([
                 'state' => 'you cannot make review without rating'
             ]);
        }
 
-       elseif(($rating != NULL) && ($body == NULL))
+       elseif(($request["rating"] != NULL) && ($request["body"] == NULL))
        {
-           if ($shelf != 0)
+           /*if ($reuqst["shelf"] != 0)
            {
-                $userId=$this->id;
+                $userId=$this->ID;
                 Shelf::create(request(['userId','bookId','type']));
-           }
-            $userId=$this->id;
+           }*/
+            $userId=$this->ID;
             Review::create(request(['userId','bookId','body','rating']));
             return response()->json([
                 'state' => 'your review is saved '
@@ -66,11 +78,11 @@ class ReviewController extends Controller
        }
        else
        {
-           if ($shelf != 0)
+           /*if ($request["shelf"] != 0)
            {
             $userId=$this->id;
                 Shelf::create(request(['userId','bookId','type']));
-           }
+           }*/
            $userId=$this->id;
             Review::create(request(['userId','bookId','body','rating']));
             return response()->json([
@@ -98,15 +110,15 @@ class ReviewController extends Controller
      *  "state" : "your review is updated "
      * }
      */
-    public function editReview($reviewId,$body=NULL,$rating)
+    public function editReview(Request $request)
     {
-        if(($rating == NULL) && ($body == NULL))
+        if(($request["rating"] == NULL) && ($request["body"] == NULL))
        {
             return response()->json([
                 'state' => 'Invalid review update'
             ]);
        } 
-       elseif(($rating == NULL) && ($body != NULL))
+       elseif(($request["rating"] == NULL) && ($request["body"] != NULL))
        {
             return response()->json([
                 'state' => 'you cannot make review update without rating'
@@ -202,9 +214,22 @@ class ReviewController extends Controller
      * @authenticated
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens 
      */
-    public function showReviewOfBook()
+    public function showReviewOfBook($id)
     {
         //
+        $results = DB::select('select * from reviews where id = ?', [$id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
     }
 
 
@@ -214,8 +239,43 @@ class ReviewController extends Controller
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book 
      */
-    public function showReviewForBookForUser()
+    public function showReviewForBookForUser($user_id , $book_id)
     {
         //
+        $results = DB::select('select * from reviews  where userId = ? and bookId = ?', [$user_id,$book_id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
+    }
+    /**
+     * Get the review for specific user on a specific Book 
+     * @authenticated
+     * @bodyParam bookId integer required id of the of the book 
+     */
+    public function showReviewsForBook($book_id)
+    {
+        //
+        $results = DB::select('select * from reviews  where bookId = ?', [$book_id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $results),
+                200);
+        }
     }
 }

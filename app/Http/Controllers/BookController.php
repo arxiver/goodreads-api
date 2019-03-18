@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use DB;
+use Response;
 use Illuminate\Http\Request;
 
 /**
@@ -68,9 +70,23 @@ class BookController extends Controller
      *
 
      */
-    public function show ()
+    public function show ($id)
     {
         //
+        $results = DB::select('select * from books where id = ?', [$id]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed, may be there is no books by this id',
+                'pages' => $results),
+                200);
+        }
+        
     }
 
     /**
@@ -100,6 +116,19 @@ class BookController extends Controller
     public function showByGenre()
     {
         //
+        $results = DB::select('select * from books where title = ?', [$book_title]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed, may be there is no books by this title',
+                'pages' => $results),
+                200);
+        }
     }
     /**
      * get the needed book by its name
@@ -122,9 +151,22 @@ class BookController extends Controller
      * "genre" : "action"
      * }
      */
-    public function getBookByTitle()
+    public function getBookByTitle($book_title)
     {
         //
+        $results = DB::select('select * from books where title = ?', [$book_title]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed, may be there is no books by this title',
+                'pages' => $results),
+                200);
+        }
     }
     /**
      * get the needed book by its ISBN
@@ -147,9 +189,22 @@ class BookController extends Controller
      * "genre" : "action"
      * }
      */
-    public function getBookByIsbn()
+    public function getBookByIsbn($isbn)
     {
         //
+        $results = DB::select('select * from books where isbn = ?', [$isbn]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed, may be there is no books by this isbn',
+                'pages' => $results),
+                200);
+        }
     }
     /**
      * search about the needed book by its Author name
@@ -172,8 +227,21 @@ class BookController extends Controller
      * "genre" : "action"
      * }
      */
-    public function getBookByAuthorName()
+    public function getBookByAuthorName($author_name)
     {
         //
+        $results = DB::select('select * from books b , authors a where a.id = b.authorId and a.authorName=?', [$author_name]);
+        if($results != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $results),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed, may be there is no books have this author name',
+                'pages' => $results),
+                200);
+        }
     }
 }

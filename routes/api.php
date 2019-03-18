@@ -29,6 +29,7 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('showSetting', "UserController@showSetting");
     Route::get('logOut', "UserController@logOut");
     Route::get('showProfile','UserController@showProfile');
+    Route::post('reviwes/create','ReviewController@createReview');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -43,21 +44,22 @@ Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
 Route::get('books','BookController@index');
 Route::get( 'books/show/{book_id}', 'BookController@show');
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
-Route::get('Books/book_title','BookController@getBookByTitle');
-Route::get('Books/book_ISBN','BookController@getBookByIsbn');
-Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+Route::get('Books/book_title/{book_title}','BookController@getBookByTitle');
+Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
 
 // Review Section
 Route::get('reviwes','ReviewController@recentReviews');
-Route::post('reviwes/create','ReviewController@createReview');
 Route::put('reviwes/edit', 'ReviewController@editReview');
 Route::delete('reviwes/{id}', 'ReviewController@destroy');
 Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
 Route::get('listmyreviews','ReviewController@listMyReviews');
 Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
+Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
+Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+
 
 
 
@@ -69,7 +71,7 @@ Route::get('shelf/{shelf_name}', 'ShelfController@show');
 Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
 Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
-Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
+Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
 
 //Owned Books
 //Route::get( 'owned_books', 'OwnedBookController@index');
@@ -84,11 +86,12 @@ Route::get('shelf/{get_books}','ShelfController@getBooksOnShelf');
 
 
 
-//follow section
-Route::post('followuser','followcontroller@followUser');
-Route::delete('unfollowuser','followcontroller@unfollowUser');
-Route::get('followers','followcontroller@userFollowers');
-Route::get('following','followcontroller@userFollowing');
+//Following section
+Route::post('follow','FollowingController@followUser');
+Route::delete('unfollow','FollowingController@unfollowUser');
+Route::get('followers','FollowingController@userFollowers');
+Route::get('following','FollowingController@userFollowing');
+
 //User section
 Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');

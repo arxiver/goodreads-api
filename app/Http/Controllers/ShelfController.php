@@ -132,8 +132,9 @@ class ShelfController extends Controller
      * "genre" : "action"
      * }
      */
-	public function getBooksOnShelf()
+	public function getBooksOnShelf($user_id,$shelf_name)
 	{
         //
+       
     }
 }

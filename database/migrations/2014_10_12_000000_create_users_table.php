@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->integer('followingCounts');                            // following count
             $table->float('ratingAvg');                                    // Raging average
             $table->integer('ratingCount'); 
-            $table->integer('bookCount');                                // Book count
+            $table->integer('bookCount')->nullable();                                // Book count
             $table->date("birthDay")->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -14,14 +14,14 @@ class Updates extends Migration
     public function up()
     {
         Schema::create('updates', function (Blueprint $table) {
-            $table->bigIncrements('id'); 
-            $table->integer('actorId');
-            $table->integer('actionId');
-            $table->integer('actionType');
-            $table->integer('numComments');
-            $table->integer('numLikes');
+            $table->bigIncrements('id');
+            $table->integer('actor_id');
+            $table->integer('action_id');
+            $table->integer('action_type');
+            $table->integer('comments_count');
+            $table->integer('likes_count');
             $table->timestamps();
-    
+
         });
     }
 

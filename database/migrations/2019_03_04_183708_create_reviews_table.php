@@ -22,8 +22,8 @@ class CreateReviewsTable extends Migration
                                             //1->Currently Read
                                             //2->Want to Read
             $table->integer('rating')->nullable();
-            $table->integer('numberLikes')->nullable();
-            $table->integer('numberComments')->nullable();
+            $table->integer('likes_count')->nullable();
+            $table->integer('comments_count')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('book_id')->references('id')->on('books');
             $table->timestamps();

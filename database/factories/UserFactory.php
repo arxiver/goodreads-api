@@ -18,6 +18,7 @@ use phpDocumentor\Reflection\Types\Integer;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'userName' =>$faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -28,11 +29,12 @@ $factory->define(User::class, function (Faker $faker) {
         'about'=> Str::random(10),
         'age'=> $faker->numberBetween(10, 70),
         'gender'=> $faker->randomElement(['Male','Female','N/A']),
-        'location'=> $faker->state,
         'joinedAt'=> $faker->date(),
         'lastActive'=> $faker->date(),
         'followersCount'=> 0,
-        'followingCount'=> 0,
+        'followingCounts'=> 0,
+        'country' => 'Egupt',
+        'city'=>'Cairo',
         'ratingAvg'=> $faker->randomFloat(3,0,5),
         'ratingCount'=> $faker->randomDigitNotNull,
     ];

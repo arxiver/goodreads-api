@@ -12,21 +12,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-   
         factory(App\User::class, 10)->create();
-        factory(App\Following::class,10)->create();
-    }
+        /*factory(App\Following::class,10)->create();
+        $i = 1;
+        while ($i <= 20) {
+            factory(App\Following::class)->create(
+                [
+                    'user_id' => 1,
+                    'follower_id' => $i,
+                ]
+            );
+            $i++;*/
+            /*$i=1;
+            while($i <= 5){
+            DB::table('users')->insert([
+            'name' => Str::random(4),
+            'email' => Str::random(4).'@gmail.com',
+            'password' => bcrypt('secret'),                                      // The name             
+            'userName' => Str::random(4),
+            'gender'=> 'Male',                                        // The gender of the user
+            'country'=>'Egypt',                                     // The country of the user
+            'city' => 'Cairo',                                        // The city of the user
+            'ratingAvg' => 0.0,                                  // Raging average
+            'ratingCount' => 0, 
+            ]);
+            $i++;
+            }*/
+        }
 }
-/**
-    * $i = 2;
-    *
-    *    while ($i <= 250) {
-    *        factory(App\Following::class)->create(
-    *            [
-    *                'user_id' => $i,
-    *                'follower_id' => 1,
-    *            ]
-    *        );
-    *        $i++;
-    *    }
-*/

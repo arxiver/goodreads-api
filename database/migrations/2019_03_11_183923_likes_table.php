@@ -15,13 +15,14 @@ class LikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('userId');
+            $table->unsignedinteger('user_id');
             // the id of the comment or review 
             $table->integer('resourseId');
             // the type of the resourse which will determine the table the 
             // resourseId belongs to 
             $table->integer('resourseType');
-            $table->datetime('lastUpdate');
+            //$table->datetime('lastUpdate');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

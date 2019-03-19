@@ -13,7 +13,6 @@ class Updates extends Migration
      */
     public function up()
     {
-        //
         Schema::create('updates', function (Blueprint $table) {
             $table->bigIncrements('id'); 
             $table->unsignedInteger('actorId');

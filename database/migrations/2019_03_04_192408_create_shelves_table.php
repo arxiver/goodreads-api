@@ -15,9 +15,11 @@ class CreateShelvesTable extends Migration
     {
         Schema::create('shelves', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('userId');
-            $table->integer('bookId');
-            $table->string('type');
+            $table->unsignedinteger('user_id');
+            $table->unsignedinteger('book_id');
+            $table->integer('type')->default(3);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('book_id')->references('id')->on('books');
             $table->timestamps();
         });
     }

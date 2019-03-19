@@ -1,8 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
+use App\Review;
+use App\Shelf;
+use App\Book;
+use App\Comment;
+use App\Likes;
 use Illuminate\Http\Request;
+use DB;
+use Validator;
+use Response;
 /**
  * @group Activities
  *
@@ -65,24 +73,81 @@ class ActivitiesController extends Controller
      * @bodyParam body string required the body of the comment .
      * @authenticated.
      * @response {
-	 * 	"state":"true"
+     * "status": "true",
+     * "user": 1,
+     * "resourseId": "1",
+     * "resourseType": "2",
+     * "bodyOfReview": "it 's very good to follow me XD"
 	 * }
+     * @response {
+     * {
+     *   "status": "false",
+     *   "errors": "The body is required to make a comment."
+     * }
      */
-    public function makeComment()
+    public function makeComment(Request $request)
     {
-
+        //To DO ->check for the resource to be inside the database or not and update the number of 
+        // comments on the review or user status
+        $Validations    = array(
+            "id"        => "required|integer",
+            "type"      => "required|integer|max:2|min:1",
+            "body"      => "required|string"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            $Create = array(
+                "user_id" => $this->ID,
+                "resourseId" => $request["id"],
+                "resourseType"  => $request["type"],
+                "body" =>$request["body"]
+            );
+            Comment::create($Create);
+            return response()->json([
+                "status" => "true" , "user" => $this->ID, "resourseId" => $request["id"] , "resourseType"  => $request["type"]
+                ,"bodyOfReview" => $request["body"]
+            ]);
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
 	}
 	/**
      * delete comment
      * @bodyParam id int required comment id
      * @authenticated
      * @response {
-	 * 	"state":"true"
+     * "status": "true",
+     * "Message": "the comment is deleted"
 	 * }
      */
-	public function deleteComment()
+	public function deleteComment(Request $request)
 	{
-
+        //To DO -> update (decrement) the number of comments on the review or user status
+        $Validations    = array(
+            "id"        => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Comment::find($request["id"]) )
+            {
+                $comment = Comment::findOrFail($request["id"]);
+                $comment->delete();
+                return response()->json([
+                    "status" => "true" , "Message" => "the comment is deleted"
+                ]);
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "This comment doesn't exist in the database."
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
 	}
 
     /**
@@ -101,16 +166,14 @@ class ActivitiesController extends Controller
 	*				"name": "aa",
 	*				"location": "The United States",
 	*				"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	*				"image_url": "\nhttps://s.gr-assets.png\n",
-	*				"has_image": "false"
+	*				"image_url": "\nhttps://s.gr-assets.png\n"
 	*				},
 	*			"date_added": "Fri Mar 08 16:25:10 -0800 2019",
 	*			"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
 	*			"link": "\nhttps://www.goodreads.comshow/00000\n",
 	*			"body":"a great book"
 	*  		}
-	* 		],
-	*		"_type": "array"
+	* 		]
 	*	}
     * }
     */    
@@ -124,9 +187,30 @@ class ActivitiesController extends Controller
 	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
      * @response {true}
      */
-    public function makeLike()
+    public function makeLike(Request $request)
     {
-        
+        //To DO ->check for the resource to be inside the database or not and update the number of 
+        // likes on the review or user status
+        $Validations    = array(
+            "id"        => "required|integer",
+            "type"      => "required|integer|max:2|min:1",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            $Create = array(
+                "user_id" => $this->ID,
+                "resourseId" => $request["id"],
+                "resourseType"  => $request["type"]
+            );
+            Likes::create($Create);
+            return response()->json([
+                "status" => "true" , "user" => $this->ID, "resourseId" => $request["id"] , "resourseType"  => $request["type"]
+            ]);
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
 	}
 	
     /**
@@ -135,9 +219,32 @@ class ActivitiesController extends Controller
      * @authenticated
      * @response {state:true}
      */
-	public function unlike()
+	public function unlike(Request $request)
 	{
-
+        //To DO -> update (decrement) the number of likes on the review or user status
+        $Validations    = array(
+            "id"        => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Likes::find($request["id"]) )
+            {
+                $like = Likes::findOrFail($request["id"]);
+                $like->delete();
+                return response()->json([
+                    "status" => "true" , "Message" => "unLike "
+                ]);
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "This like doesn't exist in the database."
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
 	}
 
     /**

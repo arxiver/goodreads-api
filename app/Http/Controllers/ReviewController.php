@@ -25,16 +25,30 @@ class ReviewController extends Controller
      * @bodyParam body optional string optional The text of the review.
      * @bodyParam rating int optional Rating (0-5) default is 0 (No rating).
      * 
-     * @response {
-     *  "state" : "Invalid review you must make rate"
+     * @response 
+     * {
+     *       "status": "true",
+     *       "user": 2,
+     *       "book_id": "1",
+     *       "shelfType": "read",
+     *       "bodyOfReview": "Woooooooooooooow , it's a great booooook",
+     *       "rate": "1"
      * }
      *
      * @response {
-     *  "state" : "you cannot make review without rating"
+     *  "status": "false" 
+     *  "Message": "There is no Book in the database"
      * }
      *
      * @response {
-     *  "state" : "your review is saved "
+     *  "status": "false" 
+     *  "Message": "There is no rate to create the review"
+     * }
+     * 
+     * @response {
+     * {
+     *   "status": "false",
+     *   "errors": "The rating must be an integer."
      * }
      */
     public function createReview(Request $request)
@@ -42,11 +56,10 @@ class ReviewController extends Controller
         $Validations    = array(
                 "bookId"         => "required|integer",
                 "shelf"          => "required|integer|max:3|min:0",
-                "rating"         => "integer"
+                "rating"         => "integer|max:5|min:1"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            //to Do increment the rating count for the book and the average rate
             if(!empty($request["rating"]))
             {
                 if( Book::find($request["bookId"]) )
@@ -64,6 +77,23 @@ class ReviewController extends Controller
                         "rating" =>$request["rating"]
                     );
                     Review::create($Create);
+                    $bookWanted=Book::find($request["bookId"]);
+                    $conutOfReviews=$bookWanted["reviewsCount"] +1;
+                    $conutOfRating=$bookWanted["ratingsCount"] +1;
+                    $avg = DB::table('reviews')->where('book_id', $request["bookId"])->avg('rating');
+                    DB::table('books')
+                        ->updateOrInsert(
+                            ['id' => $request["bookId"]], 
+                            ['ratingsAvg' => $avg , 'reviewsCount' => $conutOfReviews ,'ratingsCount' => $conutOfRating]
+                        );
+                    $user=User::find($this->ID);
+                    $conutOfRatingUser=$user["ratingCount"] +1;
+                    $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
+                    DB::table('users')
+                        ->updateOrInsert(
+                            ['id' =>$this->ID ], 
+                            ['ratingAvg' => $avgUser ,'ratingCount' => $conutOfRatingUser]
+                        );
                     return response()->json([
                         "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
                         ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
@@ -93,40 +123,43 @@ class ReviewController extends Controller
      * @bodyParam reviewId int required Review Id.
      * @bodyParam body text optional The text of the review.
      * @bodyParam rating int required Rating (0-5) default is the same as it was .
-     * @response {
-     *  "state" : "Invalid review update"
-     * }
      *
      * @response {
-     *  "state" : "you cannot make review update without rating"
-     * }
-     *
-     * @response {
-     *  "state" : "your review is updated "
+     * 
+     * "status": "true",
+     * "user": 1,
+     * "resourseId": "1",
+     * "resourseType": "2",
+     * "bodyOfReview": "it 's very good to follow me XD"
      * }
      */
     public function editReview(Request $request)
     {
-        if(($request["rating"] == NULL) && ($request["body"] == NULL))
-       {
-            return response()->json([
-                'state' => 'Invalid review update'
-            ]);
-       } 
-       elseif(($request["rating"] == NULL) && ($request["body"] != NULL))
-       {
-            return response()->json([
-                'state' => 'you cannot make review update without rating'
-            ]);
-       }
-       else
-       {
-            $review = Review::findOrFail($reviewId);
-            $review->update(request(['body','rating']));
-            return response()->json([
-                'state' => 'your review is updated '
-            ]);
-       }
+        $Validations    = array(
+            "reviewId"         => "required|integer",
+            "rating"         => "required|integer|max:5|min:1"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if( Review::find($request["reviewId"]) ){
+                DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $request["reviewId"]],
+                            ['rating' => $request["rating"] , 'body' =>$request["body"]]
+                        );
+                return response()->json([
+                       "status" => "true" , "user" => $this->ID, "review_id" =>$request["reviewId"] ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
+                ]);
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "The reviewId is wrongggg."
+                ]); 
+            }
+        }
+        else{
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
     }
 
     /**

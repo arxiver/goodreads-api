@@ -223,7 +223,7 @@ class userController extends Controller
                                         "city" ,
                                         "ratingCount" ,
                                         "ratingAvg" ,
-                                        "followingCount" ,
+                                        "followingCounts" ,
                                         "followersCount",
                                         "imageLink"
                                     );

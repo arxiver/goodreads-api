@@ -31,7 +31,11 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('showProfile','UserController@showProfile');
     Route::post('reviwes/create','ReviewController@createReview');
     Route::get('myreviews','ReviewController@listMyReviews');
-
+    Route::put('reviwes/edit', 'ReviewController@editReview');
+    Route::post('makeComment','ActivitiesController@makeComment');
+    Route::delete('deleteComment','ActivitiesController@deleteComment');
+    Route::delete('unlike','ActivitiesController@unlike');
+    Route::post('makeLike','ActivitiesController@makeLike');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -102,7 +106,6 @@ Route::get('updates','ActivitiesController@followingUpdates');
 Route::get('notifications','ActivitiesController@notifications');
 Route::post('makeComment','ActivitiesController@makeComment');
 Route::get('listComments','ActivitiesController@listComments');
-Route::post('makeLike','ActivitiesController@makeLike');
 Route::get('listLikes','ActivitiesController@listLikes');
-Route::delete('unlike','ActivitiesController@unlike');
-Route::delete('deleteComment','ActivitiesController@deleteComment');
+
+

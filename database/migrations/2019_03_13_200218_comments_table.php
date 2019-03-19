@@ -18,7 +18,7 @@ class CommentsTable extends Migration
             $table->unsignedinteger('user_id'); 
             $table->integer('resourseId');
             $table->integer('resourseType');
-            $table->datetime('lastUpdate');
+            //$table->datetime('lastUpdate');
             $table->string('body'); 
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

@@ -16,11 +16,12 @@ class Updates extends Migration
         //
         Schema::create('updates', function (Blueprint $table) {
             $table->bigIncrements('id'); 
-            $table->integer('actorId');
-            $table->integer('actionId');
-            $table->integer('actionType');
-            $table->integer('numComments');
-            $table->integer('numLikes');
+            $table->unsignedInteger('actorId');
+            $table->unsignedInteger('actionId');
+            $table->unsignedInteger('actionType');
+            $table->unsignedInteger('numComments');
+            $table->unsignedInteger('numLikes');
+            $table->foreign('actorId')->references('id')->on('users');
             $table->timestamps();
     
         });

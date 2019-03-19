@@ -34,7 +34,7 @@ class User extends Authenticatable implements JWTSubject
         "ratingCount" ,
         "ratingAvg",
         "followingCounts",
-        "followersCount",
+        "followersCounts",
         "lastActive"    ,
         "joinedAt" 
     ];

@@ -108,7 +108,7 @@ class userController extends Controller
                                 "ratingCount"   => 0,
                                 "ratingAvg"     => 0,
                                 "followingCounts"=>0,
-                                "followersCount"=> 0,
+                                "followersCounts"=> 0,
                                 "bookCount"     => 0,
                                 "lastActive"    => now(),
                                 "joinedAt"      => date("Y-n-j")
@@ -135,7 +135,7 @@ class userController extends Controller
                                     "ratingCount" ,
                                     "ratingAvg" ,
                                     "followingCounts" ,
-                                    "followersCount",
+                                    "followersCounts",
                                     "imageLink"
                                 );
             $Show = User::where("email", $request["email"])->first($GettingData);
@@ -224,7 +224,7 @@ class userController extends Controller
                                         "ratingCount" ,
                                         "ratingAvg" ,
                                         "followingCounts" ,
-                                        "followersCount",
+                                        "followersCounts",
                                         "imageLink"
                                     );
                 $User = User::where("email" , $request["email"])->first();

@@ -86,8 +86,77 @@ class FollowingController extends Controller
      * gets the followers of a user.
      *
      * @authenticated
-     *
-     *
+     * 
+	 * 
+	 * @response 404 {
+	 * "status": " Something gone error "
+	 *}
+     * @response
+	 *
+	 *{
+	 *    "followers": [
+	 *        {
+	 *            "id": 1,
+	 *            "name": "Miss Madaline Wisozk V",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        },
+	 *        {
+	 *            "id": 4,
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        },
+	 *        {
+	 *            "id": 5,
+	 *            "name": "Velda Rosenbaum",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        },
+	 *        {
+	 *            "id": 6,
+	 *            "name": "Dr. Reagan Little",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        },
+	 *        {
+	 *            "id": 7,
+	 *            "name": "Valentin Pagac DVM",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        }
+	 *    ],
+	 *    "_start": 1,
+	 *    "_end": 5,
+	 *    "_total": 5
+	 *
+	 *	 
+	 *	 
+	 *}
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
      * @bodyParam user_id int optional to get the followers list of a specific user (default authenticated user)
      */
@@ -139,6 +208,61 @@ class FollowingController extends Controller
      *
      * @authenticated
      *
+	 * @response
+	 *
+	 *{
+	 *    "following": [
+	 *        {
+	 *            "id": 1,
+	 *            "name": "Miss Madaline Wisozk V",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 10
+	 *        },
+	 *        {
+	 *            "id": 4,
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 111
+	 *        },
+	 *        {
+	 *            "id": 5,
+	 *            "name": "Velda Rosenbaum",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 102
+	 *        },
+	 *        {
+	 *            "id": 6,
+	 *            "name": "Dr. Reagan Little",
+	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
+	 *            "currently-reading": "dummuybookName",
+	 *            "book_id": 100,
+	 *            "pages": 936,
+	 *            "book_image": "http:\/\/treutel.biz\/",
+	 *            "followersCount": 102
+	 *        }
+	 *    ],
+	 *    "_start": 1,
+	 *    "_end": 4,
+	 *    "_total": 4
+	 *
+	 *	 
+	 *	 
+	 *}
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
      * @bodyParam user_id int optional to get the following list of a specific user (default authenticated user)
      */

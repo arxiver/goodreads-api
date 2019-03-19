@@ -34,10 +34,21 @@ Get user&#039;s updates from following users
 curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
+<<<<<<< HEAD
+    -d '{"user_id":16,"max_updates":15}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":16,"max_updates":9}'
+=======
+    -d '{"user_id":16,"max_updates":15}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     -d '{"user_id":20,"max_updates":10}'
 =======
     -d '{"user_id":17,"max_updates":13}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -51,12 +62,23 @@ let headers = {
 
 let body = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+    "max_updates": 15
+=======
+<<<<<<< HEAD
+    "max_updates": 9
+=======
+    "max_updates": 15
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     "user_id": 20,
     "max_updates": 10
 =======
     "user_id": 17,
     "max_updates": 13
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -313,6 +335,16 @@ curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"id":9,"type":4,"body":"HUWf0ouVks3nU4Tx"}'
+=======
+<<<<<<< HEAD
+    -d '{"id":18,"type":11,"body":"KOiwEbzpqlIgw2JP"}'
+=======
+    -d '{"id":9,"type":4,"body":"HUWf0ouVks3nU4Tx"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"id":18,"type":16,"body":"KjLeeI3MNrOrPCpe"}'
 =======
     -d '{"id":12,"type":16,"body":"3tP7FvIYDOnsCUEN"}'
@@ -320,6 +352,7 @@ curl -X POST "http://localhost/api/makeComment" \
 =======
     -d '{"id":13,"type":14,"body":"4FeCaTe9f6jpAp5S"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -334,9 +367,23 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "id": 9,
+    "type": 4,
+    "body": "HUWf0ouVks3nU4Tx"
+=======
+=======
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
+<<<<<<< HEAD
     "id": 18,
     "type": 16,
     "body": "KjLeeI3MNrOrPCpe"
+=======
+<<<<<<< HEAD
+    "id": 9,
+    "type": 4,
+    "body": "HUWf0ouVks3nU4Tx"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
 =======
     "id": 12,
     "type": 16,
@@ -347,6 +394,7 @@ let body = {
     "type": 14,
     "body": "4FeCaTe9f6jpAp5S"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -389,6 +437,16 @@ curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"id":"YHSy3d5ajVeCoEzT","type":16}'
+=======
+<<<<<<< HEAD
+    -d '{"id":"gWVgwiSqfrzzi1xY","type":11}'
+=======
+    -d '{"id":"YHSy3d5ajVeCoEzT","type":16}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"id":"U0mMc4vgngGldbjV","type":9}'
 =======
     -d '{"id":"pi8DpBMFNkrnumtm","type":4}'
@@ -396,6 +454,7 @@ curl -X GET -G "http://localhost/api/listComments" \
 =======
     -d '{"id":"51PNi9ZvVTY1hQJ5","type":3}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -410,6 +469,19 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "id": "YHSy3d5ajVeCoEzT",
+    "type": 16
+=======
+<<<<<<< HEAD
+    "id": "gWVgwiSqfrzzi1xY",
+    "type": 11
+=======
+    "id": "YHSy3d5ajVeCoEzT",
+    "type": 16
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "id": "U0mMc4vgngGldbjV",
     "type": 9
 =======
@@ -420,6 +492,7 @@ let body = {
     "id": "51PNi9ZvVTY1hQJ5",
     "type": 3
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -458,6 +531,16 @@ curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"id":12,"type":5}'
+=======
+<<<<<<< HEAD
+    -d '{"id":13,"type":13}'
+=======
+    -d '{"id":12,"type":5}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"id":14,"type":10}'
 =======
     -d '{"id":16,"type":5}'
@@ -465,6 +548,7 @@ curl -X POST "http://localhost/api/makeLike" \
 =======
     -d '{"id":6,"type":10}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -479,16 +563,30 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "id": 12,
+    "type": 5
+=======
+<<<<<<< HEAD
+    "id": 13,
+    "type": 13
+=======
+<<<<<<< HEAD
     "id": 14,
     "type": 10
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 =======
     "id": 16,
     "type": 5
+<<<<<<< HEAD
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
 >>>>>>> fe0b66720712a3d24caf3a2ee25dc58372a046a6
 =======
     "id": 6,
     "type": 10
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -529,6 +627,16 @@ curl -X GET -G "http://localhost/api/listLikes" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"id":18,"type":15}'
+=======
+<<<<<<< HEAD
+    -d '{"id":6,"type":15}'
+=======
+    -d '{"id":18,"type":15}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"id":10,"type":5}'
 =======
     -d '{"id":4,"type":4}'
@@ -536,6 +644,7 @@ curl -X GET -G "http://localhost/api/listLikes" \
 =======
     -d '{"id":8,"type":14}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -550,6 +659,17 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "id": 18,
+=======
+<<<<<<< HEAD
+    "id": 6,
+=======
+    "id": 18,
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+    "type": 15
+=======
+<<<<<<< HEAD
     "id": 10,
     "type": 5
 =======
@@ -560,6 +680,7 @@ let body = {
     "id": 8,
     "type": 14
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -665,6 +786,16 @@ curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"id":19}'
+=======
+<<<<<<< HEAD
+    -d '{"id":18}'
+=======
+    -d '{"id":19}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"id":1}'
 =======
     -d '{"id":8}'
@@ -672,6 +803,7 @@ curl -X DELETE "http://localhost/api/deleteComment" \
 =======
     -d '{"id":14}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -686,6 +818,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "id": 19
+=======
+<<<<<<< HEAD
+    "id": 18
+=======
+    "id": 19
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "id": 1
 =======
     "id": 8
@@ -693,6 +835,7 @@ let body = {
 =======
     "id": 14
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -733,6 +876,16 @@ curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"page":15,"books_per_page":18}'
+=======
+<<<<<<< HEAD
+    -d '{"page":13,"books_per_page":2}'
+=======
+    -d '{"page":15,"books_per_page":18}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"page":14,"books_per_page":13}'
 =======
     -d '{"page":5,"books_per_page":14}'
@@ -740,6 +893,7 @@ curl -X GET -G "http://localhost/api/books" \
 =======
     -d '{"page":1,"books_per_page":2}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -754,6 +908,19 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "page": 15,
+    "books_per_page": 18
+=======
+<<<<<<< HEAD
+    "page": 13,
+    "books_per_page": 2
+=======
+    "page": 15,
+    "books_per_page": 18
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "page": 14,
     "books_per_page": 13
 =======
@@ -764,6 +931,7 @@ let body = {
     "page": 1,
     "books_per_page": 2
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -818,6 +986,16 @@ curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"book_id":10}'
+=======
+<<<<<<< HEAD
+    -d '{"book_id":11}'
+=======
+    -d '{"book_id":10}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"book_id":20}'
 =======
     -d '{"book_id":8}'
@@ -825,6 +1003,7 @@ curl -X GET -G "http://localhost/api/books/show/{book_id}" \
 =======
     -d '{"book_id":12}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -839,6 +1018,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "book_id": 10
+=======
+<<<<<<< HEAD
+    "book_id": 11
+=======
+    "book_id": 10
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "book_id": 20
 =======
     "book_id": 8
@@ -846,6 +1035,7 @@ let body = {
 =======
     "book_id": 12
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -899,6 +1089,16 @@ curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"genreName":"wZchfSEDAbjheasp","page":1,"books_per_page":11}'
+=======
+<<<<<<< HEAD
+    -d '{"genreName":"sAq2lhbqVKhZQYqv","page":5,"books_per_page":6}'
+=======
+    -d '{"genreName":"wZchfSEDAbjheasp","page":1,"books_per_page":11}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"genreName":"DmNmmgKMnFIPNIVh","page":13,"books_per_page":8}'
 =======
     -d '{"genreName":"skXGJUgf5WUXRotb","page":9,"books_per_page":3}'
@@ -906,6 +1106,7 @@ curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
 =======
     -d '{"genreName":"4HF54FVFtLndkHcV","page":7,"books_per_page":17}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -920,6 +1121,22 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "genreName": "wZchfSEDAbjheasp",
+    "page": 1,
+    "books_per_page": 11
+=======
+<<<<<<< HEAD
+    "genreName": "sAq2lhbqVKhZQYqv",
+    "page": 5,
+    "books_per_page": 6
+=======
+    "genreName": "wZchfSEDAbjheasp",
+    "page": 1,
+    "books_per_page": 11
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "genreName": "DmNmmgKMnFIPNIVh",
     "page": 13,
     "books_per_page": 8
@@ -933,6 +1150,7 @@ let body = {
     "page": 7,
     "books_per_page": 17
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -988,6 +1206,16 @@ curl -X GET -G "http://localhost/api/Books/book_title/{book_title}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"title":"dZ19NB5YPl2NDaQM"}'
+=======
+<<<<<<< HEAD
+    -d '{"title":"0BSXcNZCVAuMhPAK"}'
+=======
+    -d '{"title":"dZ19NB5YPl2NDaQM"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"title":"SQrIO2mPHWqH2TgD"}'
 =======
     -d '{"title":"IUIFo6YoIb5t6K8E"}'
@@ -995,6 +1223,7 @@ curl -X GET -G "http://localhost/api/Books/book_title/{book_title}" \
 =======
     -d '{"title":"wBaOf28xlCHstQHM"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1069,6 +1298,16 @@ curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"ISBN":14}'
+=======
+<<<<<<< HEAD
+    -d '{"ISBN":7}'
+=======
+    -d '{"ISBN":14}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"ISBN":2}'
 =======
     -d '{"ISBN":15}'
@@ -1076,6 +1315,7 @@ curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
 =======
     -d '{"ISBN":18}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1090,6 +1330,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "ISBN": 14
+=======
+<<<<<<< HEAD
+    "ISBN": 7
+=======
+    "ISBN": 14
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "ISBN": 2
 =======
     "ISBN": 15
@@ -1097,6 +1347,7 @@ let body = {
 =======
     "ISBN": 18
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1150,6 +1401,16 @@ curl -X GET -G "http://localhost/api/Books/book_Authorname/{author_name}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"Author_name":"UfRqrU3mwTVASuN3"}'
+=======
+<<<<<<< HEAD
+    -d '{"Author_name":"zBUek09h7l2rfDR8"}'
+=======
+    -d '{"Author_name":"UfRqrU3mwTVASuN3"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"Author_name":"5mvkNkSEdoSQdwbI"}'
 =======
     -d '{"Author_name":"NXUXrHtv3KNCwEAE"}'
@@ -1157,6 +1418,7 @@ curl -X GET -G "http://localhost/api/Books/book_Authorname/{author_name}" \
 =======
     -d '{"Author_name":"FrAgu8t65BlVILaN"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1171,6 +1433,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "Author_name": "UfRqrU3mwTVASuN3"
+=======
+<<<<<<< HEAD
+    "Author_name": "zBUek09h7l2rfDR8"
+=======
+    "Author_name": "UfRqrU3mwTVASuN3"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "Author_name": "5mvkNkSEdoSQdwbI"
 =======
     "Author_name": "NXUXrHtv3KNCwEAE"
@@ -1178,6 +1450,7 @@ let body = {
 =======
     "Author_name": "FrAgu8t65BlVILaN"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1493,6 +1766,16 @@ curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"book_id":1,"shelf":4,"review":"InmxTtXRgh3BwRvc","rating":16,"read_at":"LblVhqMjxNmBEPJm"}'
+=======
+<<<<<<< HEAD
+    -d '{"book_id":1,"shelf":12,"review":"7IayPzcRUTVF76qf","rating":3,"read_at":"S7IaVf0vhpBMyz91"}'
+=======
+    -d '{"book_id":1,"shelf":4,"review":"InmxTtXRgh3BwRvc","rating":16,"read_at":"LblVhqMjxNmBEPJm"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"bookId":16,"shelf":20,"body":"5LhksGVnxlxLpbaH","rating":11}'
 =======
     -d '{"book_id":4,"shelf":14,"review":"wCFJKagK29fSYXNg","rating":13,"read_at":"4iXRBZ9dsX1uauxP"}'
@@ -1500,6 +1783,7 @@ curl -X POST "http://localhost/api/reviwes/create" \
 =======
     -d '{"book_id":18,"shelf":8,"review":"fQDdZrdM97Wm8nMF","rating":17,"read_at":"IXl5IG0mFAtLE9w1"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1513,6 +1797,24 @@ let headers = {
 
 let body = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "shelf": 12,
+    "review": "7IayPzcRUTVF76qf",
+    "rating": 3,
+    "read_at": "S7IaVf0vhpBMyz91"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+    "shelf": 4,
+    "review": "InmxTtXRgh3BwRvc",
+    "rating": 16,
+    "read_at": "LblVhqMjxNmBEPJm"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
 <<<<<<< HEAD
     "bookId": 16,
     "shelf": 20,
@@ -1532,6 +1834,7 @@ let body = {
     "rating": 17,
     "read_at": "IXl5IG0mFAtLE9w1"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1590,6 +1893,16 @@ curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"review_id":19,"review":"6ISaZ4yRuG7t4iR6","shelf_name":"ydcbFfTWCbcFEkpH","rating":13,"read_at":"CsOTP5myEPahEbQT"}'
+=======
+<<<<<<< HEAD
+    -d '{"review_id":3,"review":"dQcRjLqKGggwWSiv","shelf_name":"0I6BP6Tc2DMgLbt5","rating":6,"read_at":"lXn8SgTKZnmNtVNE"}'
+=======
+    -d '{"review_id":19,"review":"6ISaZ4yRuG7t4iR6","shelf_name":"ydcbFfTWCbcFEkpH","rating":13,"read_at":"CsOTP5myEPahEbQT"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"reviewId":5,"body":"DHWsQZTUD5jBZeh7","rating":11}'
 =======
     -d '{"review_id":4,"review":"2nXpTasCVfzprti1","shelf_name":"3YcJF2FWGRcgqZvw","rating":3,"read_at":"4FiYbapi5nWtOlBJ"}'
@@ -1597,6 +1910,7 @@ curl -X PUT "http://localhost/api/reviwes/edit" \
 =======
     -d '{"review_id":13,"review":"z6nzISuGLlEw5V9s","shelf_name":"EgflfR6gACKdEII4","rating":5,"read_at":"kNJPDGsjp3PcPjs1"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1610,6 +1924,26 @@ let headers = {
 
 let body = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "review_id": 3,
+    "review": "dQcRjLqKGggwWSiv",
+    "shelf_name": "0I6BP6Tc2DMgLbt5",
+    "rating": 6,
+    "read_at": "lXn8SgTKZnmNtVNE"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+    "review_id": 19,
+    "review": "6ISaZ4yRuG7t4iR6",
+    "shelf_name": "ydcbFfTWCbcFEkpH",
+    "rating": 13,
+    "read_at": "CsOTP5myEPahEbQT"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
 <<<<<<< HEAD
     "reviewId": 5,
     "body": "DHWsQZTUD5jBZeh7",
@@ -1628,6 +1962,7 @@ let body = {
     "rating": 5,
     "read_at": "kNJPDGsjp3PcPjs1"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1685,6 +2020,16 @@ curl -X DELETE "http://localhost/api/reviwes/{id}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"review_id":1}'
+=======
+<<<<<<< HEAD
+    -d '{"review_id":16}'
+=======
+    -d '{"review_id":1}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"reviewId":20}'
 =======
     -d '{"review_id":13}'
@@ -1692,6 +2037,7 @@ curl -X DELETE "http://localhost/api/reviwes/{id}" \
 =======
     -d '{"review_id":16}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1706,6 +2052,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "review_id": 1
+=======
+<<<<<<< HEAD
+    "review_id": 16
+=======
+    "review_id": 1
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "reviewId": 20
 =======
     "review_id": 13
@@ -1713,6 +2069,7 @@ let body = {
 =======
     "review_id": 16
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1756,6 +2113,16 @@ curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"isbns":"amC7EeUMJsgSY3lW"}'
+=======
+<<<<<<< HEAD
+    -d '{"isbns":"GpOhz9myoHYbJdqD"}'
+=======
+    -d '{"isbns":"amC7EeUMJsgSY3lW"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"isbns":"4mTzyIaySiBML3lA"}'
 =======
     -d '{"isbns":"2A9Wm3UsjdiWjyCg"}'
@@ -1763,6 +2130,7 @@ curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
 =======
     -d '{"isbns":"vHtGfHEib1G97EHm"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1777,6 +2145,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "isbns": "amC7EeUMJsgSY3lW"
+=======
+<<<<<<< HEAD
+    "isbns": "GpOhz9myoHYbJdqD"
+=======
+    "isbns": "amC7EeUMJsgSY3lW"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "isbns": "4mTzyIaySiBML3lA"
 =======
     "isbns": "2A9Wm3UsjdiWjyCg"
@@ -1784,6 +2162,7 @@ let body = {
 =======
     "isbns": "vHtGfHEib1G97EHm"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -1823,6 +2202,16 @@ curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"title":"9b3XcuaKdlQVljKG","author":"SmyNHy3gnrRg4iKi","rating":4}'
+=======
+<<<<<<< HEAD
+    -d '{"title":"xEvKR0fd5jDnEDL8","author":"KL45uVNuJeDH7Dm1","rating":20}'
+=======
+    -d '{"title":"9b3XcuaKdlQVljKG","author":"SmyNHy3gnrRg4iKi","rating":4}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"title":"b7IX7wU50c0GUYgU","author":"CyilC8oRBBh1biar","rating":3}'
 =======
     -d '{"title":"sZ4Atd6YUs6Hosdo","author":"kJJFzrzE9ioFyh58","rating":18}'
@@ -1830,6 +2219,7 @@ curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
 =======
     -d '{"title":"QzSZCG8gEk7pwU8c","author":"xc60mtatCGPxDQoB","rating":6}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -1844,6 +2234,22 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "title": "9b3XcuaKdlQVljKG",
+    "author": "SmyNHy3gnrRg4iKi",
+    "rating": 4
+=======
+<<<<<<< HEAD
+    "title": "xEvKR0fd5jDnEDL8",
+    "author": "KL45uVNuJeDH7Dm1",
+    "rating": 20
+=======
+    "title": "9b3XcuaKdlQVljKG",
+    "author": "SmyNHy3gnrRg4iKi",
+    "rating": 4
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "title": "b7IX7wU50c0GUYgU",
     "author": "CyilC8oRBBh1biar",
     "rating": 3
@@ -1857,6 +2263,7 @@ let body = {
     "author": "xc60mtatCGPxDQoB",
     "rating": 6
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2243,6 +2650,16 @@ curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"shelf_name":"F0GWSetwxFGZenvK"}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"U3sddD9pcaz3xYh3"}'
+=======
+    -d '{"shelf_name":"F0GWSetwxFGZenvK"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"shelf_name":"jg39jWoA1yANZQ0p"}'
 =======
     -d '{"shelf_name":"NurQZv4RmxNQTlQ9"}'
@@ -2250,6 +2667,7 @@ curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
 =======
     -d '{"shelf_name":"zuuAGo7bk5mI3Zql"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2264,6 +2682,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "shelf_name": "F0GWSetwxFGZenvK"
+=======
+<<<<<<< HEAD
+    "shelf_name": "U3sddD9pcaz3xYh3"
+=======
+    "shelf_name": "F0GWSetwxFGZenvK"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "shelf_name": "jg39jWoA1yANZQ0p"
 =======
     "shelf_name": "NurQZv4RmxNQTlQ9"
@@ -2271,6 +2699,7 @@ let body = {
 =======
     "shelf_name": "zuuAGo7bk5mI3Zql"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2310,6 +2739,16 @@ curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"shelf_name":"5cs1FPk1jRCP1g3p","book_id":17}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"HAzXPPv2amcsqNka","book_id":7}'
+=======
+    -d '{"shelf_name":"5cs1FPk1jRCP1g3p","book_id":17}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"shelf_name":"EIfzODNVAuPtGXxp","book_id":3}'
 =======
     -d '{"shelf_name":"P0PcbhcGLO0mbmGc","book_id":19}'
@@ -2317,6 +2756,7 @@ curl -X POST "http://localhost/api/shelf/add_book" \
 =======
     -d '{"shelf_name":"6LUeUikj0khViXXP","book_id":20}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2331,6 +2771,17 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "shelf_name": "HAzXPPv2amcsqNka",
+    "book_id": 7
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+    "shelf_name": "5cs1FPk1jRCP1g3p",
+    "book_id": 17
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+=======
+<<<<<<< HEAD
     "shelf_name": "EIfzODNVAuPtGXxp",
     "book_id": 3
 =======
@@ -2341,6 +2792,7 @@ let body = {
     "shelf_name": "6LUeUikj0khViXXP",
     "book_id": 20
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2376,6 +2828,16 @@ curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"user_id":20,"page":10,"books_per_page":20}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":14,"page":14,"books_per_page":11}'
+=======
+    -d '{"user_id":20,"page":10,"books_per_page":20}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"user_id":6,"page":19,"books_per_page":5}'
 =======
     -d '{"user_id":5,"page":9,"books_per_page":7}'
@@ -2383,6 +2845,7 @@ curl -X GET -G "http://localhost/api/shelf/{user_id}" \
 =======
     -d '{"user_id":4,"page":12,"books_per_page":2}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2397,6 +2860,22 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "user_id": 20,
+    "page": 10,
+    "books_per_page": 20
+=======
+<<<<<<< HEAD
+    "user_id": 14,
+    "page": 14,
+    "books_per_page": 11
+=======
+    "user_id": 20,
+    "page": 10,
+    "books_per_page": 20
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "user_id": 6,
     "page": 19,
     "books_per_page": 5
@@ -2410,6 +2889,7 @@ let body = {
     "page": 12,
     "books_per_page": 2
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2471,6 +2951,16 @@ curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"shelf_name":"YsNKquvhlVla3IRc","book_id":2}'
+=======
+<<<<<<< HEAD
+    -d '{"shelf_name":"riJbhMIaqZx5lKmv","book_id":17}'
+=======
+    -d '{"shelf_name":"YsNKquvhlVla3IRc","book_id":2}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"shelf_name":"jxnDkAbG0ZtqJrQy","book_id":15}'
 =======
     -d '{"shelf_name":"VaHhUX9V1vTL2yRY","book_id":18}'
@@ -2478,6 +2968,7 @@ curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
 =======
     -d '{"shelf_name":"Z1zueKkWBTClyGbh","book_id":20}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2492,6 +2983,19 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "shelf_name": "YsNKquvhlVla3IRc",
+    "book_id": 2
+=======
+<<<<<<< HEAD
+    "shelf_name": "riJbhMIaqZx5lKmv",
+    "book_id": 17
+=======
+    "shelf_name": "YsNKquvhlVla3IRc",
+    "book_id": 2
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "shelf_name": "jxnDkAbG0ZtqJrQy",
     "book_id": 15
 =======
@@ -2502,6 +3006,7 @@ let body = {
     "shelf_name": "Z1zueKkWBTClyGbh",
     "book_id": 20
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2536,6 +3041,16 @@ curl -X GET -G "http://localhost/api/shelf/{user_id}/{shelf_name}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"user_id":15,"shelf_name":"37oxVPvnkZycilNe"}'
+=======
+<<<<<<< HEAD
+    -d '{"user_id":10,"shelf_name":"LI7ly6j4eBShVsqm"}'
+=======
+    -d '{"user_id":15,"shelf_name":"37oxVPvnkZycilNe"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"user_id":2,"shelf_name":"03s7Bdb5ilWorBJd"}'
 =======
     -d '{"user_id":1,"shelf_name":"AIJhypOUDeOTkxeO"}'
@@ -2543,6 +3058,7 @@ curl -X GET -G "http://localhost/api/shelf/{user_id}/{shelf_name}" \
 =======
     -d '{"user_id":10,"shelf_name":"jcP7AO5WmEtkl6ZF"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2557,6 +3073,19 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "user_id": 15,
+    "shelf_name": "37oxVPvnkZycilNe"
+=======
+<<<<<<< HEAD
+    "user_id": 10,
+    "shelf_name": "LI7ly6j4eBShVsqm"
+=======
+    "user_id": 15,
+    "shelf_name": "37oxVPvnkZycilNe"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "user_id": 2,
     "shelf_name": "03s7Bdb5ilWorBJd"
 =======
@@ -2567,6 +3096,7 @@ let body = {
     "user_id": 10,
     "shelf_name": "jcP7AO5WmEtkl6ZF"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2627,7 +3157,19 @@ Start following a user
 ```bash
 curl -X POST "http://localhost/api/followuser" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
+<<<<<<< HEAD
+    -d '{"userId":11}'
+=======
+<<<<<<< HEAD
+    -d '{"userId":18}'
+=======
+    -d '{"page":4,"user_id":6}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     -d '{"userId":3}'
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2640,7 +3182,20 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "userId": 11
+=======
+<<<<<<< HEAD
+    "userId": 18
+=======
+    "page": 4,
+    "user_id": 6
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     "userId": 3
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2737,7 +3292,15 @@ Get a user's followers
 ```bash
 curl -X GET -G "http://localhost/api/followers" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
+<<<<<<< HEAD
+    -d '{"page":4,"user_id":6}'
+=======
+    -d '{"page":14,"user_id":19}'
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     -d '{"page":8,"user_id":6}'
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2750,8 +3313,18 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "page": 4,
+    "user_id": 6
+=======
+    "page": 14,
+    "user_id": 19
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
     "page": 8,
     "user_id": 6
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2802,7 +3375,19 @@ gets the following list of a user .
 ```bash
 curl -X GET -G "http://localhost/api/following" \
     -H "Content-Type: application/json" \
+<<<<<<< HEAD
     -d '{"page":20,"user_id":9}'
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    -d '{"page":10,"user_id":18}'
+=======
+    -d '{"page":6,"user_id":12}'
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+    -d '{"page":11,"user_id":19}'
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 
 ```
 
@@ -2815,8 +3400,23 @@ let headers = {
 }
 
 let body = {
+<<<<<<< HEAD
     "page": 20,
     "user_id": 9
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "page": 10,
+    "user_id": 18
+=======
+    "page": 6,
+    "user_id": 12
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+    "page": 11,
+    "user_id": 19
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 }
 
 fetch(url, {
@@ -2899,13 +3499,28 @@ curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     -d '{"bookId":16,"shelf":20,"body":"5LhksGVnxlxLpbaH","rating":11}'
+=======
+    -d '{"email":"uLk1U7CE2ybdBB5A","password":"NpQ8iHACdcjwa0tb","password_confirmation":"qGLX9sEk26xVe0Nz","name":"zC604TJ0zWU80mEa","gender":"rnelJ2NeifbJPjev","birthday":"bSzpe13Wf8EjcsCa","country":"QBtAJNZkdYMyhGYt","city":"tb7CAqyvLLxej1wp"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"tpyWiJlfbHEeph17","fullName":"VJPOHHxqCYxVcPQB","password":"HDOvTghn85jDkrKN","password_confirmation":"J5GqC3zNVOXn00V9","gender":"idzr3NF1OoU49vhj","location":"yUJ6j5XEyqgbyCRi","birthday":"7h2kck29289Zaqug"}'
+=======
+    -d '{"email":"uLk1U7CE2ybdBB5A","password":"NpQ8iHACdcjwa0tb","password_confirmation":"qGLX9sEk26xVe0Nz","name":"zC604TJ0zWU80mEa","gender":"rnelJ2NeifbJPjev","birthday":"bSzpe13Wf8EjcsCa","country":"QBtAJNZkdYMyhGYt","city":"tb7CAqyvLLxej1wp"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
+    -d '{"email":"ZYc68DYavY6VH3am","password":"2jC5DFCRqGB0CIJp","password_confirmation":"rMpiVOdP4EGuHguN","name":"yhw16YqXTQ8TdGWS","gender":"Yyl4HJOCHWpjGmYT","birthday":"rMbB7zPlmCCrZjrn","country":"GkSZm42SvvJyYgBg","city":"UqfYvXLVhRvzKTE8"}'
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 =======
     -d '{"book_id":4,"shelf":14,"review":"wCFJKagK29fSYXNg","rating":13,"read_at":"4iXRBZ9dsX1uauxP"}'
 >>>>>>> fe0b66720712a3d24caf3a2ee25dc58372a046a6
 =======
     -d '{"book_id":18,"shelf":8,"review":"fQDdZrdM97Wm8nMF","rating":17,"read_at":"IXl5IG0mFAtLE9w1"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -2920,10 +3535,46 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "bookId": 16,
     "shelf": 20,
     "body": "5LhksGVnxlxLpbaH",
     "rating": 11
+=======
+=======
+<<<<<<< HEAD
+    "userName": "tpyWiJlfbHEeph17",
+    "fullName": "VJPOHHxqCYxVcPQB",
+    "password": "HDOvTghn85jDkrKN",
+    "password_confirmation": "J5GqC3zNVOXn00V9",
+    "gender": "idzr3NF1OoU49vhj",
+    "location": "yUJ6j5XEyqgbyCRi",
+    "birthday": "7h2kck29289Zaqug"
+=======
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+    "email": "uLk1U7CE2ybdBB5A",
+    "password": "NpQ8iHACdcjwa0tb",
+    "password_confirmation": "qGLX9sEk26xVe0Nz",
+    "name": "zC604TJ0zWU80mEa",
+    "gender": "rnelJ2NeifbJPjev",
+    "birthday": "bSzpe13Wf8EjcsCa",
+    "country": "QBtAJNZkdYMyhGYt",
+    "city": "tb7CAqyvLLxej1wp"
+<<<<<<< HEAD
+=======
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
+    "email": "ZYc68DYavY6VH3am",
+    "password": "2jC5DFCRqGB0CIJp",
+    "password_confirmation": "rMpiVOdP4EGuHguN",
+    "name": "yhw16YqXTQ8TdGWS",
+    "gender": "Yyl4HJOCHWpjGmYT",
+    "birthday": "rMbB7zPlmCCrZjrn",
+    "country": "GkSZm42SvvJyYgBg",
+    "city": "UqfYvXLVhRvzKTE8"
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 =======
     "book_id": 4,
     "shelf": 14,
@@ -2938,6 +3589,7 @@ let body = {
     "rating": 17,
     "read_at": "IXl5IG0mFAtLE9w1"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -2996,13 +3648,28 @@ curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     -d '{"reviewId":5,"body":"DHWsQZTUD5jBZeh7","rating":11}'
+=======
+    -d '{"email":"UZt8rMy210Yia1fr","password":"L6PngkSNd1XFWKZJ"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"3PfwJP61PRHpgaGO","password":"C6VHfVUpCXs4kS9u"}'
+=======
+    -d '{"email":"UZt8rMy210Yia1fr","password":"L6PngkSNd1XFWKZJ"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
+    -d '{"email":"un9U0GckJWeV7zoN","password":"aWncgSfJ6nhowYMH"}'
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 =======
     -d '{"review_id":4,"review":"2nXpTasCVfzprti1","shelf_name":"3YcJF2FWGRcgqZvw","rating":3,"read_at":"4FiYbapi5nWtOlBJ"}'
 >>>>>>> fe0b66720712a3d24caf3a2ee25dc58372a046a6
 =======
     -d '{"review_id":13,"review":"z6nzISuGLlEw5V9s","shelf_name":"EgflfR6gACKdEII4","rating":5,"read_at":"kNJPDGsjp3PcPjs1"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -3017,9 +3684,27 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "reviewId": 5,
     "body": "DHWsQZTUD5jBZeh7",
     "rating": 11
+=======
+    "email": "UZt8rMy210Yia1fr",
+    "password": "L6PngkSNd1XFWKZJ"
+=======
+<<<<<<< HEAD
+    "userName": "3PfwJP61PRHpgaGO",
+    "password": "C6VHfVUpCXs4kS9u"
+=======
+    "email": "UZt8rMy210Yia1fr",
+    "password": "L6PngkSNd1XFWKZJ"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
+    "email": "un9U0GckJWeV7zoN",
+    "password": "aWncgSfJ6nhowYMH"
+>>>>>>> 3e61ccbbdc2e49c84493902815ca3f5236e3d65e
 =======
     "review_id": 4,
     "review": "2nXpTasCVfzprti1",
@@ -3034,6 +3719,7 @@ let body = {
     "rating": 5,
     "read_at": "kNJPDGsjp3PcPjs1"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -53524,6 +54210,16 @@ curl -X POST "http://localhost/api/changePassword" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"password":"eH1xOKHql8A6V2LT","newPassword":"ktxdaqChe9Epprmw","newPassword_confirmation":"txpjpRIQb98cdHNS"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"xzw48w0pNq7mMqTt","newPassword":"l8Pvju1gJDgW6Hls","newPassword_confirmation":"NZozq44TXJ718wt9"}'
+=======
+    -d '{"password":"eH1xOKHql8A6V2LT","newPassword":"ktxdaqChe9Epprmw","newPassword_confirmation":"txpjpRIQb98cdHNS"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"password":"1wjXRL0kUVXdjWiL","newPassword":"U8ARoZJ7oZemKY0y","newPassword_confirmation":"bZDmmpsBGxskumLP"}'
 =======
     -d '{"password":"gz6wbE8g8ZxwhMuA","newPassword":"dLZxLzmlO5q7VIhf","newPassword_confirmation":"0HWnTIuIXVDsKilA"}'
@@ -53531,6 +54227,7 @@ curl -X POST "http://localhost/api/changePassword" \
 =======
     -d '{"password":"nMou3iXpWraAnoW1","newPassword":"yU5B6oZIlPb5Rppe","newPassword_confirmation":"AspFQ9NcsjwISYwe"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -53545,6 +54242,22 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "password": "eH1xOKHql8A6V2LT",
+    "newPassword": "ktxdaqChe9Epprmw",
+    "newPassword_confirmation": "txpjpRIQb98cdHNS"
+=======
+<<<<<<< HEAD
+    "password": "xzw48w0pNq7mMqTt",
+    "newPassword": "l8Pvju1gJDgW6Hls",
+    "newPassword_confirmation": "NZozq44TXJ718wt9"
+=======
+    "password": "eH1xOKHql8A6V2LT",
+    "newPassword": "ktxdaqChe9Epprmw",
+    "newPassword_confirmation": "txpjpRIQb98cdHNS"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "password": "1wjXRL0kUVXdjWiL",
     "newPassword": "U8ARoZJ7oZemKY0y",
     "newPassword_confirmation": "bZDmmpsBGxskumLP"
@@ -53558,6 +54271,7 @@ let body = {
     "newPassword": "yU5B6oZIlPb5Rppe",
     "newPassword_confirmation": "AspFQ9NcsjwISYwe"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -53613,6 +54327,16 @@ curl -X POST "http://localhost/api/changeName" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"password":"QT2oI37eQX4wO0MZ","newName":"enCxmzRp2kKKiNGO"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"AlpZHGGhJjLBvkab","newName":"euEgEgwWjydb5tWS"}'
+=======
+    -d '{"password":"QT2oI37eQX4wO0MZ","newName":"enCxmzRp2kKKiNGO"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"password":"4M8DPEcMyab9jkrz","newName":"JzABvIyWYm5kdQcn"}'
 =======
     -d '{"password":"LhGqidB1TwRQAu52","newName":"ElKXJrB8xrTmNNW0"}'
@@ -53620,6 +54344,7 @@ curl -X POST "http://localhost/api/changeName" \
 =======
     -d '{"password":"sgEYV4SJwBoCZuxE","newName":"EjJQmyvpjt1JY0Xq"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -53634,6 +54359,19 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "password": "QT2oI37eQX4wO0MZ",
+    "newName": "enCxmzRp2kKKiNGO"
+=======
+<<<<<<< HEAD
+    "password": "AlpZHGGhJjLBvkab",
+    "newName": "euEgEgwWjydb5tWS"
+=======
+    "password": "QT2oI37eQX4wO0MZ",
+    "newName": "enCxmzRp2kKKiNGO"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "password": "4M8DPEcMyab9jkrz",
     "newName": "JzABvIyWYm5kdQcn"
 =======
@@ -53644,6 +54382,7 @@ let body = {
     "password": "sgEYV4SJwBoCZuxE",
     "newName": "EjJQmyvpjt1JY0Xq"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -53697,6 +54436,16 @@ curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"Image":"Ui7kwv31tvpz7Uxn"}'
+=======
+<<<<<<< HEAD
+    -d '{"Image":"ukd1FX1ZrWtwWsQA"}'
+=======
+    -d '{"Image":"Ui7kwv31tvpz7Uxn"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"Image":"kubzy7BTqrvfmnFx"}'
 =======
     -d '{"Image":"bVZhrxRjPXA6p7P4"}'
@@ -53704,6 +54453,7 @@ curl -X POST "http://localhost/api/changeImage" \
 =======
     -d '{"Image":"zAw8xGRdNqaKmznf"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -53718,6 +54468,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "Image": "Ui7kwv31tvpz7Uxn"
+=======
+<<<<<<< HEAD
+    "Image": "ukd1FX1ZrWtwWsQA"
+=======
+    "Image": "Ui7kwv31tvpz7Uxn"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "Image": "kubzy7BTqrvfmnFx"
 =======
     "Image": "bVZhrxRjPXA6p7P4"
@@ -53725,6 +54485,7 @@ let body = {
 =======
     "Image": "zAw8xGRdNqaKmznf"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -53766,6 +54527,16 @@ curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"password":"KIdj9yrxMI1KnEth"}'
+=======
+<<<<<<< HEAD
+    -d '{"password":"Jm8KdaQGgcWLHWY4"}'
+=======
+    -d '{"password":"KIdj9yrxMI1KnEth"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"password":"Z8xyWZi66tvb6FSU"}'
 =======
     -d '{"password":"0XTgTDxzCVoUW5pl"}'
@@ -53773,6 +54544,7 @@ curl -X POST "http://localhost/api/delete" \
 =======
     -d '{"password":"vzz4za033xEV9w6x"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -53787,6 +54559,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "password": "KIdj9yrxMI1KnEth"
+=======
+<<<<<<< HEAD
+    "password": "Jm8KdaQGgcWLHWY4"
+=======
+    "password": "KIdj9yrxMI1KnEth"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "password": "Z8xyWZi66tvb6FSU"
 =======
     "password": "0XTgTDxzCVoUW5pl"
@@ -53794,6 +54576,7 @@ let body = {
 =======
     "password": "vzz4za033xEV9w6x"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54048,6 +54831,16 @@ curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"birthday":"HFVUhw7tbq6kMEA0"}'
+=======
+<<<<<<< HEAD
+    -d '{"birthday":"0EaM0nrC9uCghEB3"}'
+=======
+    -d '{"birthday":"HFVUhw7tbq6kMEA0"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"birthday":"Avs6c2pswiNjNjZb"}'
 =======
     -d '{"birthday":"kL2B9B6KUgFp1xK0"}'
@@ -54055,6 +54848,7 @@ curl -X GET -G "http://localhost/api/changeBirthday" \
 =======
     -d '{"birthday":"T5PqeEsar2qPa5qf"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54069,6 +54863,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "birthday": "HFVUhw7tbq6kMEA0"
+=======
+<<<<<<< HEAD
+    "birthday": "0EaM0nrC9uCghEB3"
+=======
+    "birthday": "HFVUhw7tbq6kMEA0"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "birthday": "Avs6c2pswiNjNjZb"
 =======
     "birthday": "kL2B9B6KUgFp1xK0"
@@ -54076,6 +54880,7 @@ let body = {
 =======
     "birthday": "T5PqeEsar2qPa5qf"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54117,6 +54922,16 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"seeMyBirthday":"Ok0VMyL1Btc6cXvE"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyBirthday":"C6uE0ro04Tk80nEB"}'
+=======
+    -d '{"seeMyBirthday":"Ok0VMyL1Btc6cXvE"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"seeMyBirthday":"9sJmQEXt8nQjFP3n"}'
 =======
     -d '{"seeMyBirthday":"s8EJPsJvA1bK2FzZ"}'
@@ -54124,6 +54939,7 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
 =======
     -d '{"seeMyBirthday":"6yjPwZC1oSbPuqtI"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54138,6 +54954,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "seeMyBirthday": "Ok0VMyL1Btc6cXvE"
+=======
+<<<<<<< HEAD
+    "seeMyBirthday": "C6uE0ro04Tk80nEB"
+=======
+    "seeMyBirthday": "Ok0VMyL1Btc6cXvE"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "seeMyBirthday": "9sJmQEXt8nQjFP3n"
 =======
     "seeMyBirthday": "s8EJPsJvA1bK2FzZ"
@@ -54145,6 +54971,7 @@ let body = {
 =======
     "seeMyBirthday": "6yjPwZC1oSbPuqtI"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54186,6 +55013,16 @@ curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"country":"RrBLAaOqH62wwfpS"}'
+=======
+<<<<<<< HEAD
+    -d '{"country":"smKMbJs7Xe4cMzIN"}'
+=======
+    -d '{"country":"RrBLAaOqH62wwfpS"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"country":"pWugxFfGteQKOZEN"}'
 =======
     -d '{"country":"qspjPR3tmEQ5eEDJ"}'
@@ -54193,6 +55030,7 @@ curl -X GET -G "http://localhost/api/changeCountry" \
 =======
     -d '{"country":"GX4bVUAjmHdEGxrW"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54207,6 +55045,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "country": "RrBLAaOqH62wwfpS"
+=======
+<<<<<<< HEAD
+    "country": "smKMbJs7Xe4cMzIN"
+=======
+    "country": "RrBLAaOqH62wwfpS"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "country": "pWugxFfGteQKOZEN"
 =======
     "country": "qspjPR3tmEQ5eEDJ"
@@ -54214,6 +55062,7 @@ let body = {
 =======
     "country": "GX4bVUAjmHdEGxrW"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54255,6 +55104,16 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"seeMyCountry":"fq6X3CRT0myFJzAB"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyCountry":"aO1fKDLMDKMTKYrj"}'
+=======
+    -d '{"seeMyCountry":"fq6X3CRT0myFJzAB"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"seeMyCountry":"Lzk8FJkZ1fc7MTWN"}'
 =======
     -d '{"seeMyCountry":"exn566pUNKEmdfiK"}'
@@ -54262,6 +55121,7 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
 =======
     -d '{"seeMyCountry":"jf37xuC9gUjT6D9F"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54276,6 +55136,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "seeMyCountry": "fq6X3CRT0myFJzAB"
+=======
+<<<<<<< HEAD
+    "seeMyCountry": "aO1fKDLMDKMTKYrj"
+=======
+    "seeMyCountry": "fq6X3CRT0myFJzAB"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "seeMyCountry": "Lzk8FJkZ1fc7MTWN"
 =======
     "seeMyCountry": "exn566pUNKEmdfiK"
@@ -54283,6 +55153,7 @@ let body = {
 =======
     "seeMyCountry": "jf37xuC9gUjT6D9F"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54324,6 +55195,16 @@ curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"city":"skUjaYn1Cqhj4puo"}'
+=======
+<<<<<<< HEAD
+    -d '{"city":"qUrmOTSlo9kBxEYV"}'
+=======
+    -d '{"city":"skUjaYn1Cqhj4puo"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"city":"gliZKLRcwSVinbdG"}'
 =======
     -d '{"city":"Erkik3eD5Qdjtayn"}'
@@ -54331,6 +55212,7 @@ curl -X GET -G "http://localhost/api/changeCity" \
 =======
     -d '{"city":"f5Bl7HlBvtPkRezU"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54345,6 +55227,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "city": "skUjaYn1Cqhj4puo"
+=======
+<<<<<<< HEAD
+    "city": "qUrmOTSlo9kBxEYV"
+=======
+    "city": "skUjaYn1Cqhj4puo"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "city": "gliZKLRcwSVinbdG"
 =======
     "city": "Erkik3eD5Qdjtayn"
@@ -54352,6 +55244,7 @@ let body = {
 =======
     "city": "f5Bl7HlBvtPkRezU"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54393,6 +55286,16 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"seeMyCity":"qRV8S8awjdpGGpLx"}'
+=======
+<<<<<<< HEAD
+    -d '{"seeMyCity":"jTan8aNhdsrn8IWv"}'
+=======
+    -d '{"seeMyCity":"qRV8S8awjdpGGpLx"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"seeMyCity":"NhIfQfjV5XUPDoVE"}'
 =======
     -d '{"seeMyCity":"WiNN3FkRXjr6spXU"}'
@@ -54400,6 +55303,7 @@ curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
 =======
     -d '{"seeMyCity":"SBQ4pktrYT3zKVkM"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54414,6 +55318,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "seeMyCity": "qRV8S8awjdpGGpLx"
+=======
+<<<<<<< HEAD
+    "seeMyCity": "jTan8aNhdsrn8IWv"
+=======
+    "seeMyCity": "qRV8S8awjdpGGpLx"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "seeMyCity": "NhIfQfjV5XUPDoVE"
 =======
     "seeMyCity": "WiNN3FkRXjr6spXU"
@@ -54421,6 +55335,7 @@ let body = {
 =======
     "seeMyCity": "SBQ4pktrYT3zKVkM"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {
@@ -54461,6 +55376,16 @@ curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
 <<<<<<< HEAD
 <<<<<<< HEAD
+    -d '{"userName":"o2FhYFrwdSOPNnfX"}'
+=======
+<<<<<<< HEAD
+    -d '{"userName":"wInVBZ6d3F07Xg7c"}'
+=======
+    -d '{"userName":"o2FhYFrwdSOPNnfX"}'
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     -d '{"userName":"oN00ALnRyJ2fwBET"}'
 =======
     -d '{"userName":"I1Q7MT2kkZhyznk2"}'
@@ -54468,6 +55393,7 @@ curl -X GET -G "http://localhost/api/UserController/{user}" \
 =======
     -d '{"userName":"V0ZyfAZBIBo9h6LN"}'
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 
 ```
 
@@ -54482,6 +55408,16 @@ let headers = {
 let body = {
 <<<<<<< HEAD
 <<<<<<< HEAD
+    "userName": "o2FhYFrwdSOPNnfX"
+=======
+<<<<<<< HEAD
+    "userName": "wInVBZ6d3F07Xg7c"
+=======
+    "userName": "o2FhYFrwdSOPNnfX"
+>>>>>>> a0a4d9430d0e2377e8bec06375d233f80fb70dbb
+>>>>>>> 50f3cec466aa2fac4361f639a0991813b9d840fa
+=======
+<<<<<<< HEAD
     "userName": "oN00ALnRyJ2fwBET"
 =======
     "userName": "I1Q7MT2kkZhyznk2"
@@ -54489,6 +55425,7 @@ let body = {
 =======
     "userName": "V0ZyfAZBIBo9h6LN"
 >>>>>>> b698a789808a4e51f6997b538dc5d549520df334
+>>>>>>> 793caa7b23da6ff5f7488d7bde6735d88e8d6ca9
 }
 
 fetch(url, {

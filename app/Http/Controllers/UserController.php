@@ -65,10 +65,8 @@ class userController extends Controller
      */
 
     public function signUp(Request $request)
-    {
-        
-        
-        $olderThan = -1;
+    {   
+        $olderThan = 3;
         $youngerThan = 100;
 
         $Validations    = array(
@@ -76,7 +74,7 @@ class userController extends Controller
                                     "password"      => "required|confirmed|max:30|min:5",
                                     "name"          => "required|string|max:50|min:3" ,
                                     "gender"        => "required|string",
-                                    //"birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
                                     "country"       => "required|string",
                                     "city"          => "required|string"
                                 );
@@ -103,16 +101,17 @@ class userController extends Controller
                                 "name"          => $request["name"],
                                 "gender"        => $request["gender"],
                                 "userName"      => $ValidationArray["UserName"],
-                                //"age"           => date("Y") - date("Y", strtotime($request["birthDay"])),
-                                //"birthDay"      => date("Y-n-j", strtotime($request["birthDay"])),
+                                "age"           => date("Y") - date("Y", strtotime($request["birthDay"])),
+                                "birthDay"      => date("Y-n-j", strtotime($request["birthDay"])),
                                 "country"       => $request["country"],
                                 "city"          => $request["city"],
                                 "ratingCount"   => 0,
                                 "ratingAvg"     => 0,
                                 "followingCounts"=>0,
-                                "followersCount"=> 0
-                                //"lastActive"    => now(),
-                                //"joinedAt"      => date("Y-n-j")
+                                "followersCount"=> 0,
+                                "bookCount"     => 0,
+                                "lastActive"    => now(),
+                                "joinedAt"      => date("Y-n-j")
                             );
 
             
@@ -141,10 +140,11 @@ class userController extends Controller
                                 );
             $Show = User::where("email", $request["email"])->first($GettingData);
             return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
-        } else {
+        } 
+        else 
+        {
             return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
         } 
-        // body
     }
 
 
@@ -261,25 +261,7 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-        $GettingData = array(
-                                "email" ,
-                                "name" ,
-                                "age" ,
-                                "birthDay",
-                                "joinedAt",
-                                "username" ,
-                                "gender" ,
-                                "lastActive" ,
-                                "country" ,
-                                "city" ,
-                                "ratingCount" ,
-                                "ratingAvg" ,
-                                "followingCounts" ,
-                                "followersCount",
-                                "imageLink"
-                            );
-        $User =  User::find($this->ID)->first($GettingData);
-        return response(["user" => $User]);
+        
     }
 
 

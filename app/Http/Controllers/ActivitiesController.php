@@ -17,42 +17,7 @@ class ActivitiesController extends Controller
      * @authenticated
      * @bodyParam user_id int optional to get the updates made by a specific user (default all following)
      * @bodyParam max_updates int optional to get the max limit of updates.
-     * @response 
-     * {"updates": {
-	 *	"update": [
-	 *		{
-	 *			"link": "https://www.goodreads.com/review/show/2742801555",
-	 *			"image_url": "https://images.gr-assets.com/books/1388255167s/31087.jpg",
-	 * 			"actor": {
-	 *				"id": "000000",
-	 *				"name": "Salma",
-	 * 				"image_url": "https://image.jpg",
-	 *				"link": "https://www.goodreads.com/user/show/000000-salma"
-	 *			},
-	 *			"updated_at": "Fri, 08 Mar 2019 04:16:55 -0800",
-	 *			"action": {
-	 *				"rating": "5",
-	 *				"_type": "rating"
-	 *			},
-	 *			"object": {
-	 *				"book": {
-	 * 					"id": "31087",
-	 * 					"title": "The Last Boleyn",
-	 *					"link": "https://www.goodreads.com/book/show/31087.The_Last_Boleyn",
-	 * 					"authors": {
-	 *						"author": {
-	 *							"id": "17450",
-	 *							"name": "Karen Harper"
-	 *						}
-	 *					}
-	 *				}
-	 *			},
-	 *			"type": "rate"
-	 *		}
-	 *	],
-	 *	"_type": "array"
-	 *  }
-     *}
+     * @responseFile responses/updatesReal.json  
      */
     public function followingUpdates($user_id,$max_updates)
     {
@@ -136,16 +101,14 @@ class ActivitiesController extends Controller
 	*				"name": "aa",
 	*				"location": "The United States",
 	*				"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	*				"image_url": "\nhttps://s.gr-assets.png\n",
-	*				"has_image": "false"
+	*				"image_url": "\nhttps://s.gr-assets.png\n"
 	*				},
 	*			"date_added": "Fri Mar 08 16:25:10 -0800 2019",
 	*			"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
 	*			"link": "\nhttps://www.goodreads.comshow/00000\n",
 	*			"body":"a great book"
 	*  		}
-	* 		],
-	*		"_type": "array"
+	* 		]
 	*	}
     * }
     */    

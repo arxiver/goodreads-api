@@ -66,7 +66,88 @@ class userController extends Controller
 
     public function signUp(Request $request)
     {
-        // body 
+        // The time you receive from user is string so you must use strtotime()
+        // if you used strtotime with invalid data it will generate date (1970)
+            
+
+        $olderThan = 3;
+        $youngerThan = 100;
+
+        $Validations    = array(
+                                    "email"         => "required|email|unique:users" ,
+                                    "password"      => "required|confirmed|max:30|min:5",
+                                    "name"          => "required|string|max:50|min:3" ,
+                                    "gender"        => "required|string",
+                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    "country"       => "required|string",
+                                    "city"          => "required|string"
+                                );
+        $Messages       = array(
+                                    "birthDay.before" => "You must be older than ". $olderThan,
+                                    "birthDay.after" => "You must be younger than ". $youngerThan
+                                );
+
+                                
+
+        $Data = validator::make($request->all(), $Validations, $Messages);
+        if (!($Data->fails())) {
+            $UserName = strstr($request["email"], '@', 2);
+            $ValidationArray    = array("UserName" => $UserName);
+            $ValidationUserName = array("UserName" => "unique:users");
+            $AdditionalString = 1;
+            while ((validator::make($ValidationArray, $ValidationUserName))->fails()) {
+                $ValidationArray["UserName"].=$AdditionalString;
+                $AdditionalString+=1;
+            }
+            $Create = array(
+                                "email"         => $request["email"],
+                                "password"      => $request["password"],
+                                "name"          => $request["name"],
+                                "gender"        => $request["gender"],
+                                "userName"      => $ValidationArray["UserName"],
+                                "age"           => date("Y") - date("Y", strtotime($request["birthDay"])),
+                                "birthDay"      => date("Y-n-j", strtotime($request["birthDay"])),
+                                "country"       => $request["country"],
+                                "city"          => $request["city"],
+                                "ratingCount"   => 0,
+                                "ratingAvg"     => 0,
+                                "followingCounts"=>0,
+                                "followersCount"=> 0,
+                                "lastActive"    => now(),
+                                "joinedAt"      => date("Y-n-j")
+                            );
+
+            
+                
+            User::create($Create);
+            
+            $token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]);
+
+            
+            $GettingData = array(
+                                    "email" ,
+                                    "name" ,
+                                    "age" ,
+                                    "birthDay",
+                                    "joinedAt",
+                                    "username" ,
+                                    "gender" ,
+                                    "lastActive" ,
+                                    "country" ,
+                                    "city" ,
+                                    "ratingCount" ,
+                                    "ratingAvg" ,
+                                    "followingCounts" ,
+                                    "followersCount",
+                                    "imageLink"
+                                );
+            $Show = User::where("email", $request["email"])->first($GettingData);
+            return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
+        } 
+        else 
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        } 
     }
 
 
@@ -180,7 +261,7 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-       
+        
     }
 
 
@@ -467,8 +548,8 @@ class userController extends Controller
             $id = $request->user->id;
 
         $data = User::select('id','name','email','link','imageLink',
-                             'smallImageUrl','about','age','gender')
-                             ->where('id', $id)->get();
+                            'smallImageUrl','about','age','gender')
+                            ->where('id', $id)->get();
 
         return response()->json($data);
 

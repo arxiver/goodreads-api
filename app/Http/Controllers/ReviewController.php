@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Review;
 use App\Shelf;
+use App\Book;
 use Illuminate\Http\Request;
 use DB;
+use Validator;
 use Response;
 /**
  * @group Review
@@ -17,14 +19,12 @@ class ReviewController extends Controller
     /**
      * Create a review
      * @authenticated
-     * @bodyParam bookId int required The book id has reviewed  to be created.
      * each state of the shelf is represented by a number
-     * @bodyParam shelf int required (read->0,currently-reading->1,to-read->2) default is (read) .
+     * @bodyParam bookId int required The book id has reviewed  to be created.
+     * @bodyParam shelf int required (read->0,currently-reading->1,to-read->2,nothig of these shelves->3) default is (read) .
      * @bodyParam body optional string optional The text of the review.
      * @bodyParam rating int optional Rating (0-5) default is 0 (No rating).
      * 
-     * 
-     *
      * @response {
      *  "state" : "Invalid review you must make rate"
      * }
@@ -39,57 +39,52 @@ class ReviewController extends Controller
      */
     public function createReview(Request $request)
     {
-        if(!empty($request["rating"]))
-        {
-            die("good function");
+        $Validations    = array(
+                "bookId"         => "required|integer",
+                "shelf"          => "required|integer|max:3|min:0",
+                "rating"         => "integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            //to Do increment the rating count for the book and the average rate
+            if(!empty($request["rating"]))
+            {
+                if( Book::find($request["bookId"]) )
+                {
+                    $shelfType = $request["shelf"];
+                    DB::table('shelves')
+                        ->updateOrInsert(
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
+                            ['type' => 0]
+                        );
+                    $Create = array(
+                        "user_id" => $this->ID,
+                        "book_id" => $request["bookId"],
+                        "body"  => $request["body"],
+                        "rating" =>$request["rating"]
+                    );
+                    Review::create($Create);
+                    return response()->json([
+                        "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
+                        ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
+                    ]);
+                } 
+                else
+                {
+                    return response()->json([
+                        "status" => "false" , "Message" => "There is no Book in the database"
+                    ]); 
+                }  
+            } 
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "There is no rate to create the review"
+                ]); 
+            }
         }
-        else
-        {
-            die("bad functoin");
+        else{
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
         }
-        if(($request["rating"] == 4) && ($request["body"] == 5))
-        {
-            die("im here");
-            //die();
-            return response()->json([
-                'state' => 'Invalid review you must make rate'
-            ]);
-       } 
-       
-       elseif(($request["rating"] == NULL) && ($request["body"] != NULL))
-       {
-            return response()->json([
-                'state' => 'you cannot make review without rating'
-            ]);
-       }
-
-       elseif(($request["rating"] != NULL) && ($request["body"] == NULL))
-       {
-           /*if ($reuqst["shelf"] != 0)
-           {
-                $userId=$this->ID;
-                Shelf::create(request(['userId','bookId','type']));
-           }*/
-            $userId=$this->ID;
-            Review::create(request(['userId','bookId','body','rating']));
-            return response()->json([
-                'state' => 'your review is saved '
-            ]);
-       }
-       else
-       {
-           /*if ($request["shelf"] != 0)
-           {
-            $userId=$this->id;
-                Shelf::create(request(['userId','bookId','type']));
-           }*/
-           $userId=$this->id;
-            Review::create(request(['userId','bookId','body','rating']));
-            return response()->json([
-                'state' => 'your review is saved '
-            ]);
-       }
-
     }
 
     /**

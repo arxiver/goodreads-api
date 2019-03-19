@@ -15,13 +15,13 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('book_id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('book_id')->nullable();
             $table->text('body')->nullable();
-            $table->integer('shelf_name');  //0->read
+            $table->integer('shelf_name')->nullable();  //0->read
                                             //1->Currently Read
                                             //2->Want to Read
-            $table->integer('rating');
+            $table->integer('rating')->nullable();
             $table->integer('numberLikes')->nullable();
             $table->integer('numberComments')->nullable();
             $table->foreign('user_id')->references('id')->on('users');

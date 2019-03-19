@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class userController extends Controller
 {
-    
-    
+
+
     //
     /**
      * Sign Up
@@ -65,11 +65,7 @@ class userController extends Controller
      */
 
     public function signUp(Request $request)
-    {
-        // The time you receive from user is string so you must use strtotime()
-        // if you used strtotime with invalid data it will generate date (1970)
-            
-
+    {   
         $olderThan = 3;
         $youngerThan = 100;
 
@@ -113,6 +109,7 @@ class userController extends Controller
                                 "ratingAvg"     => 0,
                                 "followingCounts"=>0,
                                 "followersCount"=> 0,
+                                "bookCount"     => 0,
                                 "lastActive"    => now(),
                                 "joinedAt"      => date("Y-n-j")
                             );
@@ -189,6 +186,9 @@ class userController extends Controller
     public function logIn(Request $request)
     {
         // response
+
+
+        
         
         $HashedPassword = Hash::make($request["password"]);
         $Validations    = array(
@@ -210,7 +210,7 @@ class userController extends Controller
         {
             if($token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]))
             {
-                $GettingData = array(   
+                $GettingData = array(
                                         "email" ,
                                         "name" ,
                                         "age" ,
@@ -279,7 +279,7 @@ class userController extends Controller
      */
     public function logOut(Request $request)
     {
-        
+
         $User = User::find($this->ID);
         $User->lastActive = now();
         $User->save();
@@ -542,14 +542,12 @@ class userController extends Controller
         * Case it is not sent : then we list the authenticated-user `s followers
         * other wise we use the given user_id to get profile detailed info  .
         */
-        if ($request->id == null)
-            $id = Auth::id();
-        else
-            $id = $request->user->id;
+        $userId = $request->has(['id']) ? $request->id : $this->ID;
+        User::findOrFail($userId);
 
         $data = User::select('id','name','email','link','imageLink',
-                            'smallImageUrl','about','age','gender')
-                            ->where('id', $id)->get();
+                             'smallImageUrl','about','age','gender')
+                             ->where('id', $userId)->get();
 
         return response()->json($data);
 

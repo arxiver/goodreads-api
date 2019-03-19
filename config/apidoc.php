@@ -5,7 +5,7 @@ return [
     /*
      * The output path for the generated documentation.
      */
-    'output' => 'public/docs',
+    'output' => 'docs',
 
     /*
      * The router to be used (Laravel or Dingo).

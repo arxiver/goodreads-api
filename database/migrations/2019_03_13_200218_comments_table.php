@@ -15,11 +15,11 @@ class CommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedinteger('user_id'); 
-            $table->integer('resourseId');
-            $table->integer('resourseType');
+            $table->unsignedinteger('user_id');
+            $table->integer('resourse_id');
+            $table->integer('resourse_type');
             //$table->datetime('lastUpdate');
-            $table->string('body'); 
+            $table->string('body');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

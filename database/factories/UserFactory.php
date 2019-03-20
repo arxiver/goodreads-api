@@ -31,7 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
         'gender'=> $faker->randomElement(['Male','Female','N/A']),
         'joinedAt'=> $faker->date(),
         'lastActive'=> $faker->date(),
-        'followersCount'=> 0,
+        'followersCounts'=> 0,
         'followingCounts'=> 0,
         'country' => 'Egupt',
         'city'=>'Cairo',

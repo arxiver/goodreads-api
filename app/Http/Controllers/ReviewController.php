@@ -24,9 +24,8 @@ class ReviewController extends Controller
      * @bodyParam shelf int required (read->0,currently-reading->1,to-read->2,nothig of these shelves->3) default is (read) .
      * @bodyParam body optional string optional The text of the review.
      * @bodyParam rating int optional Rating (0-5) default is 0 (No rating).
-     * 
-     * @response 
-     * {
+     *
+     * @response 201 {
      *       "status": "true",
      *       "user": 2,
      *       "book_id": "1",
@@ -35,18 +34,17 @@ class ReviewController extends Controller
      *       "rate": "1"
      * }
      *
-     * @response {
-     *  "status": "false" 
+     * @response 204 {
+     *  "status": "false" ,
      *  "Message": "There is no Book in the database"
      * }
      *
-     * @response {
-     *  "status": "false" 
+     * @response 404 {
+     *  "status": "false" ,
      *  "Message": "There is no rate to create the review"
      * }
-     * 
-     * @response {
-     * {
+     *
+     * @response 406 {
      *   "status": "false",
      *   "errors": "The rating must be an integer."
      * }
@@ -83,7 +81,7 @@ class ReviewController extends Controller
                     $avg = DB::table('reviews')->where('book_id', $request["bookId"])->avg('rating');
                     DB::table('books')
                         ->updateOrInsert(
-                            ['id' => $request["bookId"]], 
+                            ['id' => $request["bookId"]],
                             ['ratingsAvg' => $avg , 'reviewsCount' => $conutOfReviews ,'ratingsCount' => $conutOfRating]
                         );
                     $user=User::find($this->ID);
@@ -91,25 +89,25 @@ class ReviewController extends Controller
                     $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
                     DB::table('users')
                         ->updateOrInsert(
-                            ['id' =>$this->ID ], 
+                            ['id' =>$this->ID ],
                             ['ratingAvg' => $avgUser ,'ratingCount' => $conutOfRatingUser]
                         );
                     return response()->json([
                         "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
                         ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
                     ]);
-                } 
+                }
                 else
                 {
                     return response()->json([
                         "status" => "false" , "Message" => "There is no Book in the database"
-                    ]); 
-                }  
-            } 
+                    ]);
+                }
+            }
             else{
                 return response()->json([
                     "status" => "false" , "Message" => "There is no rate to create the review"
-                ]); 
+                ]);
             }
         }
         else{
@@ -125,7 +123,7 @@ class ReviewController extends Controller
      * @bodyParam rating int required Rating (0-5) default is the same as it was .
      *
      * @response {
-     * 
+     *
      * "status": "true",
      * "user": 1,
      * "resourseId": "1",
@@ -154,7 +152,7 @@ class ReviewController extends Controller
             else{
                 return response()->json([
                     "status" => "false" , "Message" => "The reviewId is wrongggg."
-                ]); 
+                ]);
             }
         }
         else{
@@ -174,7 +172,7 @@ class ReviewController extends Controller
      * Remove a Review
      * @authenticated
      * @bodyParam reviewId int required The id of review to be deleted.
-     * 
+     *
      * @response {
      *  "state" : "delete is done"
      * }
@@ -231,7 +229,7 @@ class ReviewController extends Controller
 
 
     /**
-     * List thee reviews for a specific user
+     * List the reviews for a specific user
      * @authenticated
      * @bodyParam userId required id of the user
      */
@@ -267,6 +265,8 @@ class ReviewController extends Controller
     /**
      * Get the review for specific user on a specific Book
      * @authenticated
+     * @response {
+     * }
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book
      */
@@ -289,6 +289,8 @@ class ReviewController extends Controller
     }
     /**
      * Get the review for specific user on a specific Book
+     * @response {
+     * }
      * @authenticated
      * @bodyParam bookId integer required id of the of the book
      */

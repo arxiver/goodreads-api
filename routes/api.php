@@ -75,17 +75,16 @@ Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
 Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
 Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
 
-
-
-
+Route::group(["middleware" => "unAuthorized"], function(){
+Route::post('shelf/add_book', 'ShelfController@addBook');
+Route::delete('shelf/remove_book', 'ShelfController@removeBook');
+});
 
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');
 Route::get('shelf/{shelf_name}', 'ShelfController@show');
-Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::get('shelf/{user_id}','ShelfController@userShelves');
-Route::delete('shelf/{shelf_name}/remove_book/{book_id}', 'ShelfController@removeBook');
 Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
 
 //Owned Books

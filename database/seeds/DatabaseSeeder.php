@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Review::class,4)->create();
         factory(App\Shelf::class,10)->create();
         $i = 1;
-        while ($i <= 5) {
+        while ($i <= 4) {
             factory(App\Following::class)->create(
                 [
                     'user_id' => 1,

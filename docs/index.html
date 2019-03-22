@@ -58,7 +58,7 @@
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":4,"type":15,"body":"TDPCnP7AB0pbR6xE"}'
+    -d '{"id":13,"type":18,"body":"hEydvDV0DrIEU2qv"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/makeComment");
 
@@ -68,9 +68,9 @@ let headers = {
 }
 
 let body = {
-    "id": 4,
-    "type": 15,
-    "body": "TDPCnP7AB0pbR6xE"
+    "id": 13,
+    "type": 18,
+    "body": "hEydvDV0DrIEU2qv"
 }
 
 fetch(url, {
@@ -136,7 +136,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":17}'
+    -d '{"id":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/deleteComment");
 
@@ -146,7 +146,7 @@ let headers = {
 }
 
 let body = {
-    "id": 17
+    "id": 1
 }
 
 fetch(url, {
@@ -193,7 +193,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/unlike" \
     -H "Content-Type: application/json" \
-    -d '{"id":4}'
+    -d '{"id":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/unlike");
 
@@ -203,7 +203,7 @@ let headers = {
 }
 
 let body = {
-    "id": 4
+    "id": 20
 }
 
 fetch(url, {
@@ -246,7 +246,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
-    -d '{"id":11,"type":6}'
+    -d '{"id":14,"type":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/makeLike");
 
@@ -256,8 +256,8 @@ let headers = {
 }
 
 let body = {
-    "id": 11,
-    "type": 6
+    "id": 14,
+    "type": 20
 }
 
 fetch(url, {
@@ -308,7 +308,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":18,"max_updates":3}'
+    -d '{"user_id":11,"max_updates":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/updates");
 
@@ -318,8 +318,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 18,
-    "max_updates": 3
+    "user_id": 11,
+    "max_updates": 15
 }
 
 fetch(url, {
@@ -520,7 +520,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/notifications" \
     -H "Content-Type: application/json" \
-    -d '{"page":3}'
+    -d '{"page":10}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/notifications");
 
@@ -530,7 +530,7 @@ let headers = {
 }
 
 let body = {
-    "page": 3
+    "page": 10
 }
 
 fetch(url, {
@@ -574,7 +574,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
-    -d '{"id":"PdzgTEL8b2FzDu5o","type":16}'
+    -d '{"id":"vsc3bTXxRHtiav2K","type":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listComments");
 
@@ -584,8 +584,8 @@ let headers = {
 }
 
 let body = {
-    "id": "PdzgTEL8b2FzDu5o",
-    "type": 16
+    "id": "vsc3bTXxRHtiav2K",
+    "type": 15
 }
 
 fetch(url, {
@@ -636,7 +636,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listLikes" \
     -H "Content-Type: application/json" \
-    -d '{"id":4,"type":18}'
+    -d '{"id":3,"type":16}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listLikes");
 
@@ -646,8 +646,8 @@ let headers = {
 }
 
 let body = {
-    "id": 4,
-    "type": 18
+    "id": 3,
+    "type": 16
 }
 
 fetch(url, {
@@ -697,7 +697,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":17,"books_per_page":9}'
+    -d '{"page":16,"books_per_page":4}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books");
 
@@ -707,8 +707,8 @@ let headers = {
 }
 
 let body = {
-    "page": 17,
-    "books_per_page": 9
+    "page": 16,
+    "books_per_page": 4
 }
 
 fetch(url, {
@@ -773,7 +773,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books/show/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":9}'
+    -d '{"book_id":13}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books/show/{book_id}");
 
@@ -783,7 +783,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 9
+    "book_id": 13
 }
 
 fetch(url, {
@@ -842,7 +842,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"rheev9AP4tYALB0a","page":16,"books_per_page":8}'
+    -d '{"genreName":"Zpdr2rN6f3SzAdjl","page":17,"books_per_page":19}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books/genre/{genre_name}");
 
@@ -852,9 +852,9 @@ let headers = {
 }
 
 let body = {
-    "genreName": "rheev9AP4tYALB0a",
-    "page": 16,
-    "books_per_page": 8
+    "genreName": "Zpdr2rN6f3SzAdjl",
+    "page": 17,
+    "books_per_page": 19
 }
 
 fetch(url, {
@@ -925,7 +925,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_title/{book_title}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"25vivMkbNH4JHz5W"}'
+    -d '{"title":"vwqZQiceCMIGlT9t"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_title/{book_title}");
 
@@ -935,7 +935,7 @@ let headers = {
 }
 
 let body = {
-    "title": "25vivMkbNH4JHz5W"
+    "title": "vwqZQiceCMIGlT9t"
 }
 
 fetch(url, {
@@ -994,7 +994,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":19}'
+    -d '{"ISBN":2}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_ISBN/{book_isbn}");
 
@@ -1004,7 +1004,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 19
+    "ISBN": 2
 }
 
 fetch(url, {
@@ -1063,7 +1063,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_Authorname/{author_name}" \
     -H "Content-Type: application/json" \
-    -d '{"Author_name":"qxoWEWkfrxkb2zis"}'
+    -d '{"Author_name":"aQ4Yk212Fpt1VNZL"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_Authorname/{author_name}");
 
@@ -1073,7 +1073,7 @@ let headers = {
 }
 
 let body = {
-    "Author_name": "qxoWEWkfrxkb2zis"
+    "Author_name": "aQ4Yk212Fpt1VNZL"
 }
 
 fetch(url, {
@@ -1134,7 +1134,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/follow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":2}'
+    -d '{"user_id":9}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/follow");
 
@@ -1144,7 +1144,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 2
+    "user_id": 9
 }
 
 fetch(url, {
@@ -1203,7 +1203,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/unfollow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":18}'
+    -d '{"user_id":19}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/unfollow");
 
@@ -1213,7 +1213,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 18
+    "user_id": 19
 }
 
 fetch(url, {
@@ -1265,7 +1265,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/followers" \
     -H "Content-Type: application/json" \
-    -d '{"page":20,"user_id":19}'
+    -d '{"page":5,"user_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/followers");
 
@@ -1275,8 +1275,8 @@ let headers = {
 }
 
 let body = {
-    "page": 20,
-    "user_id": 19
+    "page": 5,
+    "user_id": 15
 }
 
 fetch(url, {
@@ -1293,7 +1293,40 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "followers": [
+        {
+            "id": 1,
+            "name": "Miss Madaline Wisozk V",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": 100,
+            "currently_reading": "dummuybookName",
+            "book_image": "http:\/\/treutel.biz\/",
+            "pages": 1200
+        },
+        {
+            "id": 4,
+            "name": "Modu Rosenbaum",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": null,
+            "currently_reading": null,
+            "book_image": null,
+            "pages": null
+        },
+        {
+            "id": 5,
+            "name": "Velda Rosenbaum",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": 10,
+            "currently_reading": "dummuybookName",
+            "book_image": "http:\/\/treutel.biz\/",
+            "pages": 1200
+        }
+    ],
+    "_start": 1,
+    "_end": 3,
+    "_total": 3
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/followers</code></p>
 <h4>Body Parameters</h4>
@@ -1331,7 +1364,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/following" \
     -H "Content-Type: application/json" \
-    -d '{"page":1,"user_id":7}'
+    -d '{"page":1,"user_id":2}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/following");
 
@@ -1342,7 +1375,7 @@ let headers = {
 
 let body = {
     "page": 1,
-    "user_id": 7
+    "user_id": 2
 }
 
 fetch(url, {
@@ -1355,7 +1388,40 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "following": [
+        {
+            "id": 1,
+            "name": "Miss Madaline Wisozk V",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": 100,
+            "currently_reading": "dummuybookName",
+            "book_image": "http:\/\/treutel.biz\/",
+            "pages": 1200
+        },
+        {
+            "id": 4,
+            "name": "Modu Rosenbaum",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": null,
+            "currently_reading": null,
+            "book_image": null,
+            "pages": null
+        },
+        {
+            "id": 5,
+            "name": "Velda Rosenbaum",
+            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+            "book_id": 10,
+            "currently_reading": "dummuybookName",
+            "book_image": "http:\/\/treutel.biz\/",
+            "pages": 1200
+        }
+    ],
+    "_start": 1,
+    "_end": 3,
+    "_total": 3
+}</code></pre>
 <blockquote>
 <p>Example response (404):</p>
 </blockquote>
@@ -1397,7 +1463,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":5,"shelf":19,"body":"S17dIiDlClaofYfT","rating":3}'
+    -d '{"bookId":8,"shelf":1,"body":"hkd2MMCaKc4M3yqX","rating":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/create");
 
@@ -1407,10 +1473,10 @@ let headers = {
 }
 
 let body = {
-    "bookId": 5,
-    "shelf": 19,
-    "body": "S17dIiDlClaofYfT",
-    "rating": 3
+    "bookId": 8,
+    "shelf": 1,
+    "body": "hkd2MMCaKc4M3yqX",
+    "rating": 15
 }
 
 fetch(url, {
@@ -1421,7 +1487,7 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (201):</p>
 </blockquote>
 <pre><code class="language-json">{
     "status": "true",
@@ -1432,17 +1498,26 @@ fetch(url, {
     "rate": "1"
 }</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (204):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "status": "false",
+    "Message": "There is no Book in the database"
+}</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (404):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "status": "false",
+    "Message": "There is no rate to create the review"
+}</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (406):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "status": "false",
+    "errors": "The rating must be an integer."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/reviwes/create</code></p>
 <h4>Body Parameters</h4>
@@ -1521,7 +1596,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":1,"body":"BCLUGX5zdjoHF1lL","rating":9}'
+    -d '{"reviewId":2,"body":"8KoRFiUzaA1foE5I","rating":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/edit");
 
@@ -1531,9 +1606,9 @@ let headers = {
 }
 
 let body = {
-    "reviewId": 1,
-    "body": "BCLUGX5zdjoHF1lL",
-    "rating": 9
+    "reviewId": 2,
+    "body": "8KoRFiUzaA1foE5I",
+    "rating": 20
 }
 
 fetch(url, {
@@ -1680,7 +1755,7 @@ and i will use it to get the review for one book array of one element</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"isbns":"4HSv7h9cZbg2OvPB"}'
+    -d '{"isbns":"LF3pAH5UqazaU9nL"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/users/books/{book_id}");
 
@@ -1690,7 +1765,7 @@ let headers = {
 }
 
 let body = {
-    "isbns": "4HSv7h9cZbg2OvPB"
+    "isbns": "LF3pAH5UqazaU9nL"
 }
 
 fetch(url, {
@@ -1734,7 +1809,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"rxrl3ptzuBzGsIdn","author":"ruZcvuV98mYjBBvV","rating":11}'
+    -d '{"title":"w3VRrGybKzvyzyu0","author":"Bgr98ZPoW75KoQoc","rating":8}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/books/{boodTitle}");
 
@@ -1744,9 +1819,9 @@ let headers = {
 }
 
 let body = {
-    "title": "rxrl3ptzuBzGsIdn",
-    "author": "ruZcvuV98mYjBBvV",
-    "rating": 11
+    "title": "w3VRrGybKzvyzyu0",
+    "author": "Bgr98ZPoW75KoQoc",
+    "rating": 8
 }
 
 fetch(url, {
@@ -1757,435 +1832,9 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (500):</p>
+<p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "message": "Undefined variable: request",
-    "exception": "ErrorException",
-    "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\app\\Http\\Controllers\\ReviewController.php",
-    "line": 216,
-    "trace": [
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\app\\Http\\Controllers\\ReviewController.php",
-            "line": 216,
-            "function": "handleError",
-            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
-            "type": "-&gt;"
-        },
-        {
-            "function": "getReviewsByTitle",
-            "class": "App\\Http\\Controllers\\ReviewController",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
-            "line": 54,
-            "function": "call_user_func_array"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
-            "line": 45,
-            "function": "callAction",
-            "class": "Illuminate\\Routing\\Controller",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-            "line": 219,
-            "function": "dispatch",
-            "class": "Illuminate\\Routing\\ControllerDispatcher",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
-            "line": 176,
-            "function": "runController",
-            "class": "Illuminate\\Routing\\Route",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 680,
-            "function": "run",
-            "class": "Illuminate\\Routing\\Route",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 30,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
-            "line": 41,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
-            "line": 58,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 104,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 682,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 657,
-            "function": "runRouteWithinStack",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 623,
-            "function": "runRoute",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
-            "line": 612,
-            "function": "dispatchToRoute",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 176,
-            "function": "dispatch",
-            "class": "Illuminate\\Routing\\Router",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 30,
-            "function": "Illuminate\\Foundation\\Http\\{closure}",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\fideloper\\proxy\\src\\TrustProxies.php",
-            "line": 57,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Fideloper\\Proxy\\TrustProxies",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-            "line": 21,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
-            "line": 21,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
-            "line": 27,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php",
-            "line": 62,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 163,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
-            "line": 53,
-            "function": "Illuminate\\Pipeline\\{closure}",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 104,
-            "function": "Illuminate\\Routing\\{closure}",
-            "class": "Illuminate\\Routing\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 151,
-            "function": "then",
-            "class": "Illuminate\\Pipeline\\Pipeline",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
-            "line": 116,
-            "function": "sendRequestThroughRouter",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
-            "line": 276,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Http\\Kernel",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
-            "line": 260,
-            "function": "callLaravelRoute",
-            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
-            "line": 36,
-            "function": "makeApiCall",
-            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
-            "line": 49,
-            "function": "__invoke",
-            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
-            "line": 68,
-            "function": "resolve",
-            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\Generator.php",
-            "line": 57,
-            "function": "getResponse",
-            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
-            "type": "::"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
-            "line": 201,
-            "function": "processRoute",
-            "class": "Mpociot\\ApiDoc\\Tools\\Generator",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
-            "line": 59,
-            "function": "processRoutes",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "-&gt;"
-        },
-        {
-            "function": "handle",
-            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 32,
-            "function": "call_user_func_array"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 90,
-            "function": "Illuminate\\Container\\{closure}",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
-            "line": 34,
-            "function": "callBoundMethod",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
-            "line": 580,
-            "function": "call",
-            "class": "Illuminate\\Container\\BoundMethod",
-            "type": "::"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-            "line": 183,
-            "function": "call",
-            "class": "Illuminate\\Container\\Container",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\symfony\\console\\Command\\Command.php",
-            "line": 255,
-            "function": "execute",
-            "class": "Illuminate\\Console\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
-            "line": 170,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Command\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\symfony\\console\\Application.php",
-            "line": 908,
-            "function": "run",
-            "class": "Illuminate\\Console\\Command",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\symfony\\console\\Application.php",
-            "line": 269,
-            "function": "doRunCommand",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\symfony\\console\\Application.php",
-            "line": 145,
-            "function": "doRun",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
-            "line": 90,
-            "function": "run",
-            "class": "Symfony\\Component\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
-            "line": 122,
-            "function": "run",
-            "class": "Illuminate\\Console\\Application",
-            "type": "-&gt;"
-        },
-        {
-            "file": "C:\\Users\\ESLAM ELECTRONICS\\Downloads\\goodreads-api-under_score_ver\\artisan",
-            "line": 37,
-            "function": "handle",
-            "class": "Illuminate\\Foundation\\Console\\Kernel",
-            "type": "-&gt;"
-        }
-    ]
-}</code></pre>
+<pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/reviwes/books/{boodTitle}</code></p>
 <h4>Body Parameters</h4>
@@ -2221,14 +1870,14 @@ fetch(url, {
 </table>
 <!-- END_ceef72433d94fbcde535849da946b411 -->
 <!-- START_3b8bc689333e11a42e9435563eb81d81 -->
-<h2>List thee reviews for a specific user</h2>
+<h2>List the reviews for a specific user</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listReviewOfUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"szakganVbhQjWwWC"}'
+    -d '{"userId":"LuCKKPqmWczD6FtX"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listReviewOfUser");
 
@@ -2238,7 +1887,7 @@ let headers = {
 }
 
 let body = {
-    "userId": "szakganVbhQjWwWC"
+    "userId": "LuCKKPqmWczD6FtX"
 }
 
 fetch(url, {
@@ -2282,7 +1931,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewOfBook/{id}" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":"xmiRku3EvFyQN6kL"}'
+    -d '{"reviewId":"kAhA2qBCy2TC7rmT"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewOfBook/{id}");
 
@@ -2292,7 +1941,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": "xmiRku3EvFyQN6kL"
+    "reviewId": "kAhA2qBCy2TC7rmT"
 }
 
 fetch(url, {
@@ -2306,21 +1955,8 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "status": "success",
-    "pages": [
-        {
-            "id": 1,
-            "userId": 9,
-            "bookId": 1,
-            "body": "hbhbhb",
-            "rating": 1,
-            "lastUpdate": "2019-03-20 00:00:00",
-            "numberLikes": 0,
-            "numberComments": 0,
-            "created_at": "2019-03-19 00:00:00",
-            "updated_at": "2019-03-29 00:00:00"
-        }
-    ]
+    "status": "failed",
+    "pages": []
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/showReviewOfBook/{id}</code></p>
@@ -2352,7 +1988,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewForBookForUser/{user_id}/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"mhiv2fhBHjSndxVl","bookId":"QcbBGr7ZdKEfE3Jo"}'
+    -d '{"userId":"Ey0hRVIhVEVxtegX","bookId":"9hsF6L4Zpt4PRcfI"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewForBookForUser/{user_id}/{book_id}");
 
@@ -2362,8 +1998,8 @@ let headers = {
 }
 
 let body = {
-    "userId": "mhiv2fhBHjSndxVl",
-    "bookId": "QcbBGr7ZdKEfE3Jo"
+    "userId": "Ey0hRVIhVEVxtegX",
+    "bookId": "9hsF6L4Zpt4PRcfI"
 }
 
 fetch(url, {
@@ -2376,10 +2012,7 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "status": "failed",
-    "pages": []
-}</code></pre>
+<pre><code class="language-json">[]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/showReviewForBookForUser/{user_id}/{book_id}</code></p>
 <h4>Body Parameters</h4>
@@ -2416,7 +2049,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewsForABook/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":9}'
+    -d '{"bookId":18}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewsForABook/{book_id}");
 
@@ -2426,7 +2059,7 @@ let headers = {
 }
 
 let body = {
-    "bookId": 9
+    "bookId": 18
 }
 
 fetch(url, {
@@ -2439,35 +2072,7 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "status": "success",
-    "pages": [
-        {
-            "id": 3,
-            "bookId": 1,
-            "body": "jnbtgrjrtjgrtg",
-            "rating": 4,
-            "lastUpdate": "2019-03-06 00:00:00",
-            "numberLikes": 4,
-            "numberComments": 5,
-            "userId": 2,
-            "username": "dsds",
-            "userimagelink": "reer"
-        },
-        {
-            "id": 1,
-            "bookId": 1,
-            "body": "hbhbhb",
-            "rating": 1,
-            "lastUpdate": "2019-03-20 00:00:00",
-            "numberLikes": 0,
-            "numberComments": 0,
-            "userId": 9,
-            "username": "44r",
-            "userimagelink": "4fddfdfdf"
-        }
-    ]
-}</code></pre>
+<pre><code class="language-json">[]</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/showReviewsForABook/{book_id}</code></p>
 <h4>Body Parameters</h4>
@@ -2529,7 +2134,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"LEgO3FrsVwx0bsjq"}'
+    -d '{"shelf_name":"NB1tRuMXrbMbyPji"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{shelf_name}");
 
@@ -2539,7 +2144,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "LEgO3FrsVwx0bsjq"
+    "shelf_name": "NB1tRuMXrbMbyPji"
 }
 
 fetch(url, {
@@ -2583,7 +2188,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"wByMPXboLM6MYWdF","book_id":8}'
+    -d '{"shelf_name":"M8AiWY6MMbAnL2gr","book_id":17}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/add_book");
 
@@ -2593,8 +2198,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "wByMPXboLM6MYWdF",
-    "book_id": 8
+    "shelf_name": "M8AiWY6MMbAnL2gr",
+    "book_id": 17
 }
 
 fetch(url, {
@@ -2640,7 +2245,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":19,"page":12,"books_per_page":3}'
+    -d '{"user_id":3,"page":8,"books_per_page":9}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{user_id}");
 
@@ -2650,9 +2255,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 19,
-    "page": 12,
-    "books_per_page": 3
+    "user_id": 3,
+    "page": 8,
+    "books_per_page": 9
 }
 
 fetch(url, {
@@ -2728,7 +2333,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"0lEhJ4uYGnmFQcpG","book_id":15}'
+    -d '{"shelf_name":"wHSKYWqOLOnoysaf","book_id":5}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{shelf_name}/remove_book/{book_id}");
 
@@ -2738,8 +2343,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "0lEhJ4uYGnmFQcpG",
-    "book_id": 15
+    "shelf_name": "wHSKYWqOLOnoysaf",
+    "book_id": 5
 }
 
 fetch(url, {
@@ -2784,7 +2389,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/{user_id}/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":16,"shelf_name":"4xjLg6gITAQhWjxk"}'
+    -d '{"user_id":16,"shelf_name":"hRjZI75tMu5VmD6x"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/{user_id}/{shelf_name}");
 
@@ -2795,7 +2400,7 @@ let headers = {
 
 let body = {
     "user_id": 16,
-    "shelf_name": "4xjLg6gITAQhWjxk"
+    "shelf_name": "hRjZI75tMu5VmD6x"
 }
 
 fetch(url, {
@@ -2862,7 +2467,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/signUp" \
     -H "Content-Type: application/json" \
-    -d '{"email":"dY3fDPSDj7Ep9EcR","password":"SCylEBgpTRUi648A","password_confirmation":"DLpE3WGOJoraJsdw","name":"ZtxcbRMJ6lgoksfr","gender":"FSrvRCvqq4SrP99r","birthday":"BoPTU3tTojDytF3H","country":"X8gQETwk6jggTyIk","city":"pX7lf1JMbGSnn21b"}'
+    -d '{"email":"3x0qVtp9dNCDWSGe","password":"YT5o3AkhVrun7TJD","password_confirmation":"jrb2GRolK39nWkbe","name":"062bxvWKIhoiealY","gender":"Tnw2K9U0U3CW8jMt","birthday":"9Nq4YFP44bkTOVxc","country":"JKZkYejZ1IkCErpK","city":"Rx6Kk3dTVJSFVA4m"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/signUp");
 
@@ -2872,14 +2477,14 @@ let headers = {
 }
 
 let body = {
-    "email": "dY3fDPSDj7Ep9EcR",
-    "password": "SCylEBgpTRUi648A",
-    "password_confirmation": "DLpE3WGOJoraJsdw",
-    "name": "ZtxcbRMJ6lgoksfr",
-    "gender": "FSrvRCvqq4SrP99r",
-    "birthday": "BoPTU3tTojDytF3H",
-    "country": "X8gQETwk6jggTyIk",
-    "city": "pX7lf1JMbGSnn21b"
+    "email": "3x0qVtp9dNCDWSGe",
+    "password": "YT5o3AkhVrun7TJD",
+    "password_confirmation": "jrb2GRolK39nWkbe",
+    "name": "062bxvWKIhoiealY",
+    "gender": "Tnw2K9U0U3CW8jMt",
+    "birthday": "9Nq4YFP44bkTOVxc",
+    "country": "JKZkYejZ1IkCErpK",
+    "city": "Rx6Kk3dTVJSFVA4m"
 }
 
 fetch(url, {
@@ -2896,7 +2501,7 @@ fetch(url, {
     "status": "false",
     "errors": [
         "The email field is required.",
-        "The userName field is required.",
+        "The username field is required.",
         "The password field is required.",
         "The name field is required.",
         "The gender field is required."
@@ -2911,18 +2516,18 @@ fetch(url, {
         "email": "",
         "name": "",
         "age": "",
-        "birthDay": "",
-        "joinedAt": "",
+        "birthday": "",
+        "joined_at": "",
         "username": "",
         "gender": "",
-        "lastActive": "",
+        "last_active": "",
         "country": "",
         "city": "",
-        "ratingCount": "",
-        "ratingAvg": "",
-        "followingCounts": "",
-        "followersCount": "",
-        "imageLink": ""
+        "rating_count": "",
+        "rating_avg": "",
+        "following_count": "",
+        "followers_count": "",
+        "image_link": ""
     },
     "token": "",
     "token_type": "",
@@ -2999,7 +2604,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/logIn" \
     -H "Content-Type: application/json" \
-    -d '{"email":"L6KHbKzkGB8gocD3","password":"4dwJl6YkiSiTGK8b"}'
+    -d '{"email":"LEET7PzntrGu4Qf5","password":"fzmeCwkxb2t1isOW"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/logIn");
 
@@ -3009,8 +2614,8 @@ let headers = {
 }
 
 let body = {
-    "email": "L6KHbKzkGB8gocD3",
-    "password": "4dwJl6YkiSiTGK8b"
+    "email": "LEET7PzntrGu4Qf5",
+    "password": "fzmeCwkxb2t1isOW"
 }
 
 fetch(url, {
@@ -3039,18 +2644,18 @@ fetch(url, {
         "email": "",
         "name": "",
         "age": "",
-        "birthDay": "",
-        "joinedAt": "",
+        "birthday": "",
+        "joined_at": "",
         "username": "",
         "gender": "",
-        "lastActive": "",
+        "last_active": "",
         "country": "",
         "city": "",
-        "ratingCount": "",
-        "ratingAvg": "",
-        "followingCounts": "",
-        "followersCount": "",
-        "imageLink": ""
+        "rating_count": "",
+        "rating_avg": "",
+        "following_count": "",
+        "followers_count": "",
+        "image_link": ""
     },
     "token": "",
     "token_type": "",
@@ -3092,7 +2697,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changePassword" \
     -H "Content-Type: application/json" \
-    -d '{"password":"q6NeopcH78BtdkON","newPassword":"NKyp3Rn7Q1h9d9vB","newPassword_confirmation":"GiaD4U3piYiith8o"}'
+    -d '{"password":"c5LYqiMbgmJxCGui","newPassword":"vlYlY8Ums7DZq0Vx","newPassword_confirmation":"EHr3oHwgaQsv8yiL"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changePassword");
 
@@ -3102,9 +2707,9 @@ let headers = {
 }
 
 let body = {
-    "password": "q6NeopcH78BtdkON",
-    "newPassword": "NKyp3Rn7Q1h9d9vB",
-    "newPassword_confirmation": "GiaD4U3piYiith8o"
+    "password": "c5LYqiMbgmJxCGui",
+    "newPassword": "vlYlY8Ums7DZq0Vx",
+    "newPassword_confirmation": "EHr3oHwgaQsv8yiL"
 }
 
 fetch(url, {
@@ -3174,7 +2779,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changeName" \
     -H "Content-Type: application/json" \
-    -d '{"password":"b6JBSY6nStr1jUhf","newName":"meFf5iZkhvcatl9o"}'
+    -d '{"password":"h5bAhU5FmztbwArc","newName":"8ZNPUOarhKZ3EcZ9"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeName");
 
@@ -3184,8 +2789,8 @@ let headers = {
 }
 
 let body = {
-    "password": "b6JBSY6nStr1jUhf",
-    "newName": "meFf5iZkhvcatl9o"
+    "password": "h5bAhU5FmztbwArc",
+    "newName": "8ZNPUOarhKZ3EcZ9"
 }
 
 fetch(url, {
@@ -3248,7 +2853,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
-    -d '{"Image":"sq9Qf3jP1ape49ZD"}'
+    -d '{"Image":"Mogfpz0P8ev8wBcs"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeImage");
 
@@ -3258,7 +2863,7 @@ let headers = {
 }
 
 let body = {
-    "Image": "sq9Qf3jP1ape49ZD"
+    "Image": "Mogfpz0P8ev8wBcs"
 }
 
 fetch(url, {
@@ -3305,7 +2910,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
-    -d '{"password":"tDIWVJKO6hsLdkUW"}'
+    -d '{"password":"wQH2UvnuztNDvl4Z"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/delete");
 
@@ -3315,7 +2920,7 @@ let headers = {
 }
 
 let body = {
-    "password": "tDIWVJKO6hsLdkUW"
+    "password": "wQH2UvnuztNDvl4Z"
 }
 
 fetch(url, {
@@ -3448,7 +3053,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showProfile" \
     -H "Content-Type: application/json" \
-    -d '{"id":9}'
+    -d '{"id":12}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showProfile");
 
@@ -3458,7 +3063,7 @@ let headers = {
 }
 
 let body = {
-    "id": 9
+    "id": 12
 }
 
 fetch(url, {
@@ -3554,7 +3159,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"birthday":"bqWG1y5gRdY6tW9r"}'
+    -d '{"birthday":"1SGpKPmqa5dNwFOX"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeBirthday");
 
@@ -3564,7 +3169,7 @@ let headers = {
 }
 
 let body = {
-    "birthday": "bqWG1y5gRdY6tW9r"
+    "birthday": "1SGpKPmqa5dNwFOX"
 }
 
 fetch(url, {
@@ -3611,7 +3216,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyBirthday":"BpU7SIeHuVxzZdjK"}'
+    -d '{"seeMyBirthday":"Z55H8AbStQCINwIR"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyBirthday");
 
@@ -3621,7 +3226,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyBirthday": "BpU7SIeHuVxzZdjK"
+    "seeMyBirthday": "Z55H8AbStQCINwIR"
 }
 
 fetch(url, {
@@ -3668,7 +3273,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
-    -d '{"country":"Lo5prmwNgh3bQH01"}'
+    -d '{"country":"R6dmIjxauhY5Wa04"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeCountry");
 
@@ -3678,7 +3283,7 @@ let headers = {
 }
 
 let body = {
-    "country": "Lo5prmwNgh3bQH01"
+    "country": "R6dmIjxauhY5Wa04"
 }
 
 fetch(url, {
@@ -3725,7 +3330,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCountry":"EPD7djqFL7LY8rln"}'
+    -d '{"seeMyCountry":"RNqFIzVXfo0gd6Ae"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyCountry");
 
@@ -3735,7 +3340,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCountry": "EPD7djqFL7LY8rln"
+    "seeMyCountry": "RNqFIzVXfo0gd6Ae"
 }
 
 fetch(url, {
@@ -3782,7 +3387,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
-    -d '{"city":"k0xvLQptLkJzC5fk"}'
+    -d '{"city":"bdPmmDfWRMM95PhF"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeCity");
 
@@ -3792,7 +3397,7 @@ let headers = {
 }
 
 let body = {
-    "city": "k0xvLQptLkJzC5fk"
+    "city": "bdPmmDfWRMM95PhF"
 }
 
 fetch(url, {
@@ -3839,7 +3444,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCity":"hdkZCMBFyZxTcLhu"}'
+    -d '{"seeMyCity":"3XIk4v7mKHj9pZbb"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whoCanSeeMyCity");
 
@@ -3849,7 +3454,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCity": "hdkZCMBFyZxTcLhu"
+    "seeMyCity": "3XIk4v7mKHj9pZbb"
 }
 
 fetch(url, {
@@ -3895,7 +3500,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/UserController/{user}" \
     -H "Content-Type: application/json" \
-    -d '{"userName":"Peg9J67pEexBdlSD"}'
+    -d '{"userName":"8PAga7Df2aIduCfH"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/UserController/{user}");
 
@@ -3905,7 +3510,7 @@ let headers = {
 }
 
 let body = {
-    "userName": "Peg9J67pEexBdlSD"
+    "userName": "8PAga7Df2aIduCfH"
 }
 
 fetch(url, {

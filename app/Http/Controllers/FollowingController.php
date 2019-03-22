@@ -108,71 +108,36 @@ class FollowingController extends Controller
 	 *{
 	 *    "followers": [
 	 *        {
-	 *            "id": 1,
-	 *            "name": "Miss Madaline Wisozk V",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-     *            "followers_count": 10
+     *             "id": 1,
+     *             "name": "Miss Madaline Wisozk V",
+     *             "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+     *             "book_id": 100,
+     *             "currently_reading": "dummuybookName",
+     *             "book_image": "http:\/\/treutel.biz\/",
+     *             "pages": 1200
 	 *        },
 	 *        {
 	 *            "id": 4,
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-     *            "followers_count": 10
+	 *            "name": "Modu Rosenbaum",
+     *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "book_id": null,
+     *            "currently_reading": null,
+     *            "book_image": null,
+     *            "pages": null
 	 *        },
 	 *        {
 	 *            "id": 5,
 	 *            "name": "Velda Rosenbaum",
 	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
+	 *            "book_id": 10,
      *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-     *            "followers_count": 10
-	 *        },
-	 *        {
-	 *            "id": 6,
-	 *            "name": "Dr. Reagan Little",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-     *            "followers_count": 10
-	 *        },
-	 *        {
-	 *            "id": 7,
-	 *            "name": "Valentin Pagac DVM",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-     *            "followers_count": 10
-     *
+     *            "book_image": "http:\/\/treutel.biz\/",
+     *            "pages": 1200
 	 *        }
 	 *    ],
 	 *    "_start": 1,
-	 *    "_end": 5,
-	 *    "_total": 5
-	 *
-	 *
+	 *    "_end": 3,
+	 *    "_total": 3
 	 *
 	 *}
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
@@ -207,10 +172,15 @@ class FollowingController extends Controller
          * Query
          */
         $data =
-            DB::select( 'SELECT id , name , image_link , small_image_link ,
-                        email , link ,followers_count
-                        FROM followings F,users U WHERE user_id = ?
-                        AND F.follower_id = U.id limit ? offset ?', [$userId,$listSize,$skipCount]);
+            DB::select( '   SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
+							FROM
+							( SELECT follower_id as id , name , image_link
+	                        FROM followings F,users U
+	                        WHERE F.user_id = ? and F.follower_id = U.id ) as t1
+							LEFT JOIN
+							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
+                                       B.img_url as book_image , B.pages_no as pages
+							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
 
         /**
          * Response paramaters and return
@@ -226,67 +196,45 @@ class FollowingController extends Controller
      *
      * @authenticated
      *
-	 * @response
+
+     * @response
 	 *
 	 *{
 	 *    "following": [
 	 *        {
-	 *            "id": 1,
-	 *            "name": "Miss Madaline Wisozk V",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followers_count": 10
+     *             "id": 1,
+     *             "name": "Miss Madaline Wisozk V",
+     *             "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+     *             "book_id": 100,
+     *             "currently_reading": "dummuybookName",
+     *             "book_image": "http:\/\/treutel.biz\/",
+     *             "pages": 1200
 	 *        },
 	 *        {
 	 *            "id": 4,
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1312,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followers_count": 109
-     *        },
+	 *            "name": "Modu Rosenbaum",
+     *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "book_id": null,
+     *            "currently_reading": null,
+     *            "book_image": null,
+     *            "pages": null
+	 *        },
 	 *        {
 	 *            "id": 5,
 	 *            "name": "Velda Rosenbaum",
 	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
+	 *            "book_id": 10,
      *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 1212,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followers_count": 19
-	 *        },
-	 *        {
-	 *            "id": 6,
-	 *            "name": "Dr. Reagan Little",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_link": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "book_id": 100,
-     *            "currently_reading": "dummuybookName",
-     *            "book_image": wolf.info\/molestiae-qui-sed-at-vel,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followers_count": 102
+     *            "book_image": "http:\/\/treutel.biz\/",
+     *            "pages": 1200
 	 *        }
 	 *    ],
 	 *    "_start": 1,
-	 *    "_end": 4,
-	 *    "_total": 4
-	 *
-     *
-	 *
+	 *    "_end": 3,
+	 *    "_total": 3
 	 *
      *}
-     *
+      *
      * @response 404 {
      * }
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
@@ -321,10 +269,16 @@ class FollowingController extends Controller
          * Eloquent query
          */
         $data =
-            DB::select( 'SELECT id , name , image_link , small_image_link ,
-                        email , link ,followers_count
-                        FROM followings F,users U WHERE follower_id = ?
-                        AND F.user_id = U.id limit ? offset ?', [$userId,$listSize,$skipCount]);
+            DB::select(' SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
+							FROM
+							( SELECT F.user_id as id , name , image_link
+	                        FROM followings F,users U
+	                        WHERE F.follower_id = ? and F.user_id = U.id ) as t1
+							LEFT JOIN
+							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
+                                       B.img_url as book_image , B.pages_no as pages
+							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
+
         /**
          * Response paramaters and return
          */
@@ -333,3 +287,4 @@ class FollowingController extends Controller
         return response()->json(['following'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);
     }
 }
+

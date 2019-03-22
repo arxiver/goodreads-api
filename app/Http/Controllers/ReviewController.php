@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Review;
 use App\Shelf;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use Response;
+
 /**
  * @group Review
  * @authenticated
@@ -24,9 +26,8 @@ class ReviewController extends Controller
      * @bodyParam shelf int required (read->0,currently-reading->1,to-read->2,nothig of these shelves->3) default is (read) .
      * @bodyParam body optional string optional The text of the review.
      * @bodyParam rating int optional Rating (0-5) default is 0 (No rating).
-     * 
-     * @response 
-     * {
+     *
+     * @response 201 {
      *       "status": "true",
      *       "user": 2,
      *       "book_id": "1",
@@ -35,18 +36,17 @@ class ReviewController extends Controller
      *       "rate": "1"
      * }
      *
-     * @response {
-     *  "status": "false" 
+     * @response 204 {
+     *  "status": "false" ,
      *  "Message": "There is no Book in the database"
      * }
      *
-     * @response {
-     *  "status": "false" 
+     * @response 404 {
+     *  "status": "false" ,
      *  "Message": "There is no rate to create the review"
      * }
-     * 
-     * @response {
-     * {
+     *
+     * @response 406 {
      *   "status": "false",
      *   "errors": "The rating must be an integer."
      * }
@@ -54,66 +54,59 @@ class ReviewController extends Controller
     public function createReview(Request $request)
     {
         $Validations    = array(
-                "bookId"         => "required|integer",
-                "shelf"          => "required|integer|max:3|min:0",
-                "rating"         => "integer|max:5|min:1"
+            "bookId"         => "required|integer",
+            "shelf"          => "required|integer|max:3|min:0",
+            "rating"         => "integer|max:5|min:1"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if(!empty($request["rating"]))
-            {
-                if( Book::find($request["bookId"]) )
-                {
-                    $shelfType = $request["shelf"];
-                    DB::table('shelves')
-                        ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
-                            ['type' => 0]
-                        );
-                    $Create = array(
-                        "user_id" => $this->ID,
-                        "book_id" => $request["bookId"],
-                        "body"  => $request["body"],
-                        "rating" =>$request["rating"]
-                    );
-                    Review::create($Create);
-                    $bookWanted=Book::find($request["bookId"]);
-                    $conutOfReviews=$bookWanted["reviewsCount"] +1;
-                    $conutOfRating=$bookWanted["ratingsCount"] +1;
-                    $avg = DB::table('reviews')->where('book_id', $request["bookId"])->avg('rating');
-                    DB::table('books')
-                        ->updateOrInsert(
-                            ['id' => $request["bookId"]], 
-                            ['ratingsAvg' => $avg , 'reviewsCount' => $conutOfReviews ,'ratingsCount' => $conutOfRating]
-                        );
-                    $user=User::find($this->ID);
-                    $conutOfRatingUser=$user["ratingCount"] +1;
-                    $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
-                    DB::table('users')
-                        ->updateOrInsert(
-                            ['id' =>$this->ID ], 
-                            ['ratingAvg' => $avgUser ,'ratingCount' => $conutOfRatingUser]
-                        );
-                    return response()->json([
-                        "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
-                        ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
-                    ]);
-                } 
-                else
-                {
-                    return response()->json([
-                        "status" => "false" , "Message" => "There is no Book in the database"
-                    ]); 
-                }  
-            } 
-            else{
+            if (!empty($request["rating"])) {
+                    if (Book::find($request["bookId"])) {
+                            $shelfType = $request["shelf"];
+                            DB::table('shelves')
+                                ->updateOrInsert(
+                                    ['user_id' => $this->ID, 'book_id' => $request["bookId"], 'type' => $shelfType],
+                                    ['type' => 0]
+                                );
+                            $Create = array(
+                                "user_id" => $this->ID,
+                                "book_id" => $request["bookId"],
+                                "body"  => $request["body"],
+                                "rating" => $request["rating"]
+                            );
+                            Review::create($Create);
+                            $bookWanted = Book::find($request["bookId"]);
+                            $conutOfReviews = $bookWanted["reviewsCount"] + 1;
+                            $conutOfRating = $bookWanted["ratingsCount"] + 1;
+                            $avg = DB::table('reviews')->where('book_id', $request["bookId"])->avg('rating');
+                            DB::table('books')
+                                ->updateOrInsert(
+                                    ['id' => $request["bookId"]],
+                                    ['ratingsAvg' => $avg, 'reviewsCount' => $conutOfReviews, 'ratingsCount' => $conutOfRating]
+                                );
+                            $user = User::find($this->ID);
+                            $conutOfRatingUser = $user["ratingCount"] + 1;
+                            $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
+                            DB::table('users')
+                                ->updateOrInsert(
+                                    ['id' => $this->ID],
+                                    ['ratingAvg' => $avgUser, 'ratingCount' => $conutOfRatingUser]
+                                );
+                            return response()->json([
+                                "status" => "true", "user" => $this->ID, "book_id" => $request["bookId"], "shelfType" => "read", "bodyOfReview" => $request["body"], "rate" => $request["rating"]
+                            ]);
+                        } else {
+                            return response()->json([
+                                "status" => "false", "Message" => "There is no Book in the database"
+                            ]);
+                        }
+                } else {
                 return response()->json([
-                    "status" => "false" , "Message" => "There is no rate to create the review"
-                ]); 
+                    "status" => "false", "Message" => "There is no rate to create the review"
+                ]);
             }
-        }
-        else{
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        } else {
+            return response(["status" => "false", "errors" => $Data->messages()->first()]);
         }
     }
 
@@ -125,7 +118,7 @@ class ReviewController extends Controller
      * @bodyParam rating int required Rating (0-5) default is the same as it was .
      *
      * @response {
-     * 
+     *
      * "status": "true",
      * "user": 1,
      * "resourseId": "1",
@@ -141,24 +134,22 @@ class ReviewController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if( Review::find($request["reviewId"]) ){
+            if (Review::find($request["reviewId"])) {
                 DB::table('reviews')
-                        ->updateOrInsert(
-                            ['id' => $request["reviewId"]],
-                            ['rating' => $request["rating"] , 'body' =>$request["body"]]
-                        );
+                    ->updateOrInsert(
+                        ['id' => $request["reviewId"]],
+                        ['rating' => $request["rating"], 'body' => $request["body"]]
+                    );
                 return response()->json([
-                       "status" => "true" , "user" => $this->ID, "review_id" =>$request["reviewId"] ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
+                    "status" => "true", "user" => $this->ID, "review_id" => $request["reviewId"], "bodyOfReview" => $request["body"], "rate" => $request["rating"]
+                ]);
+            } else {
+                return response()->json([
+                    "status" => "false", "Message" => "The reviewId is wrongggg."
                 ]);
             }
-            else{
-                return response()->json([
-                    "status" => "false" , "Message" => "The reviewId is wrongggg."
-                ]); 
-            }
-        }
-        else{
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        } else {
+            return response(["status" => "false", "errors" => $Data->messages()->first()]);
         }
     }
 
@@ -167,14 +158,12 @@ class ReviewController extends Controller
      * @authenticated
      */
     public function recentReviews()
-    {
-
-    }
+    { }
     /**
      * Remove a Review
      * @authenticated
      * @bodyParam reviewId int required The id of review to be deleted.
-     * 
+     *
      * @response {
      *  "state" : "delete is done"
      * }
@@ -210,22 +199,9 @@ class ReviewController extends Controller
      * @bodyParam author string optional The author name of the book to lookup.
      * @bodyParam rating int optional Show only reviews with a particular rating.
      */
-    public function getReviewsByTitle(Request $request)
+    public function getReviewsByTitle()
     {
         //
-        $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['book_title']]);
-        if($rt != NULL){
-            return Response::json(array(
-                'status' => 'success',
-                'pages' => $rt),
-                200);
-        }
-        else{
-            return Response::json(array(
-                'status' => 'failed',
-                'pages' => $rt),
-                200);
-        }  
     }
 
     /**
@@ -235,16 +211,16 @@ class ReviewController extends Controller
      */
     public function listMyReviews()
     {
-        $userId =$this->ID;
+        $userId = $this->ID;
         User::findOrFail($userId);
         $data = Review::where('user_id', $userId)->get();
-        return response()->json(array('my_reviews'=>$data),200);
+        return response()->json(array('my_reviews' => $data), 200);
     }
 
 
 
     /**
-     * List thee reviews for a specific user
+     * List the reviews for a specific user
      * @authenticated
      * @bodyParam userId required id of the user
      */
@@ -262,17 +238,22 @@ class ReviewController extends Controller
     {
         //
         $results = DB::select('select * from reviews where id = ?', [$id]);
-        if($results != NULL){
-            return Response::json(array(
-                'status' => 'success',
-                'pages' => $results),
-                200);
-        }
-        else{
-            return Response::json(array(
-                'status' => 'failed',
-                'pages' => $results),
-                200);
+        if ($results != null) {
+            return Response::json(
+                array(
+                    'status' => 'success',
+                    'pages' => $results
+                ),
+                200
+            );
+        } else {
+            return Response::json(
+                array(
+                    'status' => 'failed',
+                    'pages' => $results
+                ),
+                200
+            );
         }
     }
 
@@ -280,47 +261,61 @@ class ReviewController extends Controller
     /**
      * Get the review for specific user on a specific Book
      * @authenticated
+     * @response {
+     * }
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book
      */
-    public function showReviewForBookForUser($user_id , $book_id)
+    public function showReviewForBookForUser($user_id, $book_id)
     {
         //
-        $results = DB::select('select * from reviews  where user_id = ? and book_id = ?', [$user_id,$book_id]);
-        if($results != NULL){
-            return Response::json(array(
-                'status' => 'success',
-                'pages' => $results),
-                200);
-        }
-        else{
-            return Response::json(array(
-                'status' => 'failed',
-                'pages' => $results),
-                200);
+        $results = DB::select('select * from reviews  where userId = ? and bookId = ?', [$user_id, $book_id]);
+        if ($results != null) {
+            return Response::json(
+                array(
+                    'status' => 'success',
+                    'pages' => $results
+                ),
+                200
+            );
+        } else {
+            return Response::json(
+                array(
+                    'status' => 'failed',
+                    'pages' => $results
+                ),
+                200
+            );
         }
     }
     /**
      * Get the review for specific user on a specific Book
+     * @response {
+     * }
      * @authenticated
      * @bodyParam bookId integer required id of the of the book
      */
     public function showReviewsForBook($book_id)
     {
-       // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
-       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and book_id = ?', [$book_id]);
+        // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+        $results = DB::select('select r.id,r.bookId,r.body,r.rating,r.lastUpdate,r.numberLikes,r.numberComments,r.userId,u.name as username, u.imageLink as userimagelink from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
 
-        if($results != NULL){
-            return Response::json(array(
-                'status' => 'success',
-                'pages' => $results),
-                200);
-        }
-        else{
-            return Response::json(array(
-                'status' => 'failed',
-                'pages' => $results),
-                200);
+        if ($results != null) {
+            return Response::json(
+                array(
+                    'status' => 'success',
+                    'pages' => $results
+                ),
+                200
+            );
+        } else {
+            return Response::json(
+                array(
+                    'status' => 'failed',
+                    'pages' => $results
+                ),
+                200
+            );
         }
     }
 }

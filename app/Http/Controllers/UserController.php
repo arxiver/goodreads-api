@@ -65,7 +65,7 @@ class userController extends Controller
      */
 
     public function signUp(Request $request)
-    {   
+    {
         $olderThan = 3;
         $youngerThan = 100;
 
@@ -74,25 +74,25 @@ class userController extends Controller
                                     "password"      => "required|confirmed|max:30|min:5",
                                     "name"          => "required|string|max:50|min:3" ,
                                     "gender"        => "required|string",
-                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    "birthday"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
                                     "country"       => "required|string",
                                     "city"          => "required|string"
                                 );
         $Messages       = array(
-                                    "birthDay.before" => "You must be older than ". $olderThan,
-                                    "birthDay.after" => "You must be younger than ". $youngerThan
+                                    "birthday.before" => "You must be older than ". $olderThan,
+                                    "birthday.after" => "You must be younger than ". $youngerThan
                                 );
 
-                                
+
 
         $Data = validator::make($request->all(), $Validations, $Messages);
         if (!($Data->fails())) {
             $UserName = strstr($request["email"], '@', 2);
-            $ValidationArray    = array("UserName" => $UserName);
-            $ValidationUserName = array("UserName" => "unique:users");
+            $ValidationArray    = array("Username" => $UserName);
+            $ValidationUserName = array("Username" => "unique:users");
             $AdditionalString = 1;
             while ((validator::make($ValidationArray, $ValidationUserName))->fails()) {
-                $ValidationArray["UserName"].=$AdditionalString;
+                $ValidationArray["Username"].=$AdditionalString;
                 $AdditionalString+=1;
             }
             $Create = array(
@@ -100,51 +100,51 @@ class userController extends Controller
                                 "password"      => $request["password"],
                                 "name"          => $request["name"],
                                 "gender"        => $request["gender"],
-                                "userName"      => $ValidationArray["UserName"],
+                                "username"      => $ValidationArray["UserName"],
                                 "age"           => date("Y") - date("Y", strtotime($request["birthDay"])),
-                                "birthDay"      => date("Y-n-j", strtotime($request["birthDay"])),
+                                "birthday"      => date("Y-n-j", strtotime($request["birthDay"])),
                                 "country"       => $request["country"],
                                 "city"          => $request["city"],
-                                "ratingCount"   => 0,
-                                "ratingAvg"     => 0,
-                                "followingCounts"=>0,
-                                "followersCounts"=> 0,
-                                "bookCount"     => 0,
-                                "lastActive"    => now(),
-                                "joinedAt"      => date("Y-n-j")
+                                "rating_count"   => 0,
+                                "rating_avg"     => 0,
+                                "following_count"=>0,
+                                "followers_count"=> 0,
+                                "book_count"     => 0,
+                                "last_active"    => now(),
+                                "joined_at"      => date("Y-n-j")
                             );
 
-            
-                
+
+
             User::create($Create);
-            
+
             $token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]);
 
-            
+
             $GettingData = array(
                                     "email" ,
                                     "name" ,
                                     "age" ,
-                                    "birthDay",
-                                    "joinedAt",
+                                    "birthday",
+                                    "joined_at",
                                     "username" ,
                                     "gender" ,
-                                    "lastActive" ,
+                                    "last_active" ,
                                     "country" ,
                                     "city" ,
-                                    "ratingCount" ,
-                                    "ratingAvg" ,
-                                    "followingCounts" ,
-                                    "followersCounts",
-                                    "imageLink"
+                                    "rating_count" ,
+                                    "rating_avg" ,
+                                    "following_count" ,
+                                    "followers_count",
+                                    "image_link"
                                 );
             $Show = User::where("email", $request["email"])->first($GettingData);
             return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
-        } 
-        else 
+        }
+        else
         {
             return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
-        } 
+        }
     }
 
 
@@ -188,8 +188,8 @@ class userController extends Controller
         // response
 
 
-        
-        
+
+
         $HashedPassword = Hash::make($request["password"]);
         $Validations    = array(
                                     "email"             => "required|email|exists:users,Email" ,
@@ -214,21 +214,21 @@ class userController extends Controller
                                         "email" ,
                                         "name" ,
                                         "age" ,
-                                        "birthDay",
-                                        "joinedAt",
+                                        "birthday",
+                                        "joined_at",
                                         "username" ,
                                         "gender" ,
-                                        "lastActive" ,
+                                        "last_active" ,
                                         "country" ,
                                         "city" ,
-                                        "ratingCount" ,
-                                        "ratingAvg" ,
-                                        "followingCounts" ,
-                                        "followersCounts",
-                                        "imageLink"
+                                        "rating_count" ,
+                                        "rating_avg" ,
+                                        "following_count" ,
+                                        "followers_count",
+                                        "image_link"
                                     );
                 $User = User::where("email" , $request["email"])->first();
-                $User->lastActive=now();
+                $User->last_active=now();
                 $User->save();
                 $Show = User::where("email" , $request["email"])->first($GettingData);
                 return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
@@ -261,7 +261,7 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-        
+
     }
 
 
@@ -281,7 +281,7 @@ class userController extends Controller
     {
 
         $User = User::find($this->ID);
-        $User->lastActive = now();
+        $User->last_active = now();
         $User->save();
         auth()->logout();
         return response(["status" => "true" , "message" => "You have loged out"]);
@@ -545,8 +545,8 @@ class userController extends Controller
         $userId = $request->has(['id']) ? $request->id : $this->ID;
         User::findOrFail($userId);
 
-        $data = User::select('id','name','email','link','imageLink',
-                             'smallImageUrl','about','age','gender')
+        $data = User::select('id','name','email','link','image_link',
+                             'small_image_link','about','age','gender')
                              ->where('id', $userId)->get();
 
         return response()->json($data);

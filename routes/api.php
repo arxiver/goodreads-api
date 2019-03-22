@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signUp', "UserController@signUp");
     Route::post('logIn', "UserController@logIn");
+    
 });
 Route::group(["middleware" => "unAuthorized"] , function(){
     Route::post('changePassword', "UserController@changePassword");
@@ -36,6 +37,7 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::delete('deleteComment','ActivitiesController@deleteComment');
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
+    Route::get('updates','ActivitiesController@followingUpdates');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -102,10 +104,11 @@ Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');
 
 //activities section
-Route::get('updates','ActivitiesController@followingUpdates');
+
 Route::get('notifications','ActivitiesController@notifications');
 Route::post('makeComment','ActivitiesController@makeComment');
 Route::get('listComments','ActivitiesController@listComments');
 Route::get('listLikes','ActivitiesController@listLikes');
+
 
 

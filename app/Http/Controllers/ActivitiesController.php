@@ -1,6 +1,7 @@
 <?php
-
+//use App\Controller\AppController;
 namespace App\Http\Controllers;
+use App\Following;
 use App\User;
 use App\Review;
 use App\Shelf;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 /**
  * @group Activities
  *
@@ -18,19 +21,64 @@ use Response;
  */
 class ActivitiesController extends Controller
 {
-    
+
     /**
      * updates
      * Get user's updates from following users
      * @authenticated
      * @bodyParam user_id int optional to get the updates made by a specific user (default all following)
      * @bodyParam max_updates int optional to get the max limit of updates.
-     * @responseFile responses/updatesReal.json  
+     * @responseFile responses/updatesReal.json
      */
-    public function followingUpdates($user_id,$max_updates)
+    //$user_id,$max_updates
+    public function followingUpdates(Request $request)
     {
+        $Validations    = array(
+            "user_id"         => "integer",
+            "max_updates"     => "integer|min:1"
 
-    } 
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    {
+        $result = collect();
+        $auth_id = $this->ID;
+        if($request->filled('user_id'))
+        {
+            $followingArr = [$request->input('user_id')];
+        }else {
+            $following = DB::table('followings')->where('follower_id','=',$auth_id)->select('user_id')->get();
+            $followingArr= json_decode( json_encode($following), true);
+            $followingArr = Arr::flatten($followingArr);
+        }
+        $rev = Review::reviewsUsersArr($followingArr);
+        $shelf = Shelf::shelvesUsersArr($followingArr);
+        $follow =Following::followingUsersArr($followingArr);
+        $likes = Likes::likesUsersArr($followingArr);
+        $comments = Comment::commentsUsersArr($followingArr);
+        $result = collect();
+        $result = $result->merge($rev);
+        $result = $result->merge($shelf);
+        $result = $result->merge($follow);
+        $result = $result->merge($comments);
+        $result = $result->merge($likes);
+        $result = array_reverse(array_sort($result, function ($value) {
+            return $value['updated_at'];
+          }));
+        if($request->filled('max_updates'))
+        {
+            $result = array_slice($result,0,$request->input('max_updates'));
+        }
+        $response = array('status' =>"true",'updates'=>$result) ;
+        $responseCode = 201;
+
+    }else{
+        
+        $response = array( 'status' => "false",'message' =>"Something gone wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
+    }
     /**
      * notifications
      * gets a user's notifications
@@ -87,7 +135,7 @@ class ActivitiesController extends Controller
      */
     public function makeComment(Request $request)
     {
-        //To DO ->check for the resource to be inside the database or not and update the number of 
+        //To DO ->check for the resource to be inside the database or not and update the number of
         // comments on the review or user status
         $Validations    = array(
             "id"        => "required|integer",
@@ -98,14 +146,14 @@ class ActivitiesController extends Controller
         if (!($Data->fails())) {
             $Create = array(
                 "user_id" => $this->ID,
-                "resourseId" => $request["id"],
-                "resourseType"  => $request["type"],
+                "resourse_id" => $request["id"],
+                "resourse_type"  => $request["type"],
                 "body" =>$request["body"]
             );
             Comment::create($Create);
             return response()->json([
-                "status" => "true" , "user" => $this->ID, "resourseId" => $request["id"] , "resourseType"  => $request["type"]
-                ,"bodyOfReview" => $request["body"]
+                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                ,"review_body" => $request["body"]
             ]);
         }
         else
@@ -176,10 +224,10 @@ class ActivitiesController extends Controller
 	* 		]
 	*	}
     * }
-    */    
+    */
     public function listComments()
     {
-        
+
     }
     /**
      * like
@@ -189,7 +237,7 @@ class ActivitiesController extends Controller
      */
     public function makeLike(Request $request)
     {
-        //To DO ->check for the resource to be inside the database or not and update the number of 
+        //To DO ->check for the resource to be inside the database or not and update the number of
         // likes on the review or user status
         $Validations    = array(
             "id"        => "required|integer",
@@ -199,12 +247,12 @@ class ActivitiesController extends Controller
         if (!($Data->fails())) {
             $Create = array(
                 "user_id" => $this->ID,
-                "resourseId" => $request["id"],
-                "resourseType"  => $request["type"]
+                "resourse_id" => $request["id"],
+                "resourse_type"  => $request["type"]
             );
             Likes::create($Create);
             return response()->json([
-                "status" => "true" , "user" => $this->ID, "resourseId" => $request["id"] , "resourseType"  => $request["type"]
+                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
             ]);
         }
         else
@@ -212,7 +260,7 @@ class ActivitiesController extends Controller
             return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
         }
 	}
-	
+
     /**
      * unlike
      * @bodyParam id int required like id
@@ -266,16 +314,16 @@ class ActivitiesController extends Controller
 	 *		"image_url": "\nhttps://s.gr-assets.png\n",
 	 *		"has_image": "false"
 	 *	},
-	 *	
+	 *
 	 *	"date_added": "Fri Mar 08 16:25:10 -0800 2019",
 	 *	"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
 	 *	"link": "\nhttps://www.goodreads.comshow/00000\n",
 	 *  }
      * ]
      *}
-     */    
+     */
     public function listLikes()
     {
-        
+
     }
 }

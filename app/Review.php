@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Collection;
 class Review extends Model
 {
     protected $fillable = [
@@ -14,4 +14,26 @@ class Review extends Model
         'updated_at',
         'created_at'
     ];
+    public static function reviewsUsersArr($Arr)
+    {
+        $monda = Review::whereIn('reviews.user_id',$Arr)
+        ->join('books','reviews.book_id','=','books.id')
+        ->join('users','reviews.user_id','=','users.id')
+        ->join('authors','books.author_id','=','authors.id')
+        ->select('Reviews.id','body','rating','likes_count','comments_count','reviews.updated_at'
+        ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
+        ,'ratings_avg','pages_no','users.id as user_id','users.name','users.image_link','author_name')
+        ->get();
+        $t = array();
+        $j=0;
+       foreach($monda as $l)
+        {
+            $l = collect($l);
+            $l ->put('update_type',0);
+           $t[$j]=$l;
+           $j++;
+        }
+        $monda = collect($t);
+        return $monda;
+    }
 }

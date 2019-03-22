@@ -34,6 +34,5 @@ class DatabaseSeeder extends Seeder
             $i++;
             }
         }
-    }
 }
 

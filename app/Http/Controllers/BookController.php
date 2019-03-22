@@ -88,7 +88,7 @@ class BookController extends Controller
                 'pages' => $results),
                 200);
         }
-        
+
     }
 
     /**
@@ -232,7 +232,7 @@ class BookController extends Controller
     public function getBookByAuthorName($author_name)
     {
         //
-        $results = DB::select('select * from books b , authors a where a.id = b.authorId and a.authorName=?', [$author_name]);
+        $results = DB::select('select * from books b , authors a where a.id = b.author_id and a.author_name=?', [$author_name]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

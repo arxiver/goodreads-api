@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Following;
 use App\User;
@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
         factory(Comment::class,20)->create();
         factory(Likes::class,20)->create();
         factory(App\Review::class,4)->create();
+        factory(App\Shelf::class,10)->create();
         $i = 1;
-        while ($i <= 4) {
+        while ($i <= 5) {
             factory(App\Following::class)->create(
                 [
                     'user_id' => 1,
@@ -33,4 +34,6 @@ class DatabaseSeeder extends Seeder
             $i++;
             }
         }
+    }
 }
+

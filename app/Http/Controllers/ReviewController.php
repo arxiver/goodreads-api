@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Review;
 use App\Shelf;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use Response;
+
 /**
  * @group Review
  * @authenticated
@@ -57,9 +59,9 @@ class ReviewController extends Controller
          * this to make a validation on the request 
          */
         $Validations    = array(
-                "bookId"         => "required|integer",
-                "shelf"          => "required|integer|max:3|min:0",
-                "rating"         => "integer|max:5|min:1"
+            "bookId"         => "required|integer",
+            "shelf"          => "required|integer|max:3|min:0",
+            "rating"         => "integer|max:5|min:1"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
@@ -112,12 +114,11 @@ class ReviewController extends Controller
             }
             else{
                 return response()->json([
-                    "status" => "false" , "Message" => "There is no rate to create the review"
+                    "status" => "false", "Message" => "There is no rate to create the review"
                 ]);
             }
-        }
-        else{
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        } else {
+            return response(["status" => "false", "errors" => $Data->messages()->first()]);
         }
     }
 
@@ -181,12 +182,11 @@ class ReviewController extends Controller
             }
             else{
                 return response()->json([
-                    "status" => "false" , "Message" => "The reviewId is wrongggg."
+                    "status" => "false", "Message" => "The reviewId is wrongggg."
                 ]);
             }
-        }
-        else{
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        } else {
+            return response(["status" => "false", "errors" => $Data->messages()->first()]);
         }
     }
 
@@ -195,9 +195,7 @@ class ReviewController extends Controller
      * @authenticated
      */
     public function recentReviews()
-    {
-
-    }
+    { }
     /**
      * Remove a Review
      * @authenticated
@@ -344,9 +342,35 @@ class ReviewController extends Controller
      * @bodyParam author string optional The author name of the book to lookup.
      * @bodyParam rating int optional Show only reviews with a particular rating.
      */
-    public function getReviewsByTitle()
+    public function getReviewsByTitle($t)
     {
         //
+        $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$t]);
+        foreach($rt as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
+        if($rt != NULL){
+            return Response::json(array(
+                'status' => 'success',
+                'pages' => $rt),
+                200);
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                'pages' => $rt),
+                200);
+        }  
     }
 
     /**
@@ -356,10 +380,10 @@ class ReviewController extends Controller
      */
     public function listMyReviews()
     {
-        $userId =$this->ID;
+        $userId = $this->ID;
         User::findOrFail($userId);
         $data = Review::where('user_id', $userId)->get();
-        return response()->json(array('my_reviews'=>$data),200);
+        return response()->json(array('my_reviews' => $data), 200);
     }
 
 
@@ -383,6 +407,19 @@ class ReviewController extends Controller
     {
         //
         $results = DB::select('select * from reviews where id = ?', [$id]);
+        foreach($results as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -406,11 +443,34 @@ class ReviewController extends Controller
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book
      */
-    public function showReviewForBookForUser($user_id , $book_id)
+    public function showReviewForBookForUser($user_id, $book_id)
     {
         //
-        $results = DB::select('select * from reviews  where userId = ? and bookId = ?', [$user_id,$book_id]);
+     // $results=DB::table('reviews')->where('user_id',$user_id,'book_id',$book_id)->value('rating','shelf_name','body');  
+        $results =DB::select('select rating ,shelf_name , body from reviews  where user_id = ? and book_id = ?', [$user_id,$book_id]);
         if($results != NULL){
+          /*  if($results[1]['rating']==0){
+                $results[1]='read';
+            }
+            else if($results[1]==1){
+                $results[1]='currentlyRead';
+            }
+            else{
+                $results[1]='WantToRead';
+            }*/
+            foreach($results as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results),
@@ -433,8 +493,20 @@ class ReviewController extends Controller
     public function showReviewsForBook($book_id)
     {
        // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
-       $results = DB::select('select r.id,r.bookId,r.body,r.rating,r.lastUpdate,r.numberLikes,r.numberComments,r.userId,u.name as username, u.imageLink as userimagelink from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
+       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and book_id = ?', [$book_id]);
+       foreach($results as $res)
+       {
+               if($res->shelf_name ==0){
+                   $res->shelf_name ='read';
+               }
+               else if($res->shelf_name ==1){
+                   $res->shelf_name ='currentlyRead';
+               }
+               else{
+                   $res->shelf_name ='WantToRead';
 
+               }
+       }
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

@@ -74,7 +74,7 @@ class userController extends Controller
                                     "password"      => "required|confirmed|max:30|min:5",
                                     "name"          => "required|string|max:50|min:3" ,
                                     "gender"        => "required|string",
-                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    //"birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
                                     "country"       => "required|string",
                                     "city"          => "required|string"
                                 );

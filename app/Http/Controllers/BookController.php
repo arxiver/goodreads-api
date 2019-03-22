@@ -70,10 +70,12 @@ class BookController extends Controller
      *
 
      */
-    public function show ($id)
+    public function show (Request $request)
     {
         //
-        $results = DB::select('select * from books where id = ?', [$id]);
+        
+        //$results = DB::select('select * from books where id = ?', [$request["book_id"]])->first();
+        $results = Book::find([$request["book_id"]])->first();
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

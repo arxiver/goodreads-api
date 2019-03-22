@@ -36,6 +36,8 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::delete('deleteComment','ActivitiesController@deleteComment');
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
+    Route::get( 'books/show', 'BookController@show');
+    Route::delete('reviwes/delete', 'ReviewController@destroy');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -48,7 +50,7 @@ Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
 
 // Book Section
 Route::get('books','BookController@index');
-Route::get( 'books/show/{book_id}', 'BookController@show');
+
 Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
 Route::get('Books/book_title/{book_title}','BookController@getBookByTitle');
 Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
@@ -56,8 +58,6 @@ Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthor
 
 // Review Section
 Route::get('reviwes','ReviewController@recentReviews');
-Route::put('reviwes/edit', 'ReviewController@editReview');
-Route::delete('reviwes/{id}', 'ReviewController@destroy');
 Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
 //

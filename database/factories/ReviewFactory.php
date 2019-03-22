@@ -5,12 +5,12 @@ use Faker\Generator as Faker;
 $factory->define(App\Review::class, function (Faker $faker) {
     return [
         //
-        'user_id' =>$faker->numberBetween(1, 100),
-        'book_id'=>$faker->numberBetween(1, 100),
+        'user_id' =>$faker->numberBetween(1, 4),
+        'book_id'=>$faker->numberBetween(1, 4),
         'body'=> Str::random(10),
-        'shelf_name'=> $faker->randomElement(['read','to-read','currently-reading']),
+        'shelf_name'=>$faker->numberBetween(1, 3),
         'rating'=> $faker->randomFloat(3,0,5),
-        'number_likes'=> $faker->numberBetween(1, 100),
-        'number_comments'=> $faker->numberBetween(1, 100),
+        'numberLikes'=> $faker->numberBetween(1, 100),
+        'numberComments'=> $faker->numberBetween(1, 100),
     ];
 });

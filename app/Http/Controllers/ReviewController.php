@@ -210,10 +210,23 @@ class ReviewController extends Controller
      * @bodyParam author string optional The author name of the book to lookup.
      * @bodyParam rating int optional Show only reviews with a particular rating.
      */
-    public function getReviewsByTitle(Request $request)
+    public function getReviewsByTitle($t)
     {
         //
-        $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['book_title']]);
+        $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$t]);
+        foreach($rt as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
         if($rt != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -262,6 +275,19 @@ class ReviewController extends Controller
     {
         //
         $results = DB::select('select * from reviews where id = ?', [$id]);
+        foreach($results as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -286,8 +312,31 @@ class ReviewController extends Controller
     public function showReviewForBookForUser($user_id , $book_id)
     {
         //
-        $results = DB::select('select * from reviews  where user_id = ? and book_id = ?', [$user_id,$book_id]);
+     // $results=DB::table('reviews')->where('user_id',$user_id,'book_id',$book_id)->value('rating','shelf_name','body');  
+        $results =DB::select('select rating ,shelf_name , body from reviews  where user_id = ? and book_id = ?', [$user_id,$book_id]);
         if($results != NULL){
+          /*  if($results[1]['rating']==0){
+                $results[1]='read';
+            }
+            else if($results[1]==1){
+                $results[1]='currentlyRead';
+            }
+            else{
+                $results[1]='WantToRead';
+            }*/
+            foreach($results as $res)
+            {
+                    if($res->shelf_name ==0){
+                        $res->shelf_name ='read';
+                    }
+                    else if($res->shelf_name ==1){
+                        $res->shelf_name ='currentlyRead';
+                    }
+                    else{
+                        $res->shelf_name ='WantToRead';
+
+                    }
+            }
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results),
@@ -309,7 +358,19 @@ class ReviewController extends Controller
     {
        // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
        $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and book_id = ?', [$book_id]);
+       foreach($results as $res)
+       {
+               if($res->shelf_name ==0){
+                   $res->shelf_name ='read';
+               }
+               else if($res->shelf_name ==1){
+                   $res->shelf_name ='currentlyRead';
+               }
+               else{
+                   $res->shelf_name ='WantToRead';
 
+               }
+       }
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

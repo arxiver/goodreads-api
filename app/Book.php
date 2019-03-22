@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use DB;
+use Response;
 
 class Book extends Model
 {
@@ -24,4 +27,10 @@ class Book extends Model
         'updated_at',
         'created_at'
     ];
+    public function setBook($a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p){
+        $res = DB::insert('insert into books values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p]);
+    }
+    public function deleteBook($a){
+        $res = DB::delete('delete from books where id=?',[$a]);
+    }
 }

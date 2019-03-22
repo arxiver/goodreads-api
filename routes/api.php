@@ -20,6 +20,14 @@ use Illuminate\Support\Facades\Route;
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signUp', "UserController@signUp");
     Route::post('logIn', "UserController@logIn");
+    Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
+    Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
+    //
+    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+    Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
+    Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
+    Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+
 });
 Route::group(["middleware" => "unAuthorized"] , function(){
     Route::post('changePassword', "UserController@changePassword");

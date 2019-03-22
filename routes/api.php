@@ -44,6 +44,7 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::delete('deleteComment','ActivitiesController@deleteComment');
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
+    Route::get('updates','ActivitiesController@followingUpdates');
     Route::get( 'books/show', 'BookController@show');
     Route::delete('reviwes/delete', 'ReviewController@destroy');
 });
@@ -110,10 +111,11 @@ Route::get('UserController', 'UserController@index');
 Route::get('UserController/{user}','UserController@getUser');
 
 //activities section
-Route::get('updates','ActivitiesController@followingUpdates');
+
 Route::get('notifications','ActivitiesController@notifications');
 Route::post('makeComment','ActivitiesController@makeComment');
 Route::get('listComments','ActivitiesController@listComments');
 Route::get('listLikes','ActivitiesController@listLikes');
+
 
 

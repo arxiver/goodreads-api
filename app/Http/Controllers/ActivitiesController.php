@@ -1,6 +1,7 @@
 <?php
-
+//use App\Controller\AppController;
 namespace App\Http\Controllers;
+use App\Following;
 use App\User;
 use App\Review;
 use App\Shelf;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 /**
  * @group Activities
  *
@@ -27,9 +30,54 @@ class ActivitiesController extends Controller
      * @bodyParam max_updates int optional to get the max limit of updates.
      * @responseFile responses/updatesReal.json
      */
-    public function followingUpdates($user_id,$max_updates)
+    //$user_id,$max_updates
+    public function followingUpdates(Request $request)
     {
+        $Validations    = array(
+            "user_id"         => "integer",
+            "max_updates"     => "integer|min:1"
 
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    {
+        $result = collect();
+        $auth_id = $this->ID;
+        if($request->filled('user_id'))
+        {
+            $followingArr = [$request->input('user_id')];
+        }else {
+            $following = DB::table('followings')->where('follower_id','=',$auth_id)->select('user_id')->get();
+            $followingArr= json_decode( json_encode($following), true);
+            $followingArr = Arr::flatten($followingArr);
+        }
+        $rev = Review::reviewsUsersArr($followingArr);
+        $shelf = Shelf::shelvesUsersArr($followingArr);
+        $follow =Following::followingUsersArr($followingArr);
+        $likes = Likes::likesUsersArr($followingArr);
+        $comments = Comment::commentsUsersArr($followingArr);
+        $result = collect();
+        $result = $result->merge($rev);
+        $result = $result->merge($shelf);
+        $result = $result->merge($follow);
+        $result = $result->merge($comments);
+        $result = $result->merge($likes);
+        $result = array_reverse(array_sort($result, function ($value) {
+            return $value['updated_at'];
+          }));
+        if($request->filled('max_updates'))
+        {
+            $result = array_slice($result,0,$request->input('max_updates'));
+        }
+        $response = array('status' =>"true",'updates'=>$result) ;
+        $responseCode = 201;
+
+    }else{
+        
+        $response = array( 'status' => "false",'message' =>"Something gone wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
     }
     /**
      * notifications

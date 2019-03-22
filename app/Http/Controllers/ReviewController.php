@@ -83,21 +83,21 @@ class ReviewController extends Controller
                     );
                     Review::create($Create);
                     $bookWanted=Book::find($request["bookId"]);
-                    $conutOfReviews=$bookWanted["reviewsCount"] +1;
-                    $conutOfRating=$bookWanted["ratingsCount"] +1;
+                    $conutOfReviews=$bookWanted["reviews_count"] +1;
+                    $conutOfRating=$bookWanted["ratings_count"] +1;
                     $avg = DB::table('reviews')->where('book_id', $request["bookId"])->avg('rating');
                     DB::table('books')
                         ->updateOrInsert(
                             ['id' => $request["bookId"]],
-                            ['ratingsAvg' => $avg , 'reviewsCount' => $conutOfReviews ,'ratingsCount' => $conutOfRating]
+                            ['ratings_avg' => $avg , 'reviews_count' => $conutOfReviews ,'ratings_count' => $conutOfRating]
                         );
                     $user=User::find($this->ID);
-                    $conutOfRatingUser=$user["ratingCount"] +1;
+                    $conutOfRatingUser=$user["rating_count"] +1;
                     $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
                     DB::table('users')
                         ->updateOrInsert(
                             ['id' =>$this->ID ],
-                            ['ratingAvg' => $avgUser ,'ratingCount' => $conutOfRatingUser]
+                            ['rating_avg' => $avgUser ,'rating_count' => $conutOfRatingUser]
                         );
                     $reviewId=DB::table('reviews')->max('id');
                     return response()->json([
@@ -168,7 +168,7 @@ class ReviewController extends Controller
                             DB::table('books')
                                 ->updateOrInsert(
                                     ['id' => $review["book_id"]],
-                                    ['ratingsAvg' => $avg]
+                                    ['ratings_avg' => $avg]
                                 );
                     return response()->json([
                         "status" => "true" , "user" => $this->ID, "review_id" =>$request["reviewId"] ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"]
@@ -204,12 +204,12 @@ class ReviewController extends Controller
      * @response 201{
      *  "status": "true",
      *  "userId": 2,
-     *  "ratingsCountUser": 4,
-     *  "ratingAvgUser": "4.0000",
+     *  "ratings_countUser": 4,
+     *  "rating_avgUser": "4.0000",
      *  "BookId": 3,
-     *  "ratingsAvgBook": "4.0000",
-     *  "reviewsCountBook": 37,
-     *  "ratingsCountBook": 19,
+     *  "ratings_avgBook": "4.0000",
+     *  "reviews_countBook": 37,
+     *  "ratings_countBook": 19,
      *  "NumberOfDeletedCommentsOnThisReview": 3,
      *  "NumberOfDeletedLikesOnThisReview": 1
      * }
@@ -240,7 +240,7 @@ class ReviewController extends Controller
                 $user=User::find($this->ID);
                 if ($this->ID == $review['user_id']){
                     $review->delete();
-                    $conutOfRatingUser=$user["ratingCount"] -1;
+                    $conutOfRatingUser=$user["rating_count"] -1;
                     if ($conutOfRatingUser<0)
                     {
                             $conutOfRatingUser=0;
@@ -253,13 +253,13 @@ class ReviewController extends Controller
                     DB::table('users')
                         ->updateOrInsert(
                             ['id' =>$this->ID ],
-                            ['ratingAvg' => $avgUser ,'ratingCount' => $conutOfRatingUser]
+                            ['rating_avg' => $avgUser ,'rating_count' => $conutOfRatingUser]
                     );
                     //echo $review;
                     //die();
                     $bookWanted=Book::findOrFail($review["book_id"]);
-                    $conutOfReviews=$bookWanted["reviewsCount"] -1;
-                    $conutOfRating=$bookWanted["ratingsCount"] -1;
+                    $conutOfReviews=$bookWanted["reviews_count"] -1;
+                    $conutOfRating=$bookWanted["ratings_count"] -1;
                     if ($conutOfReviews < 0)
                     {
                         $conutOfReviews=0;
@@ -276,29 +276,29 @@ class ReviewController extends Controller
                     DB::table('books')
                         ->updateOrInsert(
                             ['id' => $review["book_id"]],
-                            ['ratingsAvg' => $avg , 'reviewsCount' => $conutOfReviews ,'ratingsCount' => $conutOfRating]
+                            ['ratings_avg' => $avg , 'reviews_count' => $conutOfReviews ,'ratings_count' => $conutOfRating]
                         );
                     $numberOfDeletedComments=DB::table('comments')->where([
-                        ['resourseId',$request["reviewId"] ],
-                        ['resourseType',0],
+                        ['resourse_id',$request["reviewId"] ],
+                        ['resourse_type',0],
                     ])->count();
                     DB::table('comments')->where([
-                        ['resourseId',$request["reviewId"] ],
-                        ['resourseType',0],
+                        ['resourse_id',$request["reviewId"] ],
+                        ['resourse_type',0],
                     ])->delete();
                     
                     $numberOfDeletedLikes=DB::table('likes')->where([
-                        ['resourseId',$request["reviewId"] ],
-                        ['resourseType',0],
+                        ['resourse_id',$request["reviewId"] ],
+                        ['resourse_type',0],
                     ])->count();
                     DB::table('likes')->where([
-                        ['resourseId',$request["reviewId"] ],
-                        ['resourseType',0],
+                        ['resourse_id',$request["reviewId"] ],
+                        ['resourse_type',0],
                     ])->delete();
                     return response()->json([
-                        "status" => "true" , 'userId'=>$this->ID ,'ratingsCountUser'=>$conutOfRatingUser,
-                        'ratingAvgUser' =>$avgUser,'BookId'=>$review["book_id"],'ratingsAvgBook' => $avg , 
-                        'reviewsCountBook' => $conutOfReviews ,'ratingsCountBook' => $conutOfRating,
+                        "status" => "true" , 'userId'=>$this->ID ,'ratings_countUser'=>$conutOfRatingUser,
+                        'rating_avgUser' =>$avgUser,'BookId'=>$review["book_id"],'ratings_avgBook' => $avg , 
+                        'reviews_countBook' => $conutOfReviews ,'ratings_countBook' => $conutOfRating,
                         'NumberOfDeletedCommentsOnThisReview' =>$numberOfDeletedComments,
                         'NumberOfDeletedLikesOnThisReview' =>$numberOfDeletedLikes
                     ]);

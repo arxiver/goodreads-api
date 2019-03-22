@@ -397,7 +397,7 @@ class ActivitiesController extends Controller
     {
         $Validations    = array(
             "id"        => "required|integer",
-            "type"      => "required|integer|max:2|min:1",
+            "type"      => "required|integer|max:2|min:0",
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {

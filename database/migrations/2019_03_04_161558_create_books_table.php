@@ -22,12 +22,12 @@ class CreateBooksTable extends Migration
             $table->string('publisher');
             $table->string('language');
             $table->string('description');
-            $table->integer('reviews_count')->nullable();
-            $table->integer('ratings_count')->nullable();
-            $table->float('ratings_avg')->nullable();
+            $table->integer('reviews_count')->nullable()->default(0);
+            $table->integer('ratings_count')->nullable()->default(0);
+            $table->float('ratings_avg')->nullable()->default(0);
             $table->string('link');
             $table->integer('author_id');
-            $table->integer('pages_no')->nullable();
+            $table->integer('pages_no')->nullable()->default(0);
             $table->timestamps();
         });
     }

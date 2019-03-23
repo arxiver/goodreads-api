@@ -21,15 +21,25 @@ use Response;
 class ReviewController extends Controller
 {
     /**
-     * Function_name :createReview
-     * Description:
+     *  Create of Review
+     * 
      *  make a validation on the input to check that is satisfing the conditions 
+     * 
      *  if tha input is valid it will continue in the code otherwise it will response with error
+     * 
      *  put the book in the shelf_read if it in another shelf or if it wasn't in any shelf 
+     * 
      *  create a new review in the databse 
+     * 
      *  increment the number of reviews on this book 
+     * 
      *  increment the number of ratings on this book
-     *  
+     * 
+     *  modify the avgrating for this book 
+     * 
+     *  increment the number of ratings for the user
+     * 
+     *  modify the avgrating for the user 
      *  
      * @authenticated
      * each state of the shelf is represented by a number
@@ -130,6 +140,15 @@ class ReviewController extends Controller
 
     /**
      * Edit a review
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * check that the authenticated user is  the one who create the review to allow to him to edit it.
+     * 
+     * edit the review and rating value.
+     * 
      * @authenticated
      * @bodyParam reviewId int required Review Id.
      * @bodyParam body text optional The text of the review.
@@ -204,6 +223,27 @@ class ReviewController extends Controller
     { }
     /**
      * Remove a Review
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * check that the authenticated user is  the one who create the review to allow to him to delete it.
+     * 
+     *  delete the review from the databse 
+     * 
+     *  decrement the number of reviews on this book 
+     * 
+     *  decrement the number of ratings on this book
+     * 
+     *  modify the avgrating for this book 
+     * 
+     *  decrement the number of ratings for the user
+     * 
+     *  modify the avgrating for the user
+     * 
+     *  delete the comment and likes on this review and count them 
+     *  
      * @authenticated
      * @bodyParam reviewId int required The id of review to be deleted.
      *

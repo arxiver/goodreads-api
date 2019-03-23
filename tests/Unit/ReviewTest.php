@@ -1,24 +1,22 @@
 <?php
 
+
 namespace Tests\Unit;
 use App\User;
 use App\Book;
-use App\Shelf;
 use App\Review;
+use App\Shelf;
+use App\Http\Controllers\ReviewController;
 use Tests\TestCase;
-use DB;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-class ReviewsTest extends TestCase
+class ReviewTest extends TestCase
 {
     //use RefreshDatabase;
      /**
      * test
      * @return void
      */
-    //Function to test the createReview function in the ReviewsController.
-   /* public function testCreateReview()
+   public function testCreateReview()
     {
         $rate=2;
         // Get the number of shelves in the database
@@ -42,10 +40,7 @@ class ReviewsTest extends TestCase
         // Get the reviews_count of this book
 		$reviewCountBook = $book['reviews_count'];
 		// Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token
@@ -143,7 +138,7 @@ class ReviewsTest extends TestCase
      * test
      * @return void
      */
-    /*public function testEditReview()
+    public function testEditReview()
     {
         // the new rating value 
         $newRate =5;
@@ -162,12 +157,9 @@ class ReviewsTest extends TestCase
         //$user = User::find($randomUserId); 
         // note that you must specifiy a review with his user to be able to edit it
         // or the assert will faild so i gave it number not random like the create   
-        $user = User::find(3);   
+        $user = User::find(2);   
         // Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token
@@ -201,14 +193,14 @@ class ReviewsTest extends TestCase
      echo "\n";
      echo $r['rating'];
      echo "\n";
-    }*/
+    }
 
 
     /**
      * test
      * @return void
      */
-    public function testDeleteReview()
+   /* public function testDeleteReview()
     {
         // Get the number of shelves in the database
         $shelfCount = Shelf::all()->count();
@@ -329,5 +321,5 @@ class ReviewsTest extends TestCase
             'reviews_count' => $reviewCountBook,
             'ratings_count' =>  $rating_countBook
         ]);
-    }
+    }*/
 }

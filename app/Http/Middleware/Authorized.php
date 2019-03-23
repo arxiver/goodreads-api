@@ -17,11 +17,14 @@ class Authorized
     {
         if(auth()->user())
         {
-            return response(["status" => "false" , "message" => "Alredy authorized"]);
+            return response()->json(["errors" => "Alredy authorized"],405);
         }
         else
         {
-            return $next($request);
+            return $next($request)
+            ->header("Access-Contorl-Allow-Origin" , "*")
+            ->header("Access-Contorl-Allow-Methods" , "GET,POST , PUT , DELETE, OPTIONS")
+            ->header("Access-Contorl-Allow-Headers" , "Content-Type, X-Auth-Token , Origin , Authorization , X-Requested-With");
         }
     }
 }

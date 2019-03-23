@@ -36,27 +36,50 @@ class FollowingController extends Controller
         /**
          * Validation Segment to check if there is dublication error could happen
          */
-        $followerId = $this->ID;
-        $userId = $request->user_id;
+        $userId = $request->has(['user_id']) ? $request->user_id : abort(404) ;
         /**
          *  if the user doesn`t exist .
          */
         $user = User::findOrFail($userId);
-        if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1) {
-            $response = array( 'status' => "false",'message' =>"Something gone wrong .");
+        $followerId = $this->ID;
+
+        /**
+         * Validate the relationship is not exist before.
+         * reponseing 400 if it exist.
+         */
+        if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1)
+        {
+            $response =
+             array( 'status' => "false",
+             'message' =>"Something gone wrong .");
             $responseCode = 400;
-        } else {
+        }
+        else
+        {
+            /**
+             * Creating new instance of following model
+             */
             $following = new Following();
             $following->follower_id = $followerId;
             $following->user_id = $userId;
             $following->save();
+            /**
+             * Incrementing followers/following count for each user of them
+             */
             User::find($userId)->increment('followers_count');
             User::find($followerId)->increment('following_count');
-            $response = array('status' =>"true",'message'=> "Successfully started following".' '.$user->username) ;
+
+            $response =
+             array('status' =>"true",
+             'message'=> "Successfully started following".' '.$user->username) ;
+            /**
+             * Response 201 for successfully creation
+             */
             $responseCode = 201;
         }
     return response()->json($response, $responseCode);
     }
+
     /**
      * Unfollow User
      * Stop following a user
@@ -76,21 +99,38 @@ class FollowingController extends Controller
      */
     public function unfollowUser(Request $request)
     {
-        $userId = $request->user_id;
+        /**
+         * Checking the request paramater existance
+         */
+        $userId = $request->has(['user_id']) ? $request->user_id : abort(404) ;
 
         /**
          *  if the user doesn`t exist .
          */
         $user = User::findOrFail($userId);
 
+        /**
+         * Getting authenticated user-id
+         * Deleting the follow-relationship between the given user_id and logged-in user
+         */
         $followerId =$this->ID;
         $following = Following::where('user_id', $userId)->where('follower_id', $followerId);
         $status = $following->delete();
+        /**
+         * Decrement followers/following count for each user of them
+         */
         if($status == 1)
         {
             User::find($userId)->decrement('followers_count');
             User::find($followerId)->decrement('following_count');
         }
+        else
+        {
+            abort(404);
+        }
+        /**
+         * Response
+         */
         return response()->json(array("status"=>'true','message'=>"Successfully stopped following".' '.$user->username));
     }
 
@@ -169,7 +209,7 @@ class FollowingController extends Controller
         $skipCount = ($page - 1) * $listSize ;
 
         /**
-         * Query
+         * Query getting followers list with each user has a book currently_reading .
          */
         $data =
             DB::select( '   SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
@@ -180,13 +220,15 @@ class FollowingController extends Controller
 							LEFT JOIN
 							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
                                        B.img_url as book_image , B.pages_no as pages
-							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
+							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2
+                            ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
 
         /**
          * Response paramaters and return
          */
         $_start = sizeof($data) == 0 ? 0 : ($page - 1) * $listSize + 1 ;
         $_end = sizeof($data) == 0 ? 0: ( $page - 1) * $listSize + sizeof($data) ;
+
         return response()->json(['followers'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);
     }
 
@@ -266,7 +308,7 @@ class FollowingController extends Controller
         $skipCount = ($page - 1) * $listSize;
 
         /**
-         * Eloquent query
+         * Query returns the following users` details with currently_reading book for each of them.
          */
         $data =
             DB::select(' SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
@@ -281,6 +323,10 @@ class FollowingController extends Controller
 
         /**
          * Response paramaters and return
+         * _start index of the page
+         * _end index of the page
+         * _total size of items in each page
+         *
          */
         $_start = sizeof($data) == 0 ? 0 : ($page - 1) * $listSize + 1;
         $_end = sizeof($data) == 0 ? 0: ($page  - 1) * $listSize + sizeof($data) ;

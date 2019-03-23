@@ -14,19 +14,35 @@ class FollowersTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function nottest()
     {
+        /**
+         * Get a random user for authentication
+         */
         $usersCount = User::all()->count();
         $randomUserId = rand(1, $usersCount);
         $user = User::find( $randomUserId);
+
+        /**
+         * Login assertion
+         * getting authenictaion token
+         */
         $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
         $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
         $jsonArray = json_decode($loginResponse->content(),true);
         $token = $jsonArray['token'];
+
+        /**
+         * Assertion followers GET method
+         */
         $response = $this->json('GET', 'api/followers', [ 'token'=> $token ,'token_type' =>'bearer']);
-        //echo $response->content();
         $response->assertStatus(200)->assertSee('followers');
 
 
     }
 }
+
+
+//echo $response->content();
+//echo $response->content();
+//$this->assertTrue(true);

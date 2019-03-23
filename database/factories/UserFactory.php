@@ -4,6 +4,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use phpDocumentor\Reflection\Types\Integer;
+use Illuminate\Support\Facades\Hash;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -21,7 +22,7 @@ $factory->define(User::class, function (Faker $faker) {
         'username' =>$faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => "password", 
         'remember_token' => Str::random(10),
         'link' => $faker->url,
         'image_link' => $faker->imageUrl($width = 640, $height = 480),
@@ -30,7 +31,7 @@ $factory->define(User::class, function (Faker $faker) {
         'age'=> $faker->numberBetween(10, 70),
         'gender'=> $faker->randomElement(['Male','Female','N/A']),
         'joined_at'=> $faker->date(),
-        'last_active'=> $faker->date(),
+        'birthday' =>$faker->date(),
         'followers_count'=> 0,
         'following_count'=> 0,
         'country' => 'Egupt',

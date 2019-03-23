@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 /**
+ * I belong to UserController.php
+ */
+
+/**
+ * I belong to a userController
+ */
+
+
+
+/**
  * @group user management
  *
  * APIs for managing users (Sofyan)
@@ -126,10 +136,13 @@ class userController extends Controller
             return response()->json(["errors"=> $Data->messages()->first()], 405);
         } 
     }
-
-
     /**
      * LogIn
+     * 
+     * Login : Take the request has [email , password] and check that the email is email type and exists in database and also the password
+     * then , if all is correct return a response with status 200 and json file has [name , username , image_link] 
+     * and if there are eny errors, return a response with status 405 has the message describe the error
+     * 
      * @bodyParam email string required .
      * @bodyParam password string required .
      * @response 405 {
@@ -220,7 +233,13 @@ class userController extends Controller
 
     /**
      * Log Out
+     * 
+     * log out : Take the request has [Authorization] in the header and this paramater is checked in middleware 
+     * and if it valid one the function return it into invalid and return response with status 200 with message [you have logged out]
+     * and if this [Authorization] is invalid the middleware return a response with status 405 has a message [UnAuthorized].
      * @authenticated
+     * 
+     * 
      * @response 200{
      * "message": "You have logged out"
      *}

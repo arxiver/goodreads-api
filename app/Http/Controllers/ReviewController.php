@@ -336,16 +336,39 @@ class ReviewController extends Controller
 
 
     /**
-     * Get the reviews for a book given a title string
+     * Get the reviews for a book given a title string.
+     * this function is responsible for showing certain review by
+     * returning the (body,rating,comments counts, likes counts, user id ,book id , updates date)
+     * of a certain review and also it returns the shelf name of the book the review about
+     * all of that formed by sending the parameters which :-
+     * title -> required.
+     * rating ->optional.
+     * author ->optional.
      * @authenticated
      * @bodyParam title string required The title of the book to lookup.
      * @bodyParam author string optional The author name of the book to lookup.
      * @bodyParam rating int optional Show only reviews with a particular rating.
      */
-    public function getReviewsByTitle($t)
+    public function getReviewsByTitle(Request $request)
     {
         //
-        $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$t]);
+        $Validations    = array(
+            "title"         => "required|string",
+            "author"         =>"nullable|string",
+            "rating"         =>"nullable|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if($request['author']!=NULL){
+                if($request['rating']!=NULL){
+                    $rt=DB::select('select * from reviews r , books b author a where r.book_id = b.id and a.id=b.author_id and b.title= ? and b.author=? and r.rating', [$request['title'],$request['author'],$request['rating']]);
+                }else{
+                $rt=DB::select('select * from reviews r , books b author a where r.book_id = b.id and a.id=b.author_id and b.title= ? and b.author=?', [$request['title'],$request['author']]);
+                }
+            }
+            else{
+                 $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['title']]);
+            }
         foreach($rt as $res)
             {
                     if($res->shelf_name ==0){
@@ -370,7 +393,14 @@ class ReviewController extends Controller
                 'status' => 'failed',
                 'pages' => $rt),
                 200);
-        }  
+        }
+    }  
+    else{
+        return Response::json(array(
+            'status' => 'failed',
+            'pages' => $rt),
+            200);
+    }
     }
 
     /**
@@ -399,14 +429,24 @@ class ReviewController extends Controller
     }
 
     /**
-     * get a specific review with it's comments and likes
+     * get a specific review 
+     * this function is responsible for showing details of a certain review by
+     * returning the (body,rating,comments counts, likes counts, user id ,book id )
+     * of a certain review and also it returns the shelf name of the book the review about
+     * all of that formed by sending the parameters which :-
+     * review id.
      * @authenticated
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
-    public function showReviewOfBook($id)
+    public function showReviewOfBook(Request $request)
     {
         //
-        $results = DB::select('select * from reviews where id = ?', [$id]);
+        $Validations    = array(
+            "reviewId"         => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+        $results = DB::select('select * from reviews where id = ?', [$request['reviewId']]);
         foreach($results as $res)
             {
                     if($res->shelf_name ==0){
@@ -433,31 +473,40 @@ class ReviewController extends Controller
                 200);
         }
     }
+    else{
+            return Response::json(array(
+                'status' => 'failed',
+                ),
+                200);
+        }
+    }
 
 
     /**
      * Get the review for specific user on a specific Book
+     * this function is responsible for showing review of a certain user on a certain book by
+     * returning the (body,rating) of a certain review and also it returns the shelf name of
+     * the book the review about
+     * all of that formed by sending the parameters which :-
+     * book id and
+     * user id
      * @authenticated
      * @response {
      * }
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book
      */
-    public function showReviewForBookForUser($user_id, $book_id)
+    public function showReviewForBookForUser(Request $request)
     {
         //
-     // $results=DB::table('reviews')->where('user_id',$user_id,'book_id',$book_id)->value('rating','shelf_name','body');  
-        $results =DB::select('select rating ,shelf_name , body from reviews  where user_id = ? and book_id = ?', [$user_id,$book_id]);
+        $Validations    = array(
+            "userId"         => "required|integer",
+            "bookId"         => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+        $results =DB::select('select rating ,shelf_name , body from reviews  where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
         if($results != NULL){
-          /*  if($results[1]['rating']==0){
-                $results[1]='read';
-            }
-            else if($results[1]==1){
-                $results[1]='currentlyRead';
-            }
-            else{
-                $results[1]='WantToRead';
-            }*/
             foreach($results as $res)
             {
                     if($res->shelf_name ==0){
@@ -483,17 +532,33 @@ class ReviewController extends Controller
                 200);
         }
     }
+    else{
+        return Response::json(array(
+            'status' => 'failed',
+            ),
+            200);
+    }
+    }
     /**
      * Get the review for specific user on a specific Book
+     * this function is responsible for showing review of a certain book by returning the (idmbody,rating,likes count,
+     * comments count,user id)
+     * of a certain review and also it returns the shelf name of the book the review about
+     * and also the username as well, all of that formed by sending the parameters which :-
+     * book id 
      * @response {
      * }
      * @authenticated
      * @bodyParam bookId integer required id of the of the book
      */
-    public function showReviewsForBook($book_id)
+    public function showReviewsForBook(Request $request)
     {
-       // $results = DB::select('select * from reviews r, users u where r.userid = u.id and bookId = ?', [$book_id]);
-       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and book_id = ?', [$book_id]);
+        $Validations    = array(
+            "bookId"         => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and book_id = ?', [$request['bookId']]);
        foreach($results as $res)
        {
                if($res->shelf_name ==0){
@@ -520,4 +585,11 @@ class ReviewController extends Controller
                 200);
         }
     }
+    else{
+        return Response::json(array(
+            'status' => 'failed',
+            'pages' => $results),
+            200);
+    }
+}
 }

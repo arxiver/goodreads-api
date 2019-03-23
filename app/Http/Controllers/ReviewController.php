@@ -21,7 +21,16 @@ use Response;
 class ReviewController extends Controller
 {
     /**
-     * Create a review
+     * Function_name :createReview
+     * Description:
+     *  make a validation on the input to check that is satisfing the conditions 
+     *  if tha input is valid it will continue in the code otherwise it will response with error
+     *  put the book in the shelf_read if it in another shelf or if it wasn't in any shelf 
+     *  create a new review in the databse 
+     *  increment the number of reviews on this book 
+     *  increment the number of ratings on this book
+     *  
+     *  
      * @authenticated
      * each state of the shelf is represented by a number
      * @bodyParam bookId int required The book id has reviewed  to be created.
@@ -55,9 +64,6 @@ class ReviewController extends Controller
      */
     public function createReview(Request $request)
     {
-        /**
-         * this to make a validation on the request 
-         */
         $Validations    = array(
             "bookId"         => "required|integer",
             "shelf"          => "required|integer|max:3|min:0",

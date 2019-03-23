@@ -28,16 +28,20 @@ Route::group(["middleware" => "authorized"] , function(){
 Route::group(["middleware" => "unAuthorized"] , function(){
     Route::post('changePassword', "UserController@changePassword");
     Route::post('changeName', "UserController@changeName");
+    Route::get('showProfile', 'UserController@showProfile');
+
     Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
     Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
     Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+
     Route::post('changeImage', "UserController@changeImage");
     Route::post('delete', "UserController@delete");
     Route::get('showSetting', "UserController@showSetting");
     Route::delete('logout', "UserController@logOut");
+
     Route::post('reviwes/create','ReviewController@createReview');
     Route::get('myreviews','ReviewController@listMyReviews');
     Route::put('reviwes/edit', 'ReviewController@editReview');
@@ -46,6 +50,7 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
     Route::get('updates','ActivitiesController@followingUpdates');
+
     Route::get( 'books/show', 'BookController@show');
     Route::delete('reviwes/delete', 'ReviewController@destroy');
     Route::get('changeBirthday', "UserController@changeBirthday");
@@ -78,6 +83,10 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     //Following section
     Route::post('follow','FollowingController@followUser');
     Route::delete('unfollow','FollowingController@unfollowUser');
+
+    Route::get('followers','FollowingController@userFollowers');
+    Route::get('following','FollowingController@userFollowing');
+
     //User section
     Route::get('UserController', 'UserController@index');
     Route::get('UserController/{user}','UserController@getUser');

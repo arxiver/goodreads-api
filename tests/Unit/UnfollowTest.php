@@ -14,7 +14,7 @@ class UnfollowTest extends TestCase
      *
      * @return void
      */
-    public function nottest()
+    public function testUnfollow()
     {
         /**
          * Selecting a random user that follows users [Following]
@@ -36,8 +36,8 @@ class UnfollowTest extends TestCase
         /**
          * Login assertion
          */
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $loginResponse->assertSee("token")->assertStatus(200);
 
         /**
          * Decoding the response array

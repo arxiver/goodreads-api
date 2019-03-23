@@ -16,7 +16,7 @@ class FollowTest extends TestCase
      *
      * @return void
      */
-    public function nottest()
+    public function testFollow()
     {
         /**
          * Get a random user for authentication and making follow function
@@ -36,8 +36,8 @@ class FollowTest extends TestCase
         /**
          * Login assertion for getting authentication token
          */
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $loginResponse->assertSee("token")->assertStatus(200);
         $jsonArray = json_decode($loginResponse->content(),true);
         $token = $jsonArray['token'];
 

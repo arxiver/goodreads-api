@@ -18,7 +18,7 @@ class LikesTest extends TestCase
      *
      * @return void
      */
-    public function nottest()
+    public function testmakeLike()
     {
         // Get the number of users in the database
         $usersCount = User::all()->count();
@@ -27,10 +27,7 @@ class LikesTest extends TestCase
         // Get the record of this user
         $user = User::find($randomUserId);
         // Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token
@@ -76,7 +73,7 @@ class LikesTest extends TestCase
      *
      * @return void
      */
-    public function nottest2()
+    public function testUnlike()
     {
         // Get the number of users in the database
         $usersCount = User::all()->count();
@@ -85,10 +82,7 @@ class LikesTest extends TestCase
         // Get the record of this user
         $user = User::find($randomUserId);
         // Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token

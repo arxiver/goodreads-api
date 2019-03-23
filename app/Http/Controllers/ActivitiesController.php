@@ -23,14 +23,30 @@ class ActivitiesController extends Controller
 {
 
     /**
-     * updates
+     * @group [Activities].Updates
+     * updates function
+     * 
      * Get user's updates from following users
+     * 
+     * first the function validates the sent parameters if any if it isn't valid 
+     * an error response returns with 400 status code
+     * 
+     * if there is no parameters sent the default is to return all updates that would be shown to the authenticated user
+     * get all the users followed by the authenticated user then all the activities made by them
+     * those activities are retrieved from five different database tables that store these info 
+     * (shelves,reviews,likes,comments,followings) then the data is merged into one array and sorted 
+     * by updated_at date descendingly in order to show the user the user the latest updates first
+     * 
+     * if a valid user id is sent then all activities made by this specific user are retrieved the same 
+     * way explained earlier in order to show it in this user's profile
+     * 
+     * if a valid max updates is sent then this value is retrieved from the array after sorting
+     * 
      * @authenticated
      * @bodyParam user_id int optional to get the updates made by a specific user (default all following)
      * @bodyParam max_updates int optional to get the max limit of updates.
      * @responseFile responses/updatesReal.json
      */
-    //$user_id,$max_updates
     public function followingUpdates(Request $request)
     {
         $Validations    = array(
@@ -115,7 +131,19 @@ class ActivitiesController extends Controller
 
     }
     /**
-     * comment
+     * @group [Activities].Make Comment
+     * makeComment function
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * you can make comment on three types only (review,follow,add book to shelf)
+     * 
+     * the function check that the comment is on one of the three type then make the comment 
+     * 
+     * increment the number of comments in the review or follow or  add to shelf 
+     * 
      * @bodyParam id int required id of the commented resource.
 	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
      * @bodyParam body string required the body of the comment .
@@ -230,7 +258,17 @@ class ActivitiesController extends Controller
         }
 	}
 	/**
-     * delete comment
+     * @group [Activities].Delete Comment
+     * deleteComment function
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * check that the authenticated user is  the one who create the comment to allow to him to delete it.
+     * 
+     * delete the comment and decrement the number of comments in review or shelf or follow 
+     * 
      * @bodyParam id int required comment id
      * @authenticated
      * @response {
@@ -367,9 +405,22 @@ class ActivitiesController extends Controller
 
     }
     /**
-     * like
+     * @group [Activities].Like
+     * like function
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * you can make like on three types only (review,follow,add book to shelf)
+     * 
+     * the function check that the like is on one of the three type then make the like
+     * 
+     * increment the number of likes in the review or follow or  add to shelf 
+     * 
      * @bodyParam id int required id of the liked resource
 	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
+     * @authenticated
      * @response {
      * "status": "true",
      * "user": 1,
@@ -472,7 +523,17 @@ class ActivitiesController extends Controller
 	}
 
     /**
-     * unlike
+     * @group [Activities].Unlike
+     * unLike function
+     * 
+     * make a validation on the input to check that is satisfing the conditions. 
+     * 
+     * if tha input is valid it will continue in the code otherwise it will response with error.
+     * 
+     * check that the authenticated user is  the one who make like to allow to him to unlike it.
+     * 
+     * unlike and decrement the number of likes in review or shelf or follow 
+     * 
      * @bodyParam id int required like id
      * @authenticated
      * @response {

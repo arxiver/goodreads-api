@@ -21,7 +21,7 @@ class userTest extends TestCase
      *
      * @return void
      */
-    public function testexmplecreation()
+    public function nottest()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;
@@ -32,7 +32,7 @@ class userTest extends TestCase
 
     }
 
-    public function testExample1()
+    public function nottest11()
         {
             $tt1 = new Review;
             $tt2=new ReviewController;
@@ -48,7 +48,7 @@ class userTest extends TestCase
             $this->assertEquals(4 , $data['pages'][0]['likes_count']);
             $this->assertEquals(4 , $data['pages'][0]['comments_count']);
         }
-    public function testExample2()
+    public function nottest10()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;
@@ -62,7 +62,7 @@ class userTest extends TestCase
         $this->assertEquals(4 , $data['pages'][0]['likes_count']);
         $this->assertEquals(4 , $data['pages'][0]['comments_count']);
     }
-    public function testExample3()
+    public function notetest5()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;
@@ -73,7 +73,7 @@ class userTest extends TestCase
         $this->assertEquals(5 , $data['pages'][0]['rating']);
     }
         //23mel funcs kman lkol el controller's function elly ha test ISA
-        public function testExample4()
+        public function nottest3()
         {
             $tt1 = new Review;
             $tt2=new ReviewController;
@@ -84,7 +84,7 @@ class userTest extends TestCase
             $this->assertEquals('read' , $data['pages'][0]['shelf_name']);
             $this->assertEquals(5 , $data['pages'][0]['rating']);
         } 
-        public function testexmpledeletion()
+        public function nottest2()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;

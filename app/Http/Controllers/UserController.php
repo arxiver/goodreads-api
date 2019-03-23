@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\user;
-
+use Illuminate\Support\Facades\DB;
 use JWTAuth;
 use Validator;
 use Illuminate\Http\Request;
@@ -10,12 +10,32 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @group user management
+ * I belong to UserController.php
+ */
+
+/**
+ * I belong to a userController
+ */
+
+
+
+/**
+ * @group User 
  *
  * APIs for managing users (Sofyan)
  */
 class userController extends Controller
 {
+    public $name;
+
+    public function setName($name)
+    {
+        $this->name = "$name";
+    }
+    public function getname()
+    {
+        return $this->name;
+    }
 
 
     //
@@ -39,29 +59,17 @@ class userController extends Controller
      * "The gender field is required."
      *]
      *}
-     * @response {
+     * @response 200{
      * "status": "true",
-     * "user": {
-     *    "email": "",
-     *    "name": "",
-     *    "age": "",
-     *    "birthday": "",
-     *    "joined_at": "",
+     * "user": {   
+     *    "name": "", 
      *    "username": "",
-     *    "gender": "",
-     *    "last_active": "",
-     *    "country": "",
-     *    "city": "",
-     *    "rating_count": "",
-     *    "rating_avg": "",
-     *    "following_count": "",
-     *    "followers_count": "",
      *    "image_link": ""
      *},
-     * "token": "",
-     * "token_type": "",
-     * "expires_in": ""
-     * }
+     *"token": "",
+     *"token_type": "",
+     *"expires_in": ""
+     *}
      */
 
     public function signUp(Request $request)
@@ -74,8 +82,8 @@ class userController extends Controller
                                     "password"      => "required|confirmed|max:30|min:5",
                                     "name"          => "required|string|max:50|min:3" ,
                                     "gender"        => "required|string",
-                                    //"birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
-                                    "birthday"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
+                                    //"birthday"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
                                     "country"       => "required|string",
                                     "city"          => "required|string"
                                 );
@@ -105,14 +113,7 @@ class userController extends Controller
                                 "age"           => date("Y") - date("Y", strtotime($request["birthday"])),
                                 "birthday"      => date("Y-n-j", strtotime($request["birthday"])),
                                 "country"       => $request["country"],
-                                "city"          => $request["city"],
-                                "rating_count"   => 0,
-                                "rating_avg"     => 0,
-                                "following_count"=>0,
-                                "followers_count"=> 0,
-                                "book_count"     => 0,
-                                "last_active"    => now(),
-                                "joined_at"      => date("Y-n-j")
+                                "city"          => $request["city"]
                             );
 
 
@@ -122,61 +123,45 @@ class userController extends Controller
             $token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]);
 
 
-            $GettingData = array(
-                                    "email" ,
+            $gettingData = array(
                                     "name" ,
-                                    "age" ,
-                                    "birthday",
-                                    "joined_at",
                                     "username" ,
-                                    "gender" ,
-                                    "last_active" ,
-                                    "country" ,
-                                    "city" ,
-                                    "rating_count" ,
-                                    "rating_avg" ,
-                                    "following_count" ,
-                                    "followers_count",
                                     "image_link"
                                 );
-            $Show = User::where("email", $request["email"])->first($GettingData);
-            return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
-        }
-        else
+            $Show = User::where("email", $request["email"])->first($gettingData);
+            return response()->json(["user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
+        } 
+        else 
         {
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
-        }
+            return response()->json(["errors"=> $Data->messages()->first()], 405);
+        } 
     }
-
-
     /**
-     * LogIn
+     * @group [User].Login
+     * logIn function
+     * 
+     * Take the request has [email , password] and check that the email is email type and exists in database and also the password
+     * 
+     * if all is correct return a response with status 200 and json file has [name , username , image_link] 
+     * 
+     * if there are any errors, return a response with status 405 has the message describe the error
+     * 
      * @bodyParam email string required .
      * @bodyParam password string required .
-     * @response 404 {
-     * "status": "false",
+     * @response 405 {
      * "errors": [
      * "The email field is required.",
      * "The password field is required."
      *]
      *}
-     * @response {
+     * @response 405 {
+     * "errors": "Already Authorized ."
+     *}
+     * @response 200{
      * "status": "true",
-     * "user": {
-     *    "email": "",
-     *    "name": "",
-     *    "age": "",
-     *    "birthday": "",
-     *    "joined_at": "",
+     * "user": {   
+     *    "name": "", 
      *    "username": "",
-     *    "gender": "",
-     *    "last_active": "",
-     *    "country": "",
-     *    "city": "",
-     *    "rating_count": "",
-     *    "rating_avg": "",
-     *    "following_count": "",
-     *    "followers_count": "",
      *    "image_link": ""
      *},
      *"token": "",
@@ -186,57 +171,39 @@ class userController extends Controller
      */
     public function logIn(Request $request)
     {
-        // response
-
-
-
-
-        $HashedPassword = Hash::make($request["password"]);
-        $Validations    = array(
-                                    "email"             => "required|email|exists:users,Email" ,
-                                    "password"          => "required|max:30|min:5",
-                                    "HshedPassword"     => "exists:users,Password",
+        $hashedPassword = Hash::make($request["password"]);
+        $validations    = array(
+                                    "email"             => "required|email|exists:users,email" ,
+                                    "password"          => "required",
+                                    "hashedPassword"    => "exists:users,password",
                                 );
-        $Messages      = array(
-                                    "email.exists"              => "The email or password is invalid",
-                                    "HashedPassword.exists"     => "The email or Password is invalid"
+        $messages      = array(
+                                    "email.exists"              => "The email or password is invalid.",
+                                    "hashedPassword.exists"     => "The email or Password is invalid."
                                 );
-        $Data = validator::make($request->all(), $Validations , $Messages);
+        $data = validator::make($request->all(), $validations , $messages);
 
-        if($Data->fails())
+        if($data->fails())
         {
-            return response(["status" => "false" , "errors" => $Data->messages()->first()]);
+            return response(["errors" => $data->messages()->first()],405);
         }
         else
         {
             if($token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]))
             {
-                $GettingData = array(
-                                        "email" ,
+                $gettingData = array(
                                         "name" ,
-                                        "age" ,
-                                        "birthday",
-                                        "joined_at",
                                         "username" ,
-                                        "gender" ,
-                                        "last_active" ,
-                                        "country" ,
-                                        "city" ,
-                                        "rating_count" ,
-                                        "rating_avg" ,
-                                        "following_count" ,
-                                        "followers_count",
                                         "image_link"
                                     );
-                $User = User::where("email" , $request["email"])->first();
-                $User->last_active=now();
-                $User->save();
-                $Show = User::where("email" , $request["email"])->first($GettingData);
-                return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
+                $user = User::where("email" , $request["email"])->first();
+                $user->save();
+                $show = User::where("email" , $request["email"])->first($gettingData);
+                return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
             }
             else
             {
-                return response(["status" => "false" , "errors" => "The email or password is invalid"]);
+                return response(["errors" => "The email or password is invalid."],405);
             }
         }
     }
@@ -262,30 +229,35 @@ class userController extends Controller
      */
     public function showSetting(Request $request)
     {
-
+        
+        
     }
 
 
     /**
-     * Log Out
+     * @group [User].Logout
+     * logOut function
+     * 
+     * Take the request has [Authorization] in the header and this paramater is checked in middleware 
+     * 
+     * if it valid one the function return it into invalid and return response with status 200 with message [you have logged out]
+     * 
+     * if this [Authorization] is invalid the middleware return a response with status 405 has a message [UnAuthorized].
+     * 
      * @authenticated
-     * @response {
-     * "status": "true",
+     * 
+     * 
+     * @response 200{
      * "message": "You have logged out"
      *}
-     * @response {
-     * "status": "false",
+     * @response 405{
      * "message": "Unauthorized"
      *}
      */
     public function logOut(Request $request)
     {
-
-        $User = User::find($this->ID);
-        $User->last_active = now();
-        $User->save();
         auth()->logout();
-        return response(["status" => "true" , "message" => "You have loged out"]);
+        return response()->json(["message" => "You have loged out"],200);
     }
 
 
@@ -476,63 +448,45 @@ class userController extends Controller
         // to do
     }
     /**
-     * Show Profile
-     *
+     * @group [User].Show Profile
+     * 
+     * showProfile function
+     * 
+     * checking the request given paramaters if user_id exists 
+     * 
+     * it returns his profile-details
+     * 
+     * other-wise it returns authenticated user`s profile from database user table .
+     * 
      * @bodyParam id int optional this parameter to show the info of the other user (default authenticated user) .
      *
      * @authenticated
-     * @response {
-     * "id": "",
-     * "name": "",
-     * "user_name": "",
-     * "link": "",
-     * "image_url": "",
-     * "small_image_url": "",
-     * "about": "",
-     * "age": "",
-     * "gender": "",
-     * "location": "",
-     * "joined": "",
-     * "last_active": "",
-     * "user_shelves": {
-     *   "user_shelf": [
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "read",
-     *       "book_count": {
-     *      "_type": "integer",
-     *       "__text": ""
-     *       }
-     *   },
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "currently-reading",
-     *       "book_count": {
-     *       "_type": "integer",
-     *      "__text": "0"
-     *        }
-     *   },
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "to-read",
-     *       "book_count": {
-     *       "_type": "integer",
-     *       "__text": "2"
-     *       }
-     *   }
-     *   ],
-     *   "_type": "array"
-     * },
-     * "updates": []
+     * 
+     * @response 200
+     *  {
+     *     "id": 1,
+     *     "name": "Jeromy Heidenreich",
+     *     "username": "Dr. Zaria Witting I",
+     *     "email": "anna29@example.net",
+     *     "email_verified_at": "2019-03-21 20:42:11",
+     *     "link": "http://kozey.com/excepturi-nemo-nemo-sequi-corrupti",
+     *     "image_link": "https://lorempixel.com/640/480/?23657",
+     *     "small_image_link": "https://lorempixel.com/100/100/?36683",
+     *     "about": "weRmt2re2n",
+     *     "age": 65,
+     *     "gender": "N/A",
+     *     "country": "Egupt",
+     *     "city": "Cairo",
+     *     "joined_at": "1981-11-16",
+     *     "last_active": "2019-03-23 12:17:09",
+     *     "followers_count": 2,
+     *     "following_count": 5,
+     *     "rating_avg": 2,
+     *     "rating_count": 6,
+     *     "books_count": null,
+     *     "birthday": null,
+     *     "created_at": null,
+     *     "updated_at": null
      * }
      */
 
@@ -546,10 +500,14 @@ class userController extends Controller
         $userId = $request->has(['id']) ? $request->id : $this->ID;
         User::findOrFail($userId);
 
-        $data = User::select('id','name','email','link','image_link',
-                             'small_image_link','about','age','gender')
-                             ->where('id', $userId)->get();
-
+        /**
+         * Query finding user data
+         */      
+        $data = User::where('id',$userId)->get()[0];
+  
+        /**
+         * Return response
+         */
         return response()->json($data);
 
     }

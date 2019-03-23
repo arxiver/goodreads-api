@@ -1,24 +1,21 @@
 <?php
 
 namespace Tests\Unit;
-
-use Tests\TestCase;
-use DB;
 use App\User;
 use App\Book;
-use App\Shelf;
 use App\Review;
+use App\Shelf;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CommentTest extends TestCase
+class CommentsTest extends TestCase
 {
     /**
-     * A basic unit test example.
-     *
+     * 
      * @return void
      */
-    public function testComment()
+    public function testmakeComment()
     {
         // Get the number of users in the database
         $usersCount = User::all()->count();
@@ -27,10 +24,7 @@ class CommentTest extends TestCase
         // Get the record of this user
         $user = User::find($randomUserId);
         // Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token
@@ -73,11 +67,10 @@ class CommentTest extends TestCase
 
 
     /**
-     * A basic unit test example.
-     *
+     * 
      * @return void
      */
-    public function testDeleteComment()
+    public function testdeleteComment()
     {
         // Get the number of users in the database
         $usersCount = User::all()->count();
@@ -86,10 +79,7 @@ class CommentTest extends TestCase
         // Get the record of this user
         $user = User::find($randomUserId);
         // Post request for login 
-        $loginResponse = $this->json('POST', 'api/logIn', ['email' =>$user['email'], 'password' => 'password']);
-        // check in the respone about the status in the firstplace
-        // check that the respone is valid (The request is done)
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
         // Convert the response to array to be able to access the elements of the response
         $jsonArray = json_decode($loginResponse->content(),true);
         // store the token in the variable  $token
@@ -126,4 +116,5 @@ class CommentTest extends TestCase
       echo $numberCommentstwo;
       echo "\n";
     }
+
 }

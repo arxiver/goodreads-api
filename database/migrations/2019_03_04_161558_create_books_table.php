@@ -17,17 +17,17 @@ class CreateBooksTable extends Migration
             $table->unsignedInteger('id')->autoIncrement();
             $table->string('title');
             $table->integer('isbn')->unique();
-            $table->string('imgUrl');
-            $table->date('publicationDate');
+            $table->string('img_url');
+            $table->date('publication_date');
             $table->string('publisher');
             $table->string('language');
             $table->string('description');
-            $table->integer('reviewsCount')->nullable();
-            $table->integer('ratingsCount')->nullable();
-            $table->float('ratingsAvg')->nullable();
+            $table->integer('reviews_count')->nullable()->default(0);
+            $table->integer('ratings_count')->nullable()->default(0);
+            $table->float('ratings_avg')->nullable()->default(0);
             $table->string('link');
-            $table->integer('authorId');
-            $table->integer('pagesNum')->nullable();
+            $table->integer('author_id');
+            $table->integer('pages_no')->nullable()->default(0);
             $table->timestamps();
         });
     }

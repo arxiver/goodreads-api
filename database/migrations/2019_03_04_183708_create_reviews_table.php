@@ -18,12 +18,12 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
             $table->text('body')->nullable();
-            $table->integer('shelf_name');  //0->read
+            $table->integer('shelf_name')->nullable();  //0->read
                                             //1->Currently Read
                                             //2->Want to Read
-            $table->integer('rating');
-            $table->integer('numberLikes')->nullable();
-            $table->integer('numberComments')->nullable();
+            $table->integer('rating')->nullable();
+            $table->integer('likes_count')->nullable();
+            $table->integer('comments_count')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('book_id')->references('id')->on('books');
             $table->timestamps();

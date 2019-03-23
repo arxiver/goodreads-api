@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOwnedBooksTable extends Migration
+class Genre extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateOwnedBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('owned_books', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('genre', function (Blueprint $table) {
+            $table->unsignedInteger('id')->autoIncrement();
+            $table->unsignedInteger('book_id');
+            $table->string('type'); 
+            $table->unique(['type','book_id']);
+            $table->foreign('book_id')->references('id')->on('books');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateOwnedBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('owned_books');
+        Schema::dropIfExists('genre');
     }
 }

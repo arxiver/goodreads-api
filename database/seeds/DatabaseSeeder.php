@@ -1,8 +1,12 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Following;
 use App\User;
+use App\Book;
+use App\Review;
+use App\Comment;
+use App\Likes;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,18 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(UserSeeder::class);
+        factory(App\User::class, 10)->create();
+        $this->call(UserSeeder::class);
+        DB::update('update users set password = "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi" where 1 = 1');
         factory(App\Following::class,10)->create();
-        $i = 2;
-        while ($i <= 100) {
-            factory(App\Following::class)->create(
-                [
-                    'user_id' => 1,
-                    'follower_id' => $i,
-                ]
-            );
-            $i++;
-        }
+        factory(App\Book::class, 100)->create();
+        factory(App\Following::class, 100)->create();
+        factory(Comment::class,20)->create();
+        factory(Likes::class,20)->create();
+        factory(App\Review::class,4)->create();
+        factory(App\Shelf::class,10)->create();
 
-    }
+        }
 }
+

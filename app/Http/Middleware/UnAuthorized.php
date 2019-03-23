@@ -17,7 +17,7 @@ class UnAuthorized
     {
         if(!auth()->user())
         {
-            return response(["errors" => "UnAuthorized"], 404);
+            return response(["errors" => "UnAuthorized"], 405);
         }
         else
         {

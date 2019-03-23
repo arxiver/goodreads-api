@@ -4,6 +4,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use phpDocumentor\Reflection\Types\Integer;
+use Illuminate\Support\Facades\Hash;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -17,32 +18,25 @@ use phpDocumentor\Reflection\Types\Integer;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        /*'name' => $faker->name,
+        'name' => $faker->name,
+        'username' =>$faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => "password", 
         'remember_token' => Str::random(10),
         'link' => $faker->url,
-        'imageLink' => $faker->imageUrl($width = 640, $height = 480),
-        'smallImageUrl' => $faker->imageUrl($width = 100, $height = 100),
+        'image_link' => $faker->imageUrl($width = 640, $height = 480),
+        'small_image_link' => $faker->imageUrl($width = 100, $height = 100),
         'about'=> Str::random(10),
         'age'=> $faker->numberBetween(10, 70),
         'gender'=> $faker->randomElement(['Male','Female','N/A']),
-        'location'=> $faker->state,
-        'joinedAt'=> $faker->date(),
-        'lastActive'=> $faker->date(),
-        'followersCount'=> 0,
-        'followingCount'=> 0,
-        'ratingAvg'=> $faker->randomFloat(3,0,5),
-        'ratingCount'=> $faker->randomDigitNotNull,*/
-        "email"         => "test@yahoo.com",
-        "password"      => "test21",
-        "name"          => "test",
-        "gender"        => "male",
-        "userName"      => "test",
-        "age"           => 21,
-        "birthDay"      => date("Y-n-j", strtotime("1998-02-21")),
-        "country"       => "Canada",
-        "city"          => "Attawa"
+        'joined_at'=> $faker->date(),
+        'birthday' =>$faker->date(),
+        'followers_count'=> 0,
+        'following_count'=> 0,
+        'country' => 'Egupt',
+        'city'=>'Cairo',
+        'rating_avg'=> $faker->randomFloat(3,0,5),
+        'rating_count'=> $faker->randomDigitNotNull,
     ];
 });

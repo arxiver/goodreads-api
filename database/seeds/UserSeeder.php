@@ -14,26 +14,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        /*$Create = array(
+        $Create = array(
             "email"         => "test@yahoo.com",
-            "password"      => Hash::make("testpassword"),
+            "password"      => "password",
             "name"          => "test",
             "gender"        => "female",
-            "userName"      => "test21",
+            "username"      => "test21",
             "age"           => 21,
-            "birthDay"      => date("Y-n-j", strtotime("1998-2-21")),
+            "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
-            "city"          => "Atawwa",
-            "ratingCount"   => 0,
-            "ratingAvg"     => 0,
-            "followingCounts"=>0,
-            "followersCount"=> 0,
-            "bookCount"     => 0,
-            "lastActive"    => now(),
-            "joinedAt"      => date("Y-n-j")
+            "city"          => "Atawwa"
         );
-        User::create($Create);*/
-        //factory(User::class)->create();
+        User::create($Create);
 
     }
 }

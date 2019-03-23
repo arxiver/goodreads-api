@@ -26,17 +26,17 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         "gender" ,
-        "userName" ,
+        "username" ,
         "age" ,
-        "birthDay" ,
+        "birthday" ,
         "country" ,
         "city" ,
-        "ratingCount" ,
-        "ratingAvg",
-        "followingCounts",
-        "followersCount",
-        "lastActive"    ,
-        "joinedAt" 
+        "rating_count" ,
+        "rating_avg",
+        "following_count",
+        "followers_count",
+        "last_active"    ,
+        "joined_at"
     ];
 
     /**
@@ -59,7 +59,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function setPasswordAttribute($pass)
     {
-        $this->attributes['password'] = Hash::make($pass);  
+        $this->attributes['password'] = Hash::make($pass);
     }
 
     public function getJWTIdentifier()

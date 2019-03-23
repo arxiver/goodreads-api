@@ -18,8 +18,17 @@ class FollowingController extends Controller
      * @authenticated
      * [ Start following a user ]
      * @bodyParam user_id int required Goodreads user id of user to follow.
-     * @response {
-     *  "status" : 1
+     * @response 201 {
+     * "status": "true",
+     * "message": "Successfully started following Prof. Nia White V"
+     * }
+     * @response 400{
+     *
+     * "status": "false",
+     * "message": "Something gone wrong ."
+     * }
+     *
+     * @response 404{
      * }
      */
     public function followUser(Request $request)
@@ -32,18 +41,18 @@ class FollowingController extends Controller
         /**
          *  if the user doesn`t exist .
          */
-        User::findOrFail($userId);
+        $user = User::findOrFail($userId);
         if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1) {
-            $response = array('status' =>0);
+            $response = array( 'status' => "false",'message' =>"Something gone wrong .");
             $responseCode = 400;
         } else {
             $following = new Following();
             $following->follower_id = $followerId;
             $following->user_id = $userId;
             $following->save();
-            User::find($userId)->increment('followersCount');
-            User::find($followerId)->increment('followingCount');
-            $response = array('status' =>1) ;
+            User::find($userId)->increment('followers_count');
+            User::find($followerId)->increment('following_count');
+            $response = array('status' =>"true",'message'=> "Successfully started following".' '.$user->username) ;
             $responseCode = 201;
         }
     return response()->json($response, $responseCode);
@@ -51,14 +60,18 @@ class FollowingController extends Controller
     /**
      * Unfollow User
      * Stop following a user
-     * [ 1 : successfull request ,
-     * 0 : unsuccessfull request ]
      *
      * @authenticated
      *
      * @bodyParam user_id int required Goodreads user id of user to stop following.
-     * @response {
-     *  "status" : 1
+     *
+     * @response 200
+     * {
+     * "status": "true",
+     * "message": "Successfully stopped following Darling White V"
+     * }
+     *
+     * @response 404{
      * }
      */
     public function unfollowUser(Request $request)
@@ -68,17 +81,17 @@ class FollowingController extends Controller
         /**
          *  if the user doesn`t exist .
          */
-        User::findOrFail($userId);
+        $user = User::findOrFail($userId);
 
         $followerId =$this->ID;
         $following = Following::where('user_id', $userId)->where('follower_id', $followerId);
         $status = $following->delete();
         if($status == 1)
         {
-            User::find($userId)->decrement('followersCount');
-            User::find($followerId)->decrement('followingCount');
+            User::find($userId)->decrement('followers_count');
+            User::find($followerId)->decrement('following_count');
         }
-        return response()->json(array("status"=>$status));
+        return response()->json(array("status"=>'true','message'=>"Successfully stopped following".' '.$user->username));
     }
 
     /**
@@ -86,76 +99,46 @@ class FollowingController extends Controller
      * gets the followers of a user.
      *
      * @authenticated
-     * 
-	 * 
+     *
+	 *
 	 * @response 404 {
-	 * "status": " Something gone error "
 	 *}
      * @response
 	 *
 	 *{
 	 *    "followers": [
 	 *        {
-	 *            "id": 1,
-	 *            "name": "Miss Madaline Wisozk V",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
+     *             "id": 1,
+     *             "name": "Miss Madaline Wisozk V",
+     *             "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+     *             "book_id": 100,
+     *             "currently_reading": "dummuybookName",
+     *             "book_image": "http:\/\/treutel.biz\/",
+     *             "pages": 1200
 	 *        },
 	 *        {
 	 *            "id": 4,
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
+	 *            "name": "Modu Rosenbaum",
+     *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "book_id": null,
+     *            "currently_reading": null,
+     *            "book_image": null,
+     *            "pages": null
 	 *        },
 	 *        {
 	 *            "id": 5,
 	 *            "name": "Velda Rosenbaum",
 	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
-	 *        },
-	 *        {
-	 *            "id": 6,
-	 *            "name": "Dr. Reagan Little",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
-	 *        },
-	 *        {
-	 *            "id": 7,
-	 *            "name": "Valentin Pagac DVM",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
+	 *            "book_id": 10,
+     *            "currently_reading": "dummuybookName",
+     *            "book_image": "http:\/\/treutel.biz\/",
+     *            "pages": 1200
 	 *        }
 	 *    ],
 	 *    "_start": 1,
-	 *    "_end": 5,
-	 *    "_total": 5
+	 *    "_end": 3,
+	 *    "_total": 3
 	 *
-	 *	 
-	 *	 
 	 *}
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
      * @bodyParam user_id int optional to get the followers list of a specific user (default authenticated user)
@@ -189,10 +172,15 @@ class FollowingController extends Controller
          * Query
          */
         $data =
-            DB::select( 'SELECT id , name , imageLink , smallImageUrl ,
-                        email , link ,followersCount
-                        FROM followings F,users U WHERE user_id = ?
-                        AND F.follower_id = U.id limit ? offset ?', [$userId,$listSize,$skipCount]);
+            DB::select( '   SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
+							FROM
+							( SELECT follower_id as id , name , image_link
+	                        FROM followings F,users U
+	                        WHERE F.user_id = ? and F.follower_id = U.id ) as t1
+							LEFT JOIN
+							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
+                                       B.img_url as book_image , B.pages_no as pages
+							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
 
         /**
          * Response paramaters and return
@@ -208,61 +196,47 @@ class FollowingController extends Controller
      *
      * @authenticated
      *
-	 * @response
+
+     * @response
 	 *
 	 *{
 	 *    "following": [
 	 *        {
-	 *            "id": 1,
-	 *            "name": "Miss Madaline Wisozk V",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 10
+     *             "id": 1,
+     *             "name": "Miss Madaline Wisozk V",
+     *             "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+     *             "book_id": 100,
+     *             "currently_reading": "dummuybookName",
+     *             "book_image": "http:\/\/treutel.biz\/",
+     *             "pages": 1200
 	 *        },
 	 *        {
 	 *            "id": 4,
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 111
+	 *            "name": "Modu Rosenbaum",
+     *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
+	 *            "book_id": null,
+     *            "currently_reading": null,
+     *            "book_image": null,
+     *            "pages": null
 	 *        },
 	 *        {
 	 *            "id": 5,
 	 *            "name": "Velda Rosenbaum",
 	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 102
-	 *        },
-	 *        {
-	 *            "id": 6,
-	 *            "name": "Dr. Reagan Little",
-	 *            "image_link": "http:\/\/wolf.info\/molestiae-qui-sed-at-vel",
-	 *            "small_image_url": "https:\/\/aufderhar.org\/ipsam-vitae-corrupti-repudiandae-est-reprehenderit-sit-est.html",
-	 *            "currently-reading": "dummuybookName",
-	 *            "book_id": 100,
-	 *            "pages": 936,
-	 *            "book_image": "http:\/\/treutel.biz\/",
-	 *            "followersCount": 102
+	 *            "book_id": 10,
+     *            "currently_reading": "dummuybookName",
+     *            "book_image": "http:\/\/treutel.biz\/",
+     *            "pages": 1200
 	 *        }
 	 *    ],
 	 *    "_start": 1,
-	 *    "_end": 4,
-	 *    "_total": 4
+	 *    "_end": 3,
+	 *    "_total": 3
 	 *
-	 *	 
-	 *	 
-	 *}
+     *}
+      *
+     * @response 404 {
+     * }
      * @bodyParam page int optional 1-N (default 1) returns 30 items per page .
      * @bodyParam user_id int optional to get the following list of a specific user (default authenticated user)
      */
@@ -295,10 +269,16 @@ class FollowingController extends Controller
          * Eloquent query
          */
         $data =
-            DB::select( 'SELECT id , name , imageLink , smallImageUrl ,
-                        email , link ,followersCount
-                        FROM followings F,users U WHERE follower_id = ?
-                        AND F.user_id = U.id limit ? offset ?', [$userId,$listSize,$skipCount]);
+            DB::select(' SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
+							FROM
+							( SELECT F.user_id as id , name , image_link
+	                        FROM followings F,users U
+	                        WHERE F.follower_id = ? and F.user_id = U.id ) as t1
+							LEFT JOIN
+							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
+                                       B.img_url as book_image , B.pages_no as pages
+							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
+
         /**
          * Response paramaters and return
          */
@@ -307,3 +287,4 @@ class FollowingController extends Controller
         return response()->json(['following'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);
     }
 }
+

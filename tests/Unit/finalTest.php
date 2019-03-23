@@ -15,10 +15,12 @@ class finalTest extends TestCase
      *
      * @return void
      */
+    private $User;
+
 
     private function failedAssertion($SendingData , $ReceivingData ,$Status)
     {
-        $response = $this->json('POST', 'api/logIn', $SendingData);
+        $response = $this->json('POST', 'api/login', $SendingData);
         $response
             ->assertStatus($Status)
             ->assertJson($ReceivingData);
@@ -26,14 +28,20 @@ class finalTest extends TestCase
 
     private function logOut($SendingData , $ReceivingData ,$Status)
     {
-        $response = $this->json('GET', 'api/logOut', $SendingData);
+        $response = $this->json('DELETE', 'api/logout', $SendingData);
         $response
             ->assertStatus($Status)
             ->assertJson($ReceivingData);
     }
+    
+
+    private function login($SendingData , $ReceivingData ,$Status)
+    {
+        
+    }
 
 
-    public function testExample()
+    public function testuser()
     {
 
 
@@ -58,10 +66,13 @@ class finalTest extends TestCase
         $Status = 405;
         $SendingData = array(
                                             'email' => '' ,
-                                            'password' => 'testpassword'
+                                            'password' => 'password'
                                         );
         $ReceivingData = array("errors" =>  "The email field is required.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
+
+        
+
 
 
         // LogIn without password
@@ -73,133 +84,130 @@ class finalTest extends TestCase
         $ReceivingData = array("errors" =>  "The password field is required.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
 
-        
         // logIn with invalid email
         $Status = 405;
         $SendingData = array(
-                                            'email' => 'testinvalid@yahoo.com' ,
-                                            'password' => 'testpassword'
-                                        );
+            'email' => 'testinvalid@yahoo.com' ,
+            'password' => 'password'
+        );
         $ReceivingData = array("errors" => "The email or password is invalid.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
-
-
+        
+        
         // logIn with invalid password
         $Status = 405;
         $SendingData = array(
-                                            'email' => 'test@yahoo.com' ,
-                                            'password' => 'testpasswordinvalid'
-                                        );
+            'email' => 'test@yahoo.com' ,
+            'password' => 'passwordinvalid'
+        );
         $ReceivingData = array("errors" => "The email or password is invalid.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
-
-
+        
+        
         // logIn with non email
         $Status = 405;
         $SendingData = array(
-                                            'email' => 'test' ,
-                                            'password' => 'testpassword'
-                                        );
+            'email' => 'test' ,
+            'password' => 'password'
+        );
         $ReceivingData = array("errors" => "The email must be a valid email address.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
-
-
-
+        
+        
+        
         // logIn without email and without password
         $Status = 405;
         $SendingData = array(
-                                            'email' => '' ,
-                                            'password' => ''
-                                        );
+            'email' => '' ,
+            'password' => ''
+        );
         $ReceivingData = array("errors" =>  "The email field is required.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
-
-
+        
+        
         // logIn with invalid email and invalid password
         $Status = 405;
         $SendingData = array(
-                                            'email' => 'testinvalid@yahoo.com' ,
-                                            'password' => 'testpasswordinvalid'
-                                        );
+            'email' => 'testinvalid@yahoo.com' ,
+            'password' => 'passwordinvalid'
+        );
         $ReceivingData = array("errors" => "The email or password is invalid.");
         $this->failedAssertion($SendingData , $ReceivingData , $Status);
+        
+        
+        
+        // logOut with UnAuthonticated user
+        $Status = 405;
+        $SendingData = array();
+        $ReceivingData = array("errors" => "UnAuthorized");
+        $this->logOut($SendingData , $ReceivingData , $Status);
+        
+        
+        // logIn with valid email and valid password
+        $this->User = User::where("email" , "test@yahoo.com")->first();
+        $Status = 200;
+        $SendingData = array(
+            'email' => 'test@yahoo.com' ,
+            'password' => 'password'
+        );
+        $ReceivingData = array  (
+                                    "token_type"    => "bearer" ,
+                                    "name"          => $this->User["name"] ,
+                                    "expires_in"    => 3600 * 24 ,
+                                    "username"      => $this->User["username"],
+                                    "image_link"    => $this->User["image_link"]
+                                );
+        $responsesec = $this->json('POST', 'api/login', $SendingData);
+        $responsesec
+            ->assertStatus($Status)
+            ->assertJsonFragment($ReceivingData);
+        $this->assertAuthenticatedAs($this->User);
+        
+        
+        // logIn with Authorized user
+        $Status = 405;
+        $SendingData = array(
+            'email' => 'test@yahoo.com' ,
+            'password' => 'password'
+        );
+        $ReceivingData = array("errors" => "Alredy authorized");
+        $response = $this->json('POST', 'api/login', $SendingData);
+        $response
+            ->assertStatus($Status)
+            ->assertJson($ReceivingData);
+        
+        
+            
+            
+            
+        // logOut with Authorized user
+        $token2 = JWTAuth::fromUser($this->User);
+        $Status = 200;
+        $SendingData = array('token'=> $token2 ,'token_type' =>'bearer');
+        $ReceivingData = array("message" => "You have loged out");
+        $response = $this->json('DELETE', 'api/logout', $SendingData);
+        $response
+            ->assertStatus($Status)
+            ->assertJson($ReceivingData);
 
 
 
         // logOut with UnAuthonticated user
-        $Status = 404;
+        $Status = 405;
         $SendingData = array();
         $ReceivingData = array("errors" => "UnAuthorized");
-        $response = $this->json('GET', 'api/logOut', $SendingData);
-        $response
-            ->assertStatus($Status)
-            ->assertJson($ReceivingData);
-
-
-
-
-        // logIn with valid email and valid password
-        $User = User::find(37);
-        $Status = 200;
-        $SendingData = array(
-                                            'email' => 'test@hotmail.com' ,
-                                            'password' => 'test21'
-                                        );
-        $ReceivingData = array("token_type" => "bearer" , "email" => "test@hotmail.com" , "name" => $User["name"]);
-        $response = $this->json('POST', 'api/logIn', $SendingData);
-        $response
-            ->assertStatus($Status)
-            ->assertJsonFragment($ReceivingData);
-
-            $this->assertAuthenticatedAs($User);
-
-
-        // logIn with Authorized user
-        $Status = 404;
-        $SendingData = array(
-                                            'email' => 'test@hotmail.com' ,
-                                            'password' => 'test21'
-                                        );
-        $ReceivingData = array("errors" => "Alredy authorized");
-        $response = $this->json('POST', 'api/logIn', $SendingData);
-        $response
-            ->assertStatus($Status)
-            ->assertJson($ReceivingData);
-
-
-
-
-        
-        // logOut with Authorized user
-        //$variable = json_decode($response->content() ,true);
-        //$token = $variable[$token];
-        //echo $variable;
-
-        $token = JWTAuth::fromUser($User);
-        $contentType = $response->headers->get('content-type');
-        
-
-        $Status = 200;
-        $SendingData = array("Authorization" => $token);
-        $ReceivingData = array("message" => "You have loged out");
-        $response = $this->json('GET', 'api/logOut', ['HTTP_Authorization' => 'bearer' . $token]);
-        //$response
-        //    ->assertStatus($Status)
-        //    ->assertJson($ReceivingData);
-
-        //$this->assertAuthenticatedAs($User);
-
-
-        
-
-
-        
+        $this->logOut($SendingData , $ReceivingData , $Status);
+            
+            
+            
+            /*   
+            
 
 
         
 
         
-
+*/
         
         
     }

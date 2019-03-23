@@ -17,7 +17,7 @@ class Authorized
     {
         if(auth()->user())
         {
-            return response()->json(["errors" => "Alredy authorized"],404);
+            return response()->json(["errors" => "Alredy authorized"],405);
         }
         else
         {

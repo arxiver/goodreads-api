@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Shelf;
 use Illuminate\Http\Request;
+use Validator;
+use Response;
 /**
  * @group Shelf
  * @authenticated
@@ -250,6 +252,11 @@ class ShelfController extends Controller
     }
     /**
      * show books on the shelf
+     * * this function is responsible for showing books on the user's shelf by
+     * returning the (book id,title).
+     * all of that formed by sending the parameters which :-
+     * shelf name
+     * user id
      * @bodyParam user_id integer required Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
      * @response {
@@ -270,9 +277,43 @@ class ShelfController extends Controller
      * "genre" : "action"
      * }
      */
-	public function getBooksOnShelf($user_id,$shelf_name)
+	public function getBooksOnShelf(Request $request)
 	{
         //
-
+        $Validations    = array(
+            "shelf_name"         => "required|string",
+            "user_id"         => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if($request['shelf_name']=='read'){
+                $request['shelf_name']=0;
+            }
+            else if($request['shelf_name']=='wanttoread'){
+                $request['shelf_name']=2;
+            }
+            else{
+                $request['shelf_name']=1;
+            }
+       $results=Db::select('select s.book_id , b.title from shelves s , books b where b.id = s.book_id and s.id=? and s.user_id=?',[$request['shelf_name'],$request['user_id']]);
+       if($results != NULL){
+        return Response::json(array(
+            'status' => 'success',
+            'pages' => $results),
+            200);
+    }
+    else{
+        return Response::json(array(
+            'status' => 'failed',
+            'pages' => $results),
+            200);
+    }
+}
+else{
+    return Response::json(array(
+        'status' => 'failed',
+        ),
+        200);
+}
     }
 }

@@ -5,6 +5,10 @@ use App\Review;
 use App\Book;
 use App\Http\Controllers\ReviewController;
 use Tests\TestCase;
+use Illuminate\App\Http\Request;
+use DB;
+use Validator;
+use Response;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 //use PHPUnit\Framework\TestCase;
@@ -32,7 +36,9 @@ class userTest extends TestCase
         {
             $tt1 = new Review;
             $tt2=new ReviewController;
-            $res= $tt2->getReviewsByTitle('ppp')->getContent();
+            $title['title']='ppp';
+           Request $request['title']='ppp';
+            $res= $tt2->getReviewsByTitle((Request)$title)->getContent();
             $data = json_decode($res,true);
             $this->assertEquals(2 , $data['pages'][0]['user_id']);
             $this->assertEquals(1000000 , $data['pages'][0]['book_id']);

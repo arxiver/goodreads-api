@@ -139,7 +139,7 @@ class ReviewTest extends TestCase
      * test
      * @return void
      */
-    public function notestEditReview()
+    public function testEditReview()
     {
         // the new rating value 
         $newRate =2;
@@ -211,7 +211,7 @@ class ReviewTest extends TestCase
      * test
      * @return void
      */
-    public function notestDeleteReview()
+    public function testDeleteReview()
     {
         // Get all id's of reviews
         $reviewsCount = Review::all()->count();

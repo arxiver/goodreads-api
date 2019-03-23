@@ -5,7 +5,7 @@ return [
     /*
      * The output path for the generated documentation.
      */
-    'output' => 'public/docs',
+    'output' => 'docs',
 
     /*
      * The router to be used (Laravel or Dingo).
@@ -139,13 +139,6 @@ return [
                         'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
                         // 'key' => 'value',
-                    ],
-
-                    /*
-                     * Cookies which should be sent with the API call.
-                     */
-                    'cookies' => [
-                        // 'name' => 'value'
                     ],
 
                     /*

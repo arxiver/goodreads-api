@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 100)->create();
-        //factory(App\Following::class,10)->create();
+        //$this->call(UserSeeder::class);
+        factory(App\Following::class,10)->create();
         $i = 2;
         while ($i <= 100) {
             factory(App\Following::class)->create(
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
                 ]
             );
             $i++;
-   }
+        }
 
     }
 }

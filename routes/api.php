@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,10 +30,11 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::post('delete', "UserController@delete");
     Route::get('showSetting', "UserController@showSetting");
     Route::get('logOut', "UserController@logOut");
-    Route::get('showProfile','UserController@showProfile');
     Route::post('reviwes/create','ReviewController@createReview');
     Route::get('myreviews','ReviewController@listMyReviews');
-
+    Route::get('following','FollowingController@userFollowing');
+    Route::get('followers','FollowingController@userFollowers');
+    Route::get('showProfile','UserController@showProfile');
 });
 
 Route::get('changeBirthday', "UserController@changeBirthday");
@@ -89,8 +92,6 @@ Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
 Route::group(["middleware" => "unAuthorized"], function () {
     Route::post('follow','FollowingController@followUser');
     Route::delete('unfollow','FollowingController@unfollowUser');
-    Route::get('followers','FollowingController@userFollowers');
-    Route::get('following','FollowingController@userFollowing');
 });
 
 //User section

@@ -17,11 +17,14 @@ class UnAuthorized
     {
         if(!auth()->user())
         {
-            return response(["status" => "false" , "message" => "UnAuthorized"]);
+            return response(["errors" => "UnAuthorized"], 404);
         }
         else
         {
-            return $next($request);
+            return $next($request)
+            ->header("Access-Contorl-Allow-Origin" , "*")
+            ->header("Access-Contorl-Allow-Methods" , "GET,POST , PUT , DELETE, OPTIONS")
+            ->header("Access-Contorl-Allow-Headers" , "Content-Type, X-Auth-Token , Origin , Authorization , X-Requested-With");
         }
     }
 }

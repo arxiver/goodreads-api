@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Auth;
  */
 class userController extends Controller
 {
+    public $name;
+
+    public function setName($name)
+    {
+        $this->name = "$name";
+    }
+    public function getname()
+    {
+        return $this->name;
+    }
 
 
     //
@@ -105,13 +115,13 @@ class userController extends Controller
                                 "birthDay"      => date("Y-n-j", strtotime($request["birthDay"])),
                                 "country"       => $request["country"],
                                 "city"          => $request["city"],
-                                "ratingCount"   => 0,
-                                "ratingAvg"     => 0,
-                                "followingCounts"=>0,
-                                "followersCount"=> 0,
-                                "bookCount"     => 0,
-                                "lastActive"    => now(),
-                                "joinedAt"      => date("Y-n-j")
+                                //"ratingCount"   => 0,
+                                //"ratingAvg"     => 0,
+                                //"followingCounts"=>0,
+                                //"followersCount"=> 0,
+                                //"bookCount"     => 0,
+                                //"lastActive"    => now(),
+                                //"joinedAt"      => date("Y-n-j")
                             );
 
             
@@ -139,11 +149,11 @@ class userController extends Controller
                                     "imageLink"
                                 );
             $Show = User::where("email", $request["email"])->first($GettingData);
-            return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
+            return response()->json(["user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
         } 
         else 
         {
-            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+            return response()->json(["errors"=> $Data->messages()->first()], 405);
         } 
     }
 
@@ -186,6 +196,7 @@ class userController extends Controller
     public function logIn(Request $request)
     {
         // response
+        // return response()->json(["name" => $request["name"]],200);
 
 
         
@@ -193,18 +204,18 @@ class userController extends Controller
         $HashedPassword = Hash::make($request["password"]);
         $Validations    = array(
                                     "email"             => "required|email|exists:users,Email" ,
-                                    "password"          => "required|max:30|min:5",
+                                    "password"          => "required",
                                     "HshedPassword"     => "exists:users,Password",
                                 );
         $Messages      = array(
-                                    "email.exists"              => "The email or password is invalid",
-                                    "HashedPassword.exists"     => "The email or Password is invalid"
+                                    "email.exists"              => "The email or password is invalid.",
+                                    "HashedPassword.exists"     => "The email or Password is invalid."
                                 );
         $Data = validator::make($request->all(), $Validations , $Messages);
 
         if($Data->fails())
         {
-            return response(["status" => "false" , "errors" => $Data->messages()->first()]);
+            return response(["errors" => $Data->messages()->first()],405);
         }
         else
         {
@@ -212,8 +223,8 @@ class userController extends Controller
             {
                 $GettingData = array(
                                         "email" ,
-                                        "name" ,
-                                        "age" ,
+                                        "name", 
+                                        "age",
                                         "birthDay",
                                         "joinedAt",
                                         "username" ,
@@ -231,11 +242,11 @@ class userController extends Controller
                 $User->lastActive=now();
                 $User->save();
                 $Show = User::where("email" , $request["email"])->first($GettingData);
-                return response(["status" => "true" , "user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60]);
+                return response()->json(["user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
             }
             else
             {
-                return response(["status" => "false" , "errors" => "The email or password is invalid"]);
+                return response(["errors" => "The email or password is invalid."],405);
             }
         }
     }
@@ -262,6 +273,7 @@ class userController extends Controller
     public function showSetting(Request $request)
     {
         
+        
     }
 
 
@@ -279,12 +291,13 @@ class userController extends Controller
      */
     public function logOut(Request $request)
     {
-
         $User = User::find($this->ID);
         $User->lastActive = now();
         $User->save();
+
+
         auth()->logout();
-        return response(["status" => "true" , "message" => "You have loged out"]);
+        return response()->json(["message" => "You have loged out"],200);
     }
 
 
@@ -542,6 +555,9 @@ class userController extends Controller
         * Case it is not sent : then we list the authenticated-user `s followers
         * other wise we use the given user_id to get profile detailed info  .
         */
+
+        return response(["id" => $this->ID],200);
+        die();
         $userId = $request->has(['id']) ? $request->id : $this->ID;
         User::findOrFail($userId);
 

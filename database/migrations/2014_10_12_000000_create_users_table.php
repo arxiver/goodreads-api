@@ -28,14 +28,15 @@ class CreateUsersTable extends Migration
             $table->char('gender');                                        // The gender of the user
             $table->string('country');                                     // The country of the user
             $table->string('city');                                        // The city of the user
-            $table->date('joinedAt')->nullable();                                      // The date of his joining in the website
-            $table->datetime('lastActive')->nullable();                                // Last active
-            $table->integer('followersCount')->nullable();                             // followers count
-            $table->integer('followingCounts')->nullable();                            // following count
-            $table->float('ratingAvg');                                    // Raging average
-            $table->integer('ratingCount'); 
-            $table->integer('bookCount')->nullable();                                // Book count
+            $table->date('joinedAt')->default(now());                                      // The date of his joining in the website
+            $table->datetime('lastActive')->default(now());                                // Last active
+            $table->integer('followersCount')->default(0);                             // followers count
+            $table->integer('followingCounts')->default(0);                            // following count
+            $table->float('ratingAvg')->default(0);                                    // Raging average
+            $table->integer('ratingCount')->default(0); 
+            $table->integer('bookCount')->default(0);                                // Book count
             $table->date("birthDay")->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

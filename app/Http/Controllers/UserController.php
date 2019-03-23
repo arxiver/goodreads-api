@@ -137,7 +137,8 @@ class userController extends Controller
         } 
     }
     /**
-     * Login
+     * @group [User].Login
+     * logIn function
      * 
      * Take the request has [email , password] and check that the email is email type and exists in database and also the password
      * 
@@ -234,7 +235,8 @@ class userController extends Controller
 
 
     /**
-     * Logout
+     * @group [User].Logout
+     * logOut function
      * 
      * Take the request has [Authorization] in the header and this paramater is checked in middleware 
      * 

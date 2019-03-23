@@ -21,7 +21,8 @@ use Response;
 class ReviewController extends Controller
 {
     /**
-     *  Create of Review
+     * @group [Review].Make Review
+     *  createReview function
      * 
      *  make a validation on the input to check that is satisfing the conditions 
      * 
@@ -139,7 +140,8 @@ class ReviewController extends Controller
     }
 
     /**
-     * Edit a review
+     * @group [Review].Edit Review
+     * editReview function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 
@@ -222,7 +224,8 @@ class ReviewController extends Controller
     public function recentReviews()
     { }
     /**
-     * Remove a Review
+     * @group [Review].Delete Review
+     * removeReview function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 

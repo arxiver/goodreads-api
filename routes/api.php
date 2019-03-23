@@ -45,6 +45,8 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
     Route::get('changeCity', "UserController@changeCity");
     Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
+});
+
     // Book Section
     Route::get('books','BookController@index');
     Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
@@ -91,7 +93,7 @@ Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 // Review Section
 Route::get('reviwes','ReviewController@recentReviews');
-Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
+Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
 Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
 //
 Route::get('listReviewOfUser','ReviewController@listReviewOfUser');

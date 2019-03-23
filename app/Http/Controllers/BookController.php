@@ -128,7 +128,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from genre g , books b where b.id = g. book_id and g.type = ?', [$request['genreName']]);
+        $results = DB::select('select * from books where and type = ?', [$request['genreName']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -182,7 +182,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g where g.book_id = b.id and b.title = ?', [$request['title']]);
+        $results = DB::select('select * from books where title = ?', [$request['title']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -237,7 +237,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g where g.book_id = b.id and b.isbn = ?', [$request['ISBN']]);
+        $results = DB::select('select * from books where isbn = ?', [$request['ISBN']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -292,7 +292,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , authors a , genre g where a.id = b.author_id and and b.id = g.book_id a.author_name=?', [$request['Author_name']]);
+        $results = DB::select('select * from books b , authors a where a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

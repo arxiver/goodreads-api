@@ -71,4 +71,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function setuser($a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o){
+        $res = DB::insert('insert into authors values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o]);
+    }
+    public function deleteuser($a){
+        $res = DB::delete('delete from books where id=?',[$a]);
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Book;
 use App\Http\Controllers\ReviewController;
 use Tests\TestCase;
 use Illuminate\App\Http\Request;
+Use WithoutMiddleware;
 use DB;
 use Validator;
 use Response;

@@ -386,12 +386,12 @@ class ReviewController extends Controller
 
     /**
      * @group [Review].getReviewsByTitle
-     *    Get the reviews for a book given a title string.
      * 
+     * Get the reviews for a book given a title string.
      * this function is responsible for showing certain review by
      * returning the (body,rating,comments counts, likes counts, user id ,book id , updates date)
      * of a certain review and also it returns the shelf name of the book the review about
-     * all of that formed by sending the parameters which :-
+     * all of that formed by sending the parameters which 
      * title -> required.
      * rating ->optional.
      * author ->optional.
@@ -481,7 +481,7 @@ class ReviewController extends Controller
 
     /**
      * @group [Review].show Review For Book
-     *   get a specific review 
+     * get a specific review 
      * 
      * this function is responsible for showing details of a certain review by
      * returning the (body,rating,comments counts, likes counts, user id ,book id )
@@ -537,8 +537,9 @@ class ReviewController extends Controller
 
     /**
      * @group [Review].show Review For Book For User
-     *    Get the review for specific user on a specific Book
      * 
+     * 
+     * Get the review for specific user on a specific Book 
      * this function is responsible for showing review of a certain user on a certain book by
      * returning the (body,rating) of a certain review and also it returns the shelf name of
      * the book the review about
@@ -595,9 +596,9 @@ class ReviewController extends Controller
     }
     }
     /**
-     * *@group [Review].show Reviews For Book
-     *   Get the review for specific user on a specific Book
+     * @group [Review].show Reviews For Book
      * 
+     * Get the review for specific user on a specific Book
      * this function is responsible for showing review of a certain book by returning the (idmbody,rating,likes count,
      * comments count,user id)
      * of a certain review and also it returns the shelf name of the book the review about

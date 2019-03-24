@@ -251,8 +251,9 @@ class ShelfController extends Controller
         //
     }
     /**
+     * @group [Shelf].getBooksOnShelf
      * show books on the shelf
-     * * this function is responsible for showing books on the user's shelf by
+     * this function is responsible for showing books on the user's shelf by
      * returning the (book id,title).
      * all of that formed by sending the parameters which :-
      * shelf name

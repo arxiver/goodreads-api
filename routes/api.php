@@ -45,6 +45,13 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
     Route::get('changeCity', "UserController@changeCity");
     Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
+    Route::get('reviwes','ReviewController@recentReviews');
+    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 });
 
     // Book Section
@@ -54,13 +61,7 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
     // Review Section
-    Route::get('reviwes','ReviewController@recentReviews');
-    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
-    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+    
     Route::post('shelf/add_book', 'ShelfController@addBook');
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');
     // Shelf Section

@@ -34,4 +34,11 @@ class Shelf extends Model
         $shelf = collect($t);
         return $shelf;
     }
+
+    public function setshelf($a,$b,$c,$d,$e,$f){
+        $res = DB::insert('insert into shelves values(?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f]);
+    }
+    public function deleteshelf($a){
+        $res = DB::delete('delete from shelves where id=?',[$a]);
+    }
 }

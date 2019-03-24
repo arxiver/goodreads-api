@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\user;
-
+use Illuminate\Support\Facades\DB;
 use JWTAuth;
 use Validator;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 /**
- * @group user management
+ * @group User 
  *
  * APIs for managing users (Sofyan)
  */
@@ -128,7 +128,7 @@ class userController extends Controller
                                     "username" ,
                                     "image_link"
                                 );
-            $Show = User::where("email", $request["email"])->first($GettingData);
+            $Show = User::where("email", $request["email"])->first($gettingData);
             return response()->json(["user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
         } 
         else 
@@ -137,7 +137,8 @@ class userController extends Controller
         } 
     }
     /**
-     * Login
+     * @group [User].Login
+     * logIn function
      * 
      * Take the request has [email , password] and check that the email is email type and exists in database and also the password
      * 
@@ -234,7 +235,8 @@ class userController extends Controller
 
 
     /**
-     * Logout
+     * @group [User].Logout
+     * logOut function
      * 
      * Take the request has [Authorization] in the header and this paramater is checked in middleware 
      * 
@@ -446,63 +448,45 @@ class userController extends Controller
         // to do
     }
     /**
-     * Show Profile
-     *
+     * @group [User].Show Profile
+     * 
+     * showProfile function
+     * 
+     * checking the request given paramaters if user_id exists 
+     * 
+     * it returns his profile-details
+     * 
+     * other-wise it returns authenticated user`s profile from database user table .
+     * 
      * @bodyParam id int optional this parameter to show the info of the other user (default authenticated user) .
      *
      * @authenticated
-     * @response {
-     * "id": "",
-     * "name": "",
-     * "user_name": "",
-     * "link": "",
-     * "image_url": "",
-     * "small_image_url": "",
-     * "about": "",
-     * "age": "",
-     * "gender": "",
-     * "location": "",
-     * "joined": "",
-     * "last_active": "",
-     * "user_shelves": {
-     *   "user_shelf": [
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "read",
-     *       "book_count": {
-     *      "_type": "integer",
-     *       "__text": ""
-     *       }
-     *   },
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "currently-reading",
-     *       "book_count": {
-     *       "_type": "integer",
-     *      "__text": "0"
-     *        }
-     *   },
-     *   {
-     *       "id": {
-     *       "_type": "",
-     *       "__text": ""
-     *       },
-     *       "name": "to-read",
-     *       "book_count": {
-     *       "_type": "integer",
-     *       "__text": "2"
-     *       }
-     *   }
-     *   ],
-     *   "_type": "array"
-     * },
-     * "updates": []
+     * 
+     * @response 200
+     *  {
+     *     "id": 1,
+     *     "name": "Jeromy Heidenreich",
+     *     "username": "Dr. Zaria Witting I",
+     *     "email": "anna29@example.net",
+     *     "email_verified_at": "2019-03-21 20:42:11",
+     *     "link": "http://kozey.com/excepturi-nemo-nemo-sequi-corrupti",
+     *     "image_link": "https://lorempixel.com/640/480/?23657",
+     *     "small_image_link": "https://lorempixel.com/100/100/?36683",
+     *     "about": "weRmt2re2n",
+     *     "age": 65,
+     *     "gender": "N/A",
+     *     "country": "Egupt",
+     *     "city": "Cairo",
+     *     "joined_at": "1981-11-16",
+     *     "last_active": "2019-03-23 12:17:09",
+     *     "followers_count": 2,
+     *     "following_count": 5,
+     *     "rating_avg": 2,
+     *     "rating_count": 6,
+     *     "books_count": null,
+     *     "birthday": null,
+     *     "created_at": null,
+     *     "updated_at": null
      * }
      */
 
@@ -513,16 +497,17 @@ class userController extends Controller
         * Case it is not sent : then we list the authenticated-user `s followers
         * other wise we use the given user_id to get profile detailed info  .
         */
-
-        return response(["id" => $this->ID],200);
-        die();
         $userId = $request->has(['id']) ? $request->id : $this->ID;
         User::findOrFail($userId);
 
-        $data = User::select('id','name','email','link','image_link',
-                             'small_image_link','about','age','gender')
-                             ->where('id', $userId)->get();
-
+        /**
+         * Query finding user data
+         */      
+        $data = User::where('id',$userId)->get()[0];
+  
+        /**
+         * Return response
+         */
         return response()->json($data);
 
     }

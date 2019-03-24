@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->date('joined_at')->default(now());                     // The date of his joining in the website
             $table->integer('followers_count')->default(0);                // followers count
             $table->integer('following_count')->default(0);                // following count
-            $table->float('rating_avg')->default(0);                       // Raging average
+            $table->float('rating_avg')->default(0);                       // Rating average
             $table->integer('rating_count')->default(0); 
             $table->integer('book_count')->default(0);                     // Book count
             $table->date("birthday");

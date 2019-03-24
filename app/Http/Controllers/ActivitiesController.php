@@ -23,7 +23,12 @@ class ActivitiesController extends Controller
 {
 
     /**
+<<<<<<< HEAD
      * updates
+=======
+     * @group [Activities].Updates
+     * updates function
+>>>>>>> 86b9eef009956a1caf929b72ce50a46c2b02ed84
      * 
      * Get user's updates from following users
      * 
@@ -46,7 +51,6 @@ class ActivitiesController extends Controller
      * @bodyParam max_updates int optional to get the max limit of updates.
      * @responseFile responses/updatesReal.json
      */
-    //$user_id,$max_updates
     public function followingUpdates(Request $request)
     {
         $Validations    = array(
@@ -131,7 +135,8 @@ class ActivitiesController extends Controller
 
     }
     /**
-     * Makecomment
+     * @group [Activities].Make Comment
+     * makeComment function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 
@@ -257,7 +262,8 @@ class ActivitiesController extends Controller
         }
 	}
 	/**
-     * Deletecomment
+     * @group [Activities].Delete Comment
+     * deleteComment function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 
@@ -403,7 +409,8 @@ class ActivitiesController extends Controller
 
     }
     /**
-     * Like
+     * @group [Activities].Like
+     * like function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 
@@ -520,7 +527,8 @@ class ActivitiesController extends Controller
 	}
 
     /**
-     * Unlike
+     * @group [Activities].Unlike
+     * unLike function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 

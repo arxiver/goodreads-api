@@ -7,16 +7,31 @@ use App\User;
 use App\Following;
 use Illuminate\Http\Request;
 
-/**
- * @group Following
- */
 class FollowingController extends Controller
 {
 
     /**
-     * Follow User
-     * @authenticated
-     * [ Start following a user ]
+     * @group [Following].Follow User
+     * followUser function
+     * 
+     * Checking the request`s paramaters that has [user_id] paramater
+     * 
+     * it is aborting in case no user_id is given
+     * 
+     * Validate the existance of the user_id
+     * if the user doesn`t exist aborting
+     * 
+     * Validate the relationship is not existing before.
+     * responsing 400 if it exist.
+     * 
+     * if not exists creating new instance of following model
+     * 
+     * `
+     * increamenting both Follower: follwoing_count / Followed: followers_count 
+     * `
+     * 
+     * Responses with successfully message in case of passing aborting
+     * 
      * @bodyParam user_id int required Goodreads user id of user to follow.
      * @response 201 {
      * "status": "true",
@@ -30,6 +45,8 @@ class FollowingController extends Controller
      *
      * @response 404{
      * }
+     * @authenticated
+     * 
      */
     public function followUser(Request $request)
     {
@@ -44,7 +61,7 @@ class FollowingController extends Controller
         $followerId = $this->ID;
 
         /**
-         * Validate the relationship is not exist before.
+         * Validate the relationship is not existing before.
          * reponseing 400 if it exist.
          */
         if (Following::where('follower_id', $followerId)->where('user_id', $userId)->count() == 1)
@@ -81,8 +98,27 @@ class FollowingController extends Controller
     }
 
     /**
-     * Unfollow User
-     * Stop following a user
+     * @group [Following].Unfollow User
+     * unfollowUser function
+     * 
+     * Checking the request`s paramaters that has [user_id] paramater
+     * 
+     * it is aborting in case no user_id is given
+     * 
+     * Validate the existance of the user_id
+     * if the user doesn`t exist aborting
+     * 
+     * Validate the relationship is existing .
+     * if it is not existing it`s aborting .
+     * 
+     * if exists it is being removes successfully
+     * 
+     * `
+     * decreamenting both Follower: follwoing_count / Followed: followers_count 
+     * `
+     * 
+     * Responses with successfully message in case of passing aborting
+     * 
      *
      * @authenticated
      *
@@ -135,9 +171,20 @@ class FollowingController extends Controller
     }
 
     /**
-     * Followers List
-     * gets the followers of a user.
-     *
+     * @group [Following].Followers List
+     * 
+     * followersUser function .
+     * 
+     * 
+     * returns followers list of the given [ user_id ] and their currently reading books
+     * 
+     * each page contains 30 user limiting query with max 30 record.
+     * 
+     * Checking the request paramaters and validate the existance of the user
+     * 
+     * aborting in-case of user is not exist
+     * 
+     * other wise returns the user`s followers list from database table .
      * @authenticated
      *
 	 *
@@ -233,8 +280,20 @@ class FollowingController extends Controller
     }
 
     /**
-     * Following List
-     * gets the following list of a user .
+     * @group  [Following].Following List
+     * 
+     * 
+     * followingUser function .
+     * 
+     * returns following list of the given [ user_id ] and their currently reading books
+     * 
+     * each page contains 30 user limiting query with max 30 record.
+     * 
+     * Checking the request paramaters and validate the existance of the user
+     * 
+     * aborting in-case of user is not exist
+     * 
+     * other wise returns the user`s following list from database table .
      *
      * @authenticated
      *

@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //factory(App\User::class, 10)->create();
-        $this->call(UserSeeder::class);
+        factory(App\User::class, 10)->create();
+        //$this->call(UserSeeder::class);
         DB::update('update users set password = "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi" where 1 = 1');
-        //factory(App\Following::class,10)->create();
+        factory(App\Following::class,10)->create();
         factory(App\Book::class, 100)->create();
         //factory(App\Following::class, 100)->create();
         factory(Comment::class,50)->create();

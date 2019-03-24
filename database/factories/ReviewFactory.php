@@ -10,7 +10,7 @@ $factory->define(App\Review::class, function (Faker $faker) {
         'body'=> Str::random(10),
         'shelf_name'=>$faker->numberBetween(1, 3),
         'rating'=> $faker->randomFloat(3,0,5),
-        'likes_count'=> $faker->numberBetween(1, 100),
-        'comments_count'=> $faker->numberBetween(1, 100),
+        'likes_count'=> $faker->numberBetween(1,10),
+        'comments_count'=> $faker->numberBetween(1, 10),
     ];
 });

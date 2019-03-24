@@ -146,7 +146,7 @@ class ReviewTest extends TestCase
         // Get all id's of users
         $usersCount = User::all()->count();
         // Get id for a user in the databas eto login with it 
-        $randomUserId = rand(1, $usersCount);
+        $randomUserId = 1;//rand(1, $usersCount);
         // Get the record of this user
         $user = User::find($randomUserId); 
         // show the user id 
@@ -218,7 +218,7 @@ class ReviewTest extends TestCase
         // Get all id's of users
         $usersCount = User::all()->count();
         // Get id for a user in the databas eto login with it 
-        $randomUserId = rand(1, $usersCount);
+        $randomUserId = 1;//rand(1, $usersCount);
         // Get the record of this user
         $user = User::find($randomUserId); 
         // show the user id 

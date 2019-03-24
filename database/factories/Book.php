@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Book::class, function (Faker $faker) {
+/*$factory->define(App\Book::class, function (Faker $faker) {
     return [
         'title' => $faker->name,
         'isbn' => $faker->numberBetween(1, 70),
@@ -18,4 +18,4 @@ $factory->define(App\Book::class, function (Faker $faker) {
         'authorId' =>$faker->numberBetween(1, 70) ,
         'pagesNum'=>$faker->numberBetween(1, 70),
     ];
-});
+});*/

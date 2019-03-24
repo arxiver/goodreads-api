@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Review::class, function (Faker $faker) {
     return [
         //
-        'user_id' =>$faker->numberBetween(1, 4),
+        'user_id' =>$faker->numberBetween(1, 1),
         'book_id'=>$faker->numberBetween(1, 4),
         'body'=> Str::random(10),
         'shelf_name'=>$faker->numberBetween(1, 3),

@@ -59,18 +59,6 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
     Route::get('changeCity', "UserController@changeCity");
     Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
-<<<<<<< HEAD
-=======
-    Route::get('reviwes','ReviewController@recentReviews');
-    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
-    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
-});
-
->>>>>>> 2f5b542a1e17ab872cfc0cd383593fa8f289e3dd
     // Book Section
     Route::get('books','BookController@index');
     Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
@@ -78,7 +66,6 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
     // Review Section
-<<<<<<< HEAD
     Route::get('reviwes','ReviewController@recentReviews');
     Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
@@ -86,9 +73,6 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
     Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
     Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
-=======
-    
->>>>>>> 2f5b542a1e17ab872cfc0cd383593fa8f289e3dd
     Route::post('shelf/add_book', 'ShelfController@addBook');
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');
     // Shelf Section

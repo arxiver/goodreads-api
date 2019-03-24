@@ -23,12 +23,8 @@ class ActivitiesController extends Controller
 {
 
     /**
-<<<<<<< HEAD
-     * updates
-=======
      * @group [Activities].Updates
      * updates function
->>>>>>> 86b9eef009956a1caf929b72ce50a46c2b02ed84
      * 
      * Get user's updates from following users
      * 

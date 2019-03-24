@@ -8,15 +8,17 @@ use \App\Comment;
 use \App\Likes;
 use \App\Following;
 use \App\Shelf;
+use Illuminate\Support\Facades\DB;
 namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use  Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
 class updatesTest extends TestCase
 {
-   // use RefreshDatabase;
+    //use RefreshDatabase;
     /**
      * A basic unit test example.
      * @test
@@ -73,7 +75,7 @@ class updatesTest extends TestCase
         // store the token in the variable  $token
         $token = $jsonArray['token'];*/
         $response = $this ->post('/api/logIn',[
-            'email'=>'aisha91@example.net',
+            'email'=>'jonas77@example.net',
             'password'=>'password'
         ]);
         $jsonArray = json_decode($response->content(),true);
@@ -88,8 +90,67 @@ class updatesTest extends TestCase
         $response->assertStatus(200);
         
         $jsonArray = $response1->getData();
-        $arr = array_column($jsonArray->updates,('update_type'));
+        $updates = $jsonArray->updates;
+        $arr = array_column($updates,('update_type'));
+        if(count($arr)>0)
         $this->assertTrue((min($arr)>-1)&&(max($arr)<5));
-
+        \Log::info('This is some useful information.');
+        //get users followed by auth_user then compare it with user_ids in the updates returned
+        $fol = \App\Following::where('follower_id','=',$auth_user->id)->select('user_id');
+        $arr = array_unique(array_column($updates,('user_id')));
+        $fol= json_decode( json_encode($fol), true);
+        $fol = Arr::flatten($fol);
+        //select a random user
+        $rand = \App\User::find($faker->randomElement($users_ids));
+        $r_id =\DB::table('reviews')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
+        $f_id =\DB::table('followings')->where('follower_id','=',$rand->id)->select('id')->inRandomOrder()->first();
+        $s_id =\DB::table('shelves')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
+        $c_id =\DB::table('comments')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
+        $l_id =\DB::table('likes')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
+    
+        if(\DB::table('followings')->where('follower_id','=',$auth_user->id)->where('user_id','=',$rand->id)->exists())
+        {
+            $response1->assertJsonFragment([
+                'id'=>$r_id,
+                'update_type'=>0
+            ]);
+            $response1->assertJsonFragment([
+                'id'=>$s_id,
+                'update_type'=>1
+            ]);
+            $response1->assertJsonFragment([
+                'id'=>$f_id,
+                'update_type'=>2
+            ]);
+            $response1->assertJsonFragment([
+                'id'=>$l_id,
+                'update_type'=>3
+            ]);
+            $response1->assertJsonFragment([
+                'id'=>$c_id,
+                'update_type'=>4
+            ]);
+        }else{
+            $response1->assertJsonMissing([
+                'id'=>$r_id,
+                'update_type'=>0
+            ]);
+            $response1->assertJsonMissing([
+                'id'=>$s_id,
+                'update_type'=>1
+            ]);
+            $response1->assertJsonMissing([
+                'id'=>$f_id,
+                'update_type'=>2
+            ]);
+            $response1->assertJsonMissing([
+                'id'=>$l_id,
+                'update_type'=>3
+            ]);
+            $response1->assertJsonMissing([
+                'id'=>$c_id,
+                'update_type'=>4
+            ]);
+        }
     }
 }

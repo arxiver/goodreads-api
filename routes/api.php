@@ -95,6 +95,7 @@ Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 Route::group(["middleware" => "unAuthorized"], function(){
 Route::post('shelf/add_book', 'ShelfController@addBook');
 Route::delete('shelf/remove_book', 'ShelfController@removeBook');
+Route::get('updates','ActivitiesController@followingUpdates');
 });
 
 
@@ -105,7 +106,7 @@ Route::get('shelf/shelfid','ShelfController@userShelves');
 Route::get('shelf','ShelfController@getBooksOnShelf');
 
 
-Route::get('updates','ActivitiesController@followingUpdates');
+//Route::get('updates','ActivitiesController@followingUpdates');
 
 
 

@@ -94,7 +94,9 @@ class BookController extends Controller
     }
 
     /**
-     * Show books by genre
+     *  @group [Review].get Book By genre
+     *   Show books by genre
+     * 
      * function is responsible for showing books by
      * returning the (id,title,publication_date, isbn, image url,publisher,language,
      * description,reviews count,rating count,link,author id,genre)
@@ -150,7 +152,9 @@ class BookController extends Controller
     }
     }
     /**
-     * get the needed book by its name
+     * @group [Review].get Book By title
+     *  get the needed book by its name
+     * 
      * this function is responsible for showing certain book by
      * returning the (id,title,publication_date, isbn, image url,publisher,language,
      * description,reviews count,rating count,link,author id,genre)
@@ -204,7 +208,9 @@ class BookController extends Controller
     }
     }
     /**
-     * get the needed book by its ISBN
+     * @group [Review].get Book By Isbn
+     *    get the needed book by its ISBN
+     * 
      * this function is responsible for showing certain book by
      * returning the (id,title,publication_date, isbn, image url,publisher,language,
      * description,reviews count,rating count,link,author id,genre)
@@ -259,7 +265,9 @@ class BookController extends Controller
     }
     }
     /**
-     * search about the needed book by its Author name
+     * @group [Review].get Book By Author Name
+     *    search about the needed book by its Author name
+     * 
      * this function is responsible for showing certain book by
      * returning the (id,title,publication_date, isbn, image url,publisher,language
      * ,description,reviews count,rating count,link,author id,genre)

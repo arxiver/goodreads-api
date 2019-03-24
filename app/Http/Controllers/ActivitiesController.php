@@ -24,7 +24,23 @@ class ActivitiesController extends Controller
 
     /**
      * updates
+     * 
      * Get user's updates from following users
+     * 
+     * first the function validates the sent parameters if any if it isn't valid 
+     * an error response returns with 400 status code
+     * 
+     * if there is no parameters sent the default is to return all updates that would be shown to the authenticated user
+     * get all the users followed by the authenticated user then all the activities made by them
+     * those activities are retrieved from five different database tables that store these info 
+     * (shelves,reviews,likes,comments,followings) then the data is merged into one array and sorted 
+     * by updated_at date descendingly in order to show the user the user the latest updates first
+     * 
+     * if a valid user id is sent then all activities made by this specific user are retrieved the same 
+     * way explained earlier in order to show it in this user's profile
+     * 
+     * if a valid max updates is sent then this value is retrieved from the array after sorting
+     * 
      * @authenticated
      * @bodyParam user_id int optional to get the updates made by a specific user (default all following)
      * @bodyParam max_updates int optional to get the max limit of updates.

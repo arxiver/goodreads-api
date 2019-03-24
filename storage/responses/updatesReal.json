@@ -1,151 +1,124 @@
 {
-   "updates":{
-      "update":[
-         {
-            "id":"0000000",
-            "actor":{
-               "id":"65993249",
-               "name":"Salma Ibrahim",
-               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-            },
-            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-            "numComments":"",
-            "numLikes":"",
-            "action":{
-               "id":"5",
-               "type":"0",
-               "rating":"",
-               "body":"",
-               "book":{
-                  "id":"31087",
-                  "title":"The Last Boleyn",
-                  "imgUrl":"",
-                  "shelf":"",
-                  "rating":""
-               }
-            }
-         },
-         {
-            "id":"000001",
-            "actor":{
-               "id":"65993249",
-               "name":"Salma Ibrahim",
-               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-            },
-            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-            "numComments":"",
-            "numLikes":"",
-            "action":{
-               "id":"",
-               "type":"2",
-               "user":{
-                  "name":"",
-                  "imageLink":"",
-                  "ratingAvg":"",
-                  "ratingCount":""
-               }
-            }
-         },
-         {
-            "id":"0000000",
-            "actor":{
-               "id":"65993249",
-               "name":"Salma Ibrahim",
-               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-            },
-            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-            "numComments":"",
-            "numLikes":"",
-            "action":{
-               "id":"5",
-               "type":"1",
-               "shelf":"wants to read",
-               "book":{
-                  "id":"31087",
-                  "title":"The Last Boleyn",
-                  "imgUrl":"",
-                  "shelf":"",
-                  "rating":""
-               }
-            }
-         },
-         {
-            "id":"0000000",
-            "actor":{
-               "id":"65993249",
-               "name":"Salma Ibrahim",
-               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-            },
-            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-            "action":{
-               "id":"7",
-               "type":"3",
-               "resourceType":"1",
-               "update":{
-                  "id":"0000000",
-                  "actor":{
-                     "id":"65993249",
-                     "name":"Salma Ibrahim",
-                     "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-                  },
-                  "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-                  "numComments":"",
-                  "numLikes":"",
-                  "action":{
-                     "id":"5",
-                     "type":"1",
-                     "shelf":"wants to read",
-                     "book":{
-                        "id":"31087",
-                        "title":"The Last Boleyn",
-                        "imgUrl":"",
-                        "shelf":"",
-                        "rating":""
-                     }
-                  }
-               }
-            }
-         },
-         {
-            "id":"0000000",
-            "actor":{
-               "id":"65993249",
-               "name":"Salma Ibrahim",
-               "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-            },
-            "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-            "action":{
-               "id":"7",
-               "type":"4",
-               "resourceType":"0",
-               "body":"",
-               "update":{
-                  "id":"0000000",
-                  "actor":{
-                     "id":"65993249",
-                     "name":"Salma Ibrahim",
-                     "imageLink":"https://images.gr-assets.com/users/1489660298p2/65993249.jpg"
-                  },
-                  "updated_at":"Fri, 08 Mar 2019 04:16:55 -0800",
-                  "numComments":"",
-                  "numLikes":"",
-                  "action":{
-                     "id":"5",
-                     "type":"0",
-                     "rating":"",
-                     "body":"",
-                     "book":{
-                        "id":"31087",
-                        "title":"The Last Boleyn",
-                        "imgUrl":"",
-                        "shelf":"",
-                        "rating":""
-                     }
-                  }
-               }
-            }
-         }
-      ],
-      "_type":"array"
-   }
+    "status": "true",
+    "updates": [
+        {
+            "id": 2,
+            "body": null,
+            "rating": null,
+            "likes_count": null,
+            "comments_count": null,
+            "updated_at": "2019-03-21 00:00:00",
+            "book_id": 1,
+            "title": "a",
+            "description": "",
+            "img_url": "",
+            "reviews_count": null,
+            "ratings_count": null,
+            "ratings_avg": null,
+            "pages_no": null,
+            "user_id": 2,
+            "name": "",
+            "image_link": null,
+            "author_name": "a",
+            "update_type": 0
+        },
+        {
+            "id": 1,
+            "shelf_type": 3,
+            "updated_at": "2019-03-15 00:00:00",
+            "likes_count": null,
+            "comments_count": null,
+            "book_id": 1,
+            "title": "a",
+            "description": "",
+            "img_url": "",
+            "reviews_count": null,
+            "ratings_count": null,
+            "ratings_avg": null,
+            "pages_no": null,
+            "user_id": 2,
+            "name": "",
+            "image_link": null,
+            "author_name": "a",
+            "update_type": 1
+        },
+        {
+            "id": 2,
+            "shelf_type": 3,
+            "updated_at": "2019-03-01 00:00:00",
+            "likes_count": null,
+            "comments_count": null,
+            "book_id": 1,
+            "title": "a",
+            "description": "",
+            "img_url": "",
+            "reviews_count": null,
+            "ratings_count": null,
+            "ratings_avg": null,
+            "pages_no": null,
+            "user_id": 3,
+            "name": "",
+            "image_link": null,
+            "author_name": "a",
+            "update_type": 1
+        },
+        {
+            "updated_at": "2019-03-19 00:00:00",
+            "user_id": 2,
+            "user_image_link": null,
+            "user_name": "",
+            "followed_id": 3,
+            "followed_image_link": null,
+            "followed_name": "",
+            "update_type": 2
+        },
+        {
+            "id": 2,
+            "resourse_type": 0,
+            "updated_at": null,
+            "comment_body": "",
+            "review_id": 1,
+            "body": null,
+            "rating": null,
+            "comments_count": null,
+            "review_updated_at": "2019-03-03 00:00:00",
+            "book_id": 1,
+            "title": "a",
+            "description": "",
+            "img_url": "",
+            "reviews_count": null,
+            "ratings_count": null,
+            "ratings_avg": null,
+            "pages_no": null,
+            "user_id": 1,
+            "name": "",
+            "image_link": null,
+            "author_name": "a",
+            "update_type": 4
+        },
+        {
+            "id": 2,
+            "resourse_type": 0,
+            "updated_at": null,
+            "review_id": 1,
+            "body": null,
+            "rating": null,
+            "likes_count": null,
+            "comments_count": null,
+            "review_updated_at": "2019-03-03 00:00:00",
+            "book_id": 1,
+            "title": "a",
+            "description": "",
+            "img_url": "",
+            "reviews_count": null,
+            "ratings_count": null,
+            "ratings_avg": null,
+            "pages_no": null,
+            "user_id": 1,
+            "name": "",
+            "image_link": null,
+            "author_name": "a",
+            "update_type": 3
+        }
+    ]
 }

@@ -15,6 +15,7 @@ class Likes extends Model
 
     ];
     protected $table = 'likes';
+    //function to get the likes activity of certain users
     public static function likesUsersArr($Arr)
     {
         

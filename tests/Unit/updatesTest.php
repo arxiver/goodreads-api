@@ -18,7 +18,7 @@ use  Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 class updatesTest extends TestCase
 {
-    //use RefreshDatabase;
+   // use RefreshDatabase;
     /**
      * A basic unit test example.
      * @test
@@ -27,9 +27,8 @@ class updatesTest extends TestCase
     public function testUpdates()
     {
         $faker = \Faker\Factory::create();
-       /* $users = factory(\App\User::class,rand(2,10))->make([
-            'email'=>$faker->unique()->email
-        ]);*/
+        //$users = factory(\App\User::class,rand(2,10))->make();
+        
 
         \DB::table('authors')->insert(['author_name'=>$faker->name]);
         factory(\App\Book::class,rand(1,10))->make([
@@ -61,21 +60,15 @@ class updatesTest extends TestCase
             'resourse_id'=>$faker->randomElement($reviews_ids),
             'resourse_type'=>0
         ]);
-        $auth_user = \App\User::find(1);
-       // $auth_user = \App\User::find($faker->randomElement(\App\Following::all()->pluck('follower_id')->toArray()));
+        //$auth_user = \App\User::find(1);
+        $auth_user = \App\User::find($faker->randomElement(\App\User::all()->pluck('id')->toArray()));
         /**
          * Login assertion
          * getting authenictaion token
          */
     
-       /* $loginResponse = $this->json('POST', 'api/login', ['email' =>$auth_user['email'], 'password' => 'password']);
-        // Convert the response to array to be able to access the elements of the response
-        $loginResponse->assertJson(["status"=>"true"])->assertStatus(200);
-        $jsonArray = json_decode($loginResponse->content(),true);
-        // store the token in the variable  $token
-        $token = $jsonArray['token'];*/
-        $response = $this ->post('/api/logIn',[
-            'email'=>'jonas77@example.net',
+        $response = $this ->post('/api/login',[
+            'email'=>$auth_user['email'],
             'password'=>'password'
         ]);
         $jsonArray = json_decode($response->content(),true);
@@ -86,8 +79,7 @@ class updatesTest extends TestCase
          */
         
         $response1 = $this->json('GET', '/api/updates',[ 'token'=> $token ,'token_type' =>'bearer']);
-        //$response = $this ->get('/api/updates?user_id=' .$auth_user['id'].'');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
         
         $jsonArray = $response1->getData();
         $updates = $jsonArray->updates;
@@ -100,14 +92,14 @@ class updatesTest extends TestCase
         $arr = array_unique(array_column($updates,('user_id')));
         $fol= json_decode( json_encode($fol), true);
         $fol = Arr::flatten($fol);
-        //select a random user
+        //select a random user and random updates of him
         $rand = \App\User::find($faker->randomElement($users_ids));
         $r_id =\DB::table('reviews')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
         $f_id =\DB::table('followings')->where('follower_id','=',$rand->id)->select('id')->inRandomOrder()->first();
         $s_id =\DB::table('shelves')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
         $c_id =\DB::table('comments')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
         $l_id =\DB::table('likes')->where('user_id','=',$rand->id)->select('id')->inRandomOrder()->first();
-    
+        //check if he is followed by auth_user and whether his updates should appear in the auth user updates
         if(\DB::table('followings')->where('follower_id','=',$auth_user->id)->where('user_id','=',$rand->id)->exists())
         {
             $response1->assertJsonFragment([
@@ -152,5 +144,24 @@ class updatesTest extends TestCase
                 'update_type'=>4
             ]);
         }
+        //if a user_id is sent then check that the updates only belongs to that user
+        $response2 = $this ->get('/api/updates?user_id=' .$auth_user['id'].'');
+        $response2->assertSuccessful();
+        if($rand->id==$auth_user->id)
+        {
+            $response2->assertJsonFragment([
+                'user_id'=>$rand->id
+            ]);
+
+        }else{
+            $response2->assertJsonMissing([
+                'user_id'=>$rand->id
+            ]);
+        }
+        $max=rand(1,200);
+        $response3 = $this ->get('/api/updates?max_updates=' .$max.'');
+        $response3->assertSuccessful();
+        $u = $response3->getData()->updates;
+        $this->assertTrue(count($u)<$max);
     }
 }

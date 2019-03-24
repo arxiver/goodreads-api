@@ -10,6 +10,7 @@ class Following extends Model
     protected $hidden = [
         //'user_id' , 'updated_at'
     ];
+    //function to get the following activity of certain users
     public static function FollowingUsersArr($Arr)
     {
         

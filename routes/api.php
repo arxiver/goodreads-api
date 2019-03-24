@@ -20,22 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 // User section
 Route::group(["middleware" => "authorized"] , function(){
-    Route::post('signup', "UserController@signUp");
-    Route::post('login', "UserController@logIn");
-    
-});
-
-Route::group(["middleware" => "unAuthorized"] , function(){
-    Route::post('changePassword', "UserController@changePassword");
-    Route::post('changeName', "UserController@changeName");
-    Route::get('showProfile', 'UserController@showProfile');
-
-    Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
-    Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+    Route::post('signUp', "UserController@signUp");
+    Route::post('logIn', "UserController@logIn");
 
     Route::post('changeImage', "UserController@changeImage");
     Route::post('delete', "UserController@delete");
@@ -59,6 +45,15 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
     Route::get('changeCity', "UserController@changeCity");
     Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
+    Route::get('reviwes','ReviewController@recentReviews');
+    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+});
+
     // Book Section
     Route::get('books','BookController@index');
     Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
@@ -66,20 +61,14 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
     // Review Section
-    Route::get('reviwes','ReviewController@recentReviews');
-    Route::get( 'reviwes/users/books/{book_id}', 'ReviewController@getReviewsForListOfBooks');
-    Route::get( 'reviwes/books/{boodTitle}', 'ReviewController@getReviewsByTitle');
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get('showReviewOfBook/{id}','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser/{user_id}/{book_id}','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook/{book_id}','ReviewController@showReviewsForBook');
+    
     Route::post('shelf/add_book', 'ShelfController@addBook');
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');
     // Shelf Section
     Route::get('shlef/list', 'ShelfController@index');
     Route::get('shelf/{shelf_name}', 'ShelfController@show');
     Route::get('shelf/{user_id}','ShelfController@userShelves');
-    Route::get('shelf/{user_id}/{shelf_name}','ShelfController@getBooksOnShelf');
+    Route::get('shelf/','ShelfController@getBooksOnShelf');
     //Following section
     Route::post('follow','FollowingController@followUser');
     Route::delete('unfollow','FollowingController@unfollowUser');
@@ -87,24 +76,43 @@ Route::group(["middleware" => "unAuthorized"] , function(){
     Route::get('followers','FollowingController@userFollowers');
     Route::get('following','FollowingController@userFollowing');
 
-    //User section
-    Route::get('UserController', 'UserController@index');
-    Route::get('UserController/{user}','UserController@getUser');
-    
-    //activities section
-    Route::get('notifications','ActivitiesController@notifications');
-    Route::post('makeComment','ActivitiesController@makeComment');
-    Route::get('listComments','ActivitiesController@listComments');
-    Route::get('listLikes','ActivitiesController@listLikes');
+Route::get('changeBirthday', "UserController@changeBirthday");
+Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
+Route::get('changeCountry', "UserController@changeCountry");
+Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
+Route::get('changeCity', "UserController@changeCity");
+Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
+
+
+// Book Section
+Route::get('books','BookController@index');
+
+Route::get( 'books/genre', 'BookController@showByGenre');
+Route::get('Books/book_title','BookController@getBookByTitle');
+Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+
+// Review Section
+Route::get('reviwes','ReviewController@recentReviews');
+Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+//
+Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+
+Route::group(["middleware" => "unAuthorized"], function(){
+Route::post('shelf/add_book', 'ShelfController@addBook');
+Route::delete('shelf/remove_book', 'ShelfController@removeBook');
 });
 
 
-
-
-
-
-
-
+// Shelf Section
+Route::get('shlef/list', 'ShelfController@index');
+Route::get('shelf/{shelf_name}', 'ShelfController@show');
+Route::get('shelf/{user_id}','ShelfController@userShelves');
+Route::get('shelf','ShelfController@getBooksOnShelf');
 
 //Owned Books
 //Route::get( 'owned_books', 'OwnedBookController@index');

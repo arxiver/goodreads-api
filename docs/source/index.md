@@ -20,168 +20,6 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
-#Activities
-
-APIs for users activities
-<!-- START_e65df2963c4f1f0bfdd426ee5170e8b7 -->
-## notifications
-gets a user&#039;s notifications
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/notifications" \
-    -H "Content-Type: application/json" \
-    -d '{"page":10}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/notifications");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "page": 10
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{}
-```
-
-### HTTP Request
-`GET api/notifications`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    page | integer |  optional  | optional 1-N (default 1).
-
-<!-- END_e65df2963c4f1f0bfdd426ee5170e8b7 -->
-
-<!-- START_300ec40d807333984a76a264dac57b69 -->
-## list comments
-lists comments for a specific resource(review,update)
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/listComments" \
-    -H "Content-Type: application/json" \
-    -d '{"id":"va2iYbdfxZ67fxXt","type":4}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/listComments");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "id": "va2iYbdfxZ67fxXt",
-    "type": 4
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{}
-```
-
-### HTTP Request
-`GET api/listComments`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    id | required |  optional  | int id of the commented resource
-    type | integer |  required  | type of the resource (1 for user status and 2 for review)
-
-<!-- END_300ec40d807333984a76a264dac57b69 -->
-
-<!-- START_06b447ff2a11ad98e991c70ded4a0c5e -->
-## list likes
-lists likes for a specific resource(review,update)
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/listLikes" \
-    -H "Content-Type: application/json" \
-    -d '{"id":20,"type":15}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/listLikes");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "id": 20,
-    "type": 15
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{}
-```
-
-### HTTP Request
-`GET api/listLikes`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    id | integer |  required  | id of the liked resource
-    type | integer |  required  | type of the resource (1 for user status and 2 for review)
-
-<!-- END_06b447ff2a11ad98e991c70ded4a0c5e -->
-
 #Book
 <!-- START_c1831963c98e5d1e2dc2749444d2233b -->
 ## Show book
@@ -191,7 +29,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books/show" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":2}'
+    -d '{"book_id":5}'
 
 ```
 
@@ -204,7 +42,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 2
+    "book_id": 5
 }
 
 fetch(url, {
@@ -257,7 +95,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":13,"books_per_page":10}'
+    -d '{"page":7,"books_per_page":1}'
 
 ```
 
@@ -270,8 +108,8 @@ let headers = {
 }
 
 let body = {
-    "page": 13,
-    "books_per_page": 10
+    "page": 7,
+    "books_per_page": 1
 }
 
 fetch(url, {
@@ -318,114 +156,6 @@ Parameter | Type | Status | Description
 <!-- END_c84ecb8d4fd02d9a637dac124b62c629 -->
 
 #Review
-<!-- START_b5b6c6d01bc0058683ce95a3bd41d9ed -->
-## Get review statistics given a list of ISBNs
-take alist of books and then return their reviews And Rates
-and i will use it to get the review for one book array of one element
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/reviwes/users/books/{book_id}" \
-    -H "Content-Type: application/json" \
-    -d '{"isbns":"ymZpitFobhnTcfsh"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/reviwes/users/books/{book_id}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "isbns": "ymZpitFobhnTcfsh"
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (405):
-
-```json
-{
-    "errors": "UnAuthorized"
-}
-```
-
-### HTTP Request
-`GET api/reviwes/users/books/{book_id}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    isbns | ArrayofInt |  required  | Array of ISBNs(1000 ISBNs per request max.).
-
-<!-- END_b5b6c6d01bc0058683ce95a3bd41d9ed -->
-
-<!-- START_3b8bc689333e11a42e9435563eb81d81 -->
-## List the reviews for a specific user
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/listReviewOfUser" \
-    -H "Content-Type: application/json" \
-    -d '{"userId":"4na7V5BYDy9o2gkR"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/listReviewOfUser");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "userId": "4na7V5BYDy9o2gkR"
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (405):
-
-```json
-{
-    "errors": "UnAuthorized"
-}
-```
-
-### HTTP Request
-`GET api/listReviewOfUser`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    userId | required |  optional  | id of the user
-
-<!-- END_3b8bc689333e11a42e9435563eb81d81 -->
-
 <!-- START_6747893efdb21a433cd9cc3b708804f1 -->
 ## List all reviews of the authenticated user
 
@@ -452,11 +182,554 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (405):
+> Example response (500):
 
 ```json
 {
-    "errors": "UnAuthorized"
+    "message": "SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.\r\n (SQL: select * from `users` where `users`.`id` = 0 limit 1)",
+    "exception": "Illuminate\\Database\\QueryException",
+    "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
+    "line": 664,
+    "trace": [
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
+            "line": 624,
+            "function": "runQueryCallback",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php",
+            "line": 333,
+            "function": "run",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php",
+            "line": 2100,
+            "function": "select",
+            "class": "Illuminate\\Database\\Connection",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php",
+            "line": 2088,
+            "function": "runSelect",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php",
+            "line": 2574,
+            "function": "Illuminate\\Database\\Query\\{closure}",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php",
+            "line": 2089,
+            "function": "onceWithColumns",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php",
+            "line": 519,
+            "function": "get",
+            "class": "Illuminate\\Database\\Query\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php",
+            "line": 503,
+            "function": "getModels",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php",
+            "line": 77,
+            "function": "get",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php",
+            "line": 329,
+            "function": "first",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php",
+            "line": 359,
+            "function": "find",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php",
+            "line": 23,
+            "function": "findOrFail",
+            "class": "Illuminate\\Database\\Eloquent\\Builder",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php",
+            "line": 1614,
+            "function": "forwardCallTo",
+            "class": "Illuminate\\Database\\Eloquent\\Model",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php",
+            "line": 1626,
+            "function": "__call",
+            "class": "Illuminate\\Database\\Eloquent\\Model",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\ReviewController.php",
+            "line": 465,
+            "function": "__callStatic",
+            "class": "Illuminate\\Database\\Eloquent\\Model",
+            "type": "::"
+        },
+        {
+            "function": "listMyReviews",
+            "class": "App\\Http\\Controllers\\ReviewController",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
+            "line": 54,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
+            "line": 45,
+            "function": "callAction",
+            "class": "Illuminate\\Routing\\Controller",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 219,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\ControllerDispatcher",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 176,
+            "function": "runController",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 680,
+            "function": "run",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Middleware\\Authorized.php",
+            "line": 24,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "App\\Http\\Middleware\\Authorized",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+            "line": 41,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+            "line": 58,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 682,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 657,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 623,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 612,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 176,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\fideloper\\proxy\\src\\TrustProxies.php",
+            "line": 57,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Fideloper\\Proxy\\TrustProxies",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php",
+            "line": 62,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 151,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 116,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 276,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 260,
+            "function": "callLaravelRoute",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 36,
+            "function": "makeApiCall",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
+            "line": 49,
+            "function": "__invoke",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
+            "line": 68,
+            "function": "resolve",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\Generator.php",
+            "line": 57,
+            "function": "getResponse",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
+            "line": 201,
+            "function": "processRoute",
+            "class": "Mpociot\\ApiDoc\\Tools\\Generator",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
+            "line": 59,
+            "function": "processRoutes",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "function": "handle",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 32,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 90,
+            "function": "Illuminate\\Container\\{closure}",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 34,
+            "function": "callBoundMethod",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 580,
+            "function": "call",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 183,
+            "function": "call",
+            "class": "Illuminate\\Container\\Container",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Command\\Command.php",
+            "line": 255,
+            "function": "execute",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 170,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Command\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 908,
+            "function": "run",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 269,
+            "function": "doRunCommand",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 145,
+            "function": "doRun",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
+            "line": 90,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+            "line": 122,
+            "function": "run",
+            "class": "Illuminate\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\artisan",
+            "line": 37,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Console\\Kernel",
+            "type": "->"
+        }
+    ]
 }
 ```
 
@@ -492,12 +765,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (405):
+> Example response (200):
 
 ```json
-{
-    "errors": "UnAuthorized"
-}
+null
 ```
 
 ### HTTP Request
@@ -505,6 +776,110 @@ fetch(url, {
 
 
 <!-- END_b7f52079bc658d3faea44274e95c9859 -->
+
+<!-- START_4fcfe1ad30140e7563dd7e19074534d0 -->
+## Get review statistics given a list of ISBNs
+take alist of books and then return their reviews And Rates
+and i will use it to get the review for one book array of one element
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/reviwes/users/books" \
+    -H "Content-Type: application/json" \
+    -d '{"isbns":"xWnLDMHZCwO7rxDq"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/reviwes/users/books");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "isbns": "xWnLDMHZCwO7rxDq"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/reviwes/users/books`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    isbns | ArrayofInt |  required  | Array of ISBNs(1000 ISBNs per request max.).
+
+<!-- END_4fcfe1ad30140e7563dd7e19074534d0 -->
+
+<!-- START_3b8bc689333e11a42e9435563eb81d81 -->
+## List the reviews for a specific user
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/listReviewOfUser" \
+    -H "Content-Type: application/json" \
+    -d '{"userId":"BBz4wTrb0CEbn9pa"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/listReviewOfUser");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "userId": "BBz4wTrb0CEbn9pa"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/listReviewOfUser`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    userId | required |  optional  | id of the user
+
+<!-- END_3b8bc689333e11a42e9435563eb81d81 -->
 
 #Shelf
 <!-- START_8ca8c1ada18abb4fe16799cd67e55e73 -->
@@ -557,7 +932,7 @@ fetch(url, {
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{shelf_name}" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"p3KFrEphEsLrtAZH"}'
+    -d '{"shelf_name":"NGScqG1dfso5c5zC"}'
 
 ```
 
@@ -570,7 +945,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "p3KFrEphEsLrtAZH"
+    "shelf_name": "NGScqG1dfso5c5zC"
 }
 
 fetch(url, {
@@ -582,12 +957,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (405):
+> Example response (200):
 
 ```json
-{
-    "errors": "UnAuthorized"
-}
+null
 ```
 
 ### HTTP Request
@@ -610,7 +983,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/shelf/{user_id}" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":5,"page":8,"books_per_page":2}'
+    -d '{"user_id":2,"page":19,"books_per_page":5}'
 
 ```
 
@@ -623,9 +996,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 5,
-    "page": 8,
-    "books_per_page": 2
+    "user_id": 2,
+    "page": 19,
+    "books_per_page": 5
 }
 
 fetch(url, {
@@ -679,20 +1052,20 @@ Parameter | Type | Status | Description
 #User 
 
 APIs for managing users (Sofyan)
-<!-- START_90f45d502fd52fdc0b289e55ba3c2ec6 -->
+<!-- START_68ff8c9e5dd1db295b6f780b9fcfbeb2 -->
 ## Sign Up
 
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/signup" \
+curl -X POST "http://localhost/api/signUp" \
     -H "Content-Type: application/json" \
-    -d '{"email":"5ErtXhf8gI1J0FLa","password":"McYJxtjb4MYiTDe1","password_confirmation":"hh5P4mvWLF83DnCo","name":"ZWjP4lBxBfOGts1L","gender":"bCQIDPP7Zs2xBWw4","birthday":"1aExTUjtTvhRdU19","country":"VVF4tAET6Tzh5Ra6","city":"g3bsxMAmAcH5uIad"}'
+    -d '{"email":"7ELEPSWIn7hEhm5w","password":"vercZBf80uW4HxqX","password_confirmation":"WWnLBJ8IVWJnM3HO","name":"hyCLSaIrg9QBzSo5","gender":"7xBKQz09Q1xaX4Ny","birthday":"Diyw0H0fkR48vEY2","country":"w0gFyaRDbrJigMGu","city":"36CJFXjKh6xw2Zc4"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/signup");
+const url = new URL("http://localhost/api/signUp");
 
 let headers = {
     "Content-Type": "application/json",
@@ -700,14 +1073,14 @@ let headers = {
 }
 
 let body = {
-    "email": "5ErtXhf8gI1J0FLa",
-    "password": "McYJxtjb4MYiTDe1",
-    "password_confirmation": "hh5P4mvWLF83DnCo",
-    "name": "ZWjP4lBxBfOGts1L",
-    "gender": "bCQIDPP7Zs2xBWw4",
-    "birthday": "1aExTUjtTvhRdU19",
-    "country": "VVF4tAET6Tzh5Ra6",
-    "city": "g3bsxMAmAcH5uIad"
+    "email": "7ELEPSWIn7hEhm5w",
+    "password": "vercZBf80uW4HxqX",
+    "password_confirmation": "WWnLBJ8IVWJnM3HO",
+    "name": "hyCLSaIrg9QBzSo5",
+    "gender": "7xBKQz09Q1xaX4Ny",
+    "birthday": "Diyw0H0fkR48vEY2",
+    "country": "w0gFyaRDbrJigMGu",
+    "city": "36CJFXjKh6xw2Zc4"
 }
 
 fetch(url, {
@@ -750,7 +1123,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`POST api/signup`
+`POST api/signUp`
 
 #### Body Parameters
 
@@ -765,144 +1138,7 @@ Parameter | Type | Status | Description
     country | string |  required  | .
     city | string |  required  | .
 
-<!-- END_90f45d502fd52fdc0b289e55ba3c2ec6 -->
-
-<!-- START_dd73fe89d9872ce37d284636141ae526 -->
-## Change password
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/changePassword" \
-    -H "Content-Type: application/json" \
-    -d '{"password":"GnmwvHZcil3ci2ya","newPassword":"fy3cwAKzEcJJSmzF","newPassword_confirmation":"yiQMwRo5B99vq7IO"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/changePassword");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "password": "GnmwvHZcil3ci2ya",
-    "newPassword": "fy3cwAKzEcJJSmzF",
-    "newPassword_confirmation": "yiQMwRo5B99vq7IO"
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
-
-```json
-{
-    "status": "false",
-    "errors": [
-        "The password field is required.",
-        "The newPassword field is required.",
-        "The newPassword_confirmation field is required."
-    ]
-}
-```
-> Example response (200):
-
-```json
-{
-    "status": "true",
-    "message": "You have changed your password"
-}
-```
-
-### HTTP Request
-`POST api/changePassword`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    password | string |  required  | .
-    newPassword | string |  required  | .
-    newPassword_confirmation | string |  required  | this filed is special so it isn't camel case .
-
-<!-- END_dd73fe89d9872ce37d284636141ae526 -->
-
-<!-- START_02c8bbcf77a96f67abe8f7b90efa9eac -->
-## Change Name
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/changeName" \
-    -H "Content-Type: application/json" \
-    -d '{"password":"kXEiA018HltXGQfy","newName":"AEEpodSpkBy1WEBh"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/changeName");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "password": "kXEiA018HltXGQfy",
-    "newName": "AEEpodSpkBy1WEBh"
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
-
-```json
-{
-    "status": "false",
-    "errors": [
-        "The password field is required.",
-        "The newName field is required."
-    ]
-}
-```
-> Example response (200):
-
-```json
-{
-    "status": "true",
-    "message": "You have changed your name"
-}
-```
-
-### HTTP Request
-`POST api/changeName`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    password | string |  required  | .
-    newName | string |  required  | .
-
-<!-- END_02c8bbcf77a96f67abe8f7b90efa9eac -->
+<!-- END_68ff8c9e5dd1db295b6f780b9fcfbeb2 -->
 
 <!-- START_763d0e0624078ef7007bb9dd454eb3d8 -->
 ## Change Image
@@ -913,7 +1149,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/changeImage" \
     -H "Content-Type: application/json" \
-    -d '{"Image":"HZxnHJaz5HSnbzDB"}'
+    -d '{"Image":"4WiBhECv4CPVrRie"}'
 
 ```
 
@@ -926,7 +1162,7 @@ let headers = {
 }
 
 let body = {
-    "Image": "HZxnHJaz5HSnbzDB"
+    "Image": "4WiBhECv4CPVrRie"
 }
 
 fetch(url, {
@@ -967,7 +1203,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
-    -d '{"password":"WsRQ58ghUVu4qqNn"}'
+    -d '{"password":"q8H33cslvDfffKYF"}'
 
 ```
 
@@ -980,7 +1216,7 @@ let headers = {
 }
 
 let body = {
-    "password": "WsRQ58ghUVu4qqNn"
+    "password": "q8H33cslvDfffKYF"
 }
 
 fetch(url, {
@@ -1082,7 +1318,7 @@ fetch(url, {
 ```bash
 curl -X GET -G "http://localhost/api/changeBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"birthday":"P4g0KY3oLaA2nyN4"}'
+    -d '{"birthday":"9YlKOAfp3iQTKXh9"}'
 
 ```
 
@@ -1095,7 +1331,7 @@ let headers = {
 }
 
 let body = {
-    "birthday": "P4g0KY3oLaA2nyN4"
+    "birthday": "9YlKOAfp3iQTKXh9"
 }
 
 fetch(url, {
@@ -1136,7 +1372,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyBirthday" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyBirthday":"5Mr0elYXkwF7p3sM"}'
+    -d '{"seeMyBirthday":"Uco5wFy8qH58HfAr"}'
 
 ```
 
@@ -1149,7 +1385,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyBirthday": "5Mr0elYXkwF7p3sM"
+    "seeMyBirthday": "Uco5wFy8qH58HfAr"
 }
 
 fetch(url, {
@@ -1190,7 +1426,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCountry" \
     -H "Content-Type: application/json" \
-    -d '{"country":"8DJxmSQ5yeQOsrKz"}'
+    -d '{"country":"Ed0p59VWwwhMAvNS"}'
 
 ```
 
@@ -1203,7 +1439,7 @@ let headers = {
 }
 
 let body = {
-    "country": "8DJxmSQ5yeQOsrKz"
+    "country": "Ed0p59VWwwhMAvNS"
 }
 
 fetch(url, {
@@ -1244,7 +1480,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCountry" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCountry":"TbEw3dZfcMnJFnC3"}'
+    -d '{"seeMyCountry":"BNXqz9QQ2vcuG0kr"}'
 
 ```
 
@@ -1257,7 +1493,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCountry": "TbEw3dZfcMnJFnC3"
+    "seeMyCountry": "BNXqz9QQ2vcuG0kr"
 }
 
 fetch(url, {
@@ -1298,7 +1534,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/changeCity" \
     -H "Content-Type: application/json" \
-    -d '{"city":"7Da1yvqH6EsgnzxE"}'
+    -d '{"city":"M1JNgGfHGoypOt4c"}'
 
 ```
 
@@ -1311,7 +1547,7 @@ let headers = {
 }
 
 let body = {
-    "city": "7Da1yvqH6EsgnzxE"
+    "city": "M1JNgGfHGoypOt4c"
 }
 
 fetch(url, {
@@ -1352,7 +1588,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/whoCanSeeMyCity" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCity":"mKXk4wbYsexTpic0"}'
+    -d '{"seeMyCity":"SIVfAO6sh6KF53LE"}'
 
 ```
 
@@ -1365,7 +1601,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCity": "mKXk4wbYsexTpic0"
+    "seeMyCity": "SIVfAO6sh6KF53LE"
 }
 
 fetch(url, {
@@ -1396,63 +1632,6 @@ Parameter | Type | Status | Description
     seeMyCity | string |  required  | Must be ["onlyMe","everyOne" or "friends"].
 
 <!-- END_744779377169b48280074aac19ad6760 -->
-
-<!-- START_f10126ad0059168e8104f2a086e75abe -->
-## search for an user
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/UserController/{user}" \
-    -H "Content-Type: application/json" \
-    -d '{"userName":"SoBv9UsD0KSjZdyl"}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/UserController/{user}");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "userName": "SoBv9UsD0KSjZdyl"
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{
-    "user": {
-        "id": "000000",
-        "name": "Salma",
-        "image_url": "https:\/\/image.jpg",
-        "link": "https:\/\/www.goodreads.com\/user\/show\/000000-salma"
-    }
-}
-```
-
-### HTTP Request
-`GET api/UserController/{user}`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    userName | string |  required  | search for a user by his/her userName.
-
-<!-- END_f10126ad0059168e8104f2a086e75abe -->
 
 #[Activities].Delete Comment
 deleteComment function
@@ -1569,7 +1748,7 @@ increment the number of likes in the review or follow or  add to shelf
 ```bash
 curl -X POST "http://localhost/api/makeLike" \
     -H "Content-Type: application/json" \
-    -d '{"id":9,"type":16}'
+    -d '{"id":14,"type":12}'
 
 ```
 
@@ -1582,8 +1761,8 @@ let headers = {
 }
 
 let body = {
-    "id": 9,
-    "type": 16
+    "id": 14,
+    "type": 12
 }
 
 fetch(url, {
@@ -1670,7 +1849,7 @@ increment the number of comments in the review or follow or  add to shelf
 ```bash
 curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":17,"type":12,"body":"iAj1uE5i5b5xwDNp"}'
+    -d '{"id":14,"type":15,"body":"jGKwG308XmPQs0u7"}'
 
 ```
 
@@ -1683,9 +1862,9 @@ let headers = {
 }
 
 let body = {
-    "id": 17,
-    "type": 12,
-    "body": "iAj1uE5i5b5xwDNp"
+    "id": 14,
+    "type": 15,
+    "body": "jGKwG308XmPQs0u7"
 }
 
 fetch(url, {
@@ -1780,7 +1959,7 @@ unlike and decrement the number of likes in review or shelf or follow
 ```bash
 curl -X DELETE "http://localhost/api/unlike" \
     -H "Content-Type: application/json" \
-    -d '{"id":18}'
+    -d '{"id":9}'
 
 ```
 
@@ -1793,7 +1972,7 @@ let headers = {
 }
 
 let body = {
-    "id": 18
+    "id": 9
 }
 
 fetch(url, {
@@ -1883,7 +2062,7 @@ if a valid max updates is sent then this value is retrieved from the array after
 ```bash
 curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":12,"max_updates":20}'
+    -d '{"user_id":11,"max_updates":15}'
 
 ```
 
@@ -1896,8 +2075,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 12,
-    "max_updates": 20
+    "user_id": 11,
+    "max_updates": 15
 }
 
 fetch(url, {
@@ -2078,7 +2257,7 @@ Responses with successfully message in case of passing aborting
 ```bash
 curl -X POST "http://localhost/api/follow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":20}'
+    -d '{"user_id":12}'
 
 ```
 
@@ -2091,7 +2270,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 20
+    "user_id": 12
 }
 
 fetch(url, {
@@ -2158,7 +2337,7 @@ other wise returns the user`s followers list from database table .
 ```bash
 curl -X GET -G "http://localhost/api/followers" \
     -H "Content-Type: application/json" \
-    -d '{"page":17,"user_id":6}'
+    -d '{"page":11,"user_id":3}'
 
 ```
 
@@ -2171,8 +2350,8 @@ let headers = {
 }
 
 let body = {
-    "page": 17,
-    "user_id": 6
+    "page": 11,
+    "user_id": 3
 }
 
 fetch(url, {
@@ -2262,7 +2441,7 @@ other wise returns the user`s following list from database table .
 ```bash
 curl -X GET -G "http://localhost/api/following" \
     -H "Content-Type: application/json" \
-    -d '{"page":1,"user_id":15}'
+    -d '{"page":14,"user_id":16}'
 
 ```
 
@@ -2275,8 +2454,8 @@ let headers = {
 }
 
 let body = {
-    "page": 1,
-    "user_id": 15
+    "page": 14,
+    "user_id": 16
 }
 
 fetch(url, {
@@ -2372,7 +2551,7 @@ Responses with successfully message in case of passing aborting
 ```bash
 curl -X DELETE "http://localhost/api/unfollow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":3}'
+    -d '{"user_id":17}'
 
 ```
 
@@ -2385,7 +2564,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 3
+    "user_id": 17
 }
 
 fetch(url, {
@@ -2452,7 +2631,7 @@ check that the authenticated user is  the one who create the review to allow to 
 ```bash
 curl -X DELETE "http://localhost/api/reviwes/delete" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":17}'
+    -d '{"reviewId":16}'
 
 ```
 
@@ -2465,7 +2644,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": 17
+    "reviewId": 16
 }
 
 fetch(url, {
@@ -2547,7 +2726,7 @@ edit the review and rating value.
 ```bash
 curl -X PUT "http://localhost/api/reviwes/edit" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":14,"body":"MOU7e07D7x9UZdRb","rating":5}'
+    -d '{"reviewId":4,"body":"dALhPvtwDsuNBvNv","rating":18}'
 
 ```
 
@@ -2560,9 +2739,9 @@ let headers = {
 }
 
 let body = {
-    "reviewId": 14,
-    "body": "MOU7e07D7x9UZdRb",
-    "rating": 5
+    "reviewId": 4,
+    "body": "dALhPvtwDsuNBvNv",
+    "rating": 18
 }
 
 fetch(url, {
@@ -2643,7 +2822,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":11,"shelf":5,"body":"ko8Aw7wUC21J4aTl","rating":2}'
+    -d '{"bookId":1,"shelf":11,"body":"u2o7R2yffTMfXwHb","rating":11}'
 
 ```
 
@@ -2656,10 +2835,10 @@ let headers = {
 }
 
 let body = {
-    "bookId": 11,
-    "shelf": 5,
-    "body": "ko8Aw7wUC21J4aTl",
-    "rating": 2
+    "bookId": 1,
+    "shelf": 11,
+    "body": "u2o7R2yffTMfXwHb",
+    "rating": 11
 }
 
 fetch(url, {
@@ -2737,7 +2916,7 @@ author name
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_Authorname/{author_name}" \
     -H "Content-Type: application/json" \
-    -d '{"Author_name":"s03lLrTF2xjoYY0a"}'
+    -d '{"Author_name":"KSCJsM0Fgo5jDSnJ"}'
 
 ```
 
@@ -2750,7 +2929,7 @@ let headers = {
 }
 
 let body = {
-    "Author_name": "s03lLrTF2xjoYY0a"
+    "Author_name": "KSCJsM0Fgo5jDSnJ"
 }
 
 fetch(url, {
@@ -2795,6 +2974,71 @@ Parameter | Type | Status | Description
 
 <!-- END_7c9556875434f41a3ca5be8622e54c58 -->
 
+<!-- START_4ff78ec01f28353c43599b20c5deed9b -->
+## api/Books/book_Authorname
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/Books/book_Authorname" \
+    -H "Content-Type: application/json" \
+    -d '{"Author_name":"0bCP7JFX71tZuVb2"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/Books/book_Authorname");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "Author_name": "0bCP7JFX71tZuVb2"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
+}
+```
+
+### HTTP Request
+`GET api/Books/book_Authorname`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    Author_name | string |  required  | Find books by Author's name.
+
+<!-- END_4ff78ec01f28353c43599b20c5deed9b -->
+
 #[Review].get Book By Isbn
    get the needed book by its ISBN
 
@@ -2810,7 +3054,7 @@ isbn.
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_ISBN/{book_isbn}" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":18}'
+    -d '{"ISBN":13}'
 
 ```
 
@@ -2823,7 +3067,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 18
+    "ISBN": 13
 }
 
 fetch(url, {
@@ -2868,6 +3112,71 @@ Parameter | Type | Status | Description
 
 <!-- END_d202bd96c80394da054916bbad4afec8 -->
 
+<!-- START_a73245bf8774b9eb80c387dbb9b98573 -->
+## api/Books/book_ISBN
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/Books/book_ISBN" \
+    -H "Content-Type: application/json" \
+    -d '{"ISBN":19}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/Books/book_ISBN");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "ISBN": 19
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
+}
+```
+
+### HTTP Request
+`GET api/Books/book_ISBN`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    ISBN | integer |  required  | Find books by ISBN
+
+<!-- END_a73245bf8774b9eb80c387dbb9b98573 -->
+
 #[Review].get Book By genre
   Show books by genre
 
@@ -2883,7 +3192,7 @@ genre type.
 ```bash
 curl -X GET -G "http://localhost/api/books/genre/{genre_name}" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"cYJU5a64iHrwqJtX"}'
+    -d '{"genreName":"OcGqmzlxrGty0Fjb"}'
 
 ```
 
@@ -2896,7 +3205,7 @@ let headers = {
 }
 
 let body = {
-    "genreName": "cYJU5a64iHrwqJtX"
+    "genreName": "OcGqmzlxrGty0Fjb"
 }
 
 fetch(url, {
@@ -2941,6 +3250,71 @@ Parameter | Type | Status | Description
 
 <!-- END_1ebf60b0f5e42ff9b1cbdcd9f468d722 -->
 
+<!-- START_956b28d8b20f35dcd70df9bbf29d7312 -->
+## api/books/genre
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/books/genre" \
+    -H "Content-Type: application/json" \
+    -d '{"genreName":"X9lveIz8ZRY7qRZK"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/books/genre");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "genreName": "X9lveIz8ZRY7qRZK"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
+}
+```
+
+### HTTP Request
+`GET api/books/genre`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    genreName | string |  required  | The Genre of list of books.
+
+<!-- END_956b28d8b20f35dcd70df9bbf29d7312 -->
+
 #[Review].get Book By title
  get the needed book by its name
 
@@ -2956,7 +3330,7 @@ title.
 ```bash
 curl -X GET -G "http://localhost/api/Books/book_title/{book_title}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"RCE4oV7KuEEaOEZN"}'
+    -d '{"title":"GWsQ3UvFlbHZt2E0"}'
 
 ```
 
@@ -2969,7 +3343,7 @@ let headers = {
 }
 
 let body = {
-    "title": "RCE4oV7KuEEaOEZN"
+    "title": "GWsQ3UvFlbHZt2E0"
 }
 
 fetch(url, {
@@ -3014,30 +3388,19 @@ Parameter | Type | Status | Description
 
 <!-- END_5d187f4ec204cb84ae6ab7d7ec4726e8 -->
 
-#[Review].getReviewsByTitle
-
-Get the reviews for a book given a title string.
-this function is responsible for showing certain review by
-returning the (body,rating,comments counts, likes counts, user id ,book id , updates date)
-of a certain review and also it returns the shelf name of the book the review about
-all of that formed by sending the parameters which 
-title -> required.
-rating ->optional.
-author ->optional.
-<!-- START_ceef72433d94fbcde535849da946b411 -->
-## api/reviwes/books/{boodTitle}
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+<!-- START_c4b713b7ad8c485e75fc6f65d7d9fa0a -->
+## api/Books/book_title
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/reviwes/books/{boodTitle}" \
+curl -X GET -G "http://localhost/api/Books/book_title" \
     -H "Content-Type: application/json" \
-    -d '{"title":"jecsvpb3qe9AwIX3","author":"YOEb2DaTFwEC140a","rating":11}'
+    -d '{"title":"FPTNBmQmvW91lu60"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/reviwes/books/{boodTitle}");
+const url = new URL("http://localhost/api/Books/book_title");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3045,9 +3408,7 @@ let headers = {
 }
 
 let body = {
-    "title": "jecsvpb3qe9AwIX3",
-    "author": "YOEb2DaTFwEC140a",
-    "rating": 11
+    "title": "FPTNBmQmvW91lu60"
 }
 
 fetch(url, {
@@ -3059,16 +3420,518 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (405):
+> Example response (200):
 
 ```json
 {
-    "errors": "UnAuthorized"
+    "book_title": "Would you die for me?",
+    "isbn": "1234xxxxxx",
+    "image_url": "lookdown.jpg",
+    "small_image_url": "xyz.com\/images\/uvw.jpg",
+    "num_pages": "1000",
+    "publisher": "dummyMan",
+    "publication_day": 13,
+    "publication_year": 1932,
+    "publication_month": 10,
+    "average_rating": 3.532,
+    "ratings_count": 1,
+    "description": "dummy",
+    "author_id": 1,
+    "author_name": "author",
+    "genre": "action"
 }
 ```
 
 ### HTTP Request
-`GET api/reviwes/books/{boodTitle}`
+`GET api/Books/book_title`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    title | string |  required  | Find books by title
+
+<!-- END_c4b713b7ad8c485e75fc6f65d7d9fa0a -->
+
+#[Review].getReviewsByTitle
+
+Get the reviews for a book given a title string.
+this function is responsible for showing certain review by
+returning the (body,rating,comments counts, likes counts, user id ,book id , updates date)
+of a certain review and also it returns the shelf name of the book the review about
+all of that formed by sending the parameters which 
+title -> required.
+rating ->optional.
+author ->optional.
+<!-- START_4b99cbaf6e88b97f13eaa08ab7661532 -->
+## api/reviwes/books
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/reviwes/books" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"C9Krp5QAsWQdkJEb","author":"OvIgV6mo7E7FKetR","rating":10}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/reviwes/books");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "title": "C9Krp5QAsWQdkJEb",
+    "author": "OvIgV6mo7E7FKetR",
+    "rating": 10
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (500):
+
+```json
+{
+    "message": "Undefined variable: rt",
+    "exception": "ErrorException",
+    "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\ReviewController.php",
+    "line": 452,
+    "trace": [
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\ReviewController.php",
+            "line": 452,
+            "function": "handleError",
+            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+            "type": "->"
+        },
+        {
+            "function": "getReviewsByTitle",
+            "class": "App\\Http\\Controllers\\ReviewController",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",
+            "line": 54,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",
+            "line": 45,
+            "function": "callAction",
+            "class": "Illuminate\\Routing\\Controller",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 219,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\ControllerDispatcher",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",
+            "line": 176,
+            "function": "runController",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 680,
+            "function": "run",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",
+            "line": 41,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",
+            "line": 58,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 682,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 657,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 623,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",
+            "line": 612,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 176,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 30,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\fideloper\\proxy\\src\\TrustProxies.php",
+            "line": 57,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Fideloper\\Proxy\\TrustProxies",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php",
+            "line": 62,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 163,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php",
+            "line": 53,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
+            "line": 104,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 151,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",
+            "line": 116,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 276,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 260,
+            "function": "callLaravelRoute",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseStrategies\\ResponseCallStrategy.php",
+            "line": 36,
+            "function": "makeApiCall",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
+            "line": 49,
+            "function": "__invoke",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseStrategies\\ResponseCallStrategy",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\ResponseResolver.php",
+            "line": 68,
+            "function": "resolve",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Tools\\Generator.php",
+            "line": 57,
+            "function": "getResponse",
+            "class": "Mpociot\\ApiDoc\\Tools\\ResponseResolver",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
+            "line": 201,
+            "function": "processRoute",
+            "class": "Mpociot\\ApiDoc\\Tools\\Generator",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\mpociot\\laravel-apidoc-generator\\src\\Commands\\GenerateDocumentation.php",
+            "line": 59,
+            "function": "processRoutes",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "function": "handle",
+            "class": "Mpociot\\ApiDoc\\Commands\\GenerateDocumentation",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 32,
+            "function": "call_user_func_array"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 90,
+            "function": "Illuminate\\Container\\{closure}",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",
+            "line": 34,
+            "function": "callBoundMethod",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",
+            "line": 580,
+            "function": "call",
+            "class": "Illuminate\\Container\\BoundMethod",
+            "type": "::"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 183,
+            "function": "call",
+            "class": "Illuminate\\Container\\Container",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Command\\Command.php",
+            "line": 255,
+            "function": "execute",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php",
+            "line": 170,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Command\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 908,
+            "function": "run",
+            "class": "Illuminate\\Console\\Command",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 269,
+            "function": "doRunCommand",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\symfony\\console\\Application.php",
+            "line": 145,
+            "function": "doRun",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php",
+            "line": 90,
+            "function": "run",
+            "class": "Symfony\\Component\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php",
+            "line": 122,
+            "function": "run",
+            "class": "Illuminate\\Console\\Application",
+            "type": "->"
+        },
+        {
+            "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\artisan",
+            "line": 37,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Console\\Kernel",
+            "type": "->"
+        }
+    ]
+}
+```
+
+### HTTP Request
+`GET api/reviwes/books`
 
 #### Body Parameters
 
@@ -3078,7 +3941,7 @@ Parameter | Type | Status | Description
     author | string |  optional  | optional The author name of the book to lookup.
     rating | integer |  optional  | optional Show only reviews with a particular rating.
 
-<!-- END_ceef72433d94fbcde535849da946b411 -->
+<!-- END_4b99cbaf6e88b97f13eaa08ab7661532 -->
 
 #[Review].show Review For Book For User
 
@@ -3090,20 +3953,20 @@ the book the review about
 all of that formed by sending the parameters which :-
 book id and
 user id
-<!-- START_35312a6c43c9e348424ab1410c1f4202 -->
-## api/showReviewForBookForUser/{user_id}/{book_id}
+<!-- START_af645b6773d834ce7a3f0b9c5df967cf -->
+## api/showReviewForBookForUser
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/showReviewForBookForUser/{user_id}/{book_id}" \
+curl -X GET -G "http://localhost/api/showReviewForBookForUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"ctuTQDloa1lk2yEh","bookId":"6j4h8EfoetGxBFZG"}'
+    -d '{"userId":"0J8QKdE5SyClNpi9","bookId":"ylAfD5woab26lwgS"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/showReviewForBookForUser/{user_id}/{book_id}");
+const url = new URL("http://localhost/api/showReviewForBookForUser");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3111,8 +3974,8 @@ let headers = {
 }
 
 let body = {
-    "userId": "ctuTQDloa1lk2yEh",
-    "bookId": "6j4h8EfoetGxBFZG"
+    "userId": "0J8QKdE5SyClNpi9",
+    "bookId": "ylAfD5woab26lwgS"
 }
 
 fetch(url, {
@@ -3131,7 +3994,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`GET api/showReviewForBookForUser/{user_id}/{book_id}`
+`GET api/showReviewForBookForUser`
 
 #### Body Parameters
 
@@ -3140,7 +4003,7 @@ Parameter | Type | Status | Description
     userId | required |  optional  | id of the of the user
     bookId | required |  optional  | id of the of the book
 
-<!-- END_35312a6c43c9e348424ab1410c1f4202 -->
+<!-- END_af645b6773d834ce7a3f0b9c5df967cf -->
 
 #[Review].show Review For Book
 get a specific review 
@@ -3150,20 +4013,20 @@ returning the (body,rating,comments counts, likes counts, user id ,book id )
 of a certain review and also it returns the shelf name of the book the review about
 all of that formed by sending the parameters which :-
 review id.
-<!-- START_372361de1939f63d652e087d8a0247c1 -->
-## api/showReviewOfBook/{id}
+<!-- START_102e27bc17cce7a0f22b851d24be127a -->
+## api/showReviewOfBook
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/showReviewOfBook/{id}" \
+curl -X GET -G "http://localhost/api/showReviewOfBook" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":"vg1If2eTbV3LRL15"}'
+    -d '{"reviewId":"iiGtk6MC4gZC7yqU"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/showReviewOfBook/{id}");
+const url = new URL("http://localhost/api/showReviewOfBook");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3171,7 +4034,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": "vg1If2eTbV3LRL15"
+    "reviewId": "iiGtk6MC4gZC7yqU"
 }
 
 fetch(url, {
@@ -3183,16 +4046,16 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (405):
+> Example response (200):
 
 ```json
 {
-    "errors": "UnAuthorized"
+    "status": "failed"
 }
 ```
 
 ### HTTP Request
-`GET api/showReviewOfBook/{id}`
+`GET api/showReviewOfBook`
 
 #### Body Parameters
 
@@ -3200,7 +4063,7 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     reviewId | required |  optional  | id of the of the review to get it's body when notification happens
 
-<!-- END_372361de1939f63d652e087d8a0247c1 -->
+<!-- END_102e27bc17cce7a0f22b851d24be127a -->
 
 #[Review].show Reviews For Book
 
@@ -3210,20 +4073,20 @@ comments count,user id)
 of a certain review and also it returns the shelf name of the book the review about
 and also the username as well, all of that formed by sending the parameters which :-
 book id
-<!-- START_b59d8c710c80a5c61528f8e003c4b30a -->
-## api/showReviewsForABook/{book_id}
+<!-- START_d0c06994f431d040bf6d90b2c8c3117b -->
+## api/showReviewsForABook
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/showReviewsForABook/{book_id}" \
+curl -X GET -G "http://localhost/api/showReviewsForABook" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":6}'
+    -d '{"bookId":9}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/showReviewsForABook/{book_id}");
+const url = new URL("http://localhost/api/showReviewsForABook");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3231,7 +4094,7 @@ let headers = {
 }
 
 let body = {
-    "bookId": 6
+    "bookId": 9
 }
 
 fetch(url, {
@@ -3250,7 +4113,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`GET api/showReviewsForABook/{book_id}`
+`GET api/showReviewsForABook`
 
 #### Body Parameters
 
@@ -3258,7 +4121,7 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     bookId | integer |  required  | id of the of the book
 
-<!-- END_b59d8c710c80a5c61528f8e003c4b30a -->
+<!-- END_d0c06994f431d040bf6d90b2c8c3117b -->
 
 #[Shelf].Add Book
 addBook function . 
@@ -3283,7 +4146,7 @@ it returnd an error message ( Something gone wrong).
 ```bash
 curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_id":8,"book_id":18}'
+    -d '{"shelf_id":20,"book_id":19}'
 
 ```
 
@@ -3296,8 +4159,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_id": 8,
-    "book_id": 18
+    "shelf_id": 20,
+    "book_id": 19
 }
 
 fetch(url, {
@@ -3365,7 +4228,7 @@ otherwise it respones with error message .
 ```bash
 curl -X DELETE "http://localhost/api/shelf/remove_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_id":7,"book_id":7}'
+    -d '{"shelf_id":6,"book_id":15}'
 
 ```
 
@@ -3378,8 +4241,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_id": 7,
-    "book_id": 7
+    "shelf_id": 6,
+    "book_id": 15
 }
 
 fetch(url, {
@@ -3432,19 +4295,19 @@ returning the (book id,title).
 all of that formed by sending the parameters which :-
 shelf name
 user id
-<!-- START_87fd9bac6b43987c27c7179f6bc63f4d -->
-## api/shelf/{user_id}/{shelf_name}
+<!-- START_135767995f7aebdc2a048c4bf90f4dc8 -->
+## api/shelf
 > Example request:
 
 ```bash
-curl -X GET -G "http://localhost/api/shelf/{user_id}/{shelf_name}" \
+curl -X GET -G "http://localhost/api/shelf" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":14,"shelf_name":"hrPyqEY3ZS7p8gKn"}'
+    -d '{"user_id":11,"shelf_name":"NWILLkJqNAG1oy7g"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/shelf/{user_id}/{shelf_name}");
+const url = new URL("http://localhost/api/shelf");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3452,8 +4315,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 14,
-    "shelf_name": "hrPyqEY3ZS7p8gKn"
+    "user_id": 11,
+    "shelf_name": "NWILLkJqNAG1oy7g"
 }
 
 fetch(url, {
@@ -3488,7 +4351,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`GET api/shelf/{user_id}/{shelf_name}`
+`GET api/shelf`
 
 #### Body Parameters
 
@@ -3497,7 +4360,7 @@ Parameter | Type | Status | Description
     user_id | integer |  required  | Get the books on a member's shelf.
     shelf_name | string |  required  | specified shelf`s name.
 
-<!-- END_87fd9bac6b43987c27c7179f6bc63f4d -->
+<!-- END_135767995f7aebdc2a048c4bf90f4dc8 -->
 
 #[User].Login
 logIn function
@@ -3507,19 +4370,19 @@ Take the request has [email , password] and check that the email is email type a
 if all is correct return a response with status 200 and json file has [name , username , image_link] 
 
 if there are any errors, return a response with status 405 has the message describe the error
-<!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
-## api/login
+<!-- START_c301d148df10074b99c7c734cf8eeb47 -->
+## api/logIn
 > Example request:
 
 ```bash
-curl -X POST "http://localhost/api/login" \
+curl -X POST "http://localhost/api/logIn" \
     -H "Content-Type: application/json" \
-    -d '{"email":"0L5TxGxFNOAqynER","password":"sGNe9rlkWPD1CgAL"}'
+    -d '{"email":"CllvKn4rBKBIEPZy","password":"qanGQHOKFhCIg6bb"}'
 
 ```
 
 ```javascript
-const url = new URL("http://localhost/api/login");
+const url = new URL("http://localhost/api/logIn");
 
 let headers = {
     "Content-Type": "application/json",
@@ -3527,8 +4390,8 @@ let headers = {
 }
 
 let body = {
-    "email": "0L5TxGxFNOAqynER",
-    "password": "sGNe9rlkWPD1CgAL"
+    "email": "CllvKn4rBKBIEPZy",
+    "password": "qanGQHOKFhCIg6bb"
 }
 
 fetch(url, {
@@ -3574,7 +4437,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`POST api/login`
+`POST api/logIn`
 
 #### Body Parameters
 
@@ -3583,7 +4446,7 @@ Parameter | Type | Status | Description
     email | string |  required  | .
     password | string |  required  | .
 
-<!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
+<!-- END_c301d148df10074b99c7c734cf8eeb47 -->
 
 #[User].Logout
 logOut function
@@ -3638,89 +4501,6 @@ fetch(url, {
 
 
 <!-- END_bfd94d52f65d7e0282e0634b79e28c7b -->
-
-#[User].Show Profile
-
-showProfile function
-
-checking the request given paramaters if user_id exists 
-
-it returns his profile-details
-
-other-wise it returns authenticated user`s profile from database user table .
-<!-- START_02b571ee5bd2fac11f2edd358ef66b79 -->
-## api/showProfile
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/showProfile" \
-    -H "Content-Type: application/json" \
-    -d '{"id":4}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/showProfile");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "id": 4
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-{
-    "id": 1,
-    "name": "Jeromy Heidenreich",
-    "username": "Dr. Zaria Witting I",
-    "email": "anna29@example.net",
-    "email_verified_at": "2019-03-21 20:42:11",
-    "link": "http:\/\/kozey.com\/excepturi-nemo-nemo-sequi-corrupti",
-    "image_link": "https:\/\/lorempixel.com\/640\/480\/?23657",
-    "small_image_link": "https:\/\/lorempixel.com\/100\/100\/?36683",
-    "about": "weRmt2re2n",
-    "age": 65,
-    "gender": "N\/A",
-    "country": "Egupt",
-    "city": "Cairo",
-    "joined_at": "1981-11-16",
-    "last_active": "2019-03-23 12:17:09",
-    "followers_count": 2,
-    "following_count": 5,
-    "rating_avg": 2,
-    "rating_count": 6,
-    "books_count": null,
-    "birthday": null,
-    "created_at": null,
-    "updated_at": null
-}
-```
-
-### HTTP Request
-`GET api/showProfile`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    id | integer |  optional  | optional this parameter to show the info of the other user (default authenticated user) .
-
-<!-- END_02b571ee5bd2fac11f2edd358ef66b79 -->
 
 #general
 <!-- START_41d2f7697c6118f36f8b676e5bd19ea0 -->

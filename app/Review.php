@@ -18,6 +18,7 @@ class Review extends Model
         'updated_at',
         'created_at'
     ];
+    //function to get the reviews activity of certain users
     public static function reviewsUsersArr($Arr)
     {
         $monda = Review::whereIn('reviews.user_id',$Arr)

@@ -743,6 +743,22 @@ fetch(url, {
 ## Recent reviews from all members.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Get user's updates from following users
+
+first the function validates the sent parameters if any if it isn't valid
+an error response returns with 400 status code
+
+if there is no parameters sent the default is to return all updates that would be shown to the authenticated user
+get all the users followed by the authenticated user then all the activities made by them
+those activities are retrieved from five different database tables that store these info
+(shelves,reviews,likes,comments,followings) then the data is merged into one array and sorted
+by updated_at date descendingly in order to show the user the user the latest updates first
+
+if a valid user id is sent then all activities made by this specific user are retrieved the same
+way explained earlier in order to show it in this user's profile
+
+if a valid max updates is sent then this value is retrieved from the array after sorting
+
 > Example request:
 
 ```bash

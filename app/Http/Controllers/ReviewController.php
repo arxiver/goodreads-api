@@ -442,8 +442,8 @@ class ReviewController extends Controller
         else{
             return Response::json(array(
                 'status' => 'failed',
-                'pages' => $rt),
-                200);
+                ),
+                400);
         }
     }  
     else{

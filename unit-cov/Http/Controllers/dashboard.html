@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for D:\Programs\PHP\xampp\xampp\htdocs\phase1\goodreads-api\app\Http\Controllers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../../.css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../.css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">D:\Programs\PHP\xampp\xampp\htdocs\phase1\goodreads-api\app</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Http</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Controllers</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Auth/ForgotPasswordController.php.html#8">App\Http\Controllers\Auth\ForgotPasswordController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/LoginController.php.html#8">App\Http\Controllers\Auth\LoginController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/RegisterController.php.html#11">App\Http\Controllers\Auth\RegisterController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/ResetPasswordController.php.html#8">App\Http\Controllers\Auth\ResetPasswordController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/VerificationController.php.html#8">App\Http\Controllers\Auth\VerificationController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#19">App\Http\Controllers\BookController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FollowingController.php.html#10">App\Http\Controllers\FollowingController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OwnedBookController.php.html#13">App\Http\Controllers\OwnedBookController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#14">App\Http\Controllers\ShelfController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#27">App\Http\Controllers\userController</a></td><td class="text-right">15%</td></tr>
+       <tr><td><a href="ReviewController.php.html#21">App\Http\Controllers\ReviewController</a></td><td class="text-right">23%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#22">App\Http\Controllers\ActivitiesController</a></td><td class="text-right">28%</td></tr>
+       <tr><td><a href="Controller.php.html#12">App\Http\Controllers\Controller</a></td><td class="text-right">75%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ReviewController.php.html#21">App\Http\Controllers\ReviewController</a></td><td class="text-right">1022</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#22">App\Http\Controllers\ActivitiesController</a></td><td class="text-right">537</td></tr>
+       <tr><td><a href="ShelfController.php.html#14">App\Http\Controllers\ShelfController</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="UserController.php.html#27">App\Http\Controllers\userController</a></td><td class="text-right">337</td></tr>
+       <tr><td><a href="FollowingController.php.html#10">App\Http\Controllers\FollowingController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="BookController.php.html#19">App\Http\Controllers\BookController</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Controller.php.html#12">App\Http\Controllers\Controller</a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ActivitiesController.php.html#50"><abbr title="App\Http\Controllers\ActivitiesController::followingUpdates">followingUpdates</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#31"><abbr title="App\Http\Controllers\userController::setName">setName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#460"><abbr title="App\Http\Controllers\ReviewController::listMyReviews">listMyReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#475"><abbr title="App\Http\Controllers\ReviewController::listReviewOfUser">listReviewOfUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#490"><abbr title="App\Http\Controllers\ReviewController::showReviewOfBook">showReviewOfBook</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#548"><abbr title="App\Http\Controllers\ReviewController::showReviewForBookForUser">showReviewForBookForUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#603"><abbr title="App\Http\Controllers\ReviewController::showReviewsForBook">showReviewsForBook</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#25"><abbr title="App\Http\Controllers\ShelfController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#35"><abbr title="App\Http\Controllers\ShelfController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#46"><abbr title="App\Http\Controllers\ShelfController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#91"><abbr title="App\Http\Controllers\ShelfController::addBook">addBook</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#180"><abbr title="App\Http\Controllers\ShelfController::removeBook">removeBook</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#240"><abbr title="App\Http\Controllers\ShelfController::userShelves">userShelves</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#249"><abbr title="App\Http\Controllers\ShelfController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ShelfController.php.html#280"><abbr title="App\Http\Controllers\ShelfController::getBooksOnShelf">getBooksOnShelf</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#35"><abbr title="App\Http\Controllers\userController::getname">getname</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#381"><abbr title="App\Http\Controllers\ReviewController::getReviewsForListOfBooks">getReviewsForListOfBooks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#75"><abbr title="App\Http\Controllers\userController::signUp">signUp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#230"><abbr title="App\Http\Controllers\userController::showSetting">showSetting</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#257"><abbr title="App\Http\Controllers\userController::logOut">logOut</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#281"><abbr title="App\Http\Controllers\userController::changeName">changeName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#306"><abbr title="App\Http\Controllers\userController::changePassword">changePassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#322"><abbr title="App\Http\Controllers\userController::changeCountry">changeCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#336"><abbr title="App\Http\Controllers\userController::changeCity">changeCity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#350"><abbr title="App\Http\Controllers\userController::changeBirthday">changeBirthday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#364"><abbr title="App\Http\Controllers\userController::whoCanSeeMyBirthday">whoCanSeeMyBirthday</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#379"><abbr title="App\Http\Controllers\userController::whoCanSeeMyCountry">whoCanSeeMyCountry</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#393"><abbr title="App\Http\Controllers\userController::whoCanSeeMyCity">whoCanSeeMyCity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#408"><abbr title="App\Http\Controllers\userController::changeImage">changeImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#429"><abbr title="App\Http\Controllers\userController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#446"><abbr title="App\Http\Controllers\userController::getUser">getUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#401"><abbr title="App\Http\Controllers\ReviewController::getReviewsByTitle">getReviewsByTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#280"><abbr title="App\Http\Controllers\ReviewController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#129"><abbr title="App\Http\Controllers\ActivitiesController::notifications">notifications</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#123"><abbr title="App\Http\Controllers\BookController::showByGenre">showByGenre</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#295"><abbr title="App\Http\Controllers\ActivitiesController::deleteComment">deleteComment</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#403"><abbr title="App\Http\Controllers\ActivitiesController::listComments">listComments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#668"><abbr title="App\Http\Controllers\ActivitiesController::listLikes">listLikes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/ForgotPasswordController.php.html#28"><abbr title="App\Http\Controllers\Auth\ForgotPasswordController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/LoginController.php.html#35"><abbr title="App\Http\Controllers\Auth\LoginController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/RegisterController.php.html#38"><abbr title="App\Http\Controllers\Auth\RegisterController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/RegisterController.php.html#49"><abbr title="App\Http\Controllers\Auth\RegisterController::validator">validator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/RegisterController.php.html#64"><abbr title="App\Http\Controllers\Auth\RegisterController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/ResetPasswordController.php.html#35"><abbr title="App\Http\Controllers\Auth\ResetPasswordController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Auth/VerificationController.php.html#35"><abbr title="App\Http\Controllers\Auth\VerificationController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#48"><abbr title="App\Http\Controllers\BookController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#224"><abbr title="App\Http\Controllers\ReviewController::recentReviews">recentReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#75"><abbr title="App\Http\Controllers\BookController::show">show</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#178"><abbr title="App\Http\Controllers\BookController::getBookByTitle">getBookByTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FollowingController.php.html#344"><abbr title="App\Http\Controllers\FollowingController::userFollowing">userFollowing</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OwnedBookController.php.html#58"><abbr title="App\Http\Controllers\OwnedBookController::list">list</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OwnedBookController.php.html#45"><abbr title="App\Http\Controllers\OwnedBookController::destroy">destroy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OwnedBookController.php.html#33"><abbr title="App\Http\Controllers\OwnedBookController::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#232"><abbr title="App\Http\Controllers\BookController::getBookByIsbn">getBookByIsbn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="OwnedBookController.php.html#20"><abbr title="App\Http\Controllers\OwnedBookController::index">index</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FollowingController.php.html#233"><abbr title="App\Http\Controllers\FollowingController::userFollowers">userFollowers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FollowingController.php.html#136"><abbr title="App\Http\Controllers\FollowingController::unfollowUser">unfollowUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FollowingController.php.html#51"><abbr title="App\Http\Controllers\FollowingController::followUser">followUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller.php.html#25"><abbr title="App\Http\Controllers\Controller::GetUserByID">GetUserByID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BookController.php.html#287"><abbr title="App\Http\Controllers\BookController::getBookByAuthorName">getBookByAuthorName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="UserController.php.html#493"><abbr title="App\Http\Controllers\userController::showProfile">showProfile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#560"><abbr title="App\Http\Controllers\ActivitiesController::unlike">unlike</abbr></a></td><td class="text-right">42%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#447"><abbr title="App\Http\Controllers\ActivitiesController::makeLike">makeLike</abbr></a></td><td class="text-right">46%</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#180"><abbr title="App\Http\Controllers\ActivitiesController::makeComment">makeComment</abbr></a></td><td class="text-right">48%</td></tr>
+       <tr><td><a href="ReviewController.php.html#177"><abbr title="App\Http\Controllers\ReviewController::editReview">editReview</abbr></a></td><td class="text-right">78%</td></tr>
+       <tr><td><a href="UserController.php.html#172"><abbr title="App\Http\Controllers\userController::logIn">logIn</abbr></a></td><td class="text-right">84%</td></tr>
+       <tr><td><a href="ReviewController.php.html#76"><abbr title="App\Http\Controllers\ReviewController::createReview">createReview</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ReviewController.php.html#280"><abbr title="App\Http\Controllers\ReviewController::destroy">destroy</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ReviewController.php.html#401"><abbr title="App\Http\Controllers\ReviewController::getReviewsByTitle">getReviewsByTitle</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#295"><abbr title="App\Http\Controllers\ActivitiesController::deleteComment">deleteComment</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ReviewController.php.html#603"><abbr title="App\Http\Controllers\ReviewController::showReviewsForBook">showReviewsForBook</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ReviewController.php.html#548"><abbr title="App\Http\Controllers\ReviewController::showReviewForBookForUser">showReviewForBookForUser</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="ReviewController.php.html#490"><abbr title="App\Http\Controllers\ReviewController::showReviewOfBook">showReviewOfBook</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="FollowingController.php.html#344"><abbr title="App\Http\Controllers\FollowingController::userFollowing">userFollowing</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="FollowingController.php.html#233"><abbr title="App\Http\Controllers\FollowingController::userFollowers">userFollowers</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ShelfController.php.html#280"><abbr title="App\Http\Controllers\ShelfController::getBooksOnShelf">getBooksOnShelf</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ShelfController.php.html#91"><abbr title="App\Http\Controllers\ShelfController::addBook">addBook</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#560"><abbr title="App\Http\Controllers\ActivitiesController::unlike">unlike</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ShelfController.php.html#180"><abbr title="App\Http\Controllers\ShelfController::removeBook">removeBook</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#50"><abbr title="App\Http\Controllers\ActivitiesController::followingUpdates">followingUpdates</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#447"><abbr title="App\Http\Controllers\ActivitiesController::makeLike">makeLike</abbr></a></td><td class="text-right">14</td></tr>
+       <tr><td><a href="ActivitiesController.php.html#180"><abbr title="App\Http\Controllers\ActivitiesController::makeComment">makeComment</abbr></a></td><td class="text-right">13</td></tr>
+       <tr><td><a href="FollowingController.php.html#136"><abbr title="App\Http\Controllers\FollowingController::unfollowUser">unfollowUser</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="FollowingController.php.html#51"><abbr title="App\Http\Controllers\FollowingController::followUser">followUser</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BookController.php.html#287"><abbr title="App\Http\Controllers\BookController::getBookByAuthorName">getBookByAuthorName</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BookController.php.html#232"><abbr title="App\Http\Controllers\BookController::getBookByIsbn">getBookByIsbn</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BookController.php.html#178"><abbr title="App\Http\Controllers\BookController::getBookByTitle">getBookByTitle</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BookController.php.html#123"><abbr title="App\Http\Controllers\BookController::showByGenre">showByGenre</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="UserController.php.html#75"><abbr title="App\Http\Controllers\userController::signUp">signUp</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="BookController.php.html#75"><abbr title="App\Http\Controllers\BookController::show">show</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="UserController.php.html#493"><abbr title="App\Http\Controllers\userController::showProfile">showProfile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReviewController.php.html#177"><abbr title="App\Http\Controllers\ReviewController::editReview">editReview</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ReviewController.php.html#76"><abbr title="App\Http\Controllers\ReviewController::createReview">createReview</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="UserController.php.html#172"><abbr title="App\Http\Controllers\userController::logIn">logIn</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 6.1.4</a> using <a href="https://secure.php.net/" target="_top">PHP 7.2.12</a> with <a href="https://xdebug.org/">Xdebug 2.7.0</a> and <a href="https://phpunit.de/">PHPUnit 7.5.7</a> at Sun Mar 24 0:04:28 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../.js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../.js/d3.min.js" type="text/javascript"></script>
+  <script src="../../.js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([9,0,1,2,0,0,0,0,1,0,0,1], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([61,0,0,0,0,3,0,0,1,2,0,1], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[28.497409326424872,37,"<a href=\"ActivitiesController.php.html#22\">App\\Http\\Controllers\\ActivitiesController<\/a>"],[0,1,"<a href=\"Auth\/ForgotPasswordController.php.html#8\">App\\Http\\Controllers\\Auth\\ForgotPasswordController<\/a>"],[0,1,"<a href=\"Auth\/LoginController.php.html#8\">App\\Http\\Controllers\\Auth\\LoginController<\/a>"],[0,3,"<a href=\"Auth\/RegisterController.php.html#11\">App\\Http\\Controllers\\Auth\\RegisterController<\/a>"],[0,1,"<a href=\"Auth\/ResetPasswordController.php.html#8\">App\\Http\\Controllers\\Auth\\ResetPasswordController<\/a>"],[0,1,"<a href=\"Auth\/VerificationController.php.html#8\">App\\Http\\Controllers\\Auth\\VerificationController<\/a>"],[100,0,"<a href=\"AuthorController.php.html#10\">App\\Http\\Controllers\\AuthorController<\/a>"],[0,15,"<a href=\"BookController.php.html#19\">App\\Http\\Controllers\\BookController<\/a>"],[75,3,"<a href=\"Controller.php.html#12\">App\\Http\\Controllers\\Controller<\/a>"],[0,16,"<a href=\"FollowingController.php.html#10\">App\\Http\\Controllers\\FollowingController<\/a>"],[0,4,"<a href=\"OwnedBookController.php.html#13\">App\\Http\\Controllers\\OwnedBookController<\/a>"],[23.853211009174313,47,"<a href=\"ReviewController.php.html#21\">App\\Http\\Controllers\\ReviewController<\/a>"],[0,19,"<a href=\"ShelfController.php.html#14\">App\\Http\\Controllers\\ShelfController<\/a>"],[15.942028985507244,23,"<a href=\"UserController.php.html#27\">App\\Http\\Controllers\\userController<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,4,"<a href=\"ActivitiesController.php.html#50\">App\\Http\\Controllers\\ActivitiesController::followingUpdates<\/a>"],[0,1,"<a href=\"ActivitiesController.php.html#129\">App\\Http\\Controllers\\ActivitiesController::notifications<\/a>"],[48.78048780487805,7,"<a href=\"ActivitiesController.php.html#180\">App\\Http\\Controllers\\ActivitiesController::makeComment<\/a>"],[0,8,"<a href=\"ActivitiesController.php.html#295\">App\\Http\\Controllers\\ActivitiesController::deleteComment<\/a>"],[0,1,"<a href=\"ActivitiesController.php.html#403\">App\\Http\\Controllers\\ActivitiesController::listComments<\/a>"],[46.15384615384615,7,"<a href=\"ActivitiesController.php.html#447\">App\\Http\\Controllers\\ActivitiesController::makeLike<\/a>"],[42.5,8,"<a href=\"ActivitiesController.php.html#560\">App\\Http\\Controllers\\ActivitiesController::unlike<\/a>"],[0,1,"<a href=\"ActivitiesController.php.html#668\">App\\Http\\Controllers\\ActivitiesController::listLikes<\/a>"],[0,1,"<a href=\"Auth\/ForgotPasswordController.php.html#28\">App\\Http\\Controllers\\Auth\\ForgotPasswordController::__construct<\/a>"],[0,1,"<a href=\"Auth\/LoginController.php.html#35\">App\\Http\\Controllers\\Auth\\LoginController::__construct<\/a>"],[0,1,"<a href=\"Auth\/RegisterController.php.html#38\">App\\Http\\Controllers\\Auth\\RegisterController::__construct<\/a>"],[0,1,"<a href=\"Auth\/RegisterController.php.html#49\">App\\Http\\Controllers\\Auth\\RegisterController::validator<\/a>"],[0,1,"<a href=\"Auth\/RegisterController.php.html#64\">App\\Http\\Controllers\\Auth\\RegisterController::create<\/a>"],[0,1,"<a href=\"Auth\/ResetPasswordController.php.html#35\">App\\Http\\Controllers\\Auth\\ResetPasswordController::__construct<\/a>"],[0,1,"<a href=\"Auth\/VerificationController.php.html#35\">App\\Http\\Controllers\\Auth\\VerificationController::__construct<\/a>"],[0,1,"<a href=\"BookController.php.html#48\">App\\Http\\Controllers\\BookController::index<\/a>"],[0,2,"<a href=\"BookController.php.html#75\">App\\Http\\Controllers\\BookController::show<\/a>"],[0,3,"<a href=\"BookController.php.html#123\">App\\Http\\Controllers\\BookController::showByGenre<\/a>"],[0,3,"<a href=\"BookController.php.html#178\">App\\Http\\Controllers\\BookController::getBookByTitle<\/a>"],[0,3,"<a href=\"BookController.php.html#232\">App\\Http\\Controllers\\BookController::getBookByIsbn<\/a>"],[0,3,"<a href=\"BookController.php.html#287\">App\\Http\\Controllers\\BookController::getBookByAuthorName<\/a>"],[100,2,"<a href=\"Controller.php.html#18\">App\\Http\\Controllers\\Controller::__construct<\/a>"],[0,1,"<a href=\"Controller.php.html#25\">App\\Http\\Controllers\\Controller::GetUserByID<\/a>"],[0,3,"<a href=\"FollowingController.php.html#51\">App\\Http\\Controllers\\FollowingController::followUser<\/a>"],[0,3,"<a href=\"FollowingController.php.html#136\">App\\Http\\Controllers\\FollowingController::unfollowUser<\/a>"],[0,5,"<a href=\"FollowingController.php.html#233\">App\\Http\\Controllers\\FollowingController::userFollowers<\/a>"],[0,5,"<a href=\"FollowingController.php.html#344\">App\\Http\\Controllers\\FollowingController::userFollowing<\/a>"],[0,1,"<a href=\"OwnedBookController.php.html#20\">App\\Http\\Controllers\\OwnedBookController::index<\/a>"],[0,1,"<a href=\"OwnedBookController.php.html#33\">App\\Http\\Controllers\\OwnedBookController::create<\/a>"],[0,1,"<a href=\"OwnedBookController.php.html#45\">App\\Http\\Controllers\\OwnedBookController::destroy<\/a>"],[0,1,"<a href=\"OwnedBookController.php.html#58\">App\\Http\\Controllers\\OwnedBookController::list<\/a>"],[87.17948717948718,4,"<a href=\"ReviewController.php.html#76\">App\\Http\\Controllers\\ReviewController::createReview<\/a>"],[78.26086956521739,4,"<a href=\"ReviewController.php.html#177\">App\\Http\\Controllers\\ReviewController::editReview<\/a>"],[0,1,"<a href=\"ReviewController.php.html#224\">App\\Http\\Controllers\\ReviewController::recentReviews<\/a>"],[0,9,"<a href=\"ReviewController.php.html#280\">App\\Http\\Controllers\\ReviewController::destroy<\/a>"],[0,1,"<a href=\"ReviewController.php.html#381\">App\\Http\\Controllers\\ReviewController::getReviewsForListOfBooks<\/a>"],[0,8,"<a href=\"ReviewController.php.html#401\">App\\Http\\Controllers\\ReviewController::getReviewsByTitle<\/a>"],[0,1,"<a href=\"ReviewController.php.html#460\">App\\Http\\Controllers\\ReviewController::listMyReviews<\/a>"],[0,1,"<a href=\"ReviewController.php.html#475\">App\\Http\\Controllers\\ReviewController::listReviewOfUser<\/a>"],[0,6,"<a href=\"ReviewController.php.html#490\">App\\Http\\Controllers\\ReviewController::showReviewOfBook<\/a>"],[0,6,"<a href=\"ReviewController.php.html#548\">App\\Http\\Controllers\\ReviewController::showReviewForBookForUser<\/a>"],[0,6,"<a href=\"ReviewController.php.html#603\">App\\Http\\Controllers\\ReviewController::showReviewsForBook<\/a>"],[0,1,"<a href=\"ShelfController.php.html#25\">App\\Http\\Controllers\\ShelfController::index<\/a>"],[0,1,"<a href=\"ShelfController.php.html#35\">App\\Http\\Controllers\\ShelfController::create<\/a>"],[0,1,"<a href=\"ShelfController.php.html#46\">App\\Http\\Controllers\\ShelfController::show<\/a>"],[0,5,"<a href=\"ShelfController.php.html#91\">App\\Http\\Controllers\\ShelfController::addBook<\/a>"],[0,4,"<a href=\"ShelfController.php.html#180\">App\\Http\\Controllers\\ShelfController::removeBook<\/a>"],[0,1,"<a href=\"ShelfController.php.html#240\">App\\Http\\Controllers\\ShelfController::userShelves<\/a>"],[0,1,"<a href=\"ShelfController.php.html#249\">App\\Http\\Controllers\\ShelfController::destroy<\/a>"],[0,5,"<a href=\"ShelfController.php.html#280\">App\\Http\\Controllers\\ShelfController::getBooksOnShelf<\/a>"],[0,1,"<a href=\"UserController.php.html#31\">App\\Http\\Controllers\\userController::setName<\/a>"],[0,1,"<a href=\"UserController.php.html#35\">App\\Http\\Controllers\\userController::getname<\/a>"],[0,3,"<a href=\"UserController.php.html#75\">App\\Http\\Controllers\\userController::signUp<\/a>"],[84.61538461538461,3,"<a href=\"UserController.php.html#172\">App\\Http\\Controllers\\userController::logIn<\/a>"],[0,1,"<a href=\"UserController.php.html#230\">App\\Http\\Controllers\\userController::showSetting<\/a>"],[0,1,"<a href=\"UserController.php.html#257\">App\\Http\\Controllers\\userController::logOut<\/a>"],[0,1,"<a href=\"UserController.php.html#281\">App\\Http\\Controllers\\userController::changeName<\/a>"],[0,1,"<a href=\"UserController.php.html#306\">App\\Http\\Controllers\\userController::changePassword<\/a>"],[0,1,"<a href=\"UserController.php.html#322\">App\\Http\\Controllers\\userController::changeCountry<\/a>"],[0,1,"<a href=\"UserController.php.html#336\">App\\Http\\Controllers\\userController::changeCity<\/a>"],[0,1,"<a href=\"UserController.php.html#350\">App\\Http\\Controllers\\userController::changeBirthday<\/a>"],[0,1,"<a href=\"UserController.php.html#364\">App\\Http\\Controllers\\userController::whoCanSeeMyBirthday<\/a>"],[0,1,"<a href=\"UserController.php.html#379\">App\\Http\\Controllers\\userController::whoCanSeeMyCountry<\/a>"],[0,1,"<a href=\"UserController.php.html#393\">App\\Http\\Controllers\\userController::whoCanSeeMyCity<\/a>"],[0,1,"<a href=\"UserController.php.html#408\">App\\Http\\Controllers\\userController::changeImage<\/a>"],[0,1,"<a href=\"UserController.php.html#429\">App\\Http\\Controllers\\userController::delete<\/a>"],[0,1,"<a href=\"UserController.php.html#446\">App\\Http\\Controllers\\userController::getUser<\/a>"],[0,2,"<a href=\"UserController.php.html#493\">App\\Http\\Controllers\\userController::showProfile<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

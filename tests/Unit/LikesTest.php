@@ -19,7 +19,7 @@ class LikesTest extends TestCase
      *
      * @return void
      */
-    public function notestmakeLike()
+    public function testmakeLike()
     {
        // Get the number of users in the database
        $usersCount = User::all()->count();

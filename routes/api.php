@@ -54,21 +54,11 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 });
 
-    // Book Section
-    Route::get('books','BookController@index');
-    Route::get( 'books/genre/{genre_name}', 'BookController@showByGenre');
-    Route::get('Books/book_title/{book_title}','BookController@getBookByTitle');
-    Route::get('Books/book_ISBN/{book_isbn}','BookController@getBookByIsbn');
-    Route::get('Books/book_Authorname/{author_name}','BookController@getBookByAuthorName');
+
     // Review Section
     
     Route::post('shelf/add_book', 'ShelfController@addBook');
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');
-    // Shelf Section
-    Route::get('shlef/list', 'ShelfController@index');
-    Route::get('shelf/{shelf_name}', 'ShelfController@show');
-    Route::get('shelf/{user_id}','ShelfController@userShelves');
-    Route::get('shelf/','ShelfController@getBooksOnShelf');
     //Following section
     Route::post('follow','FollowingController@followUser');
     Route::delete('unfollow','FollowingController@unfollowUser');
@@ -110,19 +100,10 @@ Route::delete('shelf/remove_book', 'ShelfController@removeBook');
 
 // Shelf Section
 Route::get('shlef/list', 'ShelfController@index');
-Route::get('shelf/{shelf_name}', 'ShelfController@show');
-Route::get('shelf/{user_id}','ShelfController@userShelves');
+Route::get('shelf/shelfname', 'ShelfController@show');
+Route::get('shelf/shelfid','ShelfController@userShelves');
 Route::get('shelf','ShelfController@getBooksOnShelf');
 
-//Owned Books
-//Route::get( 'owned_books', 'OwnedBookController@index');
-//Route::post( 'owned_books/{book_id}', 'OwnedBookController@create');
-//Route::get('owned_books/list/{user_id}', 'OwnedBookController@list');
-//Route::delete( 'owned_books/{book_id}', 'OwnedBookController@destroy');
-
-//Auther section
-//Route::get('authorname','AuthorController@getAuthorByName');
-//Route::get('authorid','AuthorController@searchAuthor');
 
 
 

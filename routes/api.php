@@ -20,9 +20,12 @@ use Illuminate\Support\Facades\Route;
 */
 // User section
 Route::group(["middleware" => "authorized"] , function(){
-    Route::post('signUp', "UserController@signUp");
-    Route::post('logIn', "UserController@logIn");
+    Route::post('signup', "UserController@signUp");
+    Route::post('login', "UserController@logIn");
+});
 
+
+Route::group(["middleware" => "unAuthorized"], function(){
     Route::post('changeImage', "UserController@changeImage");
     Route::post('delete', "UserController@delete");
     Route::get('showSetting', "UserController@showSetting");
@@ -52,7 +55,6 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
     Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
     Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
-});
 
 
     // Review Section
@@ -66,35 +68,40 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('followers','FollowingController@userFollowers');
     Route::get('following','FollowingController@userFollowing');
 
-Route::get('changeBirthday', "UserController@changeBirthday");
-Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
-Route::get('changeCountry', "UserController@changeCountry");
-Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
-Route::get('changeCity', "UserController@changeCity");
-Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
+    Route::get('changeBirthday', "UserController@changeBirthday");
+    Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
+    Route::get('changeCountry', "UserController@changeCountry");
+    Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
+    Route::get('changeCity', "UserController@changeCity");
+    Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
 
 
-// Book Section
-Route::get('books','BookController@index');
+    // Book Section
+    Route::get('books','BookController@index');
 
-Route::get( 'books/genre', 'BookController@showByGenre');
-Route::get('Books/book_title','BookController@getBookByTitle');
-Route::get('Books/book_ISBN','BookController@getBookByIsbn');
-Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+    Route::get( 'books/genre', 'BookController@showByGenre');
+    Route::get('Books/book_title','BookController@getBookByTitle');
+    Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+    Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
-// Review Section
-Route::get('reviwes','ReviewController@recentReviews');
-Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
-Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-//
-Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+    // Review Section
+    Route::get('reviwes','ReviewController@recentReviews');
+    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+    //
+    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 
-Route::group(["middleware" => "unAuthorized"], function(){
-Route::post('shelf/add_book', 'ShelfController@addBook');
-Route::delete('shelf/remove_book', 'ShelfController@removeBook');
+    Route::post('shelf/add_book', 'ShelfController@addBook');
+    Route::delete('shelf/remove_book', 'ShelfController@removeBook');
+
+    // Shelf Section
+    Route::get('shlef/list', 'ShelfController@index');
+    Route::get('shelf/shelfname', 'ShelfController@show');
+    Route::get('shelf/shelfid','ShelfController@userShelves');
+    Route::get('shelf','ShelfController@getBooksOnShelf');
 });
 
 
@@ -105,6 +112,7 @@ Route::get('shelf/shelfid','ShelfController@userShelves');
 Route::get('shelf','ShelfController@getBooksOnShelf');
 
 
+//Route::get('updates','ActivitiesController@followingUpdates');
 
 
 

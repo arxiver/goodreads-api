@@ -14,6 +14,7 @@ class Comment extends Model
         'updated_at',
         'created_at'
     ];
+    //function to get the comments activity of certain users
     public static function commentsUsersArr($Arr)
     {
         $comment=Comment::where('resourse_type','=','0')->whereIn('comments.user_id',$Arr)

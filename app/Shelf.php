@@ -13,6 +13,7 @@ class Shelf extends Model
         'updated_at',
         'created_at'
     ];
+    //function to get the shelves activity of certain users
     public static function shelvesUsersArr($Arr)
     {
         $shelf= Shelf::whereIn('shelves.user_id',$Arr)->join('books','shelves.book_id','=','books.id')

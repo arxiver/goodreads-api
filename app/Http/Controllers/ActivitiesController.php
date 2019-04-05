@@ -191,11 +191,11 @@ class ActivitiesController extends Controller
                 if ( Review::find($request["id"]) )
                 {
                     $wantedReview=Review::find($request["id"]);
-                    $wantedReview['comments_count']+=1;
+                    $number=$wantedReview['comments_count']+1;
                     DB::table('reviews')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'comments_count' => $wantedReview['comments_count'] ]
+                            [ 'comments_count' => $number ]
                         );
                 }
                 else{
@@ -209,11 +209,11 @@ class ActivitiesController extends Controller
                 if ( Shelf::find($request["id"]) )
                 {
                     $wantedShelf=Shelf::find($request["id"]);
-                    $wantedShelf['comments_count']+=1;
+                    $number=$wantedShelf['comments_count']+1;
                     DB::table('shelves')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'comments_count' => $wantedShelf['comments_count'] ]
+                            [ 'comments_count' => $number ]
                         );
                 }
                 else{
@@ -227,11 +227,11 @@ class ActivitiesController extends Controller
                 if ( Following::find($request["id"]) )
                 {
                     $wantedFollow=Following::find($request["id"]);
-                    $wantedFollow['comments_count']+=1;
+                    $number=$wantedFollow['comments_count']+1;
                     DB::table('followings')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'comments_count' => $wantedFollow['comments_count'] ]
+                            [ 'comments_count' => $number ]
                         );
                 }
                 else{
@@ -307,11 +307,11 @@ class ActivitiesController extends Controller
                     if ( Review::find($comment["resourse_id"]) )
                     {
                         $wantedReview=Review::find($comment["resourse_id"]);
-                        $wantedReview['comments_count']-=1;
+                        $number=$wantedReview['comments_count']-1;
                         DB::table('reviews')
                             ->updateOrInsert(
                                 ['id' => $comment["resourse_id"]],
-                                [ 'comments_count' => $wantedReview['comments_count'] ]
+                                [ 'comments_count' => $number ]
                             );
                     }
                     else{
@@ -325,11 +325,11 @@ class ActivitiesController extends Controller
                     if ( Shelf::find($comment["resourse_id"]) )
                     {
                         $wantedShelf=Shelf::find($comment["resourse_id"]);
-                        $wantedShelf['comments_count']-=1;
+                        $number=$wantedShelf['comments_count']-1;
                         DB::table('shelves')
                             ->updateOrInsert(
                                 ['id' => $comment["resourse_id"]],
-                                [ 'comments_count' => $wantedShelf['comments_count'] ]
+                                [ 'comments_count' => $number ]
                             );
                     }
                     else{
@@ -343,11 +343,11 @@ class ActivitiesController extends Controller
                     if ( Following::find($comment["resourse_id"]) )
                     {
                         $wantedFollow=Following::find($comment["resourse_id"]);
-                        $wantedFollow['comments_count']-=1;
+                        $number=$wantedFollow['comments_count']-1;
                         DB::table('followings')
                             ->updateOrInsert(
                                 ['id' => $comment["resourse_id"]],
-                                [ 'comments_count' => $wantedFollow['comments_count'] ]
+                                [ 'comments_count' => $number ]
                             );
                     }
                     else{
@@ -457,11 +457,11 @@ class ActivitiesController extends Controller
                 if ( Review::find($request["id"]) )
                 {
                     $wantedReview=Review::find($request["id"]);
-                    $wantedReview['likes_count']+=1;
+                    $number=$wantedReview['likes_count']+1;
                     DB::table('reviews')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'likes_count' => $wantedReview['likes_count'] ]
+                            [ 'likes_count' => $number ]
                         );
                 }
                 else{
@@ -475,11 +475,11 @@ class ActivitiesController extends Controller
                 if ( Shelf::find($request["id"]) )
                 {
                     $wantedShelf=Shelf::find($request["id"]);
-                    $wantedShelf['likes_count']+=1;
+                    $number=$wantedShelf['likes_count']+1;
                     DB::table('shelves')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'likes_count' => $wantedShelf['likes_count'] ]
+                            [ 'likes_count' => $number ]
                         );
                 }
                 else{
@@ -493,11 +493,11 @@ class ActivitiesController extends Controller
                 if ( Following::find($request["id"]) )
                 {
                     $wantedFollow=Following::find($request["id"]);
-                    $wantedFollow['likes_count']+=1;
+                    $number=$wantedFollow['likes_count']+1;
                     DB::table('followings')
                         ->updateOrInsert(
                             ['id' => $request["id"]],
-                            [ 'likes_count' => $wantedFollow['likes_count'] ]
+                            [ 'likes_count' => $number ]
                         );
                 }
                 else{
@@ -572,11 +572,11 @@ class ActivitiesController extends Controller
                     if ( Review::find($like["resourse_id"]) )
                     {
                         $wantedReview=Review::find($like["resourse_id"]);
-                        $wantedReview['likes_count']-=1;
+                        $number=$wantedReview['likes_count']-1;
                         DB::table('reviews')
                             ->updateOrInsert(
                                 ['id' => $like["resourse_id"]],
-                                [ 'likes_count' => $wantedReview['likes_count'] ]
+                                [ 'likes_count' => $number ]
                             );
                     }
                     else{
@@ -590,11 +590,11 @@ class ActivitiesController extends Controller
                     if ( Shelf::find($like["resourse_id"]) )
                     {
                         $wantedShelf=Shelf::find($like["resourse_id"]);
-                        $wantedShelf['likes_count']-=1;
+                        $number=$wantedShelf['likes_count']-1;
                         DB::table('shelves')
                             ->updateOrInsert(
                                 ['id' => $like["resourse_id"]],
-                                [ 'likes_count' => $wantedShelf['likes_count'] ]
+                                [ 'likes_count' => $number ]
                             );
                     }
                     else{
@@ -608,11 +608,11 @@ class ActivitiesController extends Controller
                     if ( Following::find($like["resourse_id"]) )
                     {
                         $wantedFollow=Following::find($like["resourse_id"]);
-                        $wantedFollow['likes_count']-=1;
+                        $number=$wantedFollow['likes_count']-1;
                         DB::table('followings')
                             ->updateOrInsert(
                                 ['id' => $like["resourse_id"]],
-                                [ 'likes_count' => $wantedFollow['likes_count'] ]
+                                [ 'likes_count' => $number ]
                             );
                     }
                     else{

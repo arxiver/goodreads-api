@@ -441,16 +441,19 @@ class ReviewController extends Controller
         }
         else{
             return Response::json(array(
+<<<<<<< HEAD
                 'status' => 'failed',
                 ),
+=======
+                'status' => 'failed'),
+>>>>>>> 9b237a297d4234a5329c9466e497b948844f191a
                 400);
         }
     }  
     else{
         return Response::json(array(
-            'status' => 'failed',
-            'pages' => $rt),
-            200);
+            'status' => 'failed'),
+            400);
     }
     }
 
@@ -523,14 +526,14 @@ class ReviewController extends Controller
             return Response::json(array(
                 'status' => 'failed',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
             return Response::json(array(
                 'status' => 'failed',
                 ),
-                200);
+                400);
         }
     }
 
@@ -583,16 +586,16 @@ class ReviewController extends Controller
         }
         else{
             return Response::json(array(
-                'status' => 'failed',
-                'pages' => $results),
-                200);
+                'status' => 'failed')
+                ,
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed',
             ),
-            200);
+            400);
     }
     }
     /**
@@ -634,20 +637,20 @@ class ReviewController extends Controller
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results),
-                200);
+                400);
         }
         else{
             return Response::json(array(
                 'status' => 'failed',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed',
             'pages' => $results),
-            200);
+            400);
     }
 }
 }

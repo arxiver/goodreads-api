@@ -307,14 +307,14 @@ class ShelfController extends Controller
         return Response::json(array(
             'status' => 'failed',
             'pages' => $results),
-            200);
+            400);
     }
 }
 else{
     return Response::json(array(
         'status' => 'failed',
         ),
-        200);
+        400);
 }
     }
 }

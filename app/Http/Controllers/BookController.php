@@ -88,7 +88,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this id',
                 'pages' => $results),
-                200);
+                400);
         }
 
     }
@@ -141,14 +141,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this title',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed, may be there is no books by this title',
             ),
-            200);
+            400);
     }
     }
     /**
@@ -197,14 +197,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this title',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed, may be there is no books by this title',
             ),
-            200);
+            400);
     }
     }
     /**
@@ -254,14 +254,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this isbn',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed, may be there is no books by this isbn',
             ),
-            200);
+            400);
     }
     }
     /**
@@ -311,14 +311,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books have this author name',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed, may be there is no books have this author name',
             ),
-            200);
+            400);
     }
     }
 }

@@ -26,18 +26,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class userController extends Controller
 {
-    public $name;
-
-    public function setName($name)
-    {
-        $this->name = "$name";
-    }
-    public function getname()
-    {
-        return $this->name;
-    }
-
-
+    private $youngerThan = 100;
+    private $olderThan = 3;
+    
     //
     /**
      * Sign Up
@@ -74,68 +65,60 @@ class userController extends Controller
 
     public function signUp(Request $request)
     {
-        $olderThan = 3;
-        $youngerThan = 100;
-
-        $Validations    = array(
+        $validations    = array(
                                     "email"         => "required|email|unique:users" ,
-                                    "password"      => "required|confirmed|max:30|min:5",
-                                    "name"          => "required|string|max:50|min:3" ,
+                                    "password"      => "required|max:30|min:5|confirmed",
+                                    "name"          => "required|max:50|min:3|string" ,
                                     "gender"        => "required|string",
-                                    "birthDay"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
-                                    //"birthday"      => "required|date|string|after:-" .$youngerThan."years|before:-" . $olderThan . "years",
-                                    "country"       => "required|string",
-                                    "city"          => "required|string"
+                                    "birthday"      => "required|date|after:-" .$this->youngerThan."years|before:-" . $this->olderThan . "years",
+                                    "country"       => "required|string|min:2|max:30",
+                                    "city"          => "required|string|min:2|max:30"
                                 );
-        $Messages       = array(
-                                    "birthday.before" => "You must be older than ". $olderThan,
-                                    "birthday.after" => "You must be younger than ". $youngerThan
+        $messages       = array(
+                                    "birthday.before" => "You must be older than ". $this->olderThan,
+                                    "birthday.after" => "You must be younger than ". $this->youngerThan
                                 );
 
-
-
-        $Data = validator::make($request->all(), $Validations, $Messages);
-        if (!($Data->fails())) {
-            $UserName = strstr($request["email"], '@', 2);
-            $ValidationArray    = array("Username" => $UserName);
-            $ValidationUserName = array("Username" => "unique:users");
-            $AdditionalString = 1;
-            while ((validator::make($ValidationArray, $ValidationUserName))->fails()) {
-                $ValidationArray["Username"].=$AdditionalString;
-                $AdditionalString+=1;
+        $data = validator::make($request->all(), $validations, $messages);
+        if (!($data->fails())) {
+            $userName = strstr($request["email"], '@', 2);
+            $validationArray    = array("username" => $userName);
+            $validationuserName = array("username" => "unique:users");
+            $additionalString = 1;
+            while ((validator::make($validationArray, $validationuserName))->fails()) {
+                $validationArray["username"].=$additionalString;
+                $additionalString+=1;
             }
             $Create = array(
                                 "email"         => $request["email"],
                                 "password"      => $request["password"],
                                 "name"          => $request["name"],
                                 "gender"        => $request["gender"],
-                                "username"      => $ValidationArray["Username"],
+                                "username"      => $validationArray["username"],
                                 "age"           => date("Y") - date("Y", strtotime($request["birthday"])),
                                 "birthday"      => date("Y-n-j", strtotime($request["birthday"])),
                                 "country"       => $request["country"],
                                 "city"          => $request["city"]
                             );
-
-
-
-            User::create($Create);
-
+            $user = User::create($Create);
             $token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]);
-
-
-            $gettingData = array(
+            $gettingdata = array(
                                     "name" ,
                                     "username" ,
                                     "image_link"
                                 );
-            $Show = User::where("email", $request["email"])->first($gettingData);
-            return response()->json(["user" => $Show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
+            $show = User::find($user->id,$gettingdata);
+            return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
         } 
         else 
         {
-            return response()->json(["errors"=> $Data->messages()->first()], 405);
+            return response()->json(["errors"=> $data->messages()->first()], 405);
         } 
     }
+
+
+
+
     /**
      * @group [User].Login
      * logIn function
@@ -191,14 +174,13 @@ class userController extends Controller
         {
             if($token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]))
             {
-                $gettingData = array(
+                $gettingdata = array(
                                         "name" ,
                                         "username" ,
                                         "image_link"
                                     );
                 $user = User::where("email" , $request["email"])->first();
-                $user->save();
-                $show = User::where("email" , $request["email"])->first($gettingData);
+                $show = User::find($user->id,$gettingdata);
                 return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
             }
             else
@@ -210,7 +192,7 @@ class userController extends Controller
 
 
     /**
-     * Show setting
+     * show setting
      * @authenticated
      * @response {
      * "status": "true",
@@ -225,12 +207,39 @@ class userController extends Controller
      *   "seeMyCountry" : "",
      *   "seeMyCity" : ""
      *}
-    * }
+     *}
      */
     public function showSetting(Request $request)
     {
-        
-        
+        $gettingData = array
+                            (   
+                                "id",
+                                "name",
+                                "username",
+                                "email",
+                                "email_verified_at",
+                                "password",
+                                "link",
+                                "image_link",
+                                "small_image_link",
+                                "about",
+                                "age",
+                                "gender",
+                                "country",
+                                "city",
+                                "joined_at",
+                                "followers_count",
+                                "following_count",
+                                "rating_avg",
+                                "rating_count",
+                                "book_count",
+                                "birthday",
+                                "see_my_birthday",
+                                "see_my_country",
+                                "see_my_city"
+                            );
+        $show = User::find($this->ID,$gettingData);
+        return response()->json(["user" => $show],200);
     }
 
 
@@ -266,21 +275,38 @@ class userController extends Controller
      * @authenticated
      * @bodyParam password string required .
      * @bodyParam newName string required .
-     * @response 404 {
-     * "status": "false",
+     * @response 405 {
      * "errors": [
      * "The password field is required.",
      * "The newName field is required."
      *]
      *}
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have changed your name"
      *}
      */
     public function changeName(Request $request)
     {
-        // body
+        $validation = array("newName" => "required|max:50|min:3|string");
+        if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
+        {
+            $valid = validator::make($request->all() , $validation);
+            if(!$valid->fails())
+            {
+                $user = User::find($this->ID);
+                $user->name = $request["newName"];
+                $user->save();
+                return response()->json(["message" => "You have changed your name"],200);
+            }
+            else
+            {
+                return response()->json(["errors"=> $valid->messages()->first()], 405);
+            }
+        }
+        else
+        {
+            return response()->json(["errors" => "The password is invalid."],405);
+        }
     }
 
 
@@ -290,22 +316,39 @@ class userController extends Controller
      * @bodyParam password string required .
      * @bodyParam newPassword string required .
      * @bodyParam newPassword_confirmation string required this filed is special so it isn't camel case .
-     * @response 404 {
-     * "status": "false",
+     * @response 405 {
      * "errors": [
      * "The password field is required.",
      * "The newPassword field is required.",
      * "The newPassword_confirmation field is required."
      *]
      *}
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have changed your password"
      *}
      */
     public function changePassword(Request $request)
     {
-        // body
+        $validation = array("newPassword" => "required|max:30|min:5|confirmed");
+        if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
+        {
+            $valid = validator::make($request->all() , $validation);
+            if(!$valid->fails())
+            {
+                $user = User::find($this->ID);
+                $user->password = $request["newPassword"];
+                $user->save();
+                return response()->json(["message" => "You have changed your password"],200);
+            }
+            else
+            {
+                return response()->json(["errors"=> $valid->messages()->first()], 405);
+            }
+        }
+        else
+        {
+            return response()->json(["errors" => "The password is invalid."],405);
+        }
     }
 
 
@@ -314,85 +357,157 @@ class userController extends Controller
      * Change country
      * @authenticated
      * @bodyParam country string required .
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have changed your country"
+     *}
+     * @response 405{
+     * "errors" : "UnAuthorized"
+     *}
+     * @response 405 {
+     * "errors": [
+     * "The country field is required."
+     *]
      *}
      */
     public function changeCountry(Request $request)
     {
-        // body
+        $validation = array("country" => "required|string|min:2|max:30");
+        $valid = validator::make($request->all() , $validation);
+        if(!$valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->country = $request["country"];
+            $user->save();
+            return response()->json(["message" => "You have changed your country"] , 200);
+        }
+        else
+        {
+            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+        }
+        
     }
 
     /**
      * Change city
      * @authenticated
      * @bodyParam city string required .
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have changed your city"
+     *}
+     * @response 405{
+     * "errors" : "UnAuthorized"
+     *}
+     * @response 405 {
+     * "errors": [
+     * "The city field is required."
+     *]
      *}
      */
     public function changeCity(Request $request)
     {
-        // body
+        $validation = array("city" => "required|string|min:2|max:30");
+        $valid = validator::make($request->all() , $validation);
+        if(!$valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->country = $request["city"];
+            $user->save();
+            return response()->json(["message" => "You have changed your city"] , 200);
+        }
+        else
+        {
+            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+        }
     }
 
     /**
      * Change birthday
      * @authenticated
      * @bodyParam birthday date required .
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have changed your birthday"
+     *}
+     * @response 405{
+     * "errors" : "UnAuthorized"
+     *}
+     * @response 405 {
+     * "errors": [
+     * "The country field is birthday."
+     *]
      *}
      */
     public function changeBirthday(Request $request)
     {
-        // body
+        
+        $validation = array("birthday" => "required|date|after:-" . $this->youngerThan . "years|before:-" . $this->olderThan . "years");
+        $messages       = array(
+                                    "birthday.before" => "You must be older than ". $this->olderThan,
+                                    "birthday.after" => "You must be younger than ". $this->youngerThan
+                                );
+
+        $valid = validator::make($request->all() , $validation, $messages);
+        if(!$valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->birthday = date("Y-n-j" , strtotime($request["birthday"]));
+            $user->age = date("Y") - date("Y" , strtotime($request["birthday"]));
+            $user->save();
+            return response()->json(["message" => "You have changed your birthday"] , 200);
+        }
+        else
+        {
+            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+        }
     }
 
     /**
      * Who can see my birthday
      * @authenticated
-     * @bodyParam seeMyBirthday string required Must be ["onlyMe","everyOne" or "friends"].
+     * @bodyParam seeMyBirthday string required Must be ["Only Me","Everyone" or "Friends"].
      * @response {
-     * "status": "true",
      * "message": "You have changed who can see your birthday"
      *}
      */
     public function whoCanSeeMyBirthday(Request $request)
     {
-        // body
+        $user = User::find($this->ID);
+        $user->see_my_birthday = $request["seeMyBirthday"];
+        $user->save();
+        return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
+
     }
 
 
     /**
      * Who can see my country
      * @authenticated
-     * @bodyParam seeMyCountry string required Must be ["onlyMe","everyOne" or "friends"].
+     * @bodyParam seeMyCountry string required Must be ["Only Me","Everyone" or "Friends"].
      * @response {
-     * "status": "true",
      * "message": "You have changed who can see your country"
      *}
      */
     public function whoCanSeeMyCountry(Request $request)
     {
-        // body
+        $user = User::find($this->ID);
+        $user->see_my_country = $request["seeMyCountry"];
+        $user->save();
+        return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
     }
 
     /**
      * Who can see my city
      * @authenticated
-     * @bodyParam seeMyCity string required Must be ["onlyMe","everyOne" or "friends"].
+     * @bodyParam seeMyCity string required Must be ["Onlyme","Everyone" or "Friends"].
      * @response {
-     * "status": "true",
      * "message": "You have changed who can see your city"
      *}
      */
     public function whoCanSeeMyCity(Request $request)
     {
-        // body
+        $user = User::find($this->ID);
+        $user->see_my_city = $request["seeMyCity"];
+        $user->save();
+        return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
     }
 
 
@@ -415,20 +530,27 @@ class userController extends Controller
      * Delete
      * @bodyParam password string required .
      * @authenticated
-     * @response 404 {
-     * "status": "false",
+     * @response 405 {
      * "errors": [
-     * "The password is wrong."
+     * "The password is invalid."
      *]
      *}
-     * @response {
-     * "status": "true",
+     * @response 200{
      * "message": "You have deleted your account"
      *}
      */
     public function delete(Request $request)
     {
-        // body
+        if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
+        {
+            auth()->logout();
+            User::find($this->ID)->delete();
+            return response()->json(["message" => "You have deleted your account"],200);
+        }
+        else
+        {
+            return response()->json(["errors" => "The password is invalid."],405);
+        }  
     }
 
 
@@ -448,7 +570,7 @@ class userController extends Controller
         // to do
     }
     /**
-     * @group [User].Show Profile
+     * @group [User].show Profile
      * 
      * showProfile function
      * 

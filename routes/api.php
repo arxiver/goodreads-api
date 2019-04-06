@@ -40,6 +40,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
     Route::get('updates','ActivitiesController@followingUpdates');
+    Route::get('notification','ActivitiesController@notifications');
 
     Route::get( 'books/show', 'BookController@show');
     Route::delete('reviwes/delete', 'ReviewController@destroy');

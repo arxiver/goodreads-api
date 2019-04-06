@@ -31,7 +31,7 @@ class Book extends Model
         $res = DB::insert('insert into books values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p]);
     }
     public function setgenre($a,$b,$c){
-        $res = DB::insert('insert into genre values(?,?,?)',[$a,$b,$c]);
+        $res = DB::insert('insert into genre (id,book_id,type) values(?,?,?)',[$a,$b,$c]);
     }
     public function setauthor($a,$b,$c,$d){
         $res = DB::insert('insert into authors values(?,?,?,?)',[$a,$b,$c,$d]);

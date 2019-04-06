@@ -40,7 +40,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::post('makeLike','ActivitiesController@makeLike');
     Route::get('updates','ActivitiesController@followingUpdates');
 
-    Route::get( 'books/show', 'BookController@show');
+    
     Route::delete('reviwes/delete', 'ReviewController@destroy');
     Route::get('changeBirthday', "UserController@changeBirthday");
     Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
@@ -49,12 +49,12 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('changeCity', "UserController@changeCity");
     Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
     Route::get('reviwes','ReviewController@recentReviews');
-    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
-    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+   // Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+   // Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+    //Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+   // Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+    //Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 
 
     // Review Section
@@ -77,12 +77,26 @@ Route::group(["middleware" => "unAuthorized"], function(){
 
 
     // Book Section
-    Route::get('books','BookController@index');
+    
+});
 
-    Route::get( 'books/genre', 'BookController@showByGenre');
+
+// Shelf Section
+/*Route::get('shlef/list', 'ShelfController@index');
+Route::get('shelf/shelfname', 'ShelfController@show');
+Route::get('shelf/shelfid','ShelfController@userShelves');
+Route::get('shelf','ShelfController@getBooksOnShelf');*/
+
+
+
+
+Route::get('books','BookController@index');
+
+    Route::get('books/genre', 'BookController@showByGenre');
     Route::get('Books/book_title','BookController@getBookByTitle');
     Route::get('Books/book_ISBN','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+    Route::get( 'books/show', 'BookController@show');
 
     // Review Section
     Route::get('reviwes','ReviewController@recentReviews');
@@ -102,14 +116,8 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('shelf/shelfname', 'ShelfController@show');
     Route::get('shelf/shelfid','ShelfController@userShelves');
     Route::get('shelf','ShelfController@getBooksOnShelf');
-});
 
 
-// Shelf Section
-Route::get('shlef/list', 'ShelfController@index');
-Route::get('shelf/shelfname', 'ShelfController@show');
-Route::get('shelf/shelfid','ShelfController@userShelves');
-Route::get('shelf','ShelfController@getBooksOnShelf');
 
 
 //Route::get('updates','ActivitiesController@followingUpdates');

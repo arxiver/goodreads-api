@@ -559,7 +559,7 @@ class ReviewController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results =DB::select('select rating ,shelf_name , body from reviews  where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+        $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
         if($results != NULL){
             foreach($results as $res)
             {

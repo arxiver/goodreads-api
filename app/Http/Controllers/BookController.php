@@ -277,7 +277,7 @@ class BookController extends Controller
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this isbn',
+            'status' => 'failed, may be there is no books by this isbn or no genre for it',
             ),
             400);
     }

@@ -261,22 +261,33 @@ class ShelfController extends Controller
      * @bodyParam user_id integer required Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
-     * }
+     * "status": "success",
+    *"pages": [
+       * {
+       *     "book_id": 95,
+       *     "title": "9jT4WR"
+       * },
+       * {
+       *     "book_id": 17,
+       *     "title": "pNUWhb"
+       * },
+       * {
+       *     "book_id": 50,
+       *     "title": "ZPiAVs"
+       * },
+       * {
+       *     "book_id": 9,
+       *     "title": "3SrTCb"
+       * },
+       * {
+       *     "book_id": 35,
+       *     "title": "TVSXeR"
+       * },
+       * {
+       *     "book_id": 61,
+      *      "title": "gBpaYn"
+     *   }
+    *]
      */
 	public function getBooksOnShelf(Request $request)
 	{
@@ -296,7 +307,7 @@ class ShelfController extends Controller
             else{
                 $request['shelf_name']=1;
             }
-       $results=Db::select('select s.book_id , b.title from shelves s , books b where b.id = s.book_id and s.id=? and s.user_id=?',[$request['shelf_name'],$request['user_id']]);
+       $results=Db::select('select s.book_id , b.title from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[$request['shelf_name'],$request['user_id']]);
        if($results != NULL){
         return Response::json(array(
             'status' => 'success',

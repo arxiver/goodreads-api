@@ -1,24 +1,9 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-/*
-
-*/
-// User section
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
@@ -51,13 +36,30 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('shelf','ShelfController@getBooksOnShelf');
 });
 
-
 Route::group(["middleware" => "unAuthorized"], function(){
-    Route::post('changeImage', "UserController@changeImage");
-    Route::post('delete', "UserController@delete");
-    Route::get('showSetting', "UserController@showSetting");
-    Route::delete('logout', "UserController@logOut");
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                   Sofyan sectoin (please don't remove them)                                      //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Route::post('changepassword', "UserController@changePassword");
+    Route::post('changename', "UserController@changeName");
+    Route::post('delete', "UserController@delete");
+    Route::delete('logout', "UserController@logOut");
+    Route::get('showsetting', "UserController@showSetting");
+    Route::get('changecountry', "UserController@changeCountry");
+    Route::get('changecity', "UserController@changeCity");
+    Route::get('changebirthday', "UserController@changeBirthday");
+    Route::get('whocanseemybirthday', "UserController@whoCanSeeMyBirthday");
+    Route::get('whocanseemycountry', "UserController@whoCanSeeMyCountry");
+    Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");
+    Route::post('changeImage', "UserController@changeImage");
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                        Every one make a section for his work                                       //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::post('reviwes/create','ReviewController@createReview');
     Route::get('myreviews','ReviewController@listMyReviews');
     Route::put('reviwes/edit', 'ReviewController@editReview');
@@ -66,15 +68,10 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::delete('unlike','ActivitiesController@unlike');
     Route::post('makeLike','ActivitiesController@makeLike');
     Route::get('updates','ActivitiesController@followingUpdates');
+    Route::get('notification','ActivitiesController@notifications');
 
     
     Route::delete('reviwes/delete', 'ReviewController@destroy');
-    Route::get('changeBirthday', "UserController@changeBirthday");
-    Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
-    Route::get('changeCountry', "UserController@changeCountry");
-    Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
-    Route::get('changeCity', "UserController@changeCity");
-    Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
     Route::get('reviwes','ReviewController@recentReviews');
    // Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
    // Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
@@ -95,24 +92,22 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('followers','FollowingController@userFollowers');
     Route::get('following','FollowingController@userFollowing');
 
-    Route::get('changeBirthday', "UserController@changeBirthday");
-    Route::get('whoCanSeeMyBirthday', "UserController@whoCanSeeMyBirthday");
-    Route::get('changeCountry', "UserController@changeCountry");
-    Route::get('whoCanSeeMyCountry', "UserController@whoCanSeeMyCountry");
-    Route::get('changeCity', "UserController@changeCity");
-    Route::get('whoCanSeeMyCity', "UserController@whoCanSeeMyCity");
-
 
     // Book Section
     
 });
+Route::get('books','BookController@index');
+
+Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+Route::get('books/genre', 'BookController@showByGenre');
+Route::get('Books/book_title','BookController@getBookByTitle');
+Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 
-// Shelf Section
-/*Route::get('shlef/list', 'ShelfController@index');
-Route::get('shelf/shelfname', 'ShelfController@show');
-Route::get('shelf/shelfid','ShelfController@userShelves');
-Route::get('shelf','ShelfController@getBooksOnShelf');*/
+
 
 
 

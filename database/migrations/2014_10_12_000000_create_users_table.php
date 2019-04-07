@@ -35,6 +35,9 @@ class CreateUsersTable extends Migration
             $table->integer('rating_count')->default(0); 
             $table->integer('book_count')->default(0);                     // Book count
             $table->date("birthday");
+            $table->char('see_my_birthday')->default("Everyone");
+            $table->char('see_my_country')->default("Everyone");
+            $table->char('see_my_city')->default("Everyone");
             
 
             $table->rememberToken();

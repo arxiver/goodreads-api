@@ -6,7 +6,7 @@ $factory->define(App\Comment::class, function (Faker $faker) {
     return [
         'user_id'=>$faker->numberBetween(1, 1),
         'resourse_id'=>$faker->numberBetween(1, 4),                  
-        'resourse_type'=>$faker->numberBetween(0, 2),        
+        'resourse_type'=>$faker->numberBetween(0, 0),        
         'body'=>Str::random(20),
     ];
 });

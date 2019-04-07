@@ -472,7 +472,12 @@ class ReviewController extends Controller
         }
         else{
             return Response::json(array(
+<<<<<<< HEAD
+                'status' => 'failed',
+                ),
+=======
                 'status' => 'failed'),
+>>>>>>> 9b237a297d4234a5329c9466e497b948844f191a
                 400);
         }
     }  

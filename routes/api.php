@@ -19,9 +19,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::post('changename', "UserController@changeName");
     Route::post('delete', "UserController@delete");
     Route::delete('logout', "UserController@logOut");
-<<<<<<< HEAD
     Route::get('showProfile', "UserController@showProfile");
-=======
     Route::get('showsetting', "UserController@showSetting");
     Route::get('changecountry', "UserController@changeCountry");
     Route::get('changecity', "UserController@changeCity");
@@ -31,7 +29,6 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");
     Route::post('changeImage', "UserController@changeImage");
 
->>>>>>> 9b237a297d4234a5329c9466e497b948844f191a
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,10 +92,7 @@ Route::get('Books/book_ISBN','BookController@getBookByIsbn');
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 
-<<<<<<< HEAD
-=======
 // Shelf Section
->>>>>>> 9b237a297d4234a5329c9466e497b948844f191a
 Route::get('shlef/list', 'ShelfController@index');
 Route::get('shelf/shelfname', 'ShelfController@show');
 Route::get('shelf/shelfid','ShelfController@userShelves');

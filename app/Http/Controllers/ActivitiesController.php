@@ -96,35 +96,34 @@ class ActivitiesController extends Controller
     return response()->json($response, $responseCode);
     }
     /**
+     * @group [Activities].Notification
      * notifications
      * gets a user's notifications
      * @authenticated
 	 * @bodyParam page int optional 1-N (default 1).
-     * @response
-     * {
-	 *  "notifications": {
-	 *	"notification": [
-	 *		{
-	 *			"id": "1",
-	 *			"actors": {
-	 *				"user": {
-	 *					"id": "000000"
-	 *					"name": "Salma",
-	 *					"link": "https://www.goodreads.com/user/show/000000-salma\n",
-	 *					"image_url":"\nhttps://images.jpg\n",
-	 *					"has_image": "true"
-	 *				}
-	 *			},
-	 *			"new": "true",
-	 *			"created_at": "2019-03-08T04:15:46-08:00",
-	 *			"url": "https://www.goodreads.com/comment/show/1111111",
-	 *			"resource_type": "Comment",
-	 *			"group_resource_type": "ReadStatus"
-	 *		},
-	 *		}
-	 *	  ]
-	 *  }
-     * }
+     * @response {
+     *	"notifications": {
+     *		"notification": [
+     *			{
+     *			"id": "1",
+     *				"actors" : {
+     *				"user": {
+     *					"id": "000000",
+     *						"name" : "Salma",
+     *						"link" : "https://www.goodreads.com/user/show/000000-salma\n",
+     *						"image_url" : "\nhttps://images.jpg\n",
+     *						"has_image" : "true"
+     *				}
+     *			},
+     *				"new": "true",
+     *				"created_at" : "2019-03-08T04:15:46-08:00",
+     *				"url" : "https://www.goodreads.com/comment/show/1111111",
+     *				"resource_type" : "Comment",
+     *				"group_resource_type" : "ReadStatus"
+     *			}
+     *		]
+     *	}
+     *}
      */
     public function notifications()
     {
@@ -419,7 +418,7 @@ class ActivitiesController extends Controller
      * increment the number of likes in the review or follow or  add to shelf 
      * 
      * @bodyParam id int required id of the liked resource
-	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
+	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
      * @authenticated
      * @response {
      * "status": "true",

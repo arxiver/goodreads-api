@@ -53,21 +53,23 @@ class BookController extends Controller
      * Show book
      * @bodyParam book_id int required The id of the book.
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
+     *"id": 1000000,
+     *       "title": "ppp",
+      *      "isbn": 1,
+       *     "img_url": "dsds",
+        *    "publication_date": "2019-03-21",
+         *   "publisher": "fgdg",
+          *  "language": "dfgdg",
+           * "description": "fdgd",
+            *"reviews_count": 4,
+            *"ratings_count": 5,
+            *"ratings_avg": 9,
+            *"link": "jyj",
+            *"author_id": 1000000,
+            *"pages_no": 8,
+            *"created_at": "2019-03-21 00:00:00",
+            *"updated_at": "2019-03-21 00:00:00",
+            *"genre": "action"
      * }
      *
 
@@ -75,9 +77,12 @@ class BookController extends Controller
     public function show (Request $request)
     {
         //
-        
-        //$results = DB::select('select * from books where id = ?', [$request["book_id"]])->first();
-        $results = Book::find([$request["book_id"]])->first();
+        $Validations    = array(
+            "book_id"         => "required|integer"
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.id = ?', [$request['book_id']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -90,6 +95,13 @@ class BookController extends Controller
                 'pages' => $results),
                 400);
         }
+    }
+    else{
+        return Response::json(array(
+            'status' => 'failed, may be there is no books by this id',
+            ),
+            400);
+    }
 
     }
 
@@ -105,21 +117,23 @@ class BookController extends Controller
      * @bodyParam genreName string required The Genre of list of books.
      *
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
+    * "id": 1000000,
+     *       "title": "ppp",
+      *      "isbn": 1,
+       *     "img_url": "dsds",
+        *    "publication_date": "2019-03-21",
+         *   "publisher": "fgdg",
+          *  "language": "dfgdg",
+           * "description": "fdgd",
+            *"reviews_count": 4,
+            *"ratings_count": 5,
+            *"ratings_avg": 9,
+            *"link": "jyj",
+            *"author_id": 1000000,
+            *"pages_no": 8,
+            *"created_at": "2019-03-21 00:00:00",
+            *"updated_at": "2019-03-21 00:00:00",
+            *"genre": "action"
      * }
      */
     public function showByGenre(Request $request)
@@ -130,7 +144,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books where and type = ?', [$request['genreName']]);
+        $results = DB::select('select * from books b , genre g where b.id = g.book_id and type = ?', [$request['genreName']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -162,21 +176,23 @@ class BookController extends Controller
      * title.
      * @bodyParam title string required Find books by title
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
+     *       "id": 1000000,
+     *       "title": "ppp",
+      *      "isbn": 1,
+       *     "img_url": "dsds",
+        *    "publication_date": "2019-03-21",
+         *   "publisher": "fgdg",
+          *  "language": "dfgdg",
+           * "description": "fdgd",
+            *"reviews_count": 4,
+            *"ratings_count": 5,
+            *"ratings_avg": 9,
+            *"link": "jyj",
+            *"author_id": 1000000,
+            *"pages_no": 8,
+            *"created_at": "2019-03-21 00:00:00",
+            *"updated_at": "2019-03-21 00:00:00",
+            *"genre": "action"
      * }
      */
     public function getBookByTitle(Request $request)
@@ -186,7 +202,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books where title = ?', [$request['title']]);
+        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.title = ?', [$request['title']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -218,21 +234,23 @@ class BookController extends Controller
      * isbn.
      * @bodyParam ISBN int required Find books by ISBN
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
+     * "id": 1000000,
+     *       "title": "ppp",
+      *      "isbn": 1,
+       *     "img_url": "dsds",
+        *    "publication_date": "2019-03-21",
+         *   "publisher": "fgdg",
+          *  "language": "dfgdg",
+           * "description": "fdgd",
+            *"reviews_count": 4,
+            *"ratings_count": 5,
+            *"ratings_avg": 9,
+            *"link": "jyj",
+            *"author_id": 1000000,
+            *"pages_no": 8,
+            *"created_at": "2019-03-21 00:00:00",
+            *"updated_at": "2019-03-21 00:00:00",
+            *"genre": "action"
      * }
      */
     public function getBookByIsbn(Request $request)
@@ -243,7 +261,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books where isbn = ?', [$request['ISBN']]);
+        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.isbn = ?', [$request['ISBN']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -259,7 +277,7 @@ class BookController extends Controller
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this isbn',
+            'status' => 'failed, may be there is no books by this isbn or no genre for it',
             ),
             400);
     }
@@ -275,21 +293,26 @@ class BookController extends Controller
      * author name
      * @bodyParam Author_name string required Find books by Author's name.
      * @response {
-     * "book_title": "Would you die for me?",
-     * "isbn": "1234xxxxxx",
-     * "image_url": "lookdown.jpg",
-     * "small_image_url": "xyz.com/images/uvw.jpg",
-     * "num_pages": "1000",
-     * "publisher": "dummyMan",
-     * "publication_day": 13 ,
-     * "publication_year": 1932 ,
-     * "publication_month": 10  ,
-     * "average_rating": 3.532,
-     * "ratings_count": 1,
-     * "description": "dummy",
-     * "author_id" : 1,
-     * "author_name" : "author",
-     * "genre" : "action"
+     * "status": "success",
+     *  {
+     *      "id": 1000000,
+     *       "title": "ppp",
+      *      "isbn": 1,
+       *     "img_url": "dsds",
+        *    "publication_date": "2019-03-21",
+         *   "publisher": "fgdg",
+          *  "language": "dfgdg",
+           * "description": "fdgd",
+            *"reviews_count": 4,
+            *"ratings_count": 5,
+            *"ratings_avg": 9,
+            *"link": "jyj",
+            *"author_id": 1000000,
+            *"pages_no": 8,
+            *"created_at": "2019-03-21 00:00:00",
+            *"updated_at": "2019-03-21 00:00:00",
+            *"genre": "action"
+        *}
      * }
      */
     public function getBookByAuthorName(Request $request)
@@ -300,7 +323,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , authors a where a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
+        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::get('/', function () {return view('ReadAholic');});
+
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
@@ -105,6 +107,8 @@ Route::get('books/genre', 'BookController@showByGenre');
 Route::get('Books/book_title','BookController@getBookByTitle');
 Route::get('Books/book_ISBN','BookController@getBookByIsbn');
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+
+
 
 
 

@@ -50,29 +50,40 @@ class BookController extends Controller
         //
     }
     /**
-     * Show book
+     * @group [Book].Show
+     *   Show books by id
+     *
+     * function is responsible for showing books by
+     * returning the (id,title,publication_date, isbn, image url,publisher,language,
+     * description,reviews count,rating count,link,author id,genre)
+     * all of that formed by sending the parameters which :-
+     * book_id.
+     * @authenticated
      * @bodyParam book_id int required The id of the book.
      * @response {
+     * "status":"success",
+     * "pages" : [
+     * {
      *"id": 1000000,
      *       "title": "ppp",
-      *      "isbn": 1,
-       *     "img_url": "dsds",
-        *    "publication_date": "2019-03-21",
-         *   "publisher": "fgdg",
-          *  "language": "dfgdg",
-           * "description": "fdgd",
-            *"reviews_count": 4,
-            *"ratings_count": 5,
-            *"ratings_avg": 9,
-            *"link": "jyj",
-            *"author_id": 1000000,
-            *"pages_no": 8,
-            *"created_at": "2019-03-21 00:00:00",
-            *"updated_at": "2019-03-21 00:00:00",
-            *"genre": "action"
+     *      "isbn": 1,
+     *     "img_url": "dsds",
+     *    "publication_date": "2019-03-21",
+     *   "publisher": "fgdg",
+     *  "language": "dfgdg",
+     * "description": "fdgd",
+     *"reviews_count": 4,
+     *"ratings_count": 5,
+     *"ratings_avg": 9,
+     *"link": "jyj",
+     *"author_id": 1000000,
+     *"pages_no": 8,
+     *"created_at": "2019-03-21 00:00:00",
+     *"updated_at": "2019-03-21 00:00:00",
+     *"genre": "action"
      * }
-     *
-
+     * ]
+     * }
      */
     public function show (Request $request)
     {
@@ -114,9 +125,12 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * genre type.
+     * @authenticated
      * @bodyParam genreName string required The Genre of list of books.
-     *
      * @response {
+     * "status" : "success",
+     * "pages" :[
+     * {
     * "id": 1000000,
      *       "title": "ppp",
       *      "isbn": 1,
@@ -134,6 +148,8 @@ class BookController extends Controller
             *"created_at": "2019-03-21 00:00:00",
             *"updated_at": "2019-03-21 00:00:00",
             *"genre": "action"
+     * }
+     * ]
      * }
      */
     public function showByGenre(Request $request)
@@ -174,8 +190,12 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * title.
+     * @authenticated
      * @bodyParam title string required Find books by title
      * @response {
+     * "status" : "success",
+     * "pages" : [
+     * {
      *       "id": 1000000,
      *       "title": "ppp",
       *      "isbn": 1,
@@ -193,6 +213,8 @@ class BookController extends Controller
             *"created_at": "2019-03-21 00:00:00",
             *"updated_at": "2019-03-21 00:00:00",
             *"genre": "action"
+     *   }
+     *  ]
      * }
      */
     public function getBookByTitle(Request $request)
@@ -232,8 +254,12 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * isbn.
+     * @authenticated
      * @bodyParam ISBN int required Find books by ISBN
      * @response {
+     * "status" : "success",
+     * "pages" : [
+     * {
      * "id": 1000000,
      *       "title": "ppp",
       *      "isbn": 1,
@@ -251,6 +277,8 @@ class BookController extends Controller
             *"created_at": "2019-03-21 00:00:00",
             *"updated_at": "2019-03-21 00:00:00",
             *"genre": "action"
+     * }
+     * ]
      * }
      */
     public function getBookByIsbn(Request $request)
@@ -291,28 +319,31 @@ class BookController extends Controller
      * ,description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * author name
+     * @authenticated
      * @bodyParam Author_name string required Find books by Author's name.
      * @response {
      * "status": "success",
+     * "pages" :[
      *  {
      *      "id": 1000000,
      *       "title": "ppp",
-      *      "isbn": 1,
-       *     "img_url": "dsds",
-        *    "publication_date": "2019-03-21",
-         *   "publisher": "fgdg",
-          *  "language": "dfgdg",
-           * "description": "fdgd",
-            *"reviews_count": 4,
-            *"ratings_count": 5,
-            *"ratings_avg": 9,
-            *"link": "jyj",
-            *"author_id": 1000000,
-            *"pages_no": 8,
-            *"created_at": "2019-03-21 00:00:00",
-            *"updated_at": "2019-03-21 00:00:00",
-            *"genre": "action"
-        *}
+     *       "isbn": 1,
+     *       "img_url": "dsds",
+     *       "publication_date": "2019-03-21",
+     *       "publisher": "fgdg",
+     *       "language": "dfgdg",
+     *       "description": "fdgd",
+     *       "reviews_count": 4,
+     *       "ratings_count": 5,
+     *       "ratings_avg": 9,
+     *       "link": "jyj",
+     *       "author_id": 1000000,
+     *       "pages_no": 8,
+     *       "created_at": "2019-03-21 00:00:00",
+     *       "updated_at": "2019-03-21 00:00:00",
+     *       "genre": "action"
+     *  }
+     * ]
      * }
      */
     public function getBookByAuthorName(Request $request)

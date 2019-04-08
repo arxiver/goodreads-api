@@ -661,20 +661,20 @@ class ReviewController extends Controller
      * @response {
     *"status": "success",
     *"pages": [
-     *   {
-      *      "id": 1000010,
-       *     "book_id": 61,
-        *    "body": "Woooooooooooooow  it is a great booooook",
-         *   "rating": 2,
-          *  "shelf_name": "read",
-           * "likes_count": null,
-            *"comments_count": null,
-            *"user_id": 1,
-            *"username": "Shakira Hahn",
-            *"userimagelink": "https://lorempixel.com/640/480/?74240"
-        *}
-    *]
-     * }
+    *   {
+    *      "id": 1000010,
+    *     "book_id": 61,
+    *     "body": "Woooooooooooooow  it is a great booooook",
+    *     "rating": 2,
+    *    "shelf_name": "read",
+    *    "likes_count": null,
+    *    "comments_count": null,
+    *    "user_id": 1,
+    *    "username": "Shakira Hahn",
+    *    "userimagelink": "https://lorempixel.com/640/480/?74240"
+    *     }
+    *   ]
+    * }
      * @authenticated
      * @bodyParam bookId integer required id of the of the book
      */

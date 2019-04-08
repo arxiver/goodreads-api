@@ -258,36 +258,38 @@ class ShelfController extends Controller
      * all of that formed by sending the parameters which :-
      * shelf name
      * user id
+     * @Authenticated
      * @bodyParam user_id integer required Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
      * @response {
      * "status": "success",
-    *"pages": [
-       * {
-       *     "book_id": 95,
-       *     "title": "9jT4WR"
-       * },
-       * {
-       *     "book_id": 17,
-       *     "title": "pNUWhb"
-       * },
-       * {
-       *     "book_id": 50,
-       *     "title": "ZPiAVs"
-       * },
-       * {
-       *     "book_id": 9,
-       *     "title": "3SrTCb"
-       * },
-       * {
-       *     "book_id": 35,
-       *     "title": "TVSXeR"
-       * },
-       * {
-       *     "book_id": 61,
-      *      "title": "gBpaYn"
-     *   }
-    *]
+     *"pages": [
+     * {
+     *     "book_id": 95,
+     *     "title": "9jT4WR"
+     * },
+     * {
+     *     "book_id": 17,
+     *     "title": "pNUWhb"
+     * },
+     * {
+     *     "book_id": 50,
+     *     "title": "ZPiAVs"
+     * },
+     * {
+     *     "book_id": 9,
+     *     "title": "3SrTCb"
+     * },
+     * {
+     *     "book_id": 35,
+     *     "title": "TVSXeR"
+     * },
+     * {
+     *     "book_id": 61,
+     *      "title": "gBpaYn"
+     * }
+     *]
+     *}
      */
 	public function getBooksOnShelf(Request $request)
 	{

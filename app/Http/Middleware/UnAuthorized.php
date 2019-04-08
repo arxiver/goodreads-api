@@ -21,10 +21,7 @@ class UnAuthorized
         }
         else
         {
-            return $next($request)
-            ->header("Access-Contorl-Allow-Origin" , "*")
-            ->header("Access-Contorl-Allow-Methods" , "GET,POST , PUT , DELETE, OPTIONS")
-            ->header("Access-Contorl-Allow-Headers" , "Content-Type, X-Auth-Token , Origin , Authorization , X-Requested-With");
+            return $next($request);
         }
     }
 }

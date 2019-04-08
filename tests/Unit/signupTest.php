@@ -577,6 +577,8 @@ class signupTest extends TestCase
 
         // [4] You must understand you it make the auth in the test function 
 
+        // [5] The test of the middleware
+
         /*
         $user = factory(User::class)->create();
 

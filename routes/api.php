@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::get('/', function () {return view('ReadAholic');});
+
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
@@ -46,6 +48,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::post('changename', "UserController@changeName");
     Route::post('delete', "UserController@delete");
     Route::delete('logout', "UserController@logOut");
+    Route::get('showProfile', "UserController@showProfile");
     Route::get('showsetting', "UserController@showSetting");
     Route::get('changecountry', "UserController@changeCountry");
     Route::get('changecity', "UserController@changeCity");
@@ -107,14 +110,11 @@ Route::get('Books/book_ISBN','BookController@getBookByIsbn');
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 
-
-
-
-
-
-
-
-
+// Shelf Section
+Route::get('shlef/list', 'ShelfController@index');
+Route::get('shelf/shelfname', 'ShelfController@show');
+Route::get('shelf/shelfid','ShelfController@userShelves');
+Route::get('shelf','ShelfController@getBooksOnShelf');
 
 
 //Route::get('updates','ActivitiesController@followingUpdates');

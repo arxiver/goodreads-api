@@ -329,11 +329,15 @@ class userController extends Controller
      */
     public function changePassword(Request $request)
     {
-        $validation = array("newPassword" => "required|max:30|min:5|confirmed");
-        if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
+        $validation = array (
+                                "password"                  => "required",
+                                "newPassword"               => "required|confirmed|max:30|min:5",
+                                "newPassword_confirmation"  => "required"
+                            );
+        $valid = validator::make($request->all() , $validation);
+        if(!$valid->fails())
         {
-            $valid = validator::make($request->all() , $validation);
-            if(!$valid->fails())
+            if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
             {
                 $user = User::find($this->ID);
                 $user->password = $request["newPassword"];
@@ -342,12 +346,12 @@ class userController extends Controller
             }
             else
             {
-                return response()->json(["errors"=> $valid->messages()->first()], 405);
+                return response()->json(["errors" => "The password is invalid."],405);
             }
         }
         else
         {
-            return response()->json(["errors" => "The password is invalid."],405);
+            return response()->json(["errors"=> $valid->messages()->first()], 405);
         }
     }
 

@@ -517,7 +517,7 @@ class ReviewController extends Controller
      * of a certain review and also it returns the shelf name of the book the review about
      * all of that formed by sending the parameters which :-
      * review id.
-     * @response{
+     * @response {
      * "status": "success",
    * "pages": [
     *    {
@@ -594,15 +594,14 @@ class ReviewController extends Controller
      * user id
      * @authenticated
      * @response {
-     * {
-    *"status": "success",
-    *"pages": [
-        *{
-        *    "rating": 2,
-       *     "shelf_name": "read",
-      *      "body": "Woooooooooooooow  it is a great booooook"
-     *   }
-    *]
+     * "status": "success",
+     * "pages": [
+     *      {
+    *       "rating": 2,
+    *       "shelf_name": "read",
+    *       "body": "Woooooooooooooow  it is a great booooook"
+    *       }
+     *    ]
      * }
      * @bodyParam userId required id of the of the user
      * @bodyParam bookId required id of the of the book
@@ -660,7 +659,6 @@ class ReviewController extends Controller
      * and also the username as well, all of that formed by sending the parameters which :-
      * book id 
      * @response {
-     * {
     *"status": "success",
     *"pages": [
      *   {

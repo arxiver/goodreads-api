@@ -8,19 +8,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-/**
- * To Do
- * [1] Verification
- * [2] Image
- * [3] Guest
- * [4] Edit the file of [start with laravel] and add every thing about the unit test
- * [5] How to use the validator [in] in the issue of (male , female and other)
- * [6] Questions
- *      [1] How i send the header with post request                 Done (in the array of sending data)
- *      [2] How is the authontecated going on in the unit test      simi Done (when you generate a toke by JWTAuth::fromUser) i think it generate a valid token you can use it in the operation of authorization
- *      [3] after you know the point [2] finish your unit test      simi Done 
- *      [4] some problem in the file of signupTest in the last function       
- */
+
 /**
  * I belong to UserController.php
  */

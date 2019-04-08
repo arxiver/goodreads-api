@@ -12,11 +12,8 @@ use Response;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-//use PHPUnit\Framework\TestCase;
-
 class userTest extends TestCase
 {
-    
     /**
      * A basic unit test example.
      * @test
@@ -24,12 +21,10 @@ class userTest extends TestCase
      */
     public function createtest()
     {
-
         $tt1 = new Review;
         $tt2=new ReviewController;
         $tt3 = new Book;
         $tt3->setauthor(1000000,'a7med7amdy','2019-03-21 00:00:00','2019-03-21 00:00:00');
-      //  $tt3->setgenre(1000000,1000000,'action');
         $tt3->setBook(1000000,'ppp',1,'dsds','2019-03-21 00:00:00','fgdg','dfgdg','fdgd',4,5,9,'jyj',1000000,8,'2019-03-21 00:00:00','2019-03-21 00:00:00');
         $tt3->setgenre(1000000,1000000,'action');
         $user=$tt1->getuser(); 
@@ -37,8 +32,7 @@ class userTest extends TestCase
         $this->assertTrue(true);
 
     }
-
-    public function AtestExample1()
+    public function testExample1()
     {
         $res=$this->json('get','api/Books/book_Authorname',['Author_name'=>'a7med7amdy']);
         $data = json_decode($res->getContent(),true);
@@ -46,29 +40,21 @@ class userTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
-
-    public function Atest1()
+    public function test1()
         {
             $tt1 = new Review;
             $tt2=new ReviewController;
             $res=$this->json('get','api/reviwes/books',['title'=>'ppp']);
-          //  $res->assertStatus(200);
-           // $arr = array(
-             //               'title' => '8FgL8g',
-               //             'book_id' => 1               
-                 //       );
-           
-//             $res->assertJsonFragment($arr);
             $data = json_decode($res->getContent(),true);
           //  $this->assertEquals(2 , $data['pages'][0]['user_id']);
             $this->assertEquals(1000000 , $data['pages'][0]['book_id']);
-            //$this->assertEquals('dsds',$data['pages'][0]['body']);
-            //$this->assertEquals('read' , $data['pages'][0]['shelf_name']);
-            //$this->assertEquals(5 , $data['pages'][0]['rating']);
-            //$this->assertEquals(4 , $data['pages'][0]['likes_count']);
-            //$this->assertEquals(4 , $data['pages'][0]['comments_count']);
+            $this->assertEquals('dsds',$data['pages'][0]['body']);
+            $this->assertEquals('read' , $data['pages'][0]['shelf_name']);
+            $this->assertEquals(5 , $data['pages'][0]['rating']);
+            $this->assertEquals(4 , $data['pages'][0]['likes_count']);
+            $this->assertEquals(4 , $data['pages'][0]['comments_count']);
         }
-    public function Atest2()
+    public function test2()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;
@@ -82,7 +68,7 @@ class userTest extends TestCase
         $this->assertEquals(4 , $data['pages'][0]['likes_count']);
         $this->assertEquals(4 , $data['pages'][0]['comments_count']);
     }
-    public function Atest3()
+    public function test3()
     {
         $tt1 = new Review;
         $tt2=new ReviewController;
@@ -94,16 +80,11 @@ class userTest extends TestCase
         $this->assertEquals('read' , $data['pages'][0]['shelf_name']);
         $this->assertEquals(5 , $data['pages'][0]['rating']);
     }
-        //23mel funcs kman lkol el controller's function elly ha test ISA
-        public function Atest4()
+        public function test4()
         {
-            
-
             $tt1 = new Review;
             $tt2=new ReviewController;
             $res=$this->json('get','api/showReviewsForABook',['bookId'=>'1000000']);
-
-           // $res= $tt2->showReviewsForBook(1000000)->getContent();
             $data = json_decode($res->getContent(),true);
             $this->assertEquals(1000000 , $data['pages'][0]['id']);
             $this->assertEquals('dsds',$data['pages'][0]['body']);
@@ -118,11 +99,6 @@ class userTest extends TestCase
         $tt1->deleteshowReviewOfBook(1000000);
         $tt3->deleteBook(1000000);
         $tt3->deleteauthor(1000000);
-        $this->assertTrue(true);
-
-    }
-    public function testAssert()
-    {
         $this->assertTrue(true);
     }
 }

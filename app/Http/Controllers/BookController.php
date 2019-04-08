@@ -106,7 +106,7 @@ class BookController extends Controller
     }
 
     /**
-     *  @group [Review].get Book By genre
+     *  @group [Book].get Book By genre
      *   Show books by genre
      * 
      * function is responsible for showing books by
@@ -166,7 +166,7 @@ class BookController extends Controller
     }
     }
     /**
-     * @group [Review].get Book By title
+     * @group [Book].get Book By title
      *  get the needed book by its name
      * 
      * this function is responsible for showing certain book by
@@ -224,7 +224,7 @@ class BookController extends Controller
     }
     }
     /**
-     * @group [Review].get Book By Isbn
+     * @group [Book].get Book By Isbn
      *    get the needed book by its ISBN
      * 
      * this function is responsible for showing certain book by
@@ -283,7 +283,7 @@ class BookController extends Controller
     }
     }
     /**
-     * @group [Review].get Book By Author Name
+     * @group [Book].get Book By Author Name
      *    search about the needed book by its Author name
      * 
      * this function is responsible for showing certain book by

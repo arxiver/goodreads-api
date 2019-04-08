@@ -116,6 +116,7 @@ Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
 
 
 
+
 //Route::get('updates','ActivitiesController@followingUpdates');
 
 

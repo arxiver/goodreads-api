@@ -21,7 +21,7 @@ class LikesTable extends Migration
             // the type of the resourse which will determine the table the
             // resourseId belongs to
             $table->integer('resourse_type');
-            $table->datetime('lastUpdate');
+            //$table->datetime('lastUpdate');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

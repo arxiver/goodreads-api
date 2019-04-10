@@ -93,7 +93,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.id = ?', [$request['book_id']]);
+        $results = DB::select('select b.id , a.author_name as author_name ,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.id = ?', [$request['book_id']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -160,7 +160,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g where b.id = g.book_id and type = ?', [$request['genreName']]);
+        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [$request['genreName']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -224,7 +224,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.title = ?', [$request['title']]);
+        $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.title = ?', [$request['title']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -289,7 +289,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.isbn = ?', [$request['ISBN']]);
+        $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.isbn = ?', [$request['ISBN']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

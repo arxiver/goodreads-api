@@ -13,7 +13,7 @@ $factory->define(App\Book::class, function (Faker $faker) {
         'publisher' => str_random(10),
         'language' => str_random(5),
         'description' => str_random(20),
-        'link'=>$faker->url,
+        //'link'=>$faker->url,
         'author_id' => $faker->randomElement($authors)
 
     ];

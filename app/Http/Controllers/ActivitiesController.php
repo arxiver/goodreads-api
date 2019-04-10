@@ -50,7 +50,7 @@ class ActivitiesController extends Controller
     public function followingUpdates(Request $request)
     {
         $Validations    = array(
-            "user_id"         => "integer",
+            "user_id"         => "integer|min:0",
             "max_updates"     => "integer|min:1"
 
     );
@@ -91,7 +91,7 @@ class ActivitiesController extends Controller
 
     }else{
         
-        $response = "Something gone wrong .";
+        $response = array('message'=>"Something gone wrong .");
         $responseCode = 400;
     }
     return response()->json($response, $responseCode);

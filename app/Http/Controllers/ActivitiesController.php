@@ -66,6 +66,7 @@ class ActivitiesController extends Controller
             $following = DB::table('followings')->where('follower_id','=',$auth_id)->select('user_id')->get();
             $followingArr= json_decode( json_encode($following), true);
             $followingArr = Arr::flatten($followingArr);
+            
         }
         $rev = Review::reviewsUsersArr($followingArr);
         $shelf = Shelf::shelvesUsersArr($followingArr);
@@ -85,12 +86,12 @@ class ActivitiesController extends Controller
         {
             $result = array_slice($result,0,$request->input('max_updates'));
         }
-        $response = array('status' =>"true",'updates'=>$result) ;
+        $response = $result ;
         $responseCode = 201;
 
     }else{
         
-        $response = array( 'status' => "false",'message' =>"Something gone wrong .");
+        $response = "Something gone wrong .";
         $responseCode = 400;
     }
     return response()->json($response, $responseCode);

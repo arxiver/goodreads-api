@@ -22,12 +22,15 @@ class Likes extends Model
         $likes = Likes::where('resourse_type','=','0')->whereIn('likes.user_id',$Arr)
         ->join('reviews','resourse_id','=','reviews.id')
         ->join('books','reviews.book_id','=','books.id')
-        ->join('users','reviews.user_id','=','users.id')
+        ->join('users as rev_u','reviews.user_id','=','rev_u.id')
+        ->join('users as u','likes.user_id','=','u.id')
         ->join('authors','books.author_id','=','authors.id')
-        ->select('likes.id','resourse_type','likes.updated_at','Reviews.id as review_id','body'
+        ->select('likes.id','resourse_type','likes.updated_at','u.id as user_id','u.name as user_name'
+        ,'u.image_link as imageLink','Reviews.id as review_id','body'
         ,'rating','likes_count','comments_count','reviews.updated_at as review_updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
-        ,'ratings_avg','pages_no','users.id as user_id','users.name','users.image_link','author_name')
+        ,'ratings_avg','pages_no','rev_u.id as rev_user_id','rev_u.name as rev_user_name'
+        ,'rev_u.image_link as rev_user_imageLink','author_name')
         ->get();
         $t = array();
         $j=0;

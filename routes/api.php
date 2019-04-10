@@ -16,7 +16,7 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('Books/book_title','BookController@getBookByTitle');
     Route::get('Books/book_ISBN','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
-    Route::get( 'books/show', 'BookController@show');
+    
 
     // Review Section
     Route::get('reviwes','ReviewController@recentReviews');
@@ -94,7 +94,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
 
     Route::get('followers','FollowingController@userFollowers');
     Route::get('following','FollowingController@userFollowing');
-
+    Route::get( 'books/show', 'BookController@show');
 
     // Book Section
     

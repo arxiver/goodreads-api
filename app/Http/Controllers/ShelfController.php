@@ -258,7 +258,6 @@ class ShelfController extends Controller
      * all of that formed by sending the parameters which :-
      * shelf name
      * user id
-     * @Authenticated
      * @bodyParam user_id integer required Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
      * @response {

@@ -10,6 +10,30 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
 
+    
+});
+
+Route::group(["middleware" => "unAuthorized"], function(){
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                   Sofyan sectoin (please don't remove them)                                      //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Route::post('changepassword', "UserController@changePassword");
+    Route::post('changename', "UserController@changeName");
+    Route::post('delete', "UserController@delete");
+    Route::delete('logout', "UserController@logOut");
+    Route::get('showProfile', "UserController@showProfile");
+    Route::get('showsetting', "UserController@showSetting");
+    Route::get('changecountry', "UserController@changeCountry");
+    Route::get('changecity', "UserController@changeCity");
+    Route::get('changebirthday', "UserController@changeBirthday");
+    Route::get('whocanseemybirthday', "UserController@whoCanSeeMyBirthday");
+    Route::get('whocanseemycountry', "UserController@whoCanSeeMyCountry");
+    Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");
+    Route::post('changeImage', "UserController@changeImage");
+
+
     Route::get('books','BookController@index');
 
     Route::get('books/genre', 'BookController@showByGenre');
@@ -36,28 +60,6 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('shelf/shelfname', 'ShelfController@show');
     Route::get('shelf/shelfid','ShelfController@userShelves');
     Route::get('shelf','ShelfController@getBooksOnShelf');
-});
-
-Route::group(["middleware" => "unAuthorized"], function(){
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                   Sofyan sectoin (please don't remove them)                                      //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    Route::post('changepassword', "UserController@changePassword");
-    Route::post('changename', "UserController@changeName");
-    Route::post('delete', "UserController@delete");
-    Route::delete('logout', "UserController@logOut");
-    Route::get('showProfile', "UserController@showProfile");
-    Route::get('showsetting', "UserController@showSetting");
-    Route::get('changecountry', "UserController@changeCountry");
-    Route::get('changecity', "UserController@changeCity");
-    Route::get('changebirthday', "UserController@changeBirthday");
-    Route::get('whocanseemybirthday', "UserController@whoCanSeeMyBirthday");
-    Route::get('whocanseemycountry', "UserController@whoCanSeeMyCountry");
-    Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");
-    Route::post('changeImage', "UserController@changeImage");
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

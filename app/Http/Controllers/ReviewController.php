@@ -96,6 +96,7 @@ class ReviewController extends Controller
                         "user_id" => $this->ID,
                         "book_id" => $request["bookId"],
                         "body"  => $request["body"],
+                        "shelf_name" => 0,
                         "rating" =>$request["rating"]
                     );
                     Review::create($Create);

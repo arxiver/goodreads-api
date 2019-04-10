@@ -8,7 +8,7 @@ $factory->define(App\Review::class, function (Faker $faker) {
         'user_id' =>$faker->numberBetween(1, 1),
         'book_id'=>$faker->numberBetween(1, 4),
         'body'=> Str::random(10),
-        'shelf_name'=>$faker->numberBetween(1, 3),
+        'shelf_name'=>$faker->numberBetween(0, 3),
         'rating'=> $faker->randomFloat(3,0,5),
         'likes_count'=> $faker->numberBetween(1,10),
         'comments_count'=> $faker->numberBetween(1, 10),

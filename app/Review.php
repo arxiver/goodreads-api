@@ -13,7 +13,8 @@ class Review extends Model
     protected $fillable = [
         "user_id", 
         "book_id",                  
-        "body" ,         
+        "body" ,   
+        "shelf_name",      
         "rating",
         'updated_at',
         'created_at'

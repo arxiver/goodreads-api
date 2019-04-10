@@ -7,5 +7,6 @@ $factory->define(App\Likes::class, function (Faker $faker) {
         'user_id' =>$faker->numberBetween(1, 1),
         'resourse_id' =>$faker->numberBetween(1, 4),
         'resourse_type'=>$faker->numberBetween(0, 0),
+        "lastUpdate" => now()
     ];
 });

@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * I belong to UserController.php
+ * [1] The Image 
+ *      [1] Which methods is better than other (public , database or s3)
+ *      [2] when i save an image in s3 how i get it (and show the TA the pdf and the code of filesystem)
+ * 
+ * [2] The verification
+ *      [1] What is the mechanesm which i will use
+ * 
+ * [3]  
  */
-
-/**
- * I belong to a userController
- */
-
-
-
 /**
  * @group User 
  *

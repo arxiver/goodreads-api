@@ -25,7 +25,7 @@ class CreateBooksTable extends Migration
             $table->integer('reviews_count')->nullable()->default(0);
             $table->integer('ratings_count')->nullable()->default(0);
             $table->float('ratings_avg')->nullable()->default(0);
-            $table->string('link');
+           // $table->string('link');
             $table->integer('author_id');
             $table->integer('pages_no')->nullable()->default(0);
             $table->timestamps();

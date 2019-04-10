@@ -26,7 +26,7 @@ class Likes extends Model
         ->join('users as u','likes.user_id','=','u.id')
         ->join('authors','books.author_id','=','authors.id')
         ->select('likes.id','resourse_type','likes.updated_at','u.id as user_id','u.name as user_name'
-        ,'u.image_link as imageLink','Reviews.id as review_id','body'
+        ,'u.image_link as image_link','Reviews.id as review_id','body'
         ,'rating','likes_count','comments_count','reviews.updated_at as review_updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
         ,'ratings_avg','pages_no','rev_u.id as rev_user_id','rev_u.name as rev_user_name'
@@ -34,11 +34,16 @@ class Likes extends Model
         ->get();
         $t = array();
         $j=0;
+        //$auth_id = $this->ID;
        foreach($likes as $l)
         {
             //$like = Likes::where('user_id',$auth_id)->where('resourse_type','0')->where('resourse_id',Arr::get($r,'id'))->get()->isNotEmpty();
             $l = collect($l);
+           // $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->get();        
+            //if(count($shelf)==0)
+                $shelf = 3;
             $l ->put('update_type',3);
+            $l ->put('shelf',$shelf);
            $t[$j]=$l;
            $j++;
         }

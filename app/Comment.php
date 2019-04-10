@@ -25,7 +25,7 @@ class Comment extends Model
         ->join('authors','books.author_id','=','authors.id')
         ->select('comments.id','resourse_type','comments.updated_at','comments.body as comment_body'
         ,'u.id as user_id','u.name as user_name'
-        ,'u.image_link as imageLink','Reviews.id as review_id','reviews.body'
+        ,'u.image_link as image_link','Reviews.id as review_id','reviews.body'
         ,'rating','comments_count','comments_count','reviews.updated_at as review_updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
         ,'ratings_avg','pages_no','rev_u.id as rev_user_id','rev_u.name as rev_user_name'
@@ -33,10 +33,16 @@ class Comment extends Model
         ->get();
         $t = array();
         $j=0;
+        //$auth_id = $this->ID;
        foreach($comment as $l)
         {
             $l = collect($l);
+           // $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->get();
+            //if(count($shelf)==0)
+                 $shelf = 3;
             $l ->put('update_type',4);
+            $l ->put('shelf',$shelf);
+            
            $t[$j]=$l;
            $j++;
         }

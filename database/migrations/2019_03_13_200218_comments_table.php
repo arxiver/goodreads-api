@@ -19,7 +19,7 @@ class CommentsTable extends Migration
             $table->integer('resourse_id');
             $table->integer('resourse_type');
             //$table->datetime('lastUpdate');
-            $table->string('body');
+            $table->string('body')->default('');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

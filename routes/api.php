@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('ReadAholic');});
 
-Route::group(["middleware" => "authorized"] , function(){
+    Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
 
@@ -26,7 +26,7 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
     Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+    
 
     Route::post('shelf/add_book', 'ShelfController@addBook');
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');
@@ -36,6 +36,7 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::get('shelf/shelfname', 'ShelfController@show');
     Route::get('shelf/shelfid','ShelfController@userShelves');
     Route::get('shelf','ShelfController@getBooksOnShelf');
+
 });
 
 Route::group(["middleware" => "unAuthorized"], function(){
@@ -95,7 +96,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('followers','FollowingController@userFollowers');
     Route::get('following','FollowingController@userFollowing');
     Route::get( 'books/show', 'BookController@show');
-
+    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
     // Book Section
     
 });
@@ -103,7 +104,6 @@ Route::get('books','BookController@index');
 
 Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
 Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
-Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 Route::get('books/genre', 'BookController@showByGenre');
 Route::get('Books/book_title','BookController@getBookByTitle');
 Route::get('Books/book_ISBN','BookController@getBookByIsbn');

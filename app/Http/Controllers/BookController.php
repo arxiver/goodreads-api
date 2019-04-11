@@ -87,7 +87,7 @@ class BookController extends Controller
      */
     public function show (Request $request)
     {
-        //
+        
         $Validations    = array(
             "book_id"         => "required|integer"
         );

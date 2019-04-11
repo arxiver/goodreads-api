@@ -15,11 +15,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $Create = array(
-            "email"         => "test@yahoo.com",
+            "email"         => "test1@yahoo.com",
             "password"      => "password",
-            "name"          => "test",
+            "name"          => "test1",
             "gender"        => "female",
-            "username"      => "test21",
+            "username"      => "test1",
             "age"           => 21,
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
@@ -36,7 +36,8 @@ class UserSeeder extends Seeder
             "age"           => 21,
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
-            "city"          => "Atawwa"
+            "city"          => "Atawwa",
+            "image_link"    => "default.jpg"
         );
         User::create($Create2);
 

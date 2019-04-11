@@ -13,25 +13,25 @@ class FollowingController extends Controller
     /**
      * @group [Following].Follow User
      * followUser function
-     * 
+     *
      * Checking the request`s paramaters that has [user_id] paramater
-     * 
+     *
      * it is aborting in case no user_id is given
-     * 
+     *
      * Validate the existance of the user_id
      * if the user doesn`t exist aborting
-     * 
+     *
      * Validate the relationship is not existing before.
      * responsing 400 if it exist.
-     * 
+     *
      * if not exists creating new instance of following model
-     * 
+     *
      * `
-     * increamenting both Follower: follwoing_count / Followed: followers_count 
+     * increamenting both Follower: follwoing_count / Followed: followers_count
      * `
-     * 
+     *
      * Responses with successfully message in case of passing aborting
-     * 
+     *
      * @bodyParam user_id int required Goodreads user id of user to follow.
      * @response 201 {
      * "status": "true",
@@ -46,7 +46,7 @@ class FollowingController extends Controller
      * @response 404{
      * }
      * @authenticated
-     * 
+     *
      */
     public function followUser(Request $request)
     {
@@ -57,6 +57,8 @@ class FollowingController extends Controller
         /**
          *  if the user doesn`t exist .
          */
+        if($userId==$this->ID)
+        abort(404);
         $user = User::findOrFail($userId);
         $followerId = $this->ID;
 
@@ -100,25 +102,25 @@ class FollowingController extends Controller
     /**
      * @group [Following].Unfollow User
      * unfollowUser function
-     * 
+     *
      * Checking the request`s paramaters that has [user_id] paramater
-     * 
+     *
      * it is aborting in case no user_id is given
-     * 
+     *
      * Validate the existance of the user_id
      * if the user doesn`t exist aborting
-     * 
+     *
      * Validate the relationship is existing .
      * if it is not existing it`s aborting .
-     * 
+     *
      * if exists it is being removes successfully
-     * 
+     *
      * `
-     * decreamenting both Follower: follwoing_count / Followed: followers_count 
+     * decreamenting both Follower: follwoing_count / Followed: followers_count
      * `
-     * 
+     *
      * Responses with successfully message in case of passing aborting
-     * 
+     *
      *
      * @authenticated
      *
@@ -172,18 +174,18 @@ class FollowingController extends Controller
 
     /**
      * @group [Following].Followers List
-     * 
+     *
      * followersUser function .
-     * 
-     * 
+     *
+     *
      * returns followers list of the given [ user_id ] and their currently reading books
-     * 
+     *
      * each page contains 30 user limiting query with max 30 record.
-     * 
+     *
      * Checking the request paramaters and validate the existance of the user
-     * 
+     *
      * aborting in-case of user is not exist
-     * 
+     *
      * other wise returns the user`s followers list from database table .
      * @authenticated
      *
@@ -270,6 +272,10 @@ class FollowingController extends Controller
 							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2
                             ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
 
+        $i=0;
+        while($i<sizeof($data)){
+        $data[$i]->is_followed =Following::where('follower_id',$this->ID)->where('user_id',$data[$i]->id)->count() ;
+        $i++;}
         /**
          * Response paramaters and return
          */
@@ -281,18 +287,18 @@ class FollowingController extends Controller
 
     /**
      * @group  [Following].Following List
-     * 
-     * 
+     *
+     *
      * followingUser function .
-     * 
+     *
      * returns following list of the given [ user_id ] and their currently reading books
-     * 
+     *
      * each page contains 30 user limiting query with max 30 record.
-     * 
+     *
      * Checking the request paramaters and validate the existance of the user
-     * 
+     *
      * aborting in-case of user is not exist
-     * 
+     *
      * other wise returns the user`s following list from database table .
      *
      * @authenticated

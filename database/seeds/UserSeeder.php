@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             "age"           => 21,
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
-            "city"          => "Atawwa"
+            "city"          => "Atawwa",
+            "image_link"    => "default.jpg"
         );
         User::create($Create);
 

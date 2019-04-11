@@ -8,6 +8,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 /**
  * [1] The Image 
@@ -17,7 +18,14 @@ use Illuminate\Support\Facades\Auth;
  * [2] The verification
  *      [1] What is the mechanesm which i will use
  * 
- * [3]  
+ * [3] Guest
+ * [4] Edit the file of [start with laravel] and add every thing about the unit test
+ * [5] How to use the validator [in] in the issue of (male , female and other)
+ * [6] Questions
+ *      [1] How i send the header with post request                 Done (in the array of sending data)
+ *      [2] How is the authontecated going on in the unit test      simi Done (when you generate a toke by JWTAuth::fromUser) i think it generate a valid token you can use it in the operation of authorization
+ *      [3] after you know the point [2] finish your unit test      simi Done 
+ *      [4] some problem in the file of signupTest in the last function  
  */
 /**
  * @group User 
@@ -28,6 +36,10 @@ class userController extends Controller
 {
     private $youngerThan = 100;
     private $olderThan = 3;
+    private $PublicUrl = "storage/";
+    private $PrivateUrl = "";
+    private $AvatarDirectory = "avatars/";
+    private $DefaultImage = "default.jpg";
     
     //
     /**
@@ -98,7 +110,8 @@ class userController extends Controller
                                 "age"           => date("Y") - date("Y", strtotime($request["birthday"])),
                                 "birthday"      => date("Y-n-j", strtotime($request["birthday"])),
                                 "country"       => $request["country"],
-                                "city"          => $request["city"]
+                                "city"          => $request["city"],
+                                "image_link"    => $this->DefaultImage
                             );
             $user = User::create($Create);
             $token = JWTAuth::attempt(["email" => $request["email"]  , "password" => $request["password"]]);
@@ -108,6 +121,7 @@ class userController extends Controller
                                     "image_link"
                                 );
             $show = User::find($user->id,$gettingdata);
+            $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
             return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
         } 
         else 
@@ -181,6 +195,7 @@ class userController extends Controller
                                     );
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
+                $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
                 return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
             }
             else
@@ -239,6 +254,7 @@ class userController extends Controller
                                 "see_my_city"
                             );
         $show = User::find($this->ID,$gettingData);
+        $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
         return response()->json(["user" => $show],200);
     }
 
@@ -273,7 +289,6 @@ class userController extends Controller
     /**
      * Change Name
      * @authenticated
-     * @bodyParam password string required .
      * @bodyParam newName string required .
      * @response 405 {
      * "errors": [
@@ -520,13 +535,38 @@ class userController extends Controller
      * @bodyParam Image string required the URL for the image .
      * @authenticated
      * @response {
-     * "status": "true",
      * "message": "You have updated your profile picture"
      *}
      */
     public function changeImage(Request $request)
     {
-        // body
+        $Validatoin = array 
+                            (
+                                "image" => "required|image"
+                            );
+        $Messages = array
+                        (
+                            "image.required"    => "You haven't uploaded your photo",
+                            "image.image"       => "You must select only photos"
+                        );
+        $Valid = validator::make($request->all() , $Validatoin , $Messages);
+        if(!$Valid->fails())
+        {
+            $ID = str_random(30);
+            $Extension = $request->file("image")->extension();
+            $URL = $ID . "." . $Extension;
+            Storage::disk("public")->putFileAs($this->PrivateUrl . $this->AvatarDirectory , $request->file('image') , $URL);
+            $User = User::find($this->ID);
+            $OldUrl = $User->image_link;
+            $User->image_link = $URL;
+            $User->save();
+            Storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory . $OldUrl);
+            return response()->json(["message" => "You have changed your profile picture"]);
+        }
+        else
+        {
+            return response()->json(["errors" => $Valid->messages()->first()],405);
+        }
     }
 
 
@@ -548,7 +588,9 @@ class userController extends Controller
         if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
         {
             auth()->logout();
-            User::find($this->ID)->delete();
+            $User = User::find($this->ID); 
+            storage::disk("public")->delete($AvatarsDirectory . "/" .$User->image_link);
+            $User->delete();
             return response()->json(["message" => "You have deleted your account"],200);
         }
         else

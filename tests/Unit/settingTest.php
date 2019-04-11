@@ -40,12 +40,14 @@ class settingTest extends TestCase
     private $tokenType;
     private $ErrorStatus;
     private $SuccessfulStatus;
-
+    private $Random;
 
     public function setUp(): void
     {
+
         parent::setUp();
-        $this->User = User::where("email", "test@yahoo.com")->first();
+        $this->Random = rand(1, User::all()->count());
+        $this->User = User::find($this->Random);
         $this->token = JWTAuth::fromUser($this->User);
         $this->tokenType = "bearer";
     }

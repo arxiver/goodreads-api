@@ -10,9 +10,11 @@ $factory->define(App\Shelf::class, function (Faker $faker) {
     $booksCount = Book::all()->count();
     $randomBookId = rand(1, $booksCount);
 
+    $users = \App\User::all()->pluck('id')->toArray();
+    $books = \App\Book::all()->pluck('id')->toArray();
     return [
-        'user_id' => $randomUserId,
-        'book_id' => $randomBookId,
+        'user_id' =>$faker->randomElement($users),
+        'book_id' => $faker->randomElement($books),
         'type' => rand(1,3)
     ];
 });

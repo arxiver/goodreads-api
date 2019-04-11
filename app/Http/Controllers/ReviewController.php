@@ -42,7 +42,6 @@ class ReviewController extends Controller
      * 
      *  modify the avgrating for the user 
      *  
-     * @authenticated
      * each state of the shelf is represented by a number
      * @bodyParam bookId int required The book id has reviewed  to be created.
      * @bodyParam shelf int required (read->0,currently-reading->1,to-read->2,nothig of these shelves->3) default is (read) .
@@ -152,7 +151,6 @@ class ReviewController extends Controller
      * 
      * edit the review and rating value.
      * 
-     * @authenticated
      * @bodyParam reviewId int required Review Id.
      * @bodyParam body text optional The text of the review.
      * @bodyParam rating int required Rating (0-5) default is the same as it was .
@@ -535,7 +533,6 @@ class ReviewController extends Controller
         *}
     *] 
      * }
-     * @authenticated
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
     public function showReviewOfBook(Request $request)
@@ -593,7 +590,6 @@ class ReviewController extends Controller
      * all of that formed by sending the parameters which :-
      * book id and
      * user id
-     * @authenticated
      * @response {
      * "status": "success",
      * "pages": [
@@ -676,7 +672,6 @@ class ReviewController extends Controller
     *     }
     *   ]
     * }
-     * @authenticated
      * @bodyParam bookId integer required id of the of the book
      */
     public function showReviewsForBook(Request $request)

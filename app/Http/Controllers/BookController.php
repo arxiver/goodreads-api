@@ -58,7 +58,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * book_id.
-     * @authenticated
      * @bodyParam book_id int required The id of the book.
      * @response {
      * "status":"success",
@@ -125,7 +124,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * genre type.
-     * @authenticated
      * @bodyParam genreName string required The Genre of list of books.
      * @response {
      * "status" : "success",
@@ -190,7 +188,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * title.
-     * @authenticated
      * @bodyParam title string required Find books by title
      * @response {
      * "status" : "success",
@@ -254,7 +251,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * isbn.
-     * @authenticated
      * @bodyParam ISBN int required Find books by ISBN
      * @response {
      * "status" : "success",
@@ -319,7 +315,6 @@ class BookController extends Controller
      * ,description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * author name
-     * @authenticated
      * @bodyParam Author_name string required Find books by Author's name.
      * @response {
      * "status": "success",

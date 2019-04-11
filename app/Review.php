@@ -13,7 +13,8 @@ class Review extends Model
     protected $fillable = [
         "user_id", 
         "book_id",                  
-        "body" ,         
+        "body" ,   
+        "shelf_name",      
         "rating",
         'updated_at',
         'created_at'
@@ -31,10 +32,16 @@ class Review extends Model
         ->get();
         $t = array();
         $j=0;
+        //$auth_id = $this->ID;
        foreach($monda as $l)
         {
+
+           // $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->get(); 
+            //if(count($shelf)==0)
+                $shelf = 3;
             $l = collect($l);
             $l ->put('update_type',0);
+            $l ->put('shelf',$shelf);
            $t[$j]=$l;
            $j++;
         }

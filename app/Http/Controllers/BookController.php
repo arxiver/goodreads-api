@@ -58,7 +58,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * book_id.
-     * @authenticated
      * @bodyParam book_id int required The id of the book.
      * @response {
      * "status":"success",
@@ -87,13 +86,13 @@ class BookController extends Controller
      */
     public function show (Request $request)
     {
-        //
+        
         $Validations    = array(
             "book_id"         => "required|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.id = ?', [$request['book_id']]);
+        $results = DB::select('select b.id , a.author_name as author_name ,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.id = ?', [$request['book_id']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -125,7 +124,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * genre type.
-     * @authenticated
      * @bodyParam genreName string required The Genre of list of books.
      * @response {
      * "status" : "success",
@@ -160,7 +158,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g where b.id = g.book_id and type = ?', [$request['genreName']]);
+        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [$request['genreName']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -190,7 +188,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * title.
-     * @authenticated
      * @bodyParam title string required Find books by title
      * @response {
      * "status" : "success",
@@ -224,7 +221,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.title = ?', [$request['title']]);
+        $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.title = ?', [$request['title']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -254,7 +251,6 @@ class BookController extends Controller
      * description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * isbn.
-     * @authenticated
      * @bodyParam ISBN int required Find books by ISBN
      * @response {
      * "status" : "success",
@@ -289,7 +285,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g where b.id = g.book_id and b.isbn = ?', [$request['ISBN']]);
+        $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.isbn = ?', [$request['ISBN']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -319,7 +315,6 @@ class BookController extends Controller
      * ,description,reviews count,rating count,link,author id,genre)
      * all of that formed by sending the parameters which :-
      * author name
-     * @authenticated
      * @bodyParam Author_name string required Find books by Author's name.
      * @response {
      * "status": "success",

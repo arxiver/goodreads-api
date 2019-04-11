@@ -15,6 +15,5 @@ $factory->define(App\Book::class, function (Faker $faker) {
         'description' => str_random(20),
         //'link'=>$faker->url,
         'author_id' => $faker->randomElement($authors)
-
     ];
 });

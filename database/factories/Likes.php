@@ -9,6 +9,6 @@ $factory->define(App\Likes::class, function (Faker $faker) {
         'user_id' =>$faker->randomElement($users),
         'resourse_id' =>$faker->randomElement($rev),
         'resourse_type'=>$faker->numberBetween(0, 0),
-        'lastUpdate'=>$faker->date
+        //'lastUpdate'=>$faker->date
     ];
 });

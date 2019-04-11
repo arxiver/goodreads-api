@@ -18,15 +18,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         factory(App\User::class, 10)->create();
-        //DB::update('update users set password = "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi" where 1 = 1');
-        //factory(App\Following::class,10)->create();
-        factory(App\Book::class, 100)->create();
-        //factory(App\Following::class, 100)->create();
+        factory(App\Author::class, 10)->create();
+        factory(App\Book::class, 50)->create();
+        factory(App\Review::class,50)->create();
+        factory(App\Genre::class, 50)->create();
         factory(App\Comment::class,50)->create();
         factory(App\Likes::class,50)->create();
-        factory(App\Review::class,4)->create();
-        factory(App\Shelf::class,10)->create();
-        factory(App\Following::class,10)->create();
+        factory(App\Shelf::class,50)->create();
+        factory(App\Following::class,50)->create();
 
     }
 }

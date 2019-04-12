@@ -127,7 +127,7 @@ class ReviewController extends Controller
                             ['id' =>$this->ID ],
                             ['rating_avg' => $avgUser ,'rating_count' => $conutOfRatingUser]
                         );
-                    $reviewId=DB::table('reviews')->max('id');
+                    //$reviewId=DB::table('reviews')->max('id');
                     $actualbody = DB::table('reviews')->where([['book_id', $request["bookId"]],
                             ['user_id' , $this->ID]])->first();
                             //die($actualbody->body) ;                  
@@ -135,13 +135,13 @@ class ReviewController extends Controller
                     {
                         return response()->json([
                             "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
-                            ,"bodyOfReview" =>$actualbody->body , "rate" => $request["rating"] , "Review_id" =>$reviewId
+                            ,"bodyOfReview" =>$actualbody->body , "rate" => $request["rating"] , "Review_id" =>$actualbody->id
                         ]);
                     }
                     else{
                         return response()->json([
                             "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
-                            ,"bodyOfReview" =>"No Body"  , "rate" => $request["rating"] , "Review_id" =>$reviewId
+                            ,"bodyOfReview" =>"No Body"  , "rate" => $request["rating"] , "Review_id" =>$actualbody->id
                         ]);
                     }
                 }

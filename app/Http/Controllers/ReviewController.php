@@ -693,7 +693,7 @@ class ReviewController extends Controller
         }
         else{
             return Response::json(array(
-                'status' => 'failed')
+                'status' => 'failed,no reviews for you')
                 ,
                 400);
         }

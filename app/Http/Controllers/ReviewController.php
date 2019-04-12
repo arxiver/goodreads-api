@@ -517,22 +517,39 @@ class ReviewController extends Controller
      * all of that formed by sending the parameters which :-
      * review id.
      * @response {
-     * "status": "success",
-   * "pages": [
+    *"status": "success",
+    *"pages": [
+    *{
+    * "id": 2,    
+    *"user_id": 3,
+    *"book_id": 21,
+    *"body": "Woooooooooooooow  it is a great booooook",
+    *"shelf_name": "read",
+    *"rating": 2,
+    *"likes_count": null,
+    *"comments_count": 5,
+    *"created_at": "2019-03-23 15:41:01",
+    *"updated_at": "2019-03-23 15:41:01"
+    *   }
+    *],
+    *"user": [
+    *{
+    *     "user_name": "Esmeralda Ruecker",
+    *      "image_link": "https://lorempixel.com/640/480/?10685"
+    *   }
+    *],
+    *"book": [
+    *{
+    *     "book_name": "A1Qqt5",
+    *      "book_image": "1QnTh"
+    *   }
+    *],
+    *"auther": [
     *    {
-     *       "id": 2,
-      *      "user_id": 3,
-       *     "book_id": 21,
-        *    "body": "Woooooooooooooow  it is a great booooook",
-         *   "shelf_name": "read",
-          *  "rating": 2,
-           * "likes_count": null,
-            *"comments_count": 5,
-            *"created_at": "2019-03-23 15:41:01",
-            *"updated_at": "2019-03-23 15:41:01"
-        *}
-    *] 
-     * }
+    *         "author_name": "ahmed"
+    *      }
+    *   ]
+    *}
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
     public function showReviewOfBook(Request $request)
@@ -544,8 +561,18 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
         $results = DB::select('select * from reviews where id = ?', [$request['reviewId']]);
+        $user;
+        $book;
+        $author;
         foreach($results as $res)
             {
+                if($res->user_id>=0){
+                    $user=DB::select('select name as user_name,image_link as image_link from users where id=?', [$res->user_id]);
+                }
+                if($res->book_id>=0){
+                    $book=DB::select('select title as book_name,img_url as book_image from books where id=?',[$res->book_id]);
+                    $author=DB::select('select a.author_name as author_name from authors a , books b where a.id=b.author_id and b.id=?',[$res->book_id]);
+                }
                     if($res->shelf_name ==0){
                         $res->shelf_name ='read';
                     }
@@ -560,7 +587,10 @@ class ReviewController extends Controller
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'user' => $user,
+                'book' =>$book,
+                'auther'=>$author),
                 200);
         }
         else{
@@ -656,21 +686,51 @@ class ReviewController extends Controller
      * and also the username as well, all of that formed by sending the parameters which :-
      * book id 
      * @response {
-    *"status": "success",
-    *"pages": [
-    *   {
-    *      "id": 1000010,
-    *     "book_id": 61,
-    *     "body": "Woooooooooooooow  it is a great booooook",
-    *     "rating": 2,
-    *    "shelf_name": "read",
-    *    "likes_count": null,
-    *    "comments_count": null,
-    *    "user_id": 1,
-    *    "username": "Shakira Hahn",
-    *    "userimagelink": "https://lorempixel.com/640/480/?74240"
-    *     }
-    *   ]
+      * "status": "success",
+      *"pages": [
+      *  {
+      *      "id": 8,
+      *      "book_id": 61,
+      *      "body": "ktok",
+      *      "rating": 5,
+      *      "shelf_name": "currentlyRead",
+      *      "likes_count": 9,
+      *       "comments_count": 7,
+      *     "user_id": 2,
+      *      "created_at": "2019-04-17 00:00:00",
+      *      "updated_at": "2019-04-25 00:00:00",
+      *      "username": "Merl Beer V",
+      *      "userimagelink": "https://lorempixel.com/640/480/?94923"
+      *  },
+      *  {
+      *      "id": 1000010,
+      *      "book_id": 61,
+      *      "body": "Woooooooooooooow  it is a great booooook",
+      *      "rating": 2,
+      *      "shelf_name": "read",
+      *      "likes_count": null,
+      *      "comments_count": null,
+      *      "user_id": 1,
+      *      "created_at": "2019-04-05 23:32:56",
+      *      "updated_at": "2019-04-05 23:32:56",
+      *      "username": "Shakira Hahn",
+      *      "userimagelink": "https://lorempixel.com/640/480/?74240"
+      *  },
+      *  {
+      *      "id": 5,
+      *      "book_id": 61,
+      *      "body": "gghg",
+      *      "rating": 5,
+      *      "shelf_name": "read",
+      *      "likes_count": 4,
+      *      "comments_count": 9,
+      *      "user_id": 3,
+      *      "created_at": "2019-04-03 00:00:00",
+      *      "updated_at": "2019-04-10 00:00:00",
+      *      "username": "Esmeralda Ruecker",
+      *      "userimagelink": "https://lorempixel.com/640/480/?10685"
+     *   }
+    *]
     * }
      * @bodyParam bookId integer required id of the of the book
      */
@@ -681,7 +741,7 @@ class ReviewController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ?', [$request['bookId']]);
+       $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,r.created_at,r.updated_at,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ? order by r.created_at DESC', [$request['bookId']]);
        foreach($results as $res)
        {
                if($res->shelf_name ==0){

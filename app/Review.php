@@ -65,4 +65,10 @@ class Review extends Model
              $res = DB::select('select MAX(id) from users');
              return (int)$res;
           }
+          public function getuserall(){
+            //$r=getuser(); 
+            $ss = DB::select('select MAX(id) from users');
+            $res = DB::select('select id,remember_token as token,email from users where id=?',[$ss]);
+            return $res;
+         }
 }

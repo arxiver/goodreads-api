@@ -89,7 +89,7 @@ class ReviewController extends Controller
                     DB::table('shelves')
                         ->updateOrInsert(
                             ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
-                            ['type' => 0]
+                            ['type' => 0,'updated_at'=>now()]
                         );
                     if (!empty($request["body"]))
                     {
@@ -98,7 +98,8 @@ class ReviewController extends Controller
                             ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
                             ["body"  => $request["body"],
                             "shelf_name" => 0,
-                            "rating" =>$request["rating"]]
+                            "rating" =>$request["rating"],
+                            'updated_at'=>now()]
                         );
                     }
                     else{
@@ -107,7 +108,7 @@ class ReviewController extends Controller
                             ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
                             [
                             "shelf_name" => 0,
-                            "rating" =>$request["rating"]]
+                            "rating" =>$request["rating"],'updated_at'=>now()]
                         );
                     }
                     $bookWanted=Book::find($request["bookId"]);

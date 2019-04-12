@@ -4,6 +4,7 @@ namespace Tests\Unit;
 namespace Tests\Unit;
 use App\Review;
 use App\Book;
+use App\User;
 use App\Http\Controllers\ReviewController;
 use Tests\TestCase;
 use Illuminate\App\Http\Request;
@@ -36,7 +37,18 @@ class BookTest extends TestCase
     }
     public function testExample1()
     {
-        $res=$this->json('get','api/Books/book_Authorname',['Author_name'=>'a7med7amdy']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/Books/book_Authorname',['Author_name'=>'a7med7amdy','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
@@ -44,14 +56,36 @@ class BookTest extends TestCase
     }
     public function testExample2()
     {
-        $res=$this->json('get','api/Books/book_ISBN',['ISBN'=>'1']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/Books/book_ISBN',['ISBN'=>'1','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
     }
     public function testExample3()
     {
-        $res=$this->json('get','api/Books/book_title',['title'=>'ppp']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/Books/book_title',['title'=>'ppp','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
@@ -59,14 +93,36 @@ class BookTest extends TestCase
     }
     public function testExample4()
     {
-        $res=$this->json('get','api/books/genre',['genreName'=>'action']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/books/genre',['genreName'=>'action','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
     public function testExample5()
     {
-        $res=$this->json('get','api/books/show',['book_id'=>'1000000']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/books/show',['book_id'=>'1000000','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
@@ -74,7 +130,18 @@ class BookTest extends TestCase
     }
     public function testExample6()
     {
-        $res=$this->json('get','api/shelf/getbook',['user_id'=>'1000000','shelf_name'=>'read']);
+        ///////////////////////////////////
+        // Get the number of users in the database
+        $usersCount = User::all()->count();
+        // Get id for a user in the databas eto login with it 
+        $randomUserId = 1;//rand(1, $usersCount);
+        // Get the record of this user
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $jsonArray = json_decode($loginResponse->content(),true);
+        $token = $jsonArray['token'];
+        ////////////////////////////////////////
+        $res=$this->json('get','api/shelf/getbook',['user_id'=>'1000000','shelf_name'=>'0','token'=>$token,'token_type'=>'bearer']);
         $data = json_decode($res->getContent(),true);
         $this->assertEquals(1000000 , $data['pages'][0]['book_id']);
     }

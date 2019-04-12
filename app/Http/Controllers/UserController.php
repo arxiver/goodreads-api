@@ -422,7 +422,7 @@ class userController extends Controller
         if(!$valid->fails())
         {
             $user = User::find($this->ID);
-            $user->country = $request["city"];
+            $user->city = $request["newCity"];
             $user->save();
             return response()->json(["message" => "You have changed your city"] , 200);
         }
@@ -482,14 +482,14 @@ class userController extends Controller
      */
     public function whoCanSeeMyBirthday(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyBirthday" => "in:Only me,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
             $user->see_my_birthday = $request["seeMyBirthday"];
             $user->save();
-            if($user->see_my_birthday == "Only Me")
+            if($user->see_my_birthday == "Only me")
             return response()->json(["message" => "Now, Just you can see your birthday"],200);
             else
             return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
@@ -513,17 +513,17 @@ class userController extends Controller
      */
     public function whoCanSeeMyCountry(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyCountry" => "in:Only me,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
-            $user->see_my_country = $request["seeMyBirthday"];
+            $user->see_my_country = $request["seeMyCountry"];
             $user->save();
-            if($user->see_my_country == "Only Me")
+            if($user->see_my_country == "Only me")
             return response()->json(["message" => "Now, Just you can see your country"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your country"],200);
+            return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
         }
         else
         {
@@ -541,17 +541,17 @@ class userController extends Controller
      */
     public function whoCanSeeMyCity(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyCity" => "in:Only me,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
-            $user->see_my_city = $request["seeMyBirthday"];
+            $user->see_my_city = $request["seeMyCity"];
             $user->save();
-            if($user->see_my_city == "Only Me")
+            if($user->see_my_city == "Only me")
             return response()->json(["message" => "Now, Just you can see your city"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your city"],200);
+            return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
         }
         else
         {

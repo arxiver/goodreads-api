@@ -23,51 +23,65 @@ change password
 
 
 change name
-[1] Change name with non authorized user                 Done
-[2] Change name with empty password                      Done
-[3] Change name with empty invalid password              Done
-[4] Change name with empty invalid name (long)           Done
-[5] Change name with invalid name (short)                Done
-[6] Change name with invalid name (non string)           Done
-[7] Successful changing name                             Done
+[1] Change name with non authorized user                    Done
+[2] Change name with empty password                         Done
+[3] Change name with empty invalid password                 Done
+[4] Change name with empty invalid name (long)              Done
+[5] Change name with invalid name (short)                   Done
+[6] Change name with invalid name (non string)              Done
+[7] Successful changing name                                Done
 
 
 change country
-[1] Change country with non authorized user              Done
-[2] Change country with empty country                    Done                   
-[3] Change country with non string country               Done                   
-[4] Change country with short country                    Done                               
-[5] Change country with long country                     Done                               
-[6] Successful Changing country                          Done                                       
+[1] Change country with non authorized user                 Done
+[2] Change country with empty country                       Done                   
+[3] Change country with non string country                  Done                   
+[4] Change country with short country                       Done                               
+[5] Change country with long country                        Done                               
+[6] Successful Changing country                             Done                                       
 
 
 change city
-[1] Change city with non authorized user                 Done
-[2] Change city with empty city                       Done                           
-[3] Change city with non string city                  Done                               
-[4] Change city with short city                       Done                           
-[5] Change city with long city                        Done                           
-[6] Successful Changing city                          ** Error **   
-
+[1] Change city with non authorized user                     Done
+[2] Change city with empty city                              Done                           
+[3] Change city with non string city                         Done                               
+[4] Change city with short city                              Done                           
+[5] Change city with long city                               Done                           
+[6] Successful Changing city                                 Done   
+    
 
 change birthday
-[1] Change birthday with non authorized user                 Done
+[1] Change birthday with non authorized user                  Done
 [2] Change birthday with empty birthday                       Done                           
 [3] Change birthday with non string birthday                  Done                               
 [4] Change birthday with short birthday                       Done                           
 [5] Change birthday with long birthday                        Done                           
 [6] Successful Changing birthday                              Done
 
-------------------
-Who can see
-[1] Change birthday with non authorized user                  UnDone
-[2] Change birthday with empty birthday                       UnDone                           
-[3] Change birthday with non string birthday                  UnDone                               
-[4] Change birthday with short birthday                       UnDone                           
-[5] Change birthday with long birthday                        UnDone                           
-[6] Successful Changing birthday 
 
-DataBase
+Who can see my birthday                                                                 
+[1] who can see my birthday with unauthonticated user         Done                                                          
+[2] who can see my birthday with empty input                  Done                                                  
+[3] who can see my birthday with input Only me                Done                                                  
+[4] who can see my birthday with Friends                      Done                                              
+[5] who can see my birthday with Everyone                     Done                                              
+
+Who can see my country                                                                  
+[1] who can see my country with unauthonticated user          Done                                                          
+[2] who can see my country with empty input                   Done                                                  
+[3] who can see my country with input Only me                 Done                                                  
+[4] who can see my country with Friends                       Done                                          
+[5] who can see my country with Everyone                      Done                                              
+
+Who can see my city
+[1] who can see my city with unauthonticated user             Done                                                      
+[2] who can see my city with empty input                      Done                                              
+[3] who can see my city with input Only me                    Done                                              
+[4] who can see my city with Friends                          Done                                          
+[5] who can see my city with Everyone                         Done                                        
+
+=======================
+[1]  DataBase                                                 UnDone
 
 
 
@@ -111,6 +125,9 @@ class settingTest extends TestCase
                                 "Non date input" => 111,
                                 "Younger birthday" => date("Y-n-j"),
                                 "Older birthday" => date("Y-n-j" , strtotime("1910-2-21")),
+                                "Only me" => "Only me",
+                                "Everyone" => "Everyone",
+                                "Friends" => "Friends",
 
                             );
         $this->ErrorStatus = 405;
@@ -156,6 +173,30 @@ class settingTest extends TestCase
     private function changeBirthday($Status, $SendingData, $ReceivingData)
     {
         $response = $this->json("GET", "api/changebirthday", $SendingData);
+        $response
+            ->assertStatus($Status)
+            ->assertJson($ReceivingData);
+    }
+
+    private function whoCanSeeBirthday($Status, $SendingData, $ReceivingData)
+    {
+        $response = $this->json("GET", "api/whocanseemybirthday", $SendingData);
+        $response
+            ->assertStatus($Status)
+            ->assertJson($ReceivingData);
+    }
+
+    private function whoCanSeeCountry($Status, $SendingData, $ReceivingData)
+    {
+        $response = $this->json("GET", "api/whocanseemycountry", $SendingData);
+        $response
+            ->assertStatus($Status)
+            ->assertJson($ReceivingData);
+    }
+
+    private function whoCanSeeCity($Status, $SendingData, $ReceivingData)
+    {
+        $response = $this->json("GET", "api/whocanseemycity", $SendingData);
         $response
             ->assertStatus($Status)
             ->assertJson($ReceivingData);
@@ -641,7 +682,7 @@ class settingTest extends TestCase
         $ReceivingData = array(
                                     "message" => "You have changed your city"
                                 );
-        //$this->changeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+        $this->changeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
         $this->assertjson(true);
     }
 
@@ -746,6 +787,278 @@ class settingTest extends TestCase
                                     "message" => "You have changed your birthday"
                                 );
         $this->changeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[1] who can see my birthday with unauthorized user
+    public function test34()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                "seeMyBirthday" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "UnAuthorized"
+                                );
+        $this->whoCanSeeBirthday($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+    /**
+     * @group sofyan
+     */
+    //[2] who can see my birthday with empty input 
+    public function test35()
+    {
+        $SendingData = array(
+                                "seeMyBirthday" => $this->Array["Empty input"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The selected see my birthday is invalid."
+                                );
+        $this->whoCanSeeBirthday($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[3] who can see my birthday with input [Only Me] 
+    public function test36()
+    {
+        $SendingData = array(
+                                "seeMyBirthday" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, Just you can see your birthday"
+                                );
+        $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[4] who can see my birthday with input [Everyone] 
+    public function test37()
+    {
+        $SendingData = array(
+                                "seeMyBirthday" => $this->Array["Everyone"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Everyone"] ." can see your birthday"
+                                );
+        $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[5] who can see my birthday with input [Friends] 
+    public function test38()
+    {
+        $SendingData = array(
+                                "seeMyBirthday" => $this->Array["Friends"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Friends"] ." can see your birthday"
+                                );
+        $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+
+    /**
+     * @group sofyan
+     */
+    //[1] who can see my country with unauthorized user
+    public function test39()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                "seeMyCountry" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "UnAuthorized"
+                                );
+        $this->whoCanSeeCountry($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+    /**
+     * @group sofyan
+     */
+    //[2] who can see my country with empty input 
+    public function test40()
+    {
+        $SendingData = array(
+                                "seeMyCountry" => $this->Array["Empty input"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The selected see my country is invalid."
+                                );
+        $this->whoCanSeeCountry($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[3] who can see my country with input [Only Me] 
+    public function test41()
+    {
+        $SendingData = array(
+                                "seeMyCountry" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, Just you can see your country"
+                                );
+        $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[4] who can see my country with input [Everyone] 
+    public function test42()
+    {
+        $SendingData = array(
+                                "seeMyCountry" => $this->Array["Everyone"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Everyone"] ." can see your country"
+                                );
+        $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[5] who can see my country with input [Friends] 
+    public function test43()
+    {
+        $SendingData = array(
+                                "seeMyCountry" => $this->Array["Friends"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Friends"] ." can see your country"
+                                );
+        $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+
+    /**
+     * @group sofyan
+     */
+    //[1] who can see my city with unauthorized user
+    public function test44()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                "seeMyCity" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "UnAuthorized"
+                                );
+        $this->whoCanSeeCity($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+    /**
+     * @group sofyan
+     */
+    //[2] who can see my city with empty input 
+    public function test45()
+    {
+        $SendingData = array(
+                                "seeMyCity" => $this->Array["Empty input"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The selected see my city is invalid."
+                                );
+        $this->whoCanSeeCity($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[3] who can see my city with input [Only Me] 
+    public function test46()
+    {
+        $SendingData = array(
+                                "seeMyCity" => $this->Array["Only me"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, Just you can see your city"
+                                );
+        $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[4] who can see my city with input [Everyone] 
+    public function test47()
+    {
+        $SendingData = array(
+                                "seeMyCity" => $this->Array["Everyone"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Everyone"] ." can see your city"
+                                );
+        $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+
+
+    /**
+     * @group sofyan
+     */
+    //[5] who can see my city with input [Friends] 
+    public function test48()
+    {
+        $SendingData = array(
+                                "seeMyCity" => $this->Array["Friends"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "Now, " . $this->Array["Friends"] ." can see your city"
+                                );
+        $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
     }
     
 }

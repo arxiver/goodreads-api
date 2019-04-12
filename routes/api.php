@@ -17,7 +17,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     //                                   Sofyan sectoin (please don't remove them)                                      //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::post('changepassword', "UserController@changePassword");
-    Route::post('changename', "UserController@changeName");
+    Route::get('changename', "UserController@changeName");
     Route::post('delete', "UserController@delete");
     Route::delete('logout', "UserController@logOut");
     Route::get('showsetting', "UserController@showSetting");

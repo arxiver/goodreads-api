@@ -122,7 +122,7 @@ class userController extends Controller
                                 );
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
-            return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
+            return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
         } 
         else 
         {
@@ -196,7 +196,7 @@ class userController extends Controller
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
                 $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
-                return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 * 24],200);
+                return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 ],200);
             }
             else
             {
@@ -368,7 +368,7 @@ class userController extends Controller
     /**
      * Change country
      * @authenticated
-     * @bodyParam country string required .
+     * @bodyParam newCountry string required .
      * @response 200{
      * "message": "You have changed your country"
      *}
@@ -383,12 +383,12 @@ class userController extends Controller
      */
     public function changeCountry(Request $request)
     {
-        $validation = array("country" => "required|string|min:2|max:30");
+        $validation = array("newCountry" => "required|string|min:3|max:30");
         $valid = validator::make($request->all() , $validation);
         if(!$valid->fails())
         {
             $user = User::find($this->ID);
-            $user->country = $request["country"];
+            $user->country = $request["newCountry"];
             $user->save();
             return response()->json(["message" => "You have changed your country"] , 200);
         }
@@ -402,7 +402,7 @@ class userController extends Controller
     /**
      * Change city
      * @authenticated
-     * @bodyParam city string required .
+     * @bodyParam newCity string required .
      * @response 200{
      * "message": "You have changed your city"
      *}
@@ -417,7 +417,7 @@ class userController extends Controller
      */
     public function changeCity(Request $request)
     {
-        $validation = array("city" => "required|string|min:2|max:30");
+        $validation = array("newCity" => "required|string|min:3|max:30");
         $valid = validator::make($request->all() , $validation);
         if(!$valid->fails())
         {
@@ -435,7 +435,7 @@ class userController extends Controller
     /**
      * Change birthday
      * @authenticated
-     * @bodyParam birthday date required .
+     * @bodyParam newBirthday date required .
      * @response 200{
      * "message": "You have changed your birthday"
      *}
@@ -451,18 +451,18 @@ class userController extends Controller
     public function changeBirthday(Request $request)
     {
         
-        $validation = array("birthday" => "required|date|after:-" . $this->youngerThan . "years|before:-" . $this->olderThan . "years");
+        $validation = array("newBirthday" => "required|date|after:-" . $this->youngerThan . "years|before:-" . $this->olderThan . "years");
         $messages       = array(
-                                    "birthday.before" => "You must be older than ". $this->olderThan,
-                                    "birthday.after" => "You must be younger than ". $this->youngerThan
+                                    "newBirthday.before" => "You must be older than ". $this->olderThan,
+                                    "newBirthday.after" => "You must be younger than ". $this->youngerThan
                                 );
 
         $valid = validator::make($request->all() , $validation, $messages);
         if(!$valid->fails())
         {
             $user = User::find($this->ID);
-            $user->birthday = date("Y-n-j" , strtotime($request["birthday"]));
-            $user->age = date("Y") - date("Y" , strtotime($request["birthday"]));
+            $user->birthday = date("Y-n-j" , strtotime($request["newBirthday"]));
+            $user->age = date("Y") - date("Y" , strtotime($request["newBirthday"]));
             $user->save();
             return response()->json(["message" => "You have changed your birthday"] , 200);
         }
@@ -482,10 +482,23 @@ class userController extends Controller
      */
     public function whoCanSeeMyBirthday(Request $request)
     {
-        $user = User::find($this->ID);
-        $user->see_my_birthday = $request["seeMyBirthday"];
-        $user->save();
-        return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
+        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Valid = validator::make($request->all() , $Validation);
+        if(!$Valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->see_my_birthday = $request["seeMyBirthday"];
+            $user->save();
+            if($user->see_my_birthday == "Only Me")
+            return response()->json(["message" => "Now, Just you can see your birthday"],200);
+            else
+            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
+        }
+        else
+        {
+            return response()->json(["errors" => $Valid->messages()->first()],405);
+        }
+        
 
     }
 
@@ -500,10 +513,22 @@ class userController extends Controller
      */
     public function whoCanSeeMyCountry(Request $request)
     {
-        $user = User::find($this->ID);
-        $user->see_my_country = $request["seeMyCountry"];
-        $user->save();
-        return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
+        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Valid = validator::make($request->all() , $Validation);
+        if(!$Valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->see_my_country = $request["seeMyBirthday"];
+            $user->save();
+            if($user->see_my_country == "Only Me")
+            return response()->json(["message" => "Now, Just you can see your country"],200);
+            else
+            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your country"],200);
+        }
+        else
+        {
+            return response()->json(["errors" => $Valid->messages()->first()],405);
+        }
     }
 
     /**
@@ -516,10 +541,22 @@ class userController extends Controller
      */
     public function whoCanSeeMyCity(Request $request)
     {
-        $user = User::find($this->ID);
-        $user->see_my_city = $request["seeMyCity"];
-        $user->save();
-        return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
+        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Valid = validator::make($request->all() , $Validation);
+        if(!$Valid->fails())
+        {
+            $user = User::find($this->ID);
+            $user->see_my_city = $request["seeMyBirthday"];
+            $user->save();
+            if($user->see_my_city == "Only Me")
+            return response()->json(["message" => "Now, Just you can see your city"],200);
+            else
+            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your city"],200);
+        }
+        else
+        {
+            return response()->json(["errors" => $Valid->messages()->first()],405);
+        }
     }
 
 

@@ -19,13 +19,16 @@ class UserSeeder extends Seeder
             "password"      => "password",
             "name"          => "test",
             "gender"        => "female",
-            "username"      => "test21",
+            "username"      => "test",
             "age"           => 21,
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
-            "city"          => "Atawwa"
+            "city"          => "Atawwa",
+            "image_link"    => "default.jpg"
         );
         User::create($Create);
+
+
         $Create2 = array(
             "email"         => "test2@yahoo.com",
             "password"      => "password",
@@ -35,7 +38,8 @@ class UserSeeder extends Seeder
             "age"           => 21,
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
-            "city"          => "Atawwa"
+            "city"          => "Atawwa",
+            "image_link"    => "default.jpg"
         );
         User::create($Create2);
 

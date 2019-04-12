@@ -15,7 +15,7 @@ class Comment extends Model
         'created_at'
     ];
     //function to get the comments activity of certain users
-    public static function commentsUsersArr($Arr)
+    public static function commentsUsersArr($Arr,$auth_id)
     {
         $comment=Comment::where('resourse_type','=','0')->whereIn('comments.user_id',$Arr)
         ->join('reviews','resourse_id','=','reviews.id')
@@ -24,7 +24,7 @@ class Comment extends Model
         ->join('users as u','comments.user_id','=','u.id')
         ->join('authors','books.author_id','=','authors.id')
         ->select('comments.id','resourse_type','comments.updated_at','comments.body as comment_body'
-        ,'u.id as user_id','u.name '
+        ,'u.id as user_id','u.name'
         ,'u.image_link as image_link','Reviews.id as review_id','reviews.body'
         ,'rating','comments_count','comments_count','reviews.updated_at as review_updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
@@ -33,16 +33,20 @@ class Comment extends Model
         ->get();
         $t = array();
         $j=0;
-        //$auth_id = $this->ID;
        foreach($comment as $l)
         {
+
+            $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->select('type')->first(); 
+            if($shelf)
+               $shelf = $shelf->type;
+            else
+                $shelf = 3; 
+                
             $l = collect($l);
-           // $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->get();
-            //if(count($shelf)==0)
-                 $shelf = 3;
             $l ->put('update_type',4);
             $l ->put('shelf',$shelf);
-            
+            //$like = 0;
+           // $l ->put('auth_like',$like);
            $t[$j]=$l;
            $j++;
         }

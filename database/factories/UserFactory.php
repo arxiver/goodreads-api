@@ -25,7 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => "password", 
         'remember_token' => Str::random(10),
         'link' => $faker->url,
-        'image_link' => $faker->imageUrl($width = 640, $height = 480),
+        'image_link' => "default.jpg",
         'small_image_link' => $faker->imageUrl($width = 100, $height = 100),
         'about'=> Str::random(10),
         'age'=> $faker->numberBetween(10, 70),

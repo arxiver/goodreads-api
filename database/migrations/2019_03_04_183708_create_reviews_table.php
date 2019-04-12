@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->integer('shelf_name')->nullable();  //0->read
                                             //1->Currently Read
                                             //2->Want to Read

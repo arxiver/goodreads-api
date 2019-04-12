@@ -722,7 +722,7 @@ class ReviewController extends Controller
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results),
-                400);
+                200);
         }
         else{
             return Response::json(array(

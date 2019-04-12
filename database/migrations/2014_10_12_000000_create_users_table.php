@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');                                    // Password
             $table->string('link')->nullable();                            // The link of the user
-            $table->string('image_link')->nullable();                      // The link of the image
+            $table->string('image_link');                      // The link of the image
             $table->string('small_image_link')->nullable();
             $table->string('about')->nullable();                           // bio about the user
             $table->integer('age');                                        // The age of the user

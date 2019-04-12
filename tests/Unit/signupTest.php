@@ -63,6 +63,57 @@ class signupTest extends TestCase
      * sign up with non-authonticated               Done                                                   
      * sign up with alredy authonticated            Done                                 
      */
+
+    private $User;
+    private $Array;
+    private $token;
+    private $tokenType;
+    private $ErrorStatus;
+    private $SuccessfulStatus;
+    private $Random;
+
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+        $this->Random = rand(3, User::all()->count());
+        $this->User = User::find($this->Random);
+        $this->token = null;
+        $this->tokenType = "bearer";
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->Array = array(
+                                "Empty input" => "",
+                                "Non email" => "email",
+                                "Long password" => "password11111111111111111111111111111111111",
+                                "Short password" => "pa",
+                                "Long name" => "test1111111111111111111111111111111111111111111111111111111",
+                                "Short name" => "te",
+                                "Non string name" => 111,
+                                "Non string gender" => 111,
+                                "Younger birthday" => date("Y-n-j"),
+                                "Older birthday" => date("Y-n-j" , strtotime("1910-2-21")),
+                                "Non date birthday" => 111,
+                                "Non string country" => 111,
+                                "Non string city" => 111,
+                                "Valid password" => "password",
+                                "Valid country" => "Egypt",
+                                "Valid city" => "Giza",
+                                "Valid birthday" => date("Y-n-j" , strtotime("1998-2-21")),
+                                "Valid gender" => "felame",
+                                "Valid email" => "test1000@yahoo.com",
+                                "Valid name" => "test1000"
+                            );
+        $this->ErrorStatus = 405;
+        $this->SuccessfulStatus = 200;
+    }
+
+
+    
     private function signUpFailed($SendingData , $RecievingData , $Status)
     {
         $response = $this->json("POST" , "api/signup" , $SendingData);
@@ -80,7 +131,7 @@ class signupTest extends TestCase
             ->assertStatus($Status)
             ->assertJsonFragment($RecievingData);
         
-        $this->user = User::where("email" , "test2@yahoo.com")->first();
+        $this->user = User::where("email" , "test1000@yahoo.com")->first();
         $this->assertAuthenticatedAs($this->user);
     }
 
@@ -91,29 +142,37 @@ class signupTest extends TestCase
             $this->assertDatabaseHas($table, $RecievingData);
     }
 
-
+    /**
+     * @group sofyan
+     */
     // sign up without email 
     public function testWithoutEmail()
     {
         $Status = 405;
         $SendingData = array(
-                                "email" => "",
+                                "email"         => $this->Array["Empty input"],
+                                "token"         => $this->token,
+                                "token_type"    => $this->tokenType
                             );
         $RecievingData = array  (
-                                    "errors" => "The email field is required."
+                                    "errors" => "The email field is required.",
                                 );
         $this->signUpFailed($SendingData , $RecievingData , $Status);
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without password
     public function testWithoutPassowrd()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => ""
+                                "email"         => $this->Array["Valid email"],
+                                "password"      => $this->Array["Empty input"],
+                                "token"         => $this->token,
+                                "token_type"    => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The password field is required."
@@ -122,15 +181,19 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without password_confirmation
     public function testWithoutPassword_confirmation()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => ""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The password confirmation does not match."
@@ -139,16 +202,20 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without name
     public function testWithoutName()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => ""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The name field is required."
@@ -157,17 +224,21 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without gender
     public function testWithoutGender()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                =>""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                =>$this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The gender field is required."
@@ -176,18 +247,22 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without birthday
     public function testWithoutBirthday()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                =>"male",
-                                "birthday"              =>""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                =>$this->Array["Valid gender"],
+                                "birthday"              =>$this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The birthday field is required."
@@ -196,19 +271,23 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without country
     public function testWithoutCountry()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                =>"male",
-                                "birthday"              => "1998-3-21",
-                                "country"               => ""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                =>$this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The country field is required."
@@ -217,20 +296,25 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up without city
     public function testWithoutCity()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                =>"male",
-                                "birthday"              => "1998-3-21",
-                                "country"               => "Egypt",
-                                "city"                  => ""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                =>$this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Empty input"],
+
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The city field is required."
@@ -238,13 +322,17 @@ class signupTest extends TestCase
         $this->signUpFailed($SendingData , $RecievingData , $Status);
     }
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with exsisting email
     public function testWithExsistingEmail()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test@yahoo.com"
+                                "email"                 => $this->User["email"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The email has already been taken."
@@ -253,13 +341,17 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with non-email
     public function testWithNonEmailType()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2NotEmail",
+                                "email"                 => $this->Array["Non email"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The email must be a valid email address."
@@ -268,14 +360,18 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with long password 
     public function testWithLongPassword()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword1111111111111111111111111111111111"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Long password"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The password may not be greater than 30 characters."
@@ -284,14 +380,18 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with short password
     public function testWithShortPassword()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "test"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Short password"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The password must be at least 5 characters."
@@ -300,16 +400,20 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with different passwords
     public function testWithDifferentPasswords()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword2",
-                                "name"                  => ""
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"]."invalid",
+                                "name"                  => $this->Array["Empty input"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The password confirmation does not match."
@@ -318,16 +422,20 @@ class signupTest extends TestCase
     }
 
     
-
+    /**
+     * @group sofyan
+     */
     // sign up with long name 
     public function testWithLongEmail()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test11111111111111111111111111111111111111111111111111111111111111"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Long name"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The name may not be greater than 50 characters."
@@ -336,16 +444,20 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with short name
     public function testWithShortEmail()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "te"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Short name"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The name must be at least 3 characters."
@@ -354,16 +466,20 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     // sign up with non-stirng name
     public function testWithNonStringName()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => 111 
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Non string name"] ,
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The name must be a string."
@@ -372,17 +488,21 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with non-stirng gender
     public function testWithNonStringGender()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => 111
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Non string gender"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The gender must be a string."
@@ -391,18 +511,24 @@ class signupTest extends TestCase
     }
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with birthday olderer than 100 years
     public function testWithOlderBirthday()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1910-2-21"))
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Valid city"],
+                                "birthday"              => $this->Array["Older birthday"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "You must be younger than 100"
@@ -411,18 +537,22 @@ class signupTest extends TestCase
     }   
 
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with birthday younger than 3 years
     public function testWithYoungerBirthday()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("2019-2-21"))
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Younger birthday"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "You must be older than 3"
@@ -430,18 +560,22 @@ class signupTest extends TestCase
         $this->signUpFailed($SendingData , $RecievingData , $Status);
     }
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with non-date type
     public function testWithNonDateType()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => "1998-21-2"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Non date birthday"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array(
                                     "errors" => "The birthday is not a valid date."
@@ -449,19 +583,23 @@ class signupTest extends TestCase
         $this->signUpFailed($SendingData, $RecievingData, $Status);
     }
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with non-string country 
     public function testWithNonStringCountry()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => 1111
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Non string country"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The country must be a string."
@@ -471,20 +609,24 @@ class signupTest extends TestCase
     
     
 
-
+    /**
+     * @group sofyan
+     */
     //sign up with non-string city
     public function testWithNonStringCity()
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => "Egypt",
-                                "city"                  => 111
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Non string city"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "The city must be a string."
@@ -492,77 +634,97 @@ class signupTest extends TestCase
         $this->signUpFailed($SendingData, $RecievingData, $Status);
     }            
     
-    
-    // sign up with non-authonticated and authonticated user
+    /**
+     * @group sofyan
+     */    
+    // Successful signup
     public function testWithNonAuthonticated()
     {
         $Status = 200;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => "Egypt",
-                                "city"                  => "Giza"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Valid city"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
-        $RecievingData = array  (
+        $RecievingData = array(
                                 "token_type"    => "bearer" ,
-                                "name"          => "test" ,
+                                "name"          => $this->Array["Valid name"] ,
                                 "expires_in"    => 3600 * 24 ,
                             );
         $this->signUpSuccessed($SendingData, $RecievingData, $Status);
+    }
 
-
+    /**
+     * @group sofyan
+     */
+    // signup with already authonticated user
+    public function alreadyAuthonticated()
+    {
+        $this->token = JWTAuth::fromUser($this->User);
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => "Egypt",
-                                "city"                  => "Giza"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Valid city"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "Alredy authorized"
                                 );
-        //$response = $this->json("POST" , "api/signup" , $SendingData);
+        $response = $this->json("POST" , "api/signup" , $SendingData);
         $this->signUpSuccessed($SendingData, $RecievingData, $Status);
     }  
-
+    /**
+     * @group sofyan
+     */
     public function testDatabase()
     {
         $Status = 200;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => "Egypt",
-                                "city"                  => "Giza"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Valid city"],
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
-        $hashedPassword = Hash::make("testpassword");
+                        
+        $hashedPassword = Hash::make($this->Array["Valid password"]);
         $RecievingData = array  (
-                                "email" => "test2@yahoo.com",
-                                "name" => "test",
+                                "email" => $this->Array["Valid email"],
+                                "name" => $this->Array["Valid name"],
                                 //"password" => "Hash::make($hashedPassword)",
-                                "gender" => "male",
-                                "birthday" => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country" => "Egypt",
-                                "city" => "Giza",
+                                "gender" => $this->Array["Valid gender"],
+                                "birthday" => $this->Array["Valid birthday"],
+                                "country" => $this->Array["Valid country"],
+                                "city" => $this->Array["Valid city"],
                             );
         $table = "users";
         $this->Database($SendingData, $RecievingData , $table);
-
-
+        $User = User::where("email" , $this->Array["Valid email"]);
+        $User->delete();
     }
     
-    
+    /**
+     * @group sofyan
+     */    
     // Login with authorized user
     public function testWithAuthonticated()
     {
@@ -584,14 +746,16 @@ class signupTest extends TestCase
 
         $Status = 405;
         $SendingData = array(
-                                "email"                 => "test2@yahoo.com",
-                                "password"              => "testpassword",
-                                "password_confirmation" => "testpassword",
-                                "name"                  => "test",
-                                "gender"                => "male",
-                                "birthday"              => date("Y-n-j" , strtotime("1998-2-21")),
-                                "country"               => "Egypt",
-                                "city"                  => "Giza"
+                                "email"                 => $this->Array["Valid email"],
+                                "password"              => $this->Array["Valid password"],
+                                "password_confirmation" => $this->Array["Valid password"],
+                                "name"                  => $this->Array["Valid name"],
+                                "gender"                => $this->Array["Valid gender"],
+                                "birthday"              => $this->Array["Valid birthday"],
+                                "country"               => $this->Array["Valid country"],
+                                "city"                  => $this->Array["Valid city"]
+                                "token" => $this->token,
+                                "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
                                     "errors" => "Alredy authorized"

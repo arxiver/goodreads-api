@@ -68,11 +68,11 @@ class ActivitiesController extends Controller
             $followingArr = Arr::flatten($followingArr);
             
         }
-        $rev = Review::reviewsUsersArr($followingArr);
+        $rev = Review::reviewsUsersArr($followingArr,$this->ID);
         $shelf = Shelf::shelvesUsersArr($followingArr);
         $follow =Following::followingUsersArr($followingArr);
-        $likes = Likes::likesUsersArr($followingArr);
-        $comments = Comment::commentsUsersArr($followingArr);
+        $likes = Likes::likesUsersArr($followingArr,$this->ID);
+        $comments = Comment::commentsUsersArr($followingArr,$this->ID);
         $result = collect();
         $result = $result->merge($rev);
         $result = $result->merge($shelf);

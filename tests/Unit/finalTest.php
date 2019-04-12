@@ -40,7 +40,9 @@ class finalTest extends TestCase
         
     }
 
-
+    /**
+     * @group sofyan
+     */
     public function test()
     {
 
@@ -155,7 +157,7 @@ class finalTest extends TestCase
                                     "name"          => $this->User["name"] ,
                                     "expires_in"    => 3600 * 24 ,
                                     "username"      => $this->User["username"],
-                                    "image_link"    => $this->User["image_link"]
+                                    "image_link"    => asset("storage/avatars/" . $this->User["image_link"])
                                 );
         $responsesec = $this->json('POST', 'api/login', $SendingData);
         $responsesec

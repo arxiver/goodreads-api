@@ -36,7 +36,8 @@ class User extends Authenticatable implements JWTSubject
         "following_count",
         "followers_count",
         "last_active"    ,
-        "joined_at"
+        "joined_at",
+        "image_link"
     ];
 
     /**

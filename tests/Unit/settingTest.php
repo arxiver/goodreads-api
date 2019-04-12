@@ -46,7 +46,7 @@ class settingTest extends TestCase
     {
 
         parent::setUp();
-        $this->Random = rand(1, User::all()->count());
+        $this->Random = rand(3, User::all()->count());
         $this->User = User::find($this->Random);
         $this->token = JWTAuth::fromUser($this->User);
         $this->tokenType = "bearer";
@@ -60,7 +60,11 @@ class settingTest extends TestCase
                                 "Invalid password" => "passwordinvalid",
                                 "Valid password" => "password",
                                 "Long password" => "password11111111111111111111111111111111111",
-                                "Short password" => "pa"
+                                "Short password" => "pa",
+                                "Empty name" => "",
+                                "Long name" => "test1111111111111111111111111111111111111111111111111111111",
+                                "Short name" => "te",
+                                "Valid name" => "soyfan"
                             );
         $this->ErrorStatus = 405;
         $this->SuccessfulStatus = 200;
@@ -87,9 +91,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [1] Change password with non authorized user  
-    */ 
+    
+    //[1] Change password with non authorized user  
     public function testChangePassword1()
     {
         $this->token = null;
@@ -107,9 +110,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [2] Change password with empty old password
-    */
+    
+    //[2] Change password with empty old password
     public function testChangePassword2()
     {
         $SendingData = array(
@@ -126,9 +128,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [3] Change password with empty new password
-    */
+    
+    //[3] Change password with empty new password
     public function testChangePassword3()
     {
         $SendingData = array(
@@ -146,9 +147,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [4] Change password with empty new password confirmation
-    */
+    
+    //[4] Change password with empty new password confirmation
     public function testChangePassword4()
     {
         $SendingData = array(
@@ -167,9 +167,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [5] Change password with invalid old password
-    */
+    
+    //[5] Change password with invalid old password
     public function testChangePassword5()
     {
         $SendingData = array(
@@ -187,9 +186,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [6] Change password with different new passwords
-    */
+    
+    //[6] Change password with different new passwords
     public function testChangePassword6()
     {
         $SendingData = array(
@@ -208,9 +206,8 @@ class settingTest extends TestCase
 
 
 
-    /**
-        [7] Change password with invalid new password (long password)
-    */
+    
+    //[7] Change password with invalid new password (long password)
     public function testChangePassword60()
     {
         $SendingData = array(
@@ -226,12 +223,8 @@ class settingTest extends TestCase
         $this->changePassword($this->ErrorStatus, $SendingData, $ReceivingData);
     }
 
-
-
-
-    /**
-        [8] Change password with invalid new passowrd (short password)
-    */
+    
+    //[8] Change password with invalid new passowrd (short password)
     public function testChangePassword61()
     {
         $SendingData = array(
@@ -250,9 +243,8 @@ class settingTest extends TestCase
 
 
     
-    /**
-        [9] Successful changing password
-    */
+    
+    //[9] Successful changing password
     public function testChangePassword7()
     {
         $Status = 200;
@@ -274,13 +266,75 @@ class settingTest extends TestCase
 
 
 
-    /** 
-        [1] Change name with non authorized user
-        [2] Change name with empty password
-        [3] Change name with empty invalid password
-        [4] Change name with empty invalid name (long)
-        [5] Change name with invalid name (short)
-        [6] Change name with invalid name (non string)
-        [7] Successful changing name
-    */
+    
+    //[1] Change name with non authorized user
+    public function testChangeName1()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                "password"      => $this->Array["Valid password"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "UnAuthorized"
+                                );
+        $this->changeName($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+
+    //[2] Change name with empty name
+    public function testChangeName2()
+    {
+        $SendingData = array(
+                                "newName"       => $this->Array["Empty name"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The new name field is required."
+                                );
+        $this->changeName($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+
+    //[3] Change name with empty invalid name (long)
+    public function testChangeName3()
+    {
+        $SendingData = array(
+                                "newName"       => $this->Array["Long name"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The new name may not be greater than 50 characters."
+                                );
+        $this->changeName($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+    //[4] Change name with invalid name (short)
+    public function testChangeName4()
+    {
+        $SendingData = array(
+                                "newName"       => $this->Array["Short name"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The new name must be at least 3 characters."
+                                );
+        $this->changeName($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+    //[5] Successful changing name
+    public function testChangeName5()
+    {
+        $SendingData = array(
+                                "newName"       => $this->User->name,
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "You have changed your name"
+                                );
+        $this->changeName($this->SuccessfulStatus, $SendingData, $ReceivingData);
+    }
+    
 }

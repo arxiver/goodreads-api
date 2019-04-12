@@ -303,24 +303,17 @@ class userController extends Controller
     public function changeName(Request $request)
     {
         $validation = array("newName" => "required|max:50|min:3|string");
-        if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
+        $valid = validator::make($request->all() , $validation);
+        if(!$valid->fails())
         {
-            $valid = validator::make($request->all() , $validation);
-            if(!$valid->fails())
-            {
-                $user = User::find($this->ID);
-                $user->name = $request["newName"];
-                $user->save();
-                return response()->json(["message" => "You have changed your name"],200);
-            }
-            else
-            {
-                return response()->json(["errors"=> $valid->messages()->first()], 405);
-            }
+            $user = User::find($this->ID);
+            $user->name = $request["newName"];
+            $user->save();
+            return response()->json(["message" => "You have changed your name"],200);
         }
         else
         {
-            return response()->json(["errors" => "The password is invalid."],405);
+            return response()->json(["errors"=> $valid->messages()->first()], 405);
         }
     }
 

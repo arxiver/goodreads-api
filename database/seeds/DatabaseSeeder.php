@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(UserSeeder::class);
-        //factory(App\User::class, 10)->create();
-        //factory(App\Author::class, 10)->create();
-        //factory(App\Book::class, 50)->create();
-        //factory(App\Shelf::class,50)->create();
-        //factory(App\Review::class,50)->create();
-        //factory(App\Likes::class,50)->create();
-        //factory(App\Comment::class,50)->create();
-        //factory(App\Genre::class, 50)->create();
+        /*$this->call(UserSeeder::class);
+        factory(App\User::class, 50)->create();
+        factory(App\Author::class, 50)->create();
+        factory(App\Book::class, 50)->create();
+        factory(App\Shelf::class,50)->create();
+        factory(App\Review::class,50)->create();
+        factory(App\Likes::class,50)->create();
+        factory(App\Comment::class,50)->create();
+        factory(App\Genre::class, 50)->create();*/
 
-        factory(App\Following::class,50)->create();
+        factory(App\Following::class,6)->create();
 
     }
 }

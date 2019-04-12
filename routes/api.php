@@ -89,10 +89,29 @@ Route::group(["middleware" => "unAuthorized"], function(){
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Ahmed Hamdy section                                                              ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('reviwes','ReviewController@recentReviews');
+   /* Route::get('reviwes','ReviewController@recentReviews');
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get( 'books/show', 'BookController@show');
+    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');*/
+
+    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+    Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
+    //
+    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+    Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
+    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
     Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+
+    Route::post('shelf/add_book', 'ShelfController@addBook');
+    Route::delete('shelf/remove_book', 'ShelfController@removeBook');
+    Route::get('shelf/getbook', 'ShelfController@getBooksOnShelf');
+
+    Route::get('books/genre', 'BookController@showByGenre');
+    Route::get('Books/book_title','BookController@getBookByTitle');
+    Route::get('Books/book_ISBN','BookController@getBookByIsbn');
+    Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
+    Route::get( 'books/show', 'BookController@show');
+
 });
 
 

@@ -36,6 +36,9 @@ class Book extends Model
     public function setauthor($a,$b,$c,$d){
         $res = DB::insert('insert into authors values(?,?,?,?)',[$a,$b,$c,$d]);
     }
+    public function setshelves($a,$b,$c,$d){
+        $res = DB::insert('insert into shelves(id,book_id,user_id,type) values(?,?,?,?)',[$a,$b,$c,$d]);
+    }
     public function deleteBook($a){
         $res = DB::delete('delete from books where id=?',[$a]);
     }
@@ -44,5 +47,8 @@ class Book extends Model
     }
     public function deleteauthor($a){
         $res = DB::delete('delete from authors where id=?',[$a]);
+    }
+    public function deleteshelves($a){
+        $res = DB::delete('delete from shelves where id=?',[$a]);
     }
 }

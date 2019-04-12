@@ -426,7 +426,7 @@ class ReviewController extends Controller
             *"user_id": 3,
             *"book_id": 21,
             *"body": "Woooooooooooooow  it is a great booooook",
-            *"shelf_name": "read",
+            *"shelf_name": 0,
             *"rating": 2,
             *"likes_count": null,
             *"comments_count": 5,
@@ -474,7 +474,7 @@ class ReviewController extends Controller
             else{
                  $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['title']]);
             }
-        foreach($rt as $res)
+       /* foreach($rt as $res)
             {
                     if($res->shelf_name ==0){
                         $res->shelf_name ='read';
@@ -486,7 +486,7 @@ class ReviewController extends Controller
                         $res->shelf_name ='WantToRead';
 
                     }
-            }
+            }*/
         if($rt != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -548,7 +548,7 @@ class ReviewController extends Controller
     *"user_id": 3,
     *"book_id": 21,
     *"body": "Woooooooooooooow  it is a great booooook",
-    *"shelf_name": "read",
+    *"shelf_name": 0,
     *"rating": 2,
     *"likes_count": null,
     *"comments_count": 5,
@@ -597,7 +597,7 @@ class ReviewController extends Controller
                     $book=DB::select('select title as book_name,img_url as book_image from books where id=?',[$res->book_id]);
                     $author=DB::select('select a.author_name as author_name from authors a , books b where a.id=b.author_id and b.id=?',[$res->book_id]);
                 }
-                    if($res->shelf_name ==0){
+                   /* if($res->shelf_name ==0){
                         $res->shelf_name ='read';
                     }
                     else if($res->shelf_name ==1){
@@ -606,7 +606,7 @@ class ReviewController extends Controller
                     else{
                         $res->shelf_name ='WantToRead';
 
-                    }
+                    }*/
             }
         if($results != NULL){
             return Response::json(array(
@@ -649,7 +649,7 @@ class ReviewController extends Controller
      * "pages": [
      *      {
     *       "rating": 2,
-    *       "shelf_name": "read",
+    *       "shelf_name": 0,
     *       "body": "Woooooooooooooow  it is a great booooook"
     *       }
      *    ]
@@ -661,14 +661,19 @@ class ReviewController extends Controller
     {
         //
         $Validations    = array(
-            "userId"         => "required|integer",
+            "userId"         => "nullable|integer",
             "bookId"         => "required|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+            if($request['userId'] != Null){
+                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+            }
+            else{
+                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
+            }
         if($results != NULL){
-            foreach($results as $res)
+           /* foreach($results as $res)
             {
                     if($res->shelf_name ==0){
                         $res->shelf_name ='read';
@@ -680,7 +685,7 @@ class ReviewController extends Controller
                         $res->shelf_name ='WantToRead';
 
                     }
-            }
+            }*/
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results),
@@ -745,7 +750,7 @@ class ReviewController extends Controller
       *      "book_id": 61,
       *      "body": "gghg",
       *      "rating": 5,
-      *      "shelf_name": "read",
+      *      "shelf_name": 1,
       *      "likes_count": 4,
       *      "comments_count": 9,
       *      "user_id": 3,
@@ -766,7 +771,7 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
        $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,r.created_at,r.updated_at,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ? order by r.created_at DESC', [$request['bookId']]);
-       foreach($results as $res)
+      /* foreach($results as $res)
        {
                if($res->shelf_name ==0){
                    $res->shelf_name ='read';
@@ -778,7 +783,7 @@ class ReviewController extends Controller
                    $res->shelf_name ='WantToRead';
 
                }
-       }
+       }*/
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

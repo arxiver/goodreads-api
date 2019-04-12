@@ -9,7 +9,7 @@ Route::get('/', function () {return view('ReadAholic');});
 Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
-   
+    
 
 });
 
@@ -93,7 +93,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     //
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
+    
     Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
 
     
@@ -103,7 +103,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::get('Books/book_Authorname','BookController@getBookByAuthorName');
     Route::get( 'books/show', 'BookController@show');
     Route::get('shelf/getbook', 'ShelfController@getBooksOnShelf');
-
+    Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');
     Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
     /////////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ class Review extends Model
         'created_at'
     ];
     //function to get the reviews activity of certain users
-    public static function reviewsUsersArr($Arr)
+    public static function reviewsUsersArr($Arr,$auth_id)
     {
         $monda = Review::whereIn('reviews.user_id',$Arr)
         ->join('books','reviews.book_id','=','books.id')
@@ -32,16 +32,20 @@ class Review extends Model
         ->get();
         $t = array();
         $j=0;
-        //$auth_id = $this->ID;
        foreach($monda as $l)
         {
 
-           // $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->get(); 
-            //if(count($shelf)==0)
-                $shelf = 3;
+            $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->select('type')->first(); 
+            if($shelf)
+               $shelf = $shelf->type;
+            else
+                $shelf = 3; 
+                
             $l = collect($l);
             $l ->put('update_type',0);
             $l ->put('shelf',$shelf);
+            //$like = 0;
+           // $l ->put('auth_like',$like);
            $t[$j]=$l;
            $j++;
         }

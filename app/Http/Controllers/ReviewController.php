@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use Response;
-
+use Illuminate\Support\Arr;
 /**
  * @group Review
  * @authenticated
@@ -91,14 +91,25 @@ class ReviewController extends Controller
                             ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
                             ['type' => 0]
                         );
-                    $Create = array(
-                        "user_id" => $this->ID,
-                        "book_id" => $request["bookId"],
-                        "body"  => $request["body"],
-                        "shelf_name" => 0,
-                        "rating" =>$request["rating"]
-                    );
-                    Review::create($Create);
+                    if (!empty($request["body"]))
+                    {
+                        DB::table('reviews')
+                        ->updateOrInsert(
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                            ["body"  => $request["body"],
+                            "shelf_name" => 0,
+                            "rating" =>$request["rating"]]
+                        );
+                    }
+                    else{
+                        DB::table('reviews')
+                        ->updateOrInsert(
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                            [
+                            "shelf_name" => 0,
+                            "rating" =>$request["rating"]]
+                        );
+                    }
                     $bookWanted=Book::find($request["bookId"]);
                     $conutOfReviews=$bookWanted["reviews_count"] +1;
                     $conutOfRating=$bookWanted["ratings_count"] +1;
@@ -117,10 +128,22 @@ class ReviewController extends Controller
                             ['rating_avg' => $avgUser ,'rating_count' => $conutOfRatingUser]
                         );
                     $reviewId=DB::table('reviews')->max('id');
-                    return response()->json([
-                        "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
-                        ,"bodyOfReview" => $request["body"] , "rate" => $request["rating"] , "Review_id" =>$reviewId
-                    ]);
+                    $actualbody = DB::table('reviews')->where([['book_id', $request["bookId"]],
+                            ['user_id' , $this->ID]])->first();
+                            //die($actualbody->body) ;                  
+                    if (!empty($actualbody->body))
+                    {
+                        return response()->json([
+                            "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
+                            ,"bodyOfReview" =>$actualbody->body , "rate" => $request["rating"] , "Review_id" =>$reviewId
+                        ]);
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "true" , "user" => $this->ID, "book_id" =>$request["bookId"] , "shelfType" => "read"
+                            ,"bodyOfReview" =>"No Body"  , "rate" => $request["rating"] , "Review_id" =>$reviewId
+                        ]);
+                    }
                 }
                 else
                 {

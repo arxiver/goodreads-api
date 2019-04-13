@@ -444,6 +444,7 @@ class ActivitiesController extends Controller
      * @authenticated
      * @response {
      * "status": "true",
+     * "Message": "Like is Done ",
      * "user": 1,
      * "resourse_id": 1,
      * "resourse_type": 2

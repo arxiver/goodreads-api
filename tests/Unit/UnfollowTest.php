@@ -22,15 +22,21 @@ class UnfollowTest extends TestCase
          * Keeps the following_count of the user before making unfollow to one of them
          * $followingCount is kept for db assertion test
          */
-        $randomUserArr = DB::select( 'SELECT follower_id FROM followings ORDER BY RAND() LIMIT 1 ') ;
-        $randomUserId = $randomUserArr[0]->follower_id;
+        $usersCount = User::all()->count();
+        $counter = 0 ;
+        do{
+        $randomUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
         $user = User::find($randomUserId);
         $followingCount = $user->following_count;
+        $counter++;
+        }
+        while($followingCount == 0 && $usersCount > $counter );
 
         /**
          * Selecting a random user of the list of people that the authenticated loggedin-random user follows
          */
         $FollowedUserArr = (DB::select( 'SELECT user_id FROM followings WHERE follower_id = ? ORDER BY RAND() LIMIT 1', [$randomUserId]));
+        if( $FollowedUserArr!= null)
         $randomFollowingId= $FollowedUserArr[0]->user_id;
 
         /**
@@ -48,8 +54,11 @@ class UnfollowTest extends TestCase
         /**
          * Unfollow assertion
          */
+        if ($FollowedUserArr != null)
+        {
         $response = $this->json('DELETE', 'api/unfollow', [ 'token'=> $token ,'token_type' =>'bearer' , 'user_id'=> $randomFollowingId ]);
         $response->assertJson(["status"=>"true"])->assertStatus(200);
+
         /**
          * FollowingCount is decreased assertion
          */
@@ -58,5 +67,19 @@ class UnfollowTest extends TestCase
             'id' => $randomUserId,
             'following_count' => $followingCount
          ]);
+        }
+
+        $response = $this->json('DELETE', 'api/unfollow', ['token' => $token, 'token_type' => 'bearer', 'user_id' => -1 ]);
+        $response->assertStatus(404);
+
+        $response = $this->json('DELETE', 'api/unfollow', ['token' => $token, 'token_type' => 'bearer', 'user_id' => - $randomUserId]);
+        $response->assertStatus(404);
+
+        $response = $this->json('DELETE', 'api/unfollow', ['token' => $token, 'token_type' => 'bearer', 'user_id' => "adssda"]);
+        $response->assertStatus(404);
+
+        $response = $this->json('DELETE', 'api/unfollow', ['token' => $token, 'token_type' => 'bearer', 'user_id' => "0x898ABD"]);
+        $response->assertStatus(404);
+
     }
 }

@@ -139,7 +139,7 @@ class ReviewTest extends TestCase
      * test
      * @return void
      */
-    public function testEditReview()
+    public function notestEditReview()
     {
         // the new rating value 
         $newRate =2;

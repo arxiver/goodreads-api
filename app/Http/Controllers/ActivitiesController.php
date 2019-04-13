@@ -679,7 +679,7 @@ class ActivitiesController extends Controller
      *   "errors": "The id must be an integer."
      * }
      */
-	public function unlike(Request $request)
+	/*public function unlike(Request $request)
 	{
         $Validations    = array(
             "id"        => "required|integer"
@@ -758,7 +758,7 @@ class ActivitiesController extends Controller
         {
             return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
         }
-	}
+	}*/
 
     /**
      * list likes

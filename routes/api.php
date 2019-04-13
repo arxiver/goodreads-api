@@ -37,11 +37,11 @@ Route::group(["middleware" => "unAuthorized"], function(){
     //                                        Every one make a section for his work                                       //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::post('reviwes/create','ReviewController@createReview');
-    Route::put('reviwes/edit', 'ReviewController@editReview');
+    //Route::put('reviwes/edit', 'ReviewController@editReview');
     Route::delete('reviwes/delete', 'ReviewController@destroy');
     Route::post('makeComment','ActivitiesController@makeComment');
     Route::delete('deleteComment','ActivitiesController@deleteComment');
-    Route::delete('unlike','ActivitiesController@unlike');
+    //Route::delete('unlike','ActivitiesController@unlike');
     Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////           

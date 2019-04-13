@@ -26,7 +26,7 @@ class userTest extends TestCase
         $tt2=new ReviewController;
         $tt3 = new Book;
         $tt3->setauthor(1000000,'a7med7amdy','2019-03-21 00:00:00','2019-03-21 00:00:00');
-        $tt3->setBook(1000000,'ppp',1,'dsds','2019-03-21 00:00:00','fgdg','dfgdg','fdgd',4,5,9,'jyj',1000000,8,'2019-03-21 00:00:00','2019-03-21 00:00:00');
+        $tt3->setBook(1000000,'ppp',1,'dsds','2019-03-21 00:00:00','fgdg','dfgdg','fdgd',4,5,9,1000000,8,'2019-03-21 00:00:00','2019-03-21 00:00:00');
         $tt3->setgenre(1000000,1000000,'action');
         $user=$tt1->getuser(); 
        $tt1->setshowReviewOfBook(1000000,((int)$user),1000000,'dsds',0,5,4,4,'2019-03-21 00:00:00','2019-03-21 00:00:00');

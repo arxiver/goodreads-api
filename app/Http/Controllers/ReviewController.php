@@ -232,7 +232,7 @@ class ReviewController extends Controller
      *   "errors": "The rating must be an integer."
      * }
      */
-    public function editReview(Request $request)
+    /*public function editReview(Request $request)
     {
         $Validations    = array(
             "reviewId"         => "required|integer",
@@ -273,7 +273,7 @@ class ReviewController extends Controller
         } else {
             return response(["status" => "false", "errors" => $Data->messages()->first()]);
         }
-    }
+    }*/
 
     /**
      * Recent reviews from all members.

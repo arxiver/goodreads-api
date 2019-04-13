@@ -11,7 +11,7 @@ class Following extends Model
         //'user_id' , 'updated_at'
     ];
     //function to get the following activity of certain users
-    public static function FollowingUsersArr($Arr)
+    public static function FollowingUsersArr($Arr,$auth_id)
     {
         
         $follow=  Following::whereIn('followings.follower_id',$Arr)->join('users as f','f.id','=','followings.user_id')
@@ -23,8 +23,13 @@ class Following extends Model
         $j=0;
        foreach($follow as $l)
         {
+            if(Following::where('follower_id',$auth_id)->where('user_id',$l->followed_id)->first()==null)
+                $followed = 0;
+            else
+                $followed = 1;
             $l = collect($l);
             $l ->put('update_type',2);
+            $l ->put('auth_user_following',$followed);
            $t[$j]=$l;
            $j++;
         }

@@ -423,8 +423,8 @@ class ActivitiesController extends Controller
 
     }
     /**
-     * @group [Activities].Like
-     * like function
+     * @group [Activities].Like/Unlike
+     * like/Unlike function
      * 
      * make a validation on the input to check that is satisfing the conditions. 
      * 
@@ -434,8 +434,11 @@ class ActivitiesController extends Controller
      * 
      * the function check that the like is on one of the three type then make the like
      * 
-     * increment the number of likes in the review or follow or  add to shelf 
+     * increment the number of likes in the review or follow or  add to shelf
+     *  
+     * But if the user already make a like the function will act as unlike
      * 
+     * decrement the number of likes in review or shelf or follow 
      * @bodyParam id int required id of the liked resource
 	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
      * @authenticated
@@ -445,6 +448,10 @@ class ActivitiesController extends Controller
      * "resourse_id": 1,
      * "resourse_type": 2
 	 * }
+     * @response{
+     * "status": "true",
+     * "Message": "unLike is Done "
+     * }
      * @response 204{
      *   "status": "false",
      *   "errors": "can't make a like on this review becouse this review doesn't exists."
@@ -461,8 +468,24 @@ class ActivitiesController extends Controller
      *   "status": "false",
      *   "errors": "The id must be an integer."
      * }
+     * @response 204{
+     *   "status": "false",
+     *   "errors": "can't make a unlike on this review becouse this review doesn't exists."
+     * }
+     * @response 204{
+     *   "status": "false",
+     *   "errors": "can't make a unlike on this shelf becouse this shelf doesn't exists."
+     * }
+     * @response 204{
+     *   "status": "false",
+     *   "errors": "can't make a unlike on this follow becouse this follow doesn't exists."
+     * }
+     * @response 406{
+     *   "status": "false",
+     *   "errors": "The id must be an integer."
+     * }
      */
-    public function makeLike(Request $request)
+    public function makeLikeOrUnlike(Request $request)
     {
         $Validations    = array(
             "id"        => "required|integer",
@@ -472,67 +495,147 @@ class ActivitiesController extends Controller
         if (!($Data->fails())) {
             if ( $request['type'] == 0 )
             {
-                if ( Review::find($request["id"]) )
+                $actualLikeInReview = DB::table('likes')->where([['user_id' , $this->ID],
+                ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+                if (!empty($actualLikeInReview))
                 {
-                    $wantedReview=Review::find($request["id"]);
-                    $number=$wantedReview['likes_count']+1;
-                    DB::table('reviews')
-                        ->updateOrInsert(
-                            ['id' => $request["id"]],
-                            [ 'likes_count' => $number ]
-                        );
-                }
+                    if ( Review::find($request["id"]) )
+                    {
+                        $wantedReview=Review::find($request["id"]);
+                        $number=$wantedReview['likes_count']-1;
+                        DB::table('reviews')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a unlike on this review becouse this review doesn't exists"
+                        ]);
+                    }
+                } 
                 else{
-                    return response()->json([
-                        "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
-                    ]);
+                    if ( Review::find($request["id"]) )
+                    {
+                        $wantedReview=Review::find($request["id"]);
+                        $number=$wantedReview['likes_count']+1;
+                        DB::table('reviews')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
+                        ]);
+                    }
                 }
             }
             else if ( $request['type'] == 1 )
             {
-                if ( Shelf::find($request["id"]) )
+                $actualLikeInAddToShelf = DB::table('likes')->where([['user_id' , $this->ID],
+                ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+                if (!empty($actualLikeInAddToShelf))
                 {
-                    $wantedShelf=Shelf::find($request["id"]);
-                    $number=$wantedShelf['likes_count']+1;
-                    DB::table('shelves')
-                        ->updateOrInsert(
-                            ['id' => $request["id"]],
-                            [ 'likes_count' => $number ]
-                        );
-                }
+                    if ( Shelf::find($request["id"]) )
+                    {
+                        $wantedShelf=Shelf::find($request["id"]);
+                        $number=$wantedShelf['likes_count']-1;
+                        DB::table('shelves')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a unlike on this shelf becouse this shelf doesn't exists"
+                        ]);
+                    }
+                } 
                 else{
-                    return response()->json([
-                        "status" => "false" , "Message" => "can't make a like on this shelf becouse this shelf doesn't exists"
-                    ]);
+                    if ( Shelf::find($request["id"]) )
+                    {
+                        $wantedShelf=Shelf::find($request["id"]);
+                        $number=$wantedShelf['likes_count']+1;
+                        DB::table('shelves')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a like on this shelf becouse this shelf doesn't exists"
+                        ]);
+                    }
                 }
             }
             else
             {
-                if ( Following::find($request["id"]) )
+                $actualLikeOnFollow = DB::table('likes')->where([['user_id' , $this->ID],
+                ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+                if (!empty($actualLikeOnFollow))
                 {
-                    $wantedFollow=Following::find($request["id"]);
-                    $number=$wantedFollow['likes_count']+1;
-                    DB::table('followings')
-                        ->updateOrInsert(
-                            ['id' => $request["id"]],
-                            [ 'likes_count' => $number ]
-                        );
-                }
+                    if ( Following::find($request["id"] ))
+                    {
+                        $wantedFollow=Following::find($request["id"]);
+                        $number=$wantedFollow['likes_count']-1;
+                        DB::table('followings')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a unlike on this follow becouse this follow doesn't exists"
+                        ]);
+                    }
+                } 
                 else{
-                    return response()->json([
-                        "status" => "false" , "Message" => "can't make a like on this follow becouse this follow doesn't exists"
-                    ]);
+                    if ( Following::find($request["id"]) )
+                    {
+                        $wantedFollow=Following::find($request["id"]);
+                        $number=$wantedFollow['likes_count']+1;
+                        DB::table('followings')
+                            ->updateOrInsert(
+                                ['id' => $request["id"]],
+                                [ 'likes_count' => $number ]
+                            );
+                    }
+                    else{
+                        return response()->json([
+                            "status" => "false" , "Message" => "can't make a like on this follow becouse this follow doesn't exists"
+                        ]);
+                    }
                 }
             }
-            $Create = array(
-                "user_id" => $this->ID,
-                "resourse_id" => $request["id"],
-                "resourse_type"  => $request["type"]
-            );
-            Likes::create($Create);
-            return response()->json([
-                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
-            ]);
+            $actualLike = DB::table('likes')->where([['user_id' , $this->ID],
+             ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+            if (!empty($actualLike))
+            {
+                $like = Likes::findOrFail($actualLike->id);
+                $like->delete();
+                return response()->json([
+                    "status" => "true" , "Message" => "unLike is Done "
+                ]);
+            } 
+            else{
+                $Create = array(
+                    "user_id" => $this->ID,
+                    "resourse_id" => $request["id"],
+                    "resourse_type"  => $request["type"],
+                    'updated_at'=>now(),
+                    'created_at'=>now()
+                );
+                Likes::create($Create);
+                return response()->json([
+                    "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                ]);
+            }
         }
         else
         {

@@ -42,7 +42,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
     Route::post('makeComment','ActivitiesController@makeComment');
     Route::delete('deleteComment','ActivitiesController@deleteComment');
     Route::delete('unlike','ActivitiesController@unlike');
-    Route::post('makeLike','ActivitiesController@makeLike');
+    Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 
 class FollowingTest extends TestCase
 {
@@ -19,9 +20,8 @@ class FollowingTest extends TestCase
         /**
          * Get a random user for authentication
          */
-        $usersCount = User::all()->count();
-        $randomUserId = rand(1, $usersCount);
-        $user = User::find( $randomUserId);
+        $randomUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
+        $user = User::find($randomUserId);
 
         /**
          * Login assertion
@@ -40,5 +40,11 @@ class FollowingTest extends TestCase
          */
         $response = $this->json('GET', 'api/following', [ 'token'=> $token ,'token_type' =>'bearer']);
         $response->assertStatus(200)->assertSee('following');
+
+        // bad request with negative id
+        $response = $this->json('GET', 'api/following', ['token' => $token, 'token_type' => 'bearer' , 'user_id'=> -1 ]);
+        $response->assertStatus(404);
+
+
     }
 }

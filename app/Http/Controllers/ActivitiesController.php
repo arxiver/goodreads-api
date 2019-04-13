@@ -69,8 +69,8 @@ class ActivitiesController extends Controller
             
         }
         $rev = Review::reviewsUsersArr($followingArr,$this->ID);
-        $shelf = Shelf::shelvesUsersArr($followingArr);
-        $follow =Following::followingUsersArr($followingArr);
+        $shelf = Shelf::shelvesUsersArr($followingArr,$this->ID);
+        $follow =Following::followingUsersArr($followingArr,$this->ID);
         $likes = Likes::likesUsersArr($followingArr,$this->ID);
         $comments = Comment::commentsUsersArr($followingArr,$this->ID);
         $result = collect();

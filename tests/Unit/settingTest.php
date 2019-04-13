@@ -125,7 +125,7 @@ class settingTest extends TestCase
                                 "Non date input" => 111,
                                 "Younger birthday" => date("Y-n-j"),
                                 "Older birthday" => date("Y-n-j" , strtotime("1910-2-21")),
-                                "Only me" => "Only me",
+                                "Only me" => "onlyMe",
                                 "Everyone" => "Everyone",
                                 "Friends" => "Friends",
 

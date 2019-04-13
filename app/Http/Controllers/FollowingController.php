@@ -274,6 +274,7 @@ class FollowingController extends Controller
 
         $i=0;
         while($i<sizeof($data)){
+        $data[$i]->image_link = $this->GetUrl() ."/". $data[$i]->image_link;
         $data[$i]->is_followed =Following::where('follower_id',$this->ID)->where('user_id',$data[$i]->id)->count() ;
         $i++;}
         /**

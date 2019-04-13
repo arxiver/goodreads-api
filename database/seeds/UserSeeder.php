@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Canada",
             "city"          => "Atawwa",
-            "image_link"    => "demo.jpg"
+            "image_link"    => "default.jpg"
         );
         User::create($Create);
 
@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Egypt",
             "city"          => "Cairo",
-            "image_link"    => "demo.jpg"
+            "image_link"    => "default.jpg"
         );
         User::create($Create4);
 
@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
             "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
             "country"       => "Egypt",
             "city"          => "Cairo",
-            "image_link"    => "demo.jpg"
+            "image_link"    => "default.jpg"
         );
         User::create($Create5);
 

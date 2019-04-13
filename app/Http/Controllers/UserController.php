@@ -212,15 +212,30 @@ class userController extends Controller
      * @response {
      * "status": "true",
      * "user": {
-     *   "userName": "",
-     *   "gender": "",
-     *   "name": "",
-     *   "image" : "",
-     *   "location" : "",
-     *   "birthday" : "",
-     *   "seeMyBirthday" : "",
-     *   "seeMyCountry" : "",
-     *   "seeMyCity" : ""
+     * "id",
+     * "name",
+     * "username",
+     * "email",
+     * "email_verified_at",
+     * "password",
+     * "link",
+     * "image_link",
+     * "small_image_link",
+     * "about",
+     * "age",
+     * "gender",
+     * "country",
+     * "city",
+     * "joined_at",
+     * "followers_count",
+     * "following_count",
+     * "rating_avg",
+     * "rating_count",
+     * "book_count",
+     * "birthday",
+     * "see_my_birthday",
+     * "see_my_country",
+     * "see_my_city"
      *}
      *}
      */
@@ -482,14 +497,14 @@ class userController extends Controller
      */
     public function whoCanSeeMyBirthday(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only me,Everyone,Friends");
+        $Validation = array("seeMyBirthday" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
             $user->see_my_birthday = $request["seeMyBirthday"];
             $user->save();
-            if($user->see_my_birthday == "Only me")
+            if($user->see_my_birthday == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your birthday"],200);
             else
             return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
@@ -513,14 +528,14 @@ class userController extends Controller
      */
     public function whoCanSeeMyCountry(Request $request)
     {
-        $Validation = array("seeMyCountry" => "in:Only me,Everyone,Friends");
+        $Validation = array("seeMyCountry" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
             $user->see_my_country = $request["seeMyCountry"];
             $user->save();
-            if($user->see_my_country == "Only me")
+            if($user->see_my_country == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your country"],200);
             else
             return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
@@ -541,14 +556,14 @@ class userController extends Controller
      */
     public function whoCanSeeMyCity(Request $request)
     {
-        $Validation = array("seeMyCity" => "in:Only me,Everyone,Friends");
+        $Validation = array("seeMyCity" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
             $user->see_my_city = $request["seeMyCity"];
             $user->save();
-            if($user->see_my_city == "Only me")
+            if($user->see_my_city == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your city"],200);
             else
             return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
@@ -702,6 +717,9 @@ class userController extends Controller
          * Query finding user data
          */      
         $data = User::where('id',$userId)->get()[0];
+
+        
+        $data["image_link"] = $this->GetUrl() . "/" . $data["image_link"];
   
         /**
          * Return response

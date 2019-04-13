@@ -648,6 +648,7 @@ class ReviewController extends Controller
      * "status": "success",
      * "pages": [
      *      {
+     *      "id": 1000010,
     *       "rating": 2,
     *       "shelf_name": 0,
     *       "body": "Woooooooooooooow  it is a great booooook"
@@ -667,10 +668,10 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
             if($request['userId'] != Null){
-                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+                $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
             }
             else{
-                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
+                $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
             }
         if($results != NULL){
            /* foreach($results as $res)

@@ -648,6 +648,7 @@ class ReviewController extends Controller
      * "status": "success",
      * "pages": [
      *      {
+     *      "id": 1000010,
     *       "rating": 2,
     *       "shelf_name": 0,
     *       "body": "Woooooooooooooow  it is a great booooook"
@@ -667,10 +668,10 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
             if($request['userId'] != Null){
-                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+                $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
             }
             else{
-                $results =DB::select('select rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
+                $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
             }
         if($results != NULL){
            /* foreach($results as $res)
@@ -693,7 +694,7 @@ class ReviewController extends Controller
         }
         else{
             return Response::json(array(
-                'status' => 'failed')
+                'status' => 'failed,no reviews for you')
                 ,
                 400);
         }
@@ -722,7 +723,7 @@ class ReviewController extends Controller
       *      "book_id": 61,
       *      "body": "ktok",
       *      "rating": 5,
-      *      "shelf_name": "currentlyRead",
+      *      "shelf_name": 3,
       *      "likes_count": 9,
       *       "comments_count": 7,
       *     "user_id": 2,
@@ -736,7 +737,7 @@ class ReviewController extends Controller
       *      "book_id": 61,
       *      "body": "Woooooooooooooow  it is a great booooook",
       *      "rating": 2,
-      *      "shelf_name": "read",
+      *      "shelf_name": 0,
       *      "likes_count": null,
       *      "comments_count": null,
       *      "user_id": 1,

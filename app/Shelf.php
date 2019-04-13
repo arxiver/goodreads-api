@@ -14,7 +14,7 @@ class Shelf extends Model
         'created_at'
     ];
     //function to get the shelves activity of certain users
-    public static function shelvesUsersArr($Arr)
+    public static function shelvesUsersArr($Arr,$auth_id)
     {
         $shelf= Shelf::whereIn('shelves.user_id',$Arr)->join('books','shelves.book_id','=','books.id')
         ->join('users','shelves.user_id','=','users.id')
@@ -26,9 +26,18 @@ class Shelf extends Model
         $j=0;
        foreach($shelf as $l)
         {
-            //$like = Likes::where('user_id',$auth_id)->where('resourse_type','0')->where('resourse_id',Arr::get($r,'id'))->get()->isNotEmpty();
+
+            $shelf = Shelf::where('user_id',$auth_id)->where('book_id',$l->book_id)->select('type')->first(); 
+            if($shelf)
+               $shelf = $shelf->type;
+            else
+                $shelf = 3; 
+                
             $l = collect($l);
             $l ->put('update_type',1);
+            $l ->put('shelf',$shelf);
+            //$like = 0;
+           // $l ->put('auth_like',$like);
            $t[$j]=$l;
            $j++;
         }

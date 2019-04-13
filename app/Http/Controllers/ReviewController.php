@@ -93,23 +93,58 @@ class ReviewController extends Controller
                         );
                     if (!empty($request["body"]))
                     {
-                        DB::table('reviews')
-                        ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
-                            ["body"  => $request["body"],
-                            "shelf_name" => 0,
-                            "rating" =>$request["rating"],
-                            'updated_at'=>now()]
-                        );
+                        $actualreview = DB::table('reviews')->where([['book_id', $request["bookId"]],
+                            ['user_id' , $this->ID]])->first();
+                        if (!empty($actualreview))
+                        {
+                            DB::table('reviews')
+                            ->updateOrInsert(
+                                ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                                ["body"  => $request["body"],
+                                "shelf_name" => 0,
+                                "rating" =>$request["rating"],
+                                'updated_at'=>now()]
+                            );
+                        }
+                        
+                        else{
+                            DB::table('reviews')
+                            ->updateOrInsert(
+                                ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                                ["body"  => $request["body"],
+                                "shelf_name" => 0,
+                                "rating" =>$request["rating"],
+                                'updated_at'=>now()
+                                ,'created_at'=>now()]
+                            );
+                        }
                     }
                     else{
-                        DB::table('reviews')
-                        ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
-                            [
-                            "shelf_name" => 0,
-                            "rating" =>$request["rating"],'updated_at'=>now()]
-                        );
+                        $actualreview = DB::table('reviews')->where([['book_id', $request["bookId"]],
+                            ['user_id' , $this->ID]])->first();
+                        if (!empty($actualreview))
+                        {
+                            DB::table('reviews')
+                            ->updateOrInsert(
+                                ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                                [
+                                "shelf_name" => 0,
+                                "rating" =>$request["rating"],
+                                'updated_at'=>now()]
+                            );
+                        }
+                        
+                        else{
+                            DB::table('reviews')
+                            ->updateOrInsert(
+                                ['user_id' => $this->ID, 'book_id' => $request["bookId"]],
+                                [
+                                "shelf_name" => 0,
+                                "rating" =>$request["rating"],
+                                'updated_at'=>now()
+                                ,'created_at'=>now()]
+                            );
+                        }
                     }
                     $bookWanted=Book::find($request["bookId"]);
                     $conutOfReviews=$bookWanted["reviews_count"] +1;

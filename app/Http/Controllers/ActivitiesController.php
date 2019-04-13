@@ -260,7 +260,9 @@ class ActivitiesController extends Controller
                 "user_id" => $this->ID,
                 "resourse_id" => $request["id"],
                 "resourse_type"  => $request["type"],
-                "body" =>$request["body"]
+                "body" =>$request["body"],
+                'updated_at'=>now(),
+                'created_at'=>now()
             );
             Comment::create($Create);
             return response()->json([

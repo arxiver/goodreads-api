@@ -48,7 +48,8 @@ class ActivitiesController extends Controller
      * @responseFile responses/updatesReal.json
      */
     public function followingUpdates(Request $request)
-    {
+    { 
+        $url = $this ->GetUrl();
         $Validations    = array(
             "user_id"         => "integer|min:0",
             "max_updates"     => "integer|min:1"
@@ -79,6 +80,21 @@ class ActivitiesController extends Controller
         $result = $result->merge($follow);
         $result = $result->merge($comments);
         $result = $result->merge($likes);
+        foreach($result as $r)
+        {
+            $temp = $r->pull('image_link');
+            $r ->put('image_link',$url . "/" .$temp );
+            if($r->has('followed_image_link'))
+            {
+                $temp = $r->pull('followed_image_link');
+                $r ->put('followed_image_link',$url . "/" .$temp );
+            }
+            if($r->has('rev_user_imageLink'))
+            {
+                $temp = $r->pull('rev_user_imageLink');
+                $r ->put('rev_user_imageLink',$url . "/" .$temp );
+            }
+        }
         $result = array_reverse(array_sort($result, function ($value) {
             return $value['updated_at'];
           }));

@@ -26,5 +26,9 @@ class Controller extends BaseController
     {
         return User::find($this->ID)->first();
     }
+    public function GetUrl()
+    {
+        return asset("storage/avatars/");
+    }
 }
 

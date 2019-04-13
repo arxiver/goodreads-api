@@ -269,7 +269,7 @@ class FollowingController extends Controller
 							LEFT JOIN
 							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
                                        B.img_url as book_image , B.pages_no as pages
-							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2
+							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2
                             ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
 
 
@@ -386,7 +386,7 @@ class FollowingController extends Controller
 							LEFT JOIN
 							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
                                        B.img_url as book_image , B.pages_no as pages
-							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
+							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
         /**
          * Response paramaters and return

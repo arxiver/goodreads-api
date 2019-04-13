@@ -21,7 +21,6 @@ class Book extends Model
         'reviews_count',
         'ratings_count',
         'ratings_avg',
-        'link',
         'author_id',
         'pages_no',
         'updated_at',

@@ -706,6 +706,7 @@ class userController extends Controller
         $data = User::where('id',$userId)->get()[0];
         if( $request->has(['id']) && ( $request->id != $this->ID ) )
          $data->is_followed = Following::where('follower_id', $this->ID)->where('user_id', $userId)->count();
+         $data->image_link = $this->GetUrl() . "/" . $data->image_link;
 
         /**
          * Return response

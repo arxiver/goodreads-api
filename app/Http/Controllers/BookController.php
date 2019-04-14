@@ -74,7 +74,6 @@ class BookController extends Controller
      *"reviews_count": 4,
      *"ratings_count": 5,
      *"ratings_avg": 9,
-     *"link": "jyj",
      *"author_id": 1000000,
      *"pages_no": 8,
      *"created_at": "2019-03-21 00:00:00",
@@ -140,7 +139,6 @@ class BookController extends Controller
             *"reviews_count": 4,
             *"ratings_count": 5,
             *"ratings_avg": 9,
-            *"link": "jyj",
             *"author_id": 1000000,
             *"pages_no": 8,
             *"created_at": "2019-03-21 00:00:00",
@@ -204,7 +202,6 @@ class BookController extends Controller
             *"reviews_count": 4,
             *"ratings_count": 5,
             *"ratings_avg": 9,
-            *"link": "jyj",
             *"author_id": 1000000,
             *"pages_no": 8,
             *"created_at": "2019-03-21 00:00:00",
@@ -267,7 +264,6 @@ class BookController extends Controller
             *"reviews_count": 4,
             *"ratings_count": 5,
             *"ratings_avg": 9,
-            *"link": "jyj",
             *"author_id": 1000000,
             *"pages_no": 8,
             *"created_at": "2019-03-21 00:00:00",
@@ -349,7 +345,7 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.link,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
+        $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

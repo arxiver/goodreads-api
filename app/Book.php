@@ -21,14 +21,13 @@ class Book extends Model
         'reviews_count',
         'ratings_count',
         'ratings_avg',
-        'link',
         'author_id',
         'pages_no',
         'updated_at',
         'created_at'
     ];
-    public function setBook($a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p){
-        $res = DB::insert('insert into books values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p]);
+    public function setBook($b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p){
+        $res = DB::insert('insert into books values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$m,$n,$o,$p]);
     }
     public function setgenre($a,$b,$c){
         $res = DB::insert('insert into genre (id,book_id,type) values(?,?,?)',[$a,$b,$c]);

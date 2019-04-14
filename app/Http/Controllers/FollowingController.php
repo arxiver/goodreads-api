@@ -269,12 +269,13 @@ class FollowingController extends Controller
 							LEFT JOIN
 							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
                                        B.img_url as book_image , B.pages_no as pages
-							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2
+							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2
                             ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
+
 
         $i=0;
         while($i<sizeof($data)){
-        $data[$i]->image_link = $this->GetUrl() ."/". $data[$i]->image_link;
+        $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
         $data[$i]->is_followed =Following::where('follower_id',$this->ID)->where('user_id',$data[$i]->id)->count() ;
         $i++;}
         /**
@@ -385,7 +386,7 @@ class FollowingController extends Controller
 							LEFT JOIN
 							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
                                        B.img_url as book_image , B.pages_no as pages
-							FROM SHELVES S , BOOKS B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
+							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
         /**
          * Response paramaters and return
@@ -394,6 +395,12 @@ class FollowingController extends Controller
          * _total size of items in each page
          *
          */
+        $i=0;
+        while ($i < sizeof($data)) {
+        $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+        $i++;
+        } 
+        
         $_start = sizeof($data) == 0 ? 0 : ($page - 1) * $listSize + 1;
         $_end = sizeof($data) == 0 ? 0: ($page  - 1) * $listSize + sizeof($data) ;
         return response()->json(['following'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);

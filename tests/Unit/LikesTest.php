@@ -61,7 +61,7 @@ class LikesTest extends TestCase
        // becouse each book will be reviewed must be read 
        // then create a record in the reviews table 
        // update some atributes in the tables of users & book 
-       $response = $this->json('POST', 'api/makeLike', [ 'token'=> $token ,'token_type' =>'bearer' ,
+       $response = $this->json('POST', 'api/LikeOrUnLike', [ 'token'=> $token ,'token_type' =>'bearer' ,
        'id'=> $reviewId ,'type'=>0]);
        // Show the response in the cmd
        /*echo "\n";
@@ -70,6 +70,7 @@ class LikesTest extends TestCase
        // Check from the structure of the return json 
        $response->assertStatus(200)->assertJsonStructure([
            'status',
+           'Message',
            'user',
            'resourse_id',
            'resourse_type'
@@ -139,8 +140,8 @@ class LikesTest extends TestCase
         // delete request will  
         // delete a record in the comments table 
         // update some atributes in the tables of users & book 
-        $response = $this->json('DELETE', 'api/unlike', [ 'token'=> $token ,'token_type' =>'bearer' ,
-        'id'=> $like['id']]);
+        $response = $this->json('POST', 'api/LikeOrUnLike', [ 'token'=> $token ,'token_type' =>'bearer' ,
+        'id'=> $review['id'],'type'=>0]);
         // Show the response in the cmd
         //echo "\n";
         //echo $response->content();

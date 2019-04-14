@@ -22,9 +22,9 @@ class FollowTest extends TestCase
          * Get a random user for authentication and making follow function
          * $followingCount is kept for db assertion test
          */
-        $usersCount = User::all()->count();
-        $randomUserId = rand(1, $usersCount);
+        $randomUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
         $user = User::find($randomUserId);
+
         $followingCount = $user->following_count;
         /**
          * Get a random user_id that is not followed by the authenticated user before
@@ -47,6 +47,10 @@ class FollowTest extends TestCase
         $response = $this->json('POST', 'api/follow', [ 'token'=> $token ,'token_type' =>'bearer' , 'user_id'=> $randomFollowingId ]);
         $response->assertJson(["status"=>"true"])->assertStatus(201);
 
+        $response = $this->json('POST', 'api/follow', ['token' => $token, 'token_type' => 'bearer', 'user_id' => $randomUserId ]);
+        $response->assertStatus(404);
+
+
         if (Following::where('follower_id', $randomFollowingId)->where('user_id', $randomUserId)->count() == 1)
             $this->assertStatus(400);
         /**
@@ -59,5 +63,29 @@ class FollowTest extends TestCase
          ]);
 
 
+    }
+    public function login()
+    {
+        $randomUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
+        $user = User::find($randomUserId);
+        $loginResponse = $this->json('POST', 'api/login', ['email' => $user['email'], 'password' => 'password']);
+        $loginResponse->assertSee("token")->assertStatus(200);
+        $jsonArray = json_decode($loginResponse->content(), true);
+        $token = $jsonArray['token'];
+        return $token;
+    }
+
+    public function testBadParamaters()
+    {
+        $token = FollowTest::login();
+        $response = $this->json('POST', 'api/follow', ['token' => $token, 'token_type' => 'bearer']);
+        $response->assertStatus(404);
+    }
+
+    public function testNegativeId()
+    {
+        $token = FollowTest::login();
+        $response = $this->json('POST', 'api/follow', ['token' => $token, 'token_type' => 'bearer','user_id'=>-1]);
+        $response->assertStatus(404);
     }
 }

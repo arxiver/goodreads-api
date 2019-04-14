@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Storage;
+use App\Following;
 
 /**
  * [1] The Image 
@@ -716,11 +717,12 @@ class userController extends Controller
         /**
          * Query finding user data
          */      
-        $data = User::where('id',$userId)->get()[0];
 
-        
-        $data["image_link"] = $this->GetUrl() . "/" . $data["image_link"];
-  
+        $data = User::where('id',$userId)->get()[0];
+        if( $request->has(['id']) && ( $request->id != $this->ID ) )
+         $data->is_followed = Following::where('follower_id', $this->ID)->where('user_id', $userId)->count();
+         $data->image_link = $this->GetUrl() . "/" . $data->image_link;
+
         /**
          * Return response
          */

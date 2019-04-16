@@ -26,7 +26,7 @@ class Review extends Model
         ->join('books','reviews.book_id','=','books.id')
         ->join('users','reviews.user_id','=','users.id')
         ->join('authors','books.author_id','=','authors.id')
-        ->select('Reviews.id','body','rating','likes_count','comments_count','reviews.updated_at'
+        ->select('reviews.id','body','rating','likes_count','comments_count','reviews.updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count','ratings_count'
         ,'ratings_avg','pages_no','users.id as user_id','users.name','users.image_link','author_name')
         ->get();

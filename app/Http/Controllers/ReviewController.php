@@ -627,6 +627,11 @@ class ReviewController extends Controller
             {
                 if($res->user_id>=0){
                     $user=DB::select('select name as user_name,image_link as image_link from users where id=?', [$res->user_id]);
+                   // $user["image_link"]=$this->GetUrl()."/".$user["image_link"];
+                   foreach($user as $res1)
+                   {
+                        $res1->image_link=$this->GetUrl()."/".$res1->image_link;
+                   }
                 }
                 if($res->book_id>=0){
                     $book=DB::select('select title as book_name,img_url as book_image from books where id=?',[$res->book_id]);
@@ -807,19 +812,10 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
        $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,r.created_at,r.updated_at,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ? order by r.created_at DESC', [$request['bookId']]);
-      /* foreach($results as $res)
+       foreach($results as $res)
        {
-               if($res->shelf_name ==0){
-                   $res->shelf_name ='read';
-               }
-               else if($res->shelf_name ==1){
-                   $res->shelf_name ='currentlyRead';
-               }
-               else{
-                   $res->shelf_name ='WantToRead';
-
-               }
-       }*/
+            $res->userimagelink=$this->GetUrl()."/".$res->userimagelink;
+       }
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',

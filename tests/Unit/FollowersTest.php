@@ -6,6 +6,8 @@ use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+
 
 class FollowersTest extends TestCase
 {
@@ -19,9 +21,10 @@ class FollowersTest extends TestCase
         /**
          * Get a random user for authentication
          */
-        $usersCount = User::all()->count();
-        $randomUserId = rand(1, $usersCount);
-        $user = User::find( $randomUserId);
+        $randomUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
+        $user = User::find($randomUserId);
+
+        $AnoterUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
 
         /**
          * Login assertion
@@ -37,6 +40,17 @@ class FollowersTest extends TestCase
          */
         $response = $this->json('GET', 'api/followers', [ 'token'=> $token ,'token_type' =>'bearer']);
         $response->assertStatus(200)->assertSee('followers');
+
+
+        $response = $this->json('GET', 'api/followers', ['token' => $token, 'token_type' => 'bearer', 'user_id' => $AnoterUserId]);
+        $response->assertStatus(200)->assertSee('followers');
+
+        $response = $this->json('GET', 'api/followers', ['token' => $token, 'token_type' => 'bearer', 'user_id' => "xzcxzc"]);
+        $response->assertStatus(404);
+
+
+        $response = $this->json('GET', 'api/followers', ['token' => $token, 'token_type' => 'bearer', 'user_id' => -102221]);
+        $response->assertStatus(404);
 
 
     }

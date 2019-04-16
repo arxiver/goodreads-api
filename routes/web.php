@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/', function () {return view('ReadAholic');});
+Route::get('/', function () {return view('welcome');});
 

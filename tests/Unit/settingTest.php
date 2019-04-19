@@ -104,7 +104,7 @@ class settingTest extends TestCase
     {
 
         parent::setUp();
-        $this->Random = rand(3, User::all()->count());
+        $this->Random = rand(3, 3);                    // i made it 3 cause it's not sure that the ids are countinious
         $this->User = User::find($this->Random);
         $this->token = JWTAuth::fromUser($this->User);
         $this->tokenType = "bearer";
@@ -217,7 +217,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->changePassword($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -395,7 +395,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->changeName($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -498,7 +498,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->changeCountry($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -598,7 +598,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->changeCity($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -702,7 +702,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->changeBirthday($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -803,7 +803,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->whoCanSeeBirthday($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -894,7 +894,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->whoCanSeeCountry($this->ErrorStatus, $SendingData, $ReceivingData);
     }
@@ -985,7 +985,7 @@ class settingTest extends TestCase
                                 'token_type'    => $this->tokenType
                             );
         $ReceivingData = array(
-                                    "errors" => "UnAuthorized"
+                                    "errors" => "You are not loged in"
                                 );
         $this->whoCanSeeCity($this->ErrorStatus, $SendingData, $ReceivingData);
     }

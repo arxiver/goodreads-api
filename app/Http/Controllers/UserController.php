@@ -12,21 +12,11 @@ use Storage;
 use App\Following;
 
 /**
- * [1] The Image 
- *      [1] Which methods is better than other (public , database or s3)
- *      [2] when i save an image in s3 how i get it (and show the TA the pdf and the code of filesystem)
- * 
  * [2] The verification
- *      [1] What is the mechanesm which i will use
+ *      [1] I will use the same column for the token of the verification and reset password
  * 
  * [3] Guest
- * [4] Edit the file of [start with laravel] and add every thing about the unit test
- * [5] How to use the validator [in] in the issue of (male , female and other)
- * [6] Questions
- *      [1] How i send the header with post request                 Done (in the array of sending data)
- *      [2] How is the authontecated going on in the unit test      simi Done (when you generate a toke by JWTAuth::fromUser) i think it generate a valid token you can use it in the operation of authorization
- *      [3] after you know the point [2] finish your unit test      simi Done 
- *      [4] some problem in the file of signupTest in the last function  
+ *      [1] I will divide all function into 3 types and make the common type without middleware and return with every response a paramater determine if it is guest or user 
  */
 /**
  * @group User 
@@ -123,11 +113,11 @@ class userController extends Controller
                                 );
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
-            return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
         } 
         else 
         {
-            return response()->json(["errors"=> $data->messages()->first()], 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $data->messages()->first()], 405);
         } 
     }
 
@@ -197,7 +187,7 @@ class userController extends Controller
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
                 $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
-                return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 ],200);
+                return response()->json(["Priviling" => $this->UserOrGuest(),"user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60 ],200);
             }
             else
             {
@@ -271,7 +261,7 @@ class userController extends Controller
                             );
         $show = User::find($this->ID,$gettingData);
         $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
-        return response()->json(["user" => $show],200);
+        return response()->json(["Priviling" => $this->UserOrGuest(),"user" => $show],200);
     }
 
 
@@ -298,7 +288,7 @@ class userController extends Controller
     public function logOut(Request $request)
     {
         auth()->logout();
-        return response()->json(["message" => "You have loged out"],200);
+        return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have loged out"],200);
     }
 
 
@@ -325,11 +315,11 @@ class userController extends Controller
             $user = User::find($this->ID);
             $user->name = $request["newName"];
             $user->save();
-            return response()->json(["message" => "You have changed your name"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your name"],200);
         }
         else
         {
-            return response()->json(["errors"=> $valid->messages()->first()], 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $valid->messages()->first()], 405);
         }
     }
 
@@ -366,16 +356,16 @@ class userController extends Controller
                 $user = User::find($this->ID);
                 $user->password = $request["newPassword"];
                 $user->save();
-                return response()->json(["message" => "You have changed your password"],200);
+                return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your password"],200);
             }
             else
             {
-                return response()->json(["errors" => "The password is invalid."],405);
+                return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => "The password is invalid."],405);
             }
         }
         else
         {
-            return response()->json(["errors"=> $valid->messages()->first()], 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $valid->messages()->first()], 405);
         }
     }
 
@@ -406,11 +396,11 @@ class userController extends Controller
             $user = User::find($this->ID);
             $user->country = $request["newCountry"];
             $user->save();
-            return response()->json(["message" => "You have changed your country"] , 200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your country"] , 200);
         }
         else
         {
-            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $valid->messages()->first()] , 405);
         }
         
     }
@@ -440,11 +430,11 @@ class userController extends Controller
             $user = User::find($this->ID);
             $user->city = $request["newCity"];
             $user->save();
-            return response()->json(["message" => "You have changed your city"] , 200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your city"] , 200);
         }
         else
         {
-            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $valid->messages()->first()] , 405);
         }
     }
 
@@ -480,11 +470,11 @@ class userController extends Controller
             $user->birthday = date("Y-n-j" , strtotime($request["newBirthday"]));
             $user->age = date("Y") - date("Y" , strtotime($request["newBirthday"]));
             $user->save();
-            return response()->json(["message" => "You have changed your birthday"] , 200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your birthday"] , 200);
         }
         else
         {
-            return response()->json(["errors"=> $valid->messages()->first()] , 405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors"=> $valid->messages()->first()] , 405);
         }
     }
 
@@ -506,13 +496,13 @@ class userController extends Controller
             $user->see_my_birthday = $request["seeMyBirthday"];
             $user->save();
             if($user->see_my_birthday == "onlyMe")
-            return response()->json(["message" => "Now, Just you can see your birthday"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, Just you can see your birthday"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
         }
         else
         {
-            return response()->json(["errors" => $Valid->messages()->first()],405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => $Valid->messages()->first()],405);
         }
         
 
@@ -537,13 +527,13 @@ class userController extends Controller
             $user->see_my_country = $request["seeMyCountry"];
             $user->save();
             if($user->see_my_country == "onlyMe")
-            return response()->json(["message" => "Now, Just you can see your country"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, Just you can see your country"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
         }
         else
         {
-            return response()->json(["errors" => $Valid->messages()->first()],405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => $Valid->messages()->first()],405);
         }
     }
 
@@ -565,13 +555,13 @@ class userController extends Controller
             $user->see_my_city = $request["seeMyCity"];
             $user->save();
             if($user->see_my_city == "onlyMe")
-            return response()->json(["message" => "Now, Just you can see your city"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, Just you can see your city"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
         }
         else
         {
-            return response()->json(["errors" => $Valid->messages()->first()],405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => $Valid->messages()->first()],405);
         }
     }
 
@@ -607,11 +597,11 @@ class userController extends Controller
             $User->image_link = $URL;
             $User->save();
             Storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory . $OldUrl);
-            return response()->json(["message" => "You have changed your profile picture"]);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have changed your profile picture"]);
         }
         else
         {
-            return response()->json(["errors" => $Valid->messages()->first()],405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => $Valid->messages()->first()],405);
         }
     }
 
@@ -637,11 +627,11 @@ class userController extends Controller
             $User = User::find($this->ID); 
             storage::disk("public")->delete($AvatarsDirectory . "/" .$User->image_link);
             $User->delete();
-            return response()->json(["message" => "You have deleted your account"],200);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"message" => "You have deleted your account"],200);
         }
         else
         {
-            return response()->json(["errors" => "The password is invalid."],405);
+            return response()->json(["Priviling" => $this->UserOrGuest(),"errors" => "The password is invalid."],405);
         }  
     }
 
@@ -728,6 +718,14 @@ class userController extends Controller
          */
         return response()->json($data);
 
+    }
+
+
+    public function test(Request $request)
+    {
+        $Output = "<p style = \"color:red\">Im here in the function</p>";
+        return response()->json(["Priviling" => $this->UserOrGuest(),"Output"=>$Output]);
+        die();
     }
 
 }

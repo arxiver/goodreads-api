@@ -17,11 +17,11 @@ class Authorized
     {
         if(auth()->user())
         {
-            return response()->json(["errors" => "Alredy authorized"],405);
+            return $next($request);
         }
         else
         {
-            return $next($request);
+            return response()->json(["errors" => "You are not loged in"],405);
         }
     }
 }

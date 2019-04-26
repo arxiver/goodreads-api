@@ -141,7 +141,7 @@ class finalTest extends TestCase
         // logOut with UnAuthonticated user
         $Status = 405;
         $SendingData = array();
-        $ReceivingData = array("errors" => "UnAuthorized");
+        $ReceivingData = array("errors" => "You are not loged in");
         $this->logOut($SendingData , $ReceivingData , $Status);
         
         
@@ -172,7 +172,7 @@ class finalTest extends TestCase
             'email' => 'test@yahoo.com' ,
             'password' => 'password'
         );
-        $ReceivingData = array("errors" => "Alredy authorized");
+        $ReceivingData = array("error" => "You are already loged in");
         $response = $this->json('POST', 'api/login', $SendingData);
         $response
             ->assertStatus($Status)
@@ -197,7 +197,7 @@ class finalTest extends TestCase
         // logOut with UnAuthonticated user
         $Status = 405;
         $SendingData = array();
-        $ReceivingData = array("errors" => "UnAuthorized");
+        $ReceivingData = array("errors" => "You are not loged in");
         $this->logOut($SendingData , $ReceivingData , $Status);
     }
 }

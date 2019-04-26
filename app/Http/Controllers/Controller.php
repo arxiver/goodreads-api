@@ -30,5 +30,16 @@ class Controller extends BaseController
     {
         return asset("storage/avatars/");
     }
+    public function UserOrGuest()
+    {
+        if(auth()->user())
+        {
+            return "User";
+        }
+        else
+        {
+            return "Guest";
+        }
+    }
 }
 

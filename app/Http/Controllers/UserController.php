@@ -10,23 +10,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Storage;
 use App\Following;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPassword;
+use App\Mail\VerifiedAccount;
+use App\Mail\testmail;
+use Crypt;
 
 /**
- * [1] The Image 
- *      [1] Which methods is better than other (public , database or s3)
- *      [2] when i save an image in s3 how i get it (and show the TA the pdf and the code of filesystem)
- * 
  * [2] The verification
- *      [1] What is the mechanesm which i will use
+ *      [1] I will use the same column for the token of the verification and reset password
  * 
  * [3] Guest
- * [4] Edit the file of [start with laravel] and add every thing about the unit test
- * [5] How to use the validator [in] in the issue of (male , female and other)
- * [6] Questions
- *      [1] How i send the header with post request                 Done (in the array of sending data)
- *      [2] How is the authontecated going on in the unit test      simi Done (when you generate a toke by JWTAuth::fromUser) i think it generate a valid token you can use it in the operation of authorization
- *      [3] after you know the point [2] finish your unit test      simi Done 
- *      [4] some problem in the file of signupTest in the last function  
+ *      [1] I will divide all function into 3 types and make the common type without middleware and return with every response a paramater determine if it is guest or user 
  */
 /**
  * @group User 
@@ -41,6 +36,11 @@ class userController extends Controller
     private $PrivateUrl = "";
     private $AvatarDirectory = "avatars/";
     private $DefaultImage = "default.jpg";
+    private $ForgotPasswordRoute = "api/checktoken?token=";
+    private $VerifyRoute = "api/checktokenverify?token=";
+    private $ForgotPasswordRouteFront = "http://localhost:4200/#/forgetPassword?token=";
+    private $VerifyRouteFront="";
+    private $TokenLife = 60*60;     // The life of the token
     
     //
     /**
@@ -119,7 +119,8 @@ class userController extends Controller
             $gettingdata = array(
                                     "name" ,
                                     "username" ,
-                                    "image_link"
+                                    "image_link",
+                                    "verified"
                                 );
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
@@ -192,7 +193,8 @@ class userController extends Controller
                 $gettingdata = array(
                                         "name" ,
                                         "username" ,
-                                        "image_link"
+                                        "image_link",
+                                        "verified"
                                     );
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
@@ -267,7 +269,8 @@ class userController extends Controller
                                 "birthday",
                                 "see_my_birthday",
                                 "see_my_country",
-                                "see_my_city"
+                                "see_my_city",
+                                "verified"
                             );
         $show = User::find($this->ID,$gettingData);
         $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
@@ -635,7 +638,7 @@ class userController extends Controller
         {
             auth()->logout();
             $User = User::find($this->ID); 
-            storage::disk("public")->delete($AvatarsDirectory . "/" .$User->image_link);
+            storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory .$User->image_link);
             $User->delete();
             return response()->json(["message" => "You have deleted your account"],200);
         }
@@ -643,6 +646,174 @@ class userController extends Controller
         {
             return response()->json(["errors" => "The password is invalid."],405);
         }  
+    }
+
+
+
+
+    /**
+     * forgotPassword
+     * @bodyParam email string required .
+     * @response 200 {
+     * "message":"Now , You can go to You email to reset the password"
+     *}
+     * @response 405{
+     * "error": "The email is invalid"
+     *}
+     */
+    public function forgotPassword(Request $request)
+    {
+
+        $Validation = array (
+                                "email" => "required|exists:users,email"
+                            );
+
+        $Messages = array   (
+                                "email.exists" => "The email is invalid"
+                            );
+        $Validate = validator::make($request->all() , $Validation , $Messages);
+        if(!$Validate->fails())
+        {
+            $token = Crypt::encryptString(time());
+            $User = User::where("email" , $request["email"])->first();
+            $User->forgot_password_token = $token;
+            $User->save();
+            $Url = asset($this->ForgotPasswordRoute . $token);
+            Mail::to($request["email"])->send(new ForgotPassword($Url));
+            return response()->json(["message" => "Now , you can go to " .$request["email"]. " to reset your password"],200);
+        }
+        else
+        {
+            return response()->json(["error" => $Validate->messages()->first()],405);
+        }
+    }
+
+
+
+
+
+    /**
+     * check token
+     * @bodyParam token string required .
+     * @response 200 {
+     * "error":"valid token"
+     *}
+     * @response 405{
+     * "error": "Invalid token"
+     *}
+     */
+    public function checkToken(Request $request)
+    {
+        $Validation = array (
+                                "token" => "required|exists:users,forgot_password_token"
+                            );
+        $Validate = validator::make($request->all() , $Validation);
+        if(!$Validate->fails())
+        {
+            $token = Crypt::decryptString($request["token"]);
+            if(time() - $token < $this->TokenLife)
+            {
+                $User = User::where("forgot_password_token" , $request["token"])->first();
+                $User->forgot_password_token = null;
+                $User->save();
+                return response()->json(["userID"=>$User->id],200);
+            }
+            else
+            {
+                return response()->json(["error" => "This url is old , please try to reset your password again"],405);
+            }
+        }
+        else
+        {
+            return response()->json(["error" => "This url is old , please try to reset your password again"] , 405);
+        }
+    }
+
+
+    /**
+     * reset password
+     * @bodyParam password string required .
+     * @bodyParam password_confirmation string required .
+     * @bodyParam userId integer required .
+     * @response 200 {
+     * "message": "You have reseted your password"
+     *}
+     * @response 405{
+     * "error": "The password field is required"
+     *}
+     */
+    public function resetPassword(Request $request)
+    {
+        $Validation = array (
+                                "password"      => "required|max:30|min:5|confirmed",
+                            );
+        $Validate = validator::make($request->all() , $Validation);
+        if(!$Validate->fails())
+        {
+            $User = User::find($request["userId"]);
+            $User->password = $request["password"];
+            $User->save();
+            return response()->json(["message"=>"You have reseted your password"],200);
+        }
+        else
+        {
+            return response()->json(["error" => $Validate->messages()->first()],405);
+        }
+    }
+
+
+
+    /**
+     * verify account
+     * @bodyParam email string required .
+     * @authenticated
+     * @response 200 {
+     * "message":"Now , You can go to You email to reset the password"
+     *}
+     * @response 405{
+     * "error": "The email is invalid"
+     *}
+     */
+    public function verify(Request $request)
+    {
+        $token = Crypt::encryptString(time());
+        $User = User::find($this->ID);
+        $User->verified_token = $token;
+        $User->save();
+        $Url = asset($this->VerifyRoute . $token);
+        Mail::to($User->email)->send(new VerifiedAccount($Url));
+        return response()->json(["message" => "Now , you can go to " .$User->email. " to verify your account"],200);
+    }
+
+
+
+
+
+    /**
+     * check token
+     * @bodyParam token string required .
+     * @response 200 {
+     * "error":"valid token"
+     *}
+     * @response 405{
+     * "error": "Invalid token"
+     *}
+     */
+    public function checkTokenVerify(Request $request)
+    {
+        $token = Crypt::decryptString($request["token"]);
+        if(time() - $token < $this->TokenLife)
+        {
+            $User = User::where("verify_token" , $request["token"])->first();
+            $User->verify_token = null;
+            $User->verified = 1;
+            $User->save();
+            return response()->json(["message" => "You have verified your account"],200);
+        }
+        else
+        {
+            return response()->json(["error" => "This url is old , please try to verify your account again"],405);
+        }
     }
 
 
@@ -728,6 +899,13 @@ class userController extends Controller
          */
         return response()->json($data);
 
+    }
+
+
+    public function test(Request $request)
+    {
+        Mail::to("mrehab745@gmail.com")->send(new testmail());
+        return response()->json(["message" => "Good you have sent your message"],200);
     }
 
 }

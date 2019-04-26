@@ -77,7 +77,7 @@ class signupTest extends TestCase
     {
 
         parent::setUp();
-        $this->Random = rand(3, User::all()->count());
+        $this->Random = rand(3, 3);
         $this->User = User::find($this->Random);
         $this->token = null;
         $this->tokenType = "bearer";
@@ -330,7 +330,7 @@ class signupTest extends TestCase
     {
         $Status = 405;
         $SendingData = array(
-                                "email"                 => $this->User["email"],
+                                "email" => $this->User["email"],
                                 "token" => $this->token,
                                 "token_type" => $this->tokenType
                             );
@@ -741,8 +741,8 @@ class signupTest extends TestCase
 
         // [5] The test of the middleware
 
-        /*
-        $user = factory(User::class)->create();
+        
+        $this->token = JWTAuth::fromUser($this->User);
 
         $Status = 405;
         $SendingData = array(
@@ -753,18 +753,18 @@ class signupTest extends TestCase
                                 "gender"                => $this->Array["Valid gender"],
                                 "birthday"              => $this->Array["Valid birthday"],
                                 "country"               => $this->Array["Valid country"],
-                                "city"                  => $this->Array["Valid city"]
+                                "city"                  => $this->Array["Valid city"],
                                 "token" => $this->token,
                                 "token_type" => $this->tokenType
                             );
         $RecievingData = array  (
-                                    "errors" => "Alredy authorized"
+                                    "error" => "You are already loged in"
                                 );
-        $response = $this->actingAs($user)->json("POST" , "api/signup" , $SendingData);
+        $response = $this->json("POST" , "api/signup" , $SendingData);
         $response
             ->assertStatus($Status)
             ->assertJsonFragment($RecievingData);
-        */
-        $this->assertJson(true);
+        
+        //$this->assertJson(true);
     }
 }

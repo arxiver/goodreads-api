@@ -20,8 +20,8 @@ class CreateShelvesTable extends Migration
             $table->integer('type')->default(3);
             $table->integer('likes_count')->nullable();
             $table->integer('comments_count')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign('book_id')->references('id')->on('books')->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

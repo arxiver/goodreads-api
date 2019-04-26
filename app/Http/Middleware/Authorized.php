@@ -21,7 +21,7 @@ class Authorized
         }
         else
         {
-            return response()->json(["Priviling" => "Guest","errors" => "You are not loged in"],405);
+            return response()->json(["errors" => "You are not loged in"],405);
         }
     }
 }

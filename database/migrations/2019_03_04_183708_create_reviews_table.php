@@ -24,8 +24,8 @@ class CreateReviewsTable extends Migration
             $table->integer('rating')->default(0);
             $table->integer('likes_count')->default(0);
             $table->integer('comments_count')->default(0);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign('book_id')->references('id')->on('books')->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

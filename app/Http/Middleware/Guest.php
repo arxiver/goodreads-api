@@ -14,7 +14,7 @@ class Guest
         }
         else
         {
-            return response()->json(["Priviling" => "User","error" => "You are already loged in"],405);
+            return response()->json(["error" => "You are already loged in"],405);
         }
     }
 }

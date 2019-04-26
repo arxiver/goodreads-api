@@ -9,8 +9,9 @@ Route::get('/', function () {return view('ReadAholic');});
 Route::group(["middleware" => "guest"] , function(){       // This middleware is only for guests
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
-    
-
+    Route::get('checktoken', "UserController@checkToken");                          
+    Route::post('forgotpassword', "UserController@forgotPassword");                  
+    Route::post('resetpassword', "UserController@resetPassword");
 });
 
 Route::group(["middleware" => "authorized"], function(){     // This middleware is only for users
@@ -30,6 +31,8 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('whocanseemycountry', "UserController@whoCanSeeMyCountry");          //auth
     Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");                //auth
     Route::post('changeimage', "UserController@changeImage");                       //auth
+    Route::get('checktokenverify', "UserController@checkTokenVerify");                          
+    Route::get('verify', "UserController@verify");
 
 
 
@@ -112,7 +115,12 @@ Route::get('books/genre', 'BookController@showByGenre');                        
 Route::get('Books/book_title','BookController@getBookByTitle');                  // Non auth
 Route::get('Books/book_ISBN','BookController@getBookByIsbn');                    // Non auth
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');        // Non auth
-Route::get( 'books/show', 'BookController@show');                                // Non auth
+Route::get( 'books/show', 'BookController@show');  
+
+
+
+
+Route::get( 'test', 'UserController@test');                                // Non auth
 
 
 

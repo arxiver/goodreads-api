@@ -20,8 +20,8 @@ class CreateFollowingsTable extends Migration
             $table->integer('likes_count')->nullable();
             $table->integer('comments_count')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('follower_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign('follower_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
             $table->unique(['user_id', 'follower_id']);
         });
     }

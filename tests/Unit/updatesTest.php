@@ -22,6 +22,7 @@ class updatesTest extends TestCase
     /**
      * A basic unit test example.
      * @test
+     * @group nour
      * @return void
      */
     public function testUpdates()
@@ -82,7 +83,7 @@ class updatesTest extends TestCase
         $response->assertSuccessful();
         
         $jsonArray = $response1->getData();
-        $updates = $jsonArray->updates;
+        $updates = $jsonArray;
         $arr = array_column($updates,('update_type'));
         if(count($arr)>0)
         $this->assertTrue((min($arr)>-1)&&(max($arr)<5));
@@ -161,7 +162,7 @@ class updatesTest extends TestCase
         $max=rand(1,200);
         $response3 = $this ->get('/api/updates?max_updates=' .$max.'');
         $response3->assertSuccessful();
-        $u = $response3->getData()->updates;
+        $u = $response3->getData();
         $this->assertTrue(count($u)<$max);
     }
 }

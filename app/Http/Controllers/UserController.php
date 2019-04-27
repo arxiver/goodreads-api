@@ -767,10 +767,7 @@ class userController extends Controller
      * verify account
      * @authenticated
      * @response 200 {
-     * "message":"Now , You can go to You email to reset the password"
-     *}
-     * @response 405{
-     * "error": "The email is invalid"
+     * "message":"Now , You can go to your account to reset the password"
      *}
      */
     public function verify(Request $request)

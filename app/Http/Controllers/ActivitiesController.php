@@ -392,35 +392,123 @@ class ActivitiesController extends Controller
 	}
 
     /**
+    * @group [Activities].List Comments
     * list comments
-    * lists comments for a specific resource(review,update)
-    * @bodyParam id required int id of the commented resource
-	* @bodyParam type int required type of the resource (1 for user status and 2 for review)
- 	* @response
+    *
+    * lists comments for a specified review for all users 
+    * and determine if the authenticated have this comment or Not having it
+    * 
+    * the resopnse wil contain an id it will represent the comment id 
+    *
+    * Please, save this id to send it back when you want to delet the comment 
+    * @authenticated 
+    *
+    * @bodyParam id int required id of the commented resource
+    * 
+    * @response 200
     * {
-	*	"comment": {
-    * 	"comments"[
-	*		"comment": {
-	*			"id": "0000000",
-	*			"user": {
-	*				"id": "000000",
-	*				"name": "aa",
-	*				"location": "The United States",
-	*				"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	*				"image_url": "\nhttps://s.gr-assets.png\n"
-	*				},
-	*			"date_added": "Fri Mar 08 16:25:10 -0800 2019",
-	*			"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
-	*			"link": "\nhttps://www.goodreads.comshow/00000\n",
-	*			"body":"a great book"
-	*  		}
-	* 		]
-	*	}
+    * "0": [
+    * {
+    *    "name": "test",
+    *    "username": "test",
+    *    "email": "test@yahoo.com",
+    *    "image_link": "default.jpg",
+    *    "id": 1,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:27",
+    *    "updated_at": "2019-04-27 02:38:27",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *    "name": "test",
+    *    "username": "test",
+    *    "email": "test@yahoo.com",
+    *    "image_link": "default.jpg",
+    *    "id": 2,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:28",
+    *    "updated_at": "2019-04-27 02:38:28",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *    "name": "test",
+    *    "username": "test",
+    *    "email": "test@yahoo.com",
+    *    "image_link": "default.jpg",
+    *    "id": 3,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:30",
+    *    "updated_at": "2019-04-27 02:38:30",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *     "name": "ta7a",
+    *     "username": "ta7a",
+    *     "email": "ta7a@yahoo.com",
+    *     "image_link": "default.jpg",
+    *     "id": 4,
+    *     "body": "ahmed",
+    *     "created_at": "2019-04-30 00:00:00",
+    *     "updated_at": "2019-04-10 00:00:00",
+    *     "have_the_comment": "No"
+    * }
+    *  ],
+    *     "status": "true"
+    * }
+    * @response 200
+    * {
+    *    "status": "true",
+    *    "Message": "There is no comments on this review"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "Message": "can't List the comments of this review becouse this review doesn't exists"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "errors": "The id field is required."
     * }
     */
-    public function listComments()
+    public function listComments(Request $request)
     {
+        $Validations    = array(
+            "id"        => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Review::find($request["id"]) )
+            {
 
+                $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+
+                if($results != NULL){
+                    DB::table('comments')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_comment' => 'Yes'));
+                    $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+                    DB::table('comments')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_comment' => 'No'));
+                    return response()->json([$results,"status" => "true"]);
+                }
+                else{
+                    return response()->json([
+                        "status" => "true" , "Message" => "There is no comments on this review"
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "can't List the comments of this review becouse this review doesn't exists"
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
     }
     /**
      * @group [Activities].Like/Unlike
@@ -440,14 +528,14 @@ class ActivitiesController extends Controller
      * 
      * decrement the number of likes in review or shelf or follow 
      * @bodyParam id int required id of the liked resource
-	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
+     * 
      * @authenticated
      * @response {
      * "status": "true",
      * "Message": "Like is Done ",
      * "user": 1,
      * "resourse_id": 1,
-     * "resourse_type": 2
+     * "resourse_type": 0
 	 * }
      * @response{
      * "status": "true",
@@ -490,51 +578,47 @@ class ActivitiesController extends Controller
     {
         $Validations    = array(
             "id"        => "required|integer",
-            "type"      => "required|integer|max:2|min:0",
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if ( $request['type'] == 0 )
+            $actualLikeInReview = DB::table('likes')->where([['user_id' , $this->ID],
+            ["resourse_id", $request["id"]]])->first();
+            if (!empty($actualLikeInReview))
             {
-                $actualLikeInReview = DB::table('likes')->where([['user_id' , $this->ID],
-                ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
-                if (!empty($actualLikeInReview))
+                if ( Review::find($request["id"]) )
                 {
-                    if ( Review::find($request["id"]) )
-                    {
-                        $wantedReview=Review::find($request["id"]);
-                        $number=$wantedReview['likes_count']-1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $request["id"]],
-                                [ 'likes_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't make a unlike on this review becouse this review doesn't exists"
-                        ]);
-                    }
-                } 
+                    $wantedReview=Review::find($request["id"]);
+                    $number=$wantedReview['likes_count']-1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $request["id"]],
+                            [ 'likes_count' => $number ]
+                        );
+                }
                 else{
-                    if ( Review::find($request["id"]) )
-                    {
-                        $wantedReview=Review::find($request["id"]);
-                        $number=$wantedReview['likes_count']+1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $request["id"]],
-                                [ 'likes_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
-                        ]);
-                    }
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't make a unlike on this review becouse this review doesn't exists"
+                    ]);
+                }
+            } 
+            else{
+                if ( Review::find($request["id"]) )
+                {
+                    $wantedReview=Review::find($request["id"]);
+                    $number=$wantedReview['likes_count']+1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $request["id"]],
+                            [ 'likes_count' => $number ]
+                        );
+                }
+                else{
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
+                    ]);
                 }
             }
-            else if ( $request['type'] == 1 )
+            /*else if ( $request['type'] == 1 )
             {
                 $actualLikeInAddToShelf = DB::table('likes')->where([['user_id' , $this->ID],
                 ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
@@ -573,8 +657,8 @@ class ActivitiesController extends Controller
                         ]);
                     }
                 }
-            }
-            else
+            }*/
+            /*else
             {
                 $actualLikeOnFollow = DB::table('likes')->where([['user_id' , $this->ID],
                 ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
@@ -613,9 +697,9 @@ class ActivitiesController extends Controller
                         ]);
                     }
                 }
-            }
+            }*/
             $actualLike = DB::table('likes')->where([['user_id' , $this->ID],
-             ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+             ["resourse_id", $request["id"]]])->first();
             if (!empty($actualLike))
             {
                 $like = Likes::findOrFail($actualLike->id);
@@ -628,13 +712,12 @@ class ActivitiesController extends Controller
                 $Create = array(
                     "user_id" => $this->ID,
                     "resourse_id" => $request["id"],
-                    "resourse_type"  => $request["type"],
                     'updated_at'=>now(),
                     'created_at'=>now()
                 );
                 Likes::create($Create);
                 return response()->json([
-                    "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                    "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] 
                 ]);
             }
         }

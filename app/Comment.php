@@ -10,6 +10,7 @@ class Comment extends Model
         "user_id",
         "resourse_id",
         "resourse_type" ,
+        "have_the_comment",
         "body",
         'updated_at',
         'created_at'

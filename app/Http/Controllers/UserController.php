@@ -652,7 +652,7 @@ class userController extends Controller
 
 
     /**
-     * forgotPassword
+     * forgot Password
      * @bodyParam email string required .
      * @response 200 {
      * "message":"Now , You can go to You email to reset the password"
@@ -693,13 +693,13 @@ class userController extends Controller
 
 
     /**
-     * check token
+     * check token forgot password
      * @bodyParam token string required .
      * @response 200 {
-     * "error":"valid token"
+     * "userId": ""
      *}
      * @response 405{
-     * "error": "Invalid token"
+     * "error": "This url is old , please try to reset your password again"
      *}
      */
     public function checkToken(Request $request)
@@ -765,13 +765,9 @@ class userController extends Controller
 
     /**
      * verify account
-     * @bodyParam email string required .
      * @authenticated
      * @response 200 {
-     * "message":"Now , You can go to You email to reset the password"
-     *}
-     * @response 405{
-     * "error": "The email is invalid"
+     * "message":"Now , You can go to your account to reset the password"
      *}
      */
     public function verify(Request $request)
@@ -790,13 +786,14 @@ class userController extends Controller
 
 
     /**
-     * check token
+     * check token verify
      * @bodyParam token string required .
+     * @authenticated
      * @response 200 {
-     * "error":"valid token"
+     * "error":"You have verified your account"
      *}
      * @response 405{
-     * "error": "Invalid token"
+     * "error": "This url is old , please try to verify your account again"
      *}
      */
     public function checkTokenVerify(Request $request)

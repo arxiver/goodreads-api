@@ -1498,13 +1498,13 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "valid token"
+    "error": "You have verified your account"
 }</code></pre>
 <blockquote>
 <p>Example response (405):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Invalid token"
+    "error": "This url is old , please try to verify your account again"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/checktokenverify</code></p>
@@ -1541,7 +1541,6 @@ fetch(url, {
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/verify");
 
 let headers = {
-    "Content-Type": "application/json",
     "Accept": "application/json",
 }
 

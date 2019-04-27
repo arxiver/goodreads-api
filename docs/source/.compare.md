@@ -1407,14 +1407,14 @@ fetch(url, {
 
 ```json
 {
-    "error": "valid token"
+    "error": "You have verified your account"
 }
 ```
 > Example response (405):
 
 ```json
 {
-    "error": "Invalid token"
+    "error": "This url is old , please try to verify your account again"
 }
 ```
 
@@ -1446,7 +1446,6 @@ curl -X GET -G "http://localhost/api/verify" \
 const url = new URL("http://localhost/api/verify");
 
 let headers = {
-    "Content-Type": "application/json",
     "Accept": "application/json",
 }
 

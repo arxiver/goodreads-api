@@ -219,7 +219,6 @@ class ActivitiesController extends Controller
      * increment the number of comments in the review or follow or  add to shelf 
      * 
      * @bodyParam id int required id of the commented resource.
-	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
      * @bodyParam body string required the body of the comment .
      * @authenticated.
      * 
@@ -255,30 +254,26 @@ class ActivitiesController extends Controller
     {
         $Validations    = array(
             "id"        => "required|integer",
-            "type"      => "required|integer|max:2|min:0",
             "body"      => "required|string"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if ( $request['type'] == 0 )
+            if ( Review::find($request["id"]) )
             {
-                if ( Review::find($request["id"]) )
-                {
-                    $wantedReview=Review::find($request["id"]);
-                    $number=$wantedReview['comments_count']+1;
-                    DB::table('reviews')
-                        ->updateOrInsert(
-                            ['id' => $request["id"]],
-                            [ 'comments_count' => $number ]
-                        );
-                }
-                else{
-                    return response()->json([
-                        "status" => "false" , "Message" => "can't make a comment on this review becouse this review doesn't exists"
-                    ]);
-                }
+                $wantedReview=Review::find($request["id"]);
+                $number=$wantedReview['comments_count']+1;
+                DB::table('reviews')
+                    ->updateOrInsert(
+                        ['id' => $request["id"]],
+                        [ 'comments_count' => $number ]
+                    );
             }
-            else if ( $request['type'] == 1 )
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "can't make a comment on this review becouse this review doesn't exists"
+                ]);
+            }
+            /*else if ( $request['type'] == 1 )
             {
                 if ( Shelf::find($request["id"]) )
                 {
@@ -295,8 +290,8 @@ class ActivitiesController extends Controller
                         "status" => "false" , "Message" => "can't make a comment on this shelf becouse this shelf doesn't exists"
                     ]);
                 }
-            }
-            else
+            }*/
+            /*else
             {
                 if ( Following::find($request["id"]) )
                 {
@@ -313,7 +308,7 @@ class ActivitiesController extends Controller
                         "status" => "false" , "Message" => "can't make a comment on this follow becouse this follow doesn't exists"
                     ]);
                 }
-            }
+            }*/
             $Create = array(
                 "user_id" => $this->ID,
                 "resourse_id" => $request["id"],
@@ -394,25 +389,22 @@ class ActivitiesController extends Controller
             if ( Comment::find($request["id"]) )
             {
                 $comment = Comment::findOrFail($request["id"]);
-                if ( $comment['resourse_type'] == 0 )
+                if ( Review::find($comment["resourse_id"]) )
                 {
-                    if ( Review::find($comment["resourse_id"]) )
-                    {
-                        $wantedReview=Review::find($comment["resourse_id"]);
-                        $number=$wantedReview['comments_count']-1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $comment["resourse_id"]],
-                                [ 'comments_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't delete a comment on this review becouse this review doesn't exists"
-                        ]);
-                    }
+                    $wantedReview=Review::find($comment["resourse_id"]);
+                    $number=$wantedReview['comments_count']-1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $comment["resourse_id"]],
+                            [ 'comments_count' => $number ]
+                        );
                 }
-                else if ( $comment['resourse_type'] == 1 )
+                else{
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't delete a comment on this review becouse this review doesn't exists"
+                    ]);
+                }
+                /*else if ( $comment['resourse_type'] == 1 )
                 {
                     if ( Shelf::find($comment["resourse_id"]) )
                     {
@@ -429,8 +421,8 @@ class ActivitiesController extends Controller
                             "status" => "false" , "Message" => "can't delete a comment on this shelf becouse this shelf doesn't exists"
                         ]);
                     }
-                }
-                else
+                }*/
+                /*else
                 {
                     if ( Following::find($comment["resourse_id"]) )
                     {
@@ -447,7 +439,7 @@ class ActivitiesController extends Controller
                             "status" => "false" , "Message" => "can't delete a comment on this follow becouse this follow doesn't exists"
                         ]);
                     }
-                }
+                }*/
                 $comment->delete();
                 return response()->json([
                     "status" => "true" , "Message" => "the comment is deleted"
@@ -483,9 +475,7 @@ class ActivitiesController extends Controller
     * {
     * "0": [
     * {
-    *    "name": "test",
     *    "username": "test",
-    *    "email": "test@yahoo.com",
     *    "image_link": "default.jpg",
     *    "id": 1,
     *    "body": "I agree with you",
@@ -494,9 +484,7 @@ class ActivitiesController extends Controller
     *    "have_the_comment": "Yes"
     * },
     * {
-    *    "name": "test",
     *    "username": "test",
-    *    "email": "test@yahoo.com",
     *    "image_link": "default.jpg",
     *    "id": 2,
     *    "body": "I agree with you",
@@ -505,9 +493,7 @@ class ActivitiesController extends Controller
     *    "have_the_comment": "Yes"
     * },
     * {
-    *    "name": "test",
     *    "username": "test",
-    *    "email": "test@yahoo.com",
     *    "image_link": "default.jpg",
     *    "id": 3,
     *    "body": "I agree with you",
@@ -516,9 +502,7 @@ class ActivitiesController extends Controller
     *    "have_the_comment": "Yes"
     * },
     * {
-    *     "name": "ta7a",
     *     "username": "ta7a",
-    *     "email": "ta7a@yahoo.com",
     *     "image_link": "default.jpg",
     *     "id": 4,
     *     "body": "ahmed",
@@ -555,13 +539,13 @@ class ActivitiesController extends Controller
             if ( Review::find($request["id"]) )
             {
 
-                $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+                $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
 
                 if($results != NULL){
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'Yes'));
-                    $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+                    $results=Db::select('SELECT U.id,U.username,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'No'));

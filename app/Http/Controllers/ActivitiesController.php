@@ -335,7 +335,7 @@ class ActivitiesController extends Controller
 
             
             return response()->json([
-                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] 
                 ,"comment_body" => $request["body"]
             ]);
         }

@@ -312,7 +312,6 @@ class ActivitiesController extends Controller
             $Create = array(
                 "user_id" => $this->ID,
                 "resourse_id" => $request["id"],
-                "resourse_type"  => $request["type"],
                 "body" =>$request["body"],
                 'updated_at'=>now(),
                 'created_at'=>now()

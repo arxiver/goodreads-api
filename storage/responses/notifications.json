@@ -1,0 +1,42 @@
+[
+    {
+        "n_id": 6,
+        "read_at": null,
+        "data": {
+            "id": 26,
+            "user_id": 1,
+            "user_name": "aaa",
+            "user_image_link": "default.jpg",
+            "review_id": 1,
+            "review_user_id": 2,
+            "review_user_name": "aaa",
+            "book_title": "The Bird King",
+            "type": 1
+        }
+    },
+    {
+        "n_id": 9,
+        "read_at": null,
+        "data": {
+            "id": 2,
+            "user_id": 1,
+            "user_name": "aaa",
+            "user_image_link": "default.jpg",
+            "review_id": 1,
+            "review_user_id": 2,
+            "review_user_name": "aaa",
+            "book_title": "The Bird King",
+            "type": 0
+        }
+    },
+    {
+        "n_id": 11,
+        "read_at": null,
+        "data": {
+            "user_id": 1,
+            "user_name": "aaa",
+            "user_image_link": "default.jpg",
+            "type": 2
+        }
+    }
+]

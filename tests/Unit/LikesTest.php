@@ -78,6 +78,7 @@ class LikesTest extends TestCase
      // Get the record of this Review
      $reviewtwo = Review::find($reviewId );
      $numberLikestwo =$reviewtwo['likes_count'];
+     $this->assertGreaterThan($numberLikes,$numberLikestwo );
      // Show the response in the cmd
      /*echo "\n";
      echo "numberlikes  => ";

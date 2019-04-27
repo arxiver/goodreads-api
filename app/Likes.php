@@ -26,7 +26,7 @@ class Likes extends Model
         ->join('users as u','likes.user_id','=','u.id')
         ->join('authors','books.author_id','=','authors.id')
         ->select('likes.id','resourse_type','likes.updated_at','u.id as user_id',
-        'u.name','u.image_link as image_link','Reviews.id as review_id','body',
+        'u.name','u.image_link as image_link','reviews.id as review_id','body',
         'rating','likes_count','comments_count','reviews.updated_at as review_updated_at'
         ,'books.id as book_id','title','description','books.img_url','reviews_count',
         'ratings_count','ratings_avg','pages_no','rev_u.id as rev_user_id',

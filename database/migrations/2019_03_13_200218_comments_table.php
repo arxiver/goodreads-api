@@ -17,9 +17,9 @@ class CommentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedinteger('user_id');
             $table->integer('resourse_id');
-            $table->integer('resourse_type');
-            //$table->datetime('lastUpdate');
+            $table->integer('resourse_type')->default(0);
             $table->string('body')->default('');
+            $table->string('have_the_comment')->default('No');
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
             

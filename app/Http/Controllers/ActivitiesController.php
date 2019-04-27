@@ -8,6 +8,10 @@ use App\Shelf;
 use App\Book;
 use App\Comment;
 use App\Likes;
+use App\Notifications\likesNotification;
+use App\Notifications\commentsNotification;
+use App\Notification as n;
+use Notification;
 use Illuminate\Http\Request;
 use DB;
 use Validator;
@@ -62,7 +66,10 @@ class ActivitiesController extends Controller
         $auth_id = $this->ID;
         if($request->filled('user_id'))
         {
-            $followingArr = [$request->input('user_id')];
+            if($request->input('user_id')==0)
+                $followingArr = [$this->ID]; 
+            else
+                $followingArr = [$request->input('user_id')];
         }else {
             $following = DB::table('followings')->where('follower_id','=',$auth_id)->select('user_id')->get();
             $followingArr= json_decode( json_encode($following), true);
@@ -118,34 +125,85 @@ class ActivitiesController extends Controller
      * gets a user's notifications
      * @authenticated
 	 * @bodyParam page int optional 1-N (default 1).
-     * @response {
-     *	"notifications": {
-     *		"notification": [
-     *			{
-     *			"id": "1",
-     *				"actors" : {
-     *				"user": {
-     *					"id": "000000",
-     *						"name" : "Salma",
-     *						"link" : "https://www.goodreads.com/user/show/000000-salma\n",
-     *						"image_url" : "\nhttps://images.jpg\n",
-     *						"has_image" : "true"
-     *				}
-     *			},
-     *				"new": "true",
-     *				"created_at" : "2019-03-08T04:15:46-08:00",
-     *				"url" : "https://www.goodreads.com/comment/show/1111111",
-     *				"resource_type" : "Comment",
-     *				"group_resource_type" : "ReadStatus"
-     *			}
-     *		]
-     *	}
-     *}
+     * @responseFile responses/notifications.json
      */
-    public function notifications()
+    public function notifications(Request $request)
     {
+        $Validations    = array(
+            "page"     => "integer|min:1"
+
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    { 
+        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at',null)->get();
+        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at','!=',null)
+        ->orderBy('read_at','desc')->get();
+        $r = collect();
+        $r = $r->merge($result);
+        $r = $r->merge($result1);
+        $response = $r;
+        $responseCode = 201;
+
+    }else{
+        
+        $response = array( "Something went wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
 
     }
+
+/**
+     * @group [Activities].Notification
+     * markNotification
+     * marks a user notification as read
+     * @authenticated
+	 * @bodyParam id int required.
+     * @response 201{
+     * "The notification was marked as read successfully."
+     * }
+     * @response 401{
+     * "There is no notification with this id."
+     * }
+     * @response 400
+     * {
+     * "Something went wrong ."
+     * }
+     * 
+     */
+    public function markNotification(Request $request)
+    {
+        $Validations    = array(
+            "id"     => "required|integer|min:1"
+
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    { 
+        $n = n::where('n_id',$request->input('id'))->where('notifiable_id',$this->ID)->first();
+        if($n)
+        {
+            $n->update(['read_at' => now()]);
+            $response = array( "The notification was marked as read successfully.");
+            $responseCode = 201;
+        }else
+        {
+            $response = array( "There is no notification with this id.");
+            $responseCode = 401;
+
+        }
+    }else{
+        
+        $response = array( "Something went wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
+
+    }
+
+
+    
     /**
      * @group [Activities].Make Comment
      * makeComment function
@@ -161,7 +219,6 @@ class ActivitiesController extends Controller
      * increment the number of comments in the review or follow or  add to shelf 
      * 
      * @bodyParam id int required id of the commented resource.
-	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
      * @bodyParam body string required the body of the comment .
      * @authenticated.
      * 
@@ -197,30 +254,26 @@ class ActivitiesController extends Controller
     {
         $Validations    = array(
             "id"        => "required|integer",
-            "type"      => "required|integer|max:2|min:0",
             "body"      => "required|string"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if ( $request['type'] == 0 )
+            if ( Review::find($request["id"]) )
             {
-                if ( Review::find($request["id"]) )
-                {
-                    $wantedReview=Review::find($request["id"]);
-                    $number=$wantedReview['comments_count']+1;
-                    DB::table('reviews')
-                        ->updateOrInsert(
-                            ['id' => $request["id"]],
-                            [ 'comments_count' => $number ]
-                        );
-                }
-                else{
-                    return response()->json([
-                        "status" => "false" , "Message" => "can't make a comment on this review becouse this review doesn't exists"
-                    ]);
-                }
+                $wantedReview=Review::find($request["id"]);
+                $number=$wantedReview['comments_count']+1;
+                DB::table('reviews')
+                    ->updateOrInsert(
+                        ['id' => $request["id"]],
+                        [ 'comments_count' => $number ]
+                    );
             }
-            else if ( $request['type'] == 1 )
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "can't make a comment on this review becouse this review doesn't exists"
+                ]);
+            }
+            /*else if ( $request['type'] == 1 )
             {
                 if ( Shelf::find($request["id"]) )
                 {
@@ -237,8 +290,8 @@ class ActivitiesController extends Controller
                         "status" => "false" , "Message" => "can't make a comment on this shelf becouse this shelf doesn't exists"
                     ]);
                 }
-            }
-            else
+            }*/
+            /*else
             {
                 if ( Following::find($request["id"]) )
                 {
@@ -255,7 +308,7 @@ class ActivitiesController extends Controller
                         "status" => "false" , "Message" => "can't make a comment on this follow becouse this follow doesn't exists"
                     ]);
                 }
-            }
+            }*/
             $Create = array(
                 "user_id" => $this->ID,
                 "resourse_id" => $request["id"],
@@ -264,7 +317,23 @@ class ActivitiesController extends Controller
                 'updated_at'=>now(),
                 'created_at'=>now()
             );
+            //send notification
+            $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
+            $x1= Review::find($request["id"])->select('user_id')->first();
+             
+            $r = collect();
+            $r = $r->merge($x);
+            $r = $r->merge($x1);
+            
+            $users = User::whereIn('id',$r)->get();
+            //echo $r;
+            //end of part1 notifications
             Comment::create($Create);
+            //rest of notification
+            $l = Comment::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
+            Notification::send($users, new commentsNotification($l->id));
+
+            
             return response()->json([
                 "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
                 ,"comment_body" => $request["body"]
@@ -320,25 +389,22 @@ class ActivitiesController extends Controller
             if ( Comment::find($request["id"]) )
             {
                 $comment = Comment::findOrFail($request["id"]);
-                if ( $comment['resourse_type'] == 0 )
+                if ( Review::find($comment["resourse_id"]) )
                 {
-                    if ( Review::find($comment["resourse_id"]) )
-                    {
-                        $wantedReview=Review::find($comment["resourse_id"]);
-                        $number=$wantedReview['comments_count']-1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $comment["resourse_id"]],
-                                [ 'comments_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't delete a comment on this review becouse this review doesn't exists"
-                        ]);
-                    }
+                    $wantedReview=Review::find($comment["resourse_id"]);
+                    $number=$wantedReview['comments_count']-1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $comment["resourse_id"]],
+                            [ 'comments_count' => $number ]
+                        );
                 }
-                else if ( $comment['resourse_type'] == 1 )
+                else{
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't delete a comment on this review becouse this review doesn't exists"
+                    ]);
+                }
+                /*else if ( $comment['resourse_type'] == 1 )
                 {
                     if ( Shelf::find($comment["resourse_id"]) )
                     {
@@ -355,8 +421,8 @@ class ActivitiesController extends Controller
                             "status" => "false" , "Message" => "can't delete a comment on this shelf becouse this shelf doesn't exists"
                         ]);
                     }
-                }
-                else
+                }*/
+                /*else
                 {
                     if ( Following::find($comment["resourse_id"]) )
                     {
@@ -373,7 +439,7 @@ class ActivitiesController extends Controller
                             "status" => "false" , "Message" => "can't delete a comment on this follow becouse this follow doesn't exists"
                         ]);
                     }
-                }
+                }*/
                 $comment->delete();
                 return response()->json([
                     "status" => "true" , "Message" => "the comment is deleted"
@@ -392,35 +458,115 @@ class ActivitiesController extends Controller
 	}
 
     /**
+    * @group [Activities].List Comments
     * list comments
-    * lists comments for a specific resource(review,update)
-    * @bodyParam id required int id of the commented resource
-	* @bodyParam type int required type of the resource (1 for user status and 2 for review)
- 	* @response
+    *
+    * lists comments for a specified review for all users 
+    * and determine if the authenticated have this comment or Not having it
+    * 
+    * the resopnse wil contain an id it will represent the comment id 
+    *
+    * Please, save this id to send it back when you want to delet the comment 
+    * @authenticated 
+    *
+    * @bodyParam id int required id of the commented resource
+    * 
+    * @response 200
     * {
-	*	"comment": {
-    * 	"comments"[
-	*		"comment": {
-	*			"id": "0000000",
-	*			"user": {
-	*				"id": "000000",
-	*				"name": "aa",
-	*				"location": "The United States",
-	*				"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	*				"image_url": "\nhttps://s.gr-assets.png\n"
-	*				},
-	*			"date_added": "Fri Mar 08 16:25:10 -0800 2019",
-	*			"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
-	*			"link": "\nhttps://www.goodreads.comshow/00000\n",
-	*			"body":"a great book"
-	*  		}
-	* 		]
-	*	}
+    * "0": [
+    * {
+    *    "username": "test",
+    *    "image_link": "default.jpg",
+    *    "id": 1,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:27",
+    *    "updated_at": "2019-04-27 02:38:27",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *    "username": "test",
+    *    "image_link": "default.jpg",
+    *    "id": 2,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:28",
+    *    "updated_at": "2019-04-27 02:38:28",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *    "username": "test",
+    *    "image_link": "default.jpg",
+    *    "id": 3,
+    *    "body": "I agree with you",
+    *    "created_at": "2019-04-27 02:38:30",
+    *    "updated_at": "2019-04-27 02:38:30",
+    *    "have_the_comment": "Yes"
+    * },
+    * {
+    *     "username": "ta7a",
+    *     "image_link": "default.jpg",
+    *     "id": 4,
+    *     "body": "ahmed",
+    *     "created_at": "2019-04-30 00:00:00",
+    *     "updated_at": "2019-04-10 00:00:00",
+    *     "have_the_comment": "No"
+    * }
+    *  ],
+    *     "status": "true"
+    * }
+    * @response 200
+    * {
+    *    "status": "true",
+    *    "Message": "There is no comments on this review"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "Message": "can't List the comments of this review becouse this review doesn't exists"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "errors": "The id field is required."
     * }
     */
-    public function listComments()
+    public function listComments(Request $request)
     {
+        $Validations    = array(
+            "id"        => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Review::find($request["id"]) )
+            {
 
+                $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
+
+                if($results != NULL){
+                    DB::table('comments')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_comment' => 'Yes'));
+                    $results=Db::select('SELECT U.id,U.username,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+                    DB::table('comments')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_comment' => 'No'));
+                    return response()->json([$results,"status" => "true"]);
+                }
+                else{
+                    return response()->json([
+                        "status" => "true" , "Message" => "There is no comments on this review"
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "can't List the comments of this review becouse this review doesn't exists"
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
     }
     /**
      * @group [Activities].Like/Unlike
@@ -440,14 +586,14 @@ class ActivitiesController extends Controller
      * 
      * decrement the number of likes in review or shelf or follow 
      * @bodyParam id int required id of the liked resource
-	 * @bodyParam type int required type of the resource (0-> review , 1-> shelves , 2-> followings).
+     * 
      * @authenticated
      * @response {
      * "status": "true",
      * "Message": "Like is Done ",
      * "user": 1,
      * "resourse_id": 1,
-     * "resourse_type": 2
+     * "resourse_type": 0
 	 * }
      * @response{
      * "status": "true",
@@ -490,51 +636,47 @@ class ActivitiesController extends Controller
     {
         $Validations    = array(
             "id"        => "required|integer",
-            "type"      => "required|integer|max:2|min:0",
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            if ( $request['type'] == 0 )
+            $actualLikeInReview = DB::table('likes')->where([['user_id' , $this->ID],
+            ["resourse_id", $request["id"]]])->first();
+            if (!empty($actualLikeInReview))
             {
-                $actualLikeInReview = DB::table('likes')->where([['user_id' , $this->ID],
-                ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
-                if (!empty($actualLikeInReview))
+                if ( Review::find($request["id"]) )
                 {
-                    if ( Review::find($request["id"]) )
-                    {
-                        $wantedReview=Review::find($request["id"]);
-                        $number=$wantedReview['likes_count']-1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $request["id"]],
-                                [ 'likes_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't make a unlike on this review becouse this review doesn't exists"
-                        ]);
-                    }
-                } 
+                    $wantedReview=Review::find($request["id"]);
+                    $number=$wantedReview['likes_count']-1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $request["id"]],
+                            [ 'likes_count' => $number ]
+                        );
+                }
                 else{
-                    if ( Review::find($request["id"]) )
-                    {
-                        $wantedReview=Review::find($request["id"]);
-                        $number=$wantedReview['likes_count']+1;
-                        DB::table('reviews')
-                            ->updateOrInsert(
-                                ['id' => $request["id"]],
-                                [ 'likes_count' => $number ]
-                            );
-                    }
-                    else{
-                        return response()->json([
-                            "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
-                        ]);
-                    }
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't make a unlike on this review becouse this review doesn't exists"
+                    ]);
+                }
+            } 
+            else{
+                if ( Review::find($request["id"]) )
+                {
+                    $wantedReview=Review::find($request["id"]);
+                    $number=$wantedReview['likes_count']+1;
+                    DB::table('reviews')
+                        ->updateOrInsert(
+                            ['id' => $request["id"]],
+                            [ 'likes_count' => $number ]
+                        );
+                }
+                else{
+                    return response()->json([
+                        "status" => "false" , "Message" => "can't make a like on this review becouse this review doesn't exists"
+                    ]);
                 }
             }
-            else if ( $request['type'] == 1 )
+            /*else if ( $request['type'] == 1 )
             {
                 $actualLikeInAddToShelf = DB::table('likes')->where([['user_id' , $this->ID],
                 ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
@@ -573,8 +715,8 @@ class ActivitiesController extends Controller
                         ]);
                     }
                 }
-            }
-            else
+            }*/
+            /*else
             {
                 $actualLikeOnFollow = DB::table('likes')->where([['user_id' , $this->ID],
                 ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
@@ -613,9 +755,9 @@ class ActivitiesController extends Controller
                         ]);
                     }
                 }
-            }
+            }*/
             $actualLike = DB::table('likes')->where([['user_id' , $this->ID],
-             ["resourse_id", $request["id"]],["resourse_type", $request["type"]]])->first();
+             ["resourse_id", $request["id"]]])->first();
             if (!empty($actualLike))
             {
                 $like = Likes::findOrFail($actualLike->id);
@@ -628,13 +770,27 @@ class ActivitiesController extends Controller
                 $Create = array(
                     "user_id" => $this->ID,
                     "resourse_id" => $request["id"],
-                    "resourse_type"  => $request["type"],
                     'updated_at'=>now(),
                     'created_at'=>now()
                 );
+                //send notification
+                $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
+                $x1= Review::find($request["id"])->select('user_id')->first();
+                 
+                $r = collect();
+                $r = $r->merge($x);
+                $r = $r->merge($x1);
+                
+                $users = User::whereIn('id',$r)->get();
+                //echo $r;
+                //end of part1 notifications
                 Likes::create($Create);
+                //rest of notification
+                $l = Likes::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
+                Notification::send($users, new likesNotification($l->id));
+
                 return response()->json([
-                    "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                    "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] 
                 ]);
             }
         }

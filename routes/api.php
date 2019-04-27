@@ -37,7 +37,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                        Every one make a section for his work                                       //
+    //                                        Ahmed Waleed Section                                     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::post('reviwes/create','ReviewController@createReview');                              //auth    
     //Route::put('reviwes/edit', 'ReviewController@editReview');                                //auth    
@@ -45,7 +45,8 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::post('makeComment','ActivitiesController@makeComment');                              //auth    
     Route::delete('deleteComment','ActivitiesController@deleteComment');                        //auth            
     //Route::delete('unlike','ActivitiesController@unlike');                                    //auth
-    Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');                        //auth            
+    Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');                        //auth  
+    Route::get('listComments','ActivitiesController@listComments');               //auth          
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,8 +76,9 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Nour section                                                              ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('updates','ActivitiesController@followingUpdates');
-    Route::get('notification','ActivitiesController@notifications');
+    Route::get('updates','ActivitiesController@followingUpdates');                    //auth
+    Route::get('notification','ActivitiesController@notifications');                  //auth
+    Route::post('mark_notification','ActivitiesController@markNotification');        //auth
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Ahmed Hamdy section                                                              ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

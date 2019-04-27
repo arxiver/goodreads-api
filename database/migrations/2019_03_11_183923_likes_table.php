@@ -20,7 +20,7 @@ class LikesTable extends Migration
             $table->integer('resourse_id');
             // the type of the resourse which will determine the table the
             // resourseId belongs to
-            $table->integer('resourse_type');
+            $table->integer('resourse_type')->default(0);
            // $table->datetime('lastUpdate');
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();

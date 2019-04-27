@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Following;
 use Illuminate\Http\Request;
-
+use App\Notifications\followingNotification;
 class FollowingController extends Controller
 {
 
@@ -95,6 +95,8 @@ class FollowingController extends Controller
              * Response 201 for successfully creation
              */
             $responseCode = 201;
+             //send notification
+             User::find($userId)->notify(new followingNotification(User::find($followerId)));
         }
     return response()->json($response, $responseCode);
     }

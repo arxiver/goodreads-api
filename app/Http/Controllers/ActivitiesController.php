@@ -8,6 +8,10 @@ use App\Shelf;
 use App\Book;
 use App\Comment;
 use App\Likes;
+use App\Notifications\likesNotification;
+use App\Notifications\commentsNotification;
+use App\Notification as n;
+use Notification;
 use Illuminate\Http\Request;
 use DB;
 use Validator;
@@ -62,7 +66,10 @@ class ActivitiesController extends Controller
         $auth_id = $this->ID;
         if($request->filled('user_id'))
         {
-            $followingArr = [$request->input('user_id')];
+            if($request->input('user_id')==0)
+                $followingArr = [$this->ID]; 
+            else
+                $followingArr = [$request->input('user_id')];
         }else {
             $following = DB::table('followings')->where('follower_id','=',$auth_id)->select('user_id')->get();
             $followingArr= json_decode( json_encode($following), true);
@@ -118,34 +125,85 @@ class ActivitiesController extends Controller
      * gets a user's notifications
      * @authenticated
 	 * @bodyParam page int optional 1-N (default 1).
-     * @response {
-     *	"notifications": {
-     *		"notification": [
-     *			{
-     *			"id": "1",
-     *				"actors" : {
-     *				"user": {
-     *					"id": "000000",
-     *						"name" : "Salma",
-     *						"link" : "https://www.goodreads.com/user/show/000000-salma\n",
-     *						"image_url" : "\nhttps://images.jpg\n",
-     *						"has_image" : "true"
-     *				}
-     *			},
-     *				"new": "true",
-     *				"created_at" : "2019-03-08T04:15:46-08:00",
-     *				"url" : "https://www.goodreads.com/comment/show/1111111",
-     *				"resource_type" : "Comment",
-     *				"group_resource_type" : "ReadStatus"
-     *			}
-     *		]
-     *	}
-     *}
+     * @responseFile responses/notifications.json
      */
-    public function notifications()
+    public function notifications(Request $request)
     {
+        $Validations    = array(
+            "page"     => "integer|min:1"
+
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    { 
+        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at',null)->get();
+        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at','!=',null)
+        ->orderBy('read_at','desc')->get();
+        $r = collect();
+        $r = $r->merge($result);
+        $r = $r->merge($result1);
+        $response = $r;
+        $responseCode = 201;
+
+    }else{
+        
+        $response = array( "Something went wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
 
     }
+
+/**
+     * @group [Activities].Notification
+     * markNotification
+     * marks a user notification as read
+     * @authenticated
+	 * @bodyParam id int required.
+     * @response 201{
+     * "The notification was marked as read successfully."
+     * }
+     * @response 401{
+     * "There is no notification with this id."
+     * }
+     * @response 400
+     * {
+     * "Something went wrong ."
+     * }
+     * 
+     */
+    public function markNotification(Request $request)
+    {
+        $Validations    = array(
+            "id"     => "required|integer|min:1"
+
+    );
+    $Data = validator::make($request->all(), $Validations);
+    if(!($Data->fails())) 
+    { 
+        $n = n::where('n_id',$request->input('id'))->where('notifiable_id',$this->ID)->first();
+        if($n)
+        {
+            $n->update(['read_at' => now()]);
+            $response = array( "The notification was marked as read successfully.");
+            $responseCode = 201;
+        }else
+        {
+            $response = array( "There is no notification with this id.");
+            $responseCode = 401;
+
+        }
+    }else{
+        
+        $response = array( "Something went wrong .");
+        $responseCode = 400;
+    }
+    return response()->json($response, $responseCode);
+
+    }
+
+
+    
     /**
      * @group [Activities].Make Comment
      * makeComment function
@@ -264,7 +322,23 @@ class ActivitiesController extends Controller
                 'updated_at'=>now(),
                 'created_at'=>now()
             );
+            //send notification
+            $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
+            $x1= Review::find($request["id"])->select('user_id')->first();
+             
+            $r = collect();
+            $r = $r->merge($x);
+            $r = $r->merge($x1);
+            
+            $users = User::whereIn('id',$r)->get();
+            //echo $r;
+            //end of part1 notifications
             Comment::create($Create);
+            //rest of notification
+            $l = Comment::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
+            Notification::send($users, new commentsNotification($l->id));
+
+            
             return response()->json([
                 "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
                 ,"comment_body" => $request["body"]
@@ -715,7 +789,22 @@ class ActivitiesController extends Controller
                     'updated_at'=>now(),
                     'created_at'=>now()
                 );
+                //send notification
+                $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
+                $x1= Review::find($request["id"])->select('user_id')->first();
+                 
+                $r = collect();
+                $r = $r->merge($x);
+                $r = $r->merge($x1);
+                
+                $users = User::whereIn('id',$r)->get();
+                //echo $r;
+                //end of part1 notifications
                 Likes::create($Create);
+                //rest of notification
+                $l = Likes::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
+                Notification::send($users, new likesNotification($l->id));
+
                 return response()->json([
                     "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] 
                 ]);

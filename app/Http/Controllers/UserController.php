@@ -868,7 +868,8 @@ class userController extends Controller
      *     "books_count": null,
      *     "birthday": null,
      *     "created_at": null,
-     *     "updated_at": null
+     *     "updated_at": null,
+	 *     "is_followed":1
      * }
      */
 
@@ -896,6 +897,168 @@ class userController extends Controller
          */
         return response()->json($data);
 
+    }
+
+
+/**
+     * @group [User].Search by name
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam name string required name of person you`r looking for .
+     * it filters users with names that like the given name paramater
+     * E.G searching by name="o" it reponses all users have name contains 'o'.
+     * @authenticated
+     *
+     * @response 200
+     *  {
+     *    "users": [
+     *        {
+     *            "id": 4,
+     *            "username": "Nour",
+     *            "name": "Nour",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "female",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByName(Request $request)
+    {
+        $name = $request->has(['name']) ? $request->name : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users where name like "."'%".$name."%'" ;
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+                $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+
+        return response()->json(['users' => $data,], 200);
+
+    }
+    /**
+     * @group [User].Search by username
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam username string required username of person you`r looking for .
+     * it filters users with usernames that like the given username paramater
+     * E.G searching by username="o" it reponses all users have name contains 'o'.
+     * @authenticated
+     *
+     * @response 200
+     *  {
+     *    "users": [
+     *        {
+     *            "id": 4,
+     *            "username": "Nour",
+     *            "name": "Nour",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "female",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 6,
+     *            "username": "LoLo",
+     *            "name": "TheLeader",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByUsername(Request $request)
+    {
+        $username = $request->has(['username']) ? $request->username : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users where username like " . "'%" . $username . "%'";
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+            $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+        return response()->json(['users' => $data,], 200);
+
+    }
+    /**
+     * @group [User].Search by name or username
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam name string required name/username of person you`r looking for .
+     * it filters users with names that like the given name paramater
+     * E.G searching by name="mo" it reponses all users have name or usernames contains 'mo'.
+     * @authenticated
+     *
+     * @response 200
+     *{
+     *    "users": [
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByNameOrUsername(Request $request)
+    {
+        $name = $request->has(['name']) ? $request->name : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users
+                    where name like " . "'%" . $name . "%' or username like "."'%".$name."%' " ;
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+            $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+        return response()->json(['users' => $data,], 200);
     }
 
 

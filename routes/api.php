@@ -55,14 +55,20 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::delete('unfollow','FollowingController@unfollowUser');                               //auth    
     Route::get('followers','FollowingController@userFollowers');                                //auth    
     Route::get('following','FollowingController@userFollowing');                                //auth    
+	
+    Route::post('shelf/add_book', 'ShelfController@addBook');                        // auth
+    Route::delete('shelf/remove_book', 'ShelfController@removeBook');                // auth   
 
+    Route::get('user_reviews', 'ReviewController@listUserReviews');   
+	
+	Route::get('search_by_name', 'UserController@searchByName');
+    Route::get('search_by_username', 'UserController@searchByUsername');
+    Route::get('search_by_name_username', 'UserController@searchByNameOrUsername');
 
     // Book Section
     Route::get('books','BookController@index');                                       
 
-    // Review Section
-    Route::post('shelf/add_book', 'ShelfController@addBook');                        // auth
-    Route::delete('shelf/remove_book', 'ShelfController@removeBook');                // auth
+
 
     // Shelf Section
     Route::get('shlef/list', 'ShelfController@index');                               // auth                            
@@ -70,9 +76,8 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('shelf/shelfid','ShelfController@userShelves');                       // auth           
     Route::get('shelf','ShelfController@getBooksOnShelf');                           // auth       
     
-    Route::post('shelf/add_book', 'ShelfController@addBook');                        // auth
-    Route::delete('shelf/remove_book', 'ShelfController@removeBook');                // auth   
-    Route::get('myreviews','ReviewController@listMyReviews');                        // auth
+
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Nour section                                                              ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,10 +112,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');        // Non auth                
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');                     // Non auth                            
     /////////////////////////////////////////////////////////////////////
-    
-
-    Route::post('shelf/add_book', 'ShelfController@addBook');                                  // auth     
-    Route::delete('shelf/remove_book', 'ShelfController@removeBook');                          // auth         
+        
 });
 
 Route::get('books/genre', 'BookController@showByGenre');                         // Non auth

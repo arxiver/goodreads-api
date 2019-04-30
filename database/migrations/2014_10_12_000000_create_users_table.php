@@ -38,6 +38,9 @@ class CreateUsersTable extends Migration
             $table->char('see_my_birthday')->default("Everyone");
             $table->char('see_my_country')->default("Everyone");
             $table->char('see_my_city')->default("Everyone");
+            $table->string("forgot_password_token",250)->nullable();
+            $table->string("verified_token",250)->nullable();
+            $table->tinyInteger("verified")->default(0);
             
 
             $table->rememberToken();

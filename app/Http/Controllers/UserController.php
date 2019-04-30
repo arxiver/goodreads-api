@@ -10,23 +10,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Storage;
 use App\Following;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ForgotPassword;
+use App\Mail\VerifiedAccount;
+use App\Mail\testmail;
+use Crypt;
 
 /**
- * [1] The Image 
- *      [1] Which methods is better than other (public , database or s3)
- *      [2] when i save an image in s3 how i get it (and show the TA the pdf and the code of filesystem)
- * 
  * [2] The verification
- *      [1] What is the mechanesm which i will use
+ *      [1] I will use the same column for the token of the verification and reset password
  * 
  * [3] Guest
- * [4] Edit the file of [start with laravel] and add every thing about the unit test
- * [5] How to use the validator [in] in the issue of (male , female and other)
- * [6] Questions
- *      [1] How i send the header with post request                 Done (in the array of sending data)
- *      [2] How is the authontecated going on in the unit test      simi Done (when you generate a toke by JWTAuth::fromUser) i think it generate a valid token you can use it in the operation of authorization
- *      [3] after you know the point [2] finish your unit test      simi Done 
- *      [4] some problem in the file of signupTest in the last function  
+ *      [1] I will divide all function into 3 types and make the common type without middleware and return with every response a paramater determine if it is guest or user 
  */
 /**
  * @group User 
@@ -41,6 +36,11 @@ class userController extends Controller
     private $PrivateUrl = "";
     private $AvatarDirectory = "avatars/";
     private $DefaultImage = "default.jpg";
+    private $ForgotPasswordRoute = "api/checktoken?token=";
+    private $VerifyRoute = "api/checktokenverify?token=";
+    private $ForgotPasswordRouteFront = "http://localhost:4200/#/forgetPassword?token=";
+    private $VerifyRouteFront="";
+    private $TokenLife = 60*60;     // The life of the token
     
     //
     /**
@@ -119,7 +119,8 @@ class userController extends Controller
             $gettingdata = array(
                                     "name" ,
                                     "username" ,
-                                    "image_link"
+                                    "image_link",
+                                    "verified"
                                 );
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
@@ -192,7 +193,8 @@ class userController extends Controller
                 $gettingdata = array(
                                         "name" ,
                                         "username" ,
-                                        "image_link"
+                                        "image_link",
+                                        "verified"
                                     );
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
@@ -213,15 +215,30 @@ class userController extends Controller
      * @response {
      * "status": "true",
      * "user": {
-     *   "userName": "",
-     *   "gender": "",
-     *   "name": "",
-     *   "image" : "",
-     *   "location" : "",
-     *   "birthday" : "",
-     *   "seeMyBirthday" : "",
-     *   "seeMyCountry" : "",
-     *   "seeMyCity" : ""
+     * "id",
+     * "name",
+     * "username",
+     * "email",
+     * "email_verified_at",
+     * "password",
+     * "link",
+     * "image_link",
+     * "small_image_link",
+     * "about",
+     * "age",
+     * "gender",
+     * "country",
+     * "city",
+     * "joined_at",
+     * "followers_count",
+     * "following_count",
+     * "rating_avg",
+     * "rating_count",
+     * "book_count",
+     * "birthday",
+     * "see_my_birthday",
+     * "see_my_country",
+     * "see_my_city"
      *}
      *}
      */
@@ -252,7 +269,8 @@ class userController extends Controller
                                 "birthday",
                                 "see_my_birthday",
                                 "see_my_country",
-                                "see_my_city"
+                                "see_my_city",
+                                "verified"
                             );
         $show = User::find($this->ID,$gettingData);
         $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
@@ -423,7 +441,7 @@ class userController extends Controller
         if(!$valid->fails())
         {
             $user = User::find($this->ID);
-            $user->country = $request["city"];
+            $user->city = $request["newCity"];
             $user->save();
             return response()->json(["message" => "You have changed your city"] , 200);
         }
@@ -483,14 +501,14 @@ class userController extends Controller
      */
     public function whoCanSeeMyBirthday(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyBirthday" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
             $user->see_my_birthday = $request["seeMyBirthday"];
             $user->save();
-            if($user->see_my_birthday == "Only Me")
+            if($user->see_my_birthday == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your birthday"],200);
             else
             return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your birthday"],200);
@@ -514,17 +532,17 @@ class userController extends Controller
      */
     public function whoCanSeeMyCountry(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyCountry" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
-            $user->see_my_country = $request["seeMyBirthday"];
+            $user->see_my_country = $request["seeMyCountry"];
             $user->save();
-            if($user->see_my_country == "Only Me")
+            if($user->see_my_country == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your country"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your country"],200);
+            return response()->json(["message" => "Now, " .$request["seeMyCountry"]. " can see your country"],200);
         }
         else
         {
@@ -542,17 +560,17 @@ class userController extends Controller
      */
     public function whoCanSeeMyCity(Request $request)
     {
-        $Validation = array("seeMyBirthday" => "in:Only Me,Everyone,Friends");
+        $Validation = array("seeMyCity" => "in:onlyMe,Everyone,Friends");
         $Valid = validator::make($request->all() , $Validation);
         if(!$Valid->fails())
         {
             $user = User::find($this->ID);
-            $user->see_my_city = $request["seeMyBirthday"];
+            $user->see_my_city = $request["seeMyCity"];
             $user->save();
-            if($user->see_my_city == "Only Me")
+            if($user->see_my_city == "onlyMe")
             return response()->json(["message" => "Now, Just you can see your city"],200);
             else
-            return response()->json(["message" => "Now, " .$request["seeMyBirthday"]. " can see your city"],200);
+            return response()->json(["message" => "Now, " .$request["seeMyCity"]. " can see your city"],200);
         }
         else
         {
@@ -620,7 +638,7 @@ class userController extends Controller
         {
             auth()->logout();
             $User = User::find($this->ID); 
-            storage::disk("public")->delete($AvatarsDirectory . "/" .$User->image_link);
+            storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory .$User->image_link);
             $User->delete();
             return response()->json(["message" => "You have deleted your account"],200);
         }
@@ -628,6 +646,171 @@ class userController extends Controller
         {
             return response()->json(["errors" => "The password is invalid."],405);
         }  
+    }
+
+
+
+
+    /**
+     * forgot Password
+     * @bodyParam email string required .
+     * @response 200 {
+     * "message":"Now , You can go to You email to reset the password"
+     *}
+     * @response 405{
+     * "error": "The email is invalid"
+     *}
+     */
+    public function forgotPassword(Request $request)
+    {
+
+        $Validation = array (
+                                "email" => "required|exists:users,email"
+                            );
+
+        $Messages = array   (
+                                "email.exists" => "The email is invalid"
+                            );
+        $Validate = validator::make($request->all() , $Validation , $Messages);
+        if(!$Validate->fails())
+        {
+            $token = Crypt::encryptString(time());
+            $User = User::where("email" , $request["email"])->first();
+            $User->forgot_password_token = $token;
+            $User->save();
+            $Url = asset($this->ForgotPasswordRoute . $token);
+            Mail::to($request["email"])->send(new ForgotPassword($Url));
+            return response()->json(["message" => "Now , you can go to " .$request["email"]. " to reset your password"],200);
+        }
+        else
+        {
+            return response()->json(["error" => $Validate->messages()->first()],405);
+        }
+    }
+
+
+
+
+
+    /**
+     * check token forgot password
+     * @bodyParam token string required .
+     * @response 200 {
+     * "userId": ""
+     *}
+     * @response 405{
+     * "error": "This url is old , please try to reset your password again"
+     *}
+     */
+    public function checkToken(Request $request)
+    {
+        $Validation = array (
+                                "token" => "required|exists:users,forgot_password_token"
+                            );
+        $Validate = validator::make($request->all() , $Validation);
+        if(!$Validate->fails())
+        {
+            $token = Crypt::decryptString($request["token"]);
+            if(time() - $token < $this->TokenLife)
+            {
+                $User = User::where("forgot_password_token" , $request["token"])->first();
+                $User->forgot_password_token = null;
+                $User->save();
+                return response()->json(["userID"=>$User->id],200);
+            }
+            else
+            {
+                return response()->json(["error" => "This url is old , please try to reset your password again"],405);
+            }
+        }
+        else
+        {
+            return response()->json(["error" => "This url is old , please try to reset your password again"] , 405);
+        }
+    }
+
+
+    /**
+     * reset password
+     * @bodyParam password string required .
+     * @bodyParam password_confirmation string required .
+     * @bodyParam userId integer required .
+     * @response 200 {
+     * "message": "You have reseted your password"
+     *}
+     * @response 405{
+     * "error": "The password field is required"
+     *}
+     */
+    public function resetPassword(Request $request)
+    {
+        $Validation = array (
+                                "password"      => "required|max:30|min:5|confirmed",
+                            );
+        $Validate = validator::make($request->all() , $Validation);
+        if(!$Validate->fails())
+        {
+            $User = User::find($request["userId"]);
+            $User->password = $request["password"];
+            $User->save();
+            return response()->json(["message"=>"You have reseted your password"],200);
+        }
+        else
+        {
+            return response()->json(["error" => $Validate->messages()->first()],405);
+        }
+    }
+
+
+
+    /**
+     * verify account
+     * @authenticated
+     * @response 200 {
+     * "message":"Now , You can go to your account to reset the password"
+     *}
+     */
+    public function verify(Request $request)
+    {
+        $token = Crypt::encryptString(time());
+        $User = User::find($this->ID);
+        $User->verified_token = $token;
+        $User->save();
+        $Url = asset($this->VerifyRoute . $token);
+        Mail::to($User->email)->send(new VerifiedAccount($Url));
+        return response()->json(["message" => "Now , you can go to " .$User->email. " to verify your account"],200);
+    }
+
+
+
+
+
+    /**
+     * check token verify
+     * @bodyParam token string required .
+     * @authenticated
+     * @response 200 {
+     * "error":"You have verified your account"
+     *}
+     * @response 405{
+     * "error": "This url is old , please try to verify your account again"
+     *}
+     */
+    public function checkTokenVerify(Request $request)
+    {
+        $token = Crypt::decryptString($request["token"]);
+        if(time() - $token < $this->TokenLife)
+        {
+            $User = User::where("verify_token" , $request["token"])->first();
+            $User->verify_token = null;
+            $User->verified = 1;
+            $User->save();
+            return response()->json(["message" => "You have verified your account"],200);
+        }
+        else
+        {
+            return response()->json(["error" => "This url is old , please try to verify your account again"],405);
+        }
     }
 
 
@@ -685,7 +868,8 @@ class userController extends Controller
      *     "books_count": null,
      *     "birthday": null,
      *     "created_at": null,
-     *     "updated_at": null
+     *     "updated_at": null,
+	 *     "is_followed":1
      * }
      */
 
@@ -706,12 +890,182 @@ class userController extends Controller
         $data = User::where('id',$userId)->get()[0];
         if( $request->has(['id']) && ( $request->id != $this->ID ) )
          $data->is_followed = Following::where('follower_id', $this->ID)->where('user_id', $userId)->count();
+         $data->image_link = $this->GetUrl() . "/" . $data->image_link;
 
         /**
          * Return response
          */
         return response()->json($data);
 
+    }
+
+
+/**
+     * @group [User].Search by name
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam name string required name of person you`r looking for .
+     * it filters users with names that like the given name paramater
+     * E.G searching by name="o" it reponses all users have name contains 'o'.
+     * @authenticated
+     *
+     * @response 200
+     *  {
+     *    "users": [
+     *        {
+     *            "id": 4,
+     *            "username": "Nour",
+     *            "name": "Nour",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "female",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByName(Request $request)
+    {
+        $name = $request->has(['name']) ? $request->name : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users where name like "."'%".$name."%'" ;
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+                $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+
+        return response()->json(['users' => $data,], 200);
+
+    }
+    /**
+     * @group [User].Search by username
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam username string required username of person you`r looking for .
+     * it filters users with usernames that like the given username paramater
+     * E.G searching by username="o" it reponses all users have name contains 'o'.
+     * @authenticated
+     *
+     * @response 200
+     *  {
+     *    "users": [
+     *        {
+     *            "id": 4,
+     *            "username": "Nour",
+     *            "name": "Nour",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "female",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 6,
+     *            "username": "LoLo",
+     *            "name": "TheLeader",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        },
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByUsername(Request $request)
+    {
+        $username = $request->has(['username']) ? $request->username : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users where username like " . "'%" . $username . "%'";
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+            $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+        return response()->json(['users' => $data,], 200);
+
+    }
+    /**
+     * @group [User].Search by name or username
+     *
+     * searchByName function
+     *
+     *
+     * @bodyParam name string required name/username of person you`r looking for .
+     * it filters users with names that like the given name paramater
+     * E.G searching by name="mo" it reponses all users have name or usernames contains 'mo'.
+     * @authenticated
+     *
+     * @response 200
+     *{
+     *    "users": [
+     *        {
+     *            "id": 7,
+     *            "username": "Mido",
+     *            "name": "Mohamed",
+     *            "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *            "gender": "male",
+     *            "country": "Egypt",
+     *            "city": "Cairo",
+     *            "followers_count": 0,
+     *            "following_count": 0
+     *        }
+     *    ]
+     *}
+     **/
+    public function searchByNameOrUsername(Request $request)
+    {
+        $name = $request->has(['name']) ? $request->name : abort(404);
+        $query = "select id , username , name ,image_link , gender , country ,
+                    city ,followers_count ,following_count from users
+                    where name like " . "'%" . $name . "%' or username like "."'%".$name."%' " ;
+        $data = DB::select($query);
+        $i = 0;
+        while ($i < sizeof($data)) {
+            $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+            $i++;
+        }
+        return response()->json(['users' => $data,], 200);
+    }
+
+
+    public function test(Request $request)
+    {
+        Mail::to("mrehab745@gmail.com")->send(new testmail());
+        return response()->json(["message" => "Good you have sent your message"],200);
     }
 
 }

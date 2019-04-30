@@ -823,4 +823,115 @@ class ReviewController extends Controller
             400);
     }
 }
+
+
+    /**
+     * @group  [Review].User`s all-reviews
+     *
+     *
+     * List the reviews for a specific user
+     * "id" as paramater if it is not given in the request
+     * it returns authenticated-user reviews
+     * @authenticated
+     * @bodyParam id int optional id of the user default authenticated-user id.
+     *
+     * @response
+     * {
+     *    "reviews": [
+     *        {
+     *            "review_id": 2,
+     *            "book_id": 2,
+     *            "title": "Sherwood",
+     *            "img_url": "https://kbimages1-a.akamaihd.net/6954f4cc-6e4e-46e3-8bc2-81b93f57a723/353/569/90/False/sherwood-7.jpg",
+     *            "pages_no": 0,
+     *            "body": "FTJ4PlC0Zq",
+     *            "shelf_id": 0,
+     *            "likes_count": 0,
+     *            "comments_count": 0,
+     *            "created_at": "2019-04-27 22:44:46",
+     *            "updated_at": "2019-04-27 22:44:46",
+     *            "comments": [
+     *                {
+     *                    "comment_id": 2,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedComment",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:37",
+     *                    "updated_at": "2019-04-28 08:33:37"
+     *                }
+     *            ]
+     *        },
+     *        {
+     *            "review_id": 16,
+     *            "book_id": 3,
+     *            "title": "Once & Future",
+     *            "img_url": "https://images-na.ssl-images-amazon.com/images/I/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+     *            "pages_no": 0,
+     *            "body": "HluxxIGc80",
+     *            "shelf_id": 2,
+     *            "likes_count": 0,
+     *            "comments_count": 0,
+     *            "created_at": "2019-04-27 22:44:46",
+     *            "updated_at": "2019-04-27 22:44:46",
+     *            "comments": [
+     *                {
+     *                    "comment_id": 1,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedComment",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:16",
+     *                    "updated_at": "2019-04-28 08:33:16"
+     *                },
+     *                {
+     *                    "comment_id": 3,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedCommentadsad",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:48",
+     *                    "updated_at": "2019-04-28 08:33:48"
+     *                }
+     *            ]
+     *        }
+     *    ]
+     *}
+     *
+     *
+     */
+
+    public function listUserReviews(Request $request)
+    {
+        $id = $request->has(['id']) ? $request->id : $this->ID;
+      //  $reviews = DB::select( 'select * from reviews R , books B where R.user_id = ? and B.id=R.book_id', [$id]);
+        $data = DB::select( 'select R.id as review_id ,R.book_id ,B.title,B.img_url,B.pages_no , R.body ,R.shelf_name as shelf_id ,
+                                     R.likes_count, R.comments_count , R.created_at ,R.updated_at
+                                     from reviews R , books B where R.user_id = ? and B.id=R.book_id', [$id]);
+        $i = 0;
+        $j=0;
+        while ($i < sizeof($data)) {
+            $_id = $data[$i]->review_id;
+            $data[$i]->comments = DB::select( 'select c.id as comment_id , user_id ,name ,  image_link ,
+                                                body ,have_the_comment ,c.created_at ,
+                                                c.updated_at from comments as c , users as u
+                                                where u.id = c.user_id and resourse_type=0 and resourse_id = ?',[$_id]);
+            $j=0;
+            while ($j<sizeof($data[$i]->comments)) {
+                $data[$i]->comments[$j]->image_link = $this->GetUrl() . "/" . $data[$i]->comments[$j]->image_link;
+                $j++;
+            }
+            $i++;
+        }
+
+        return response()->json([ 'reviews' => $data], 200);
+
+    }
+
+
+
+
 }

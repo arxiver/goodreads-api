@@ -509,19 +509,6 @@ class ReviewController extends Controller
             else{
                  $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['title']]);
             }
-       /* foreach($rt as $res)
-            {
-                    if($res->shelf_name ==0){
-                        $res->shelf_name ='read';
-                    }
-                    else if($res->shelf_name ==1){
-                        $res->shelf_name ='currentlyRead';
-                    }
-                    else{
-                        $res->shelf_name ='WantToRead';
-
-                    }
-            }*/
         if($rt != NULL){
             return Response::json(array(
                 'status' => 'success',

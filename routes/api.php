@@ -10,6 +10,7 @@ Route::group(["middleware" => "authorized"] , function(){
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
     
+    
 
 });
 
@@ -55,7 +56,7 @@ Route::group(["middleware" => "unAuthorized"], function(){
 
     // Book Section
     Route::get('books','BookController@index');
-    Route::get('books/genre', 'BookController@showByGenre');
+   // Route::get('books/genre', 'BookController@showByGenre');
     Route::get('Books/book_title','BookController@getBookByTitle');
     Route::get('Books/book_ISBN','BookController@getBookByIsbn');
     Route::get('Books/book_Authorname','BookController@getBookByAuthorName');

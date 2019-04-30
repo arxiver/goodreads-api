@@ -258,80 +258,57 @@ class ShelfController extends Controller
      * all of that formed by sending the parameters which :-
      * shelf name
      * user id
-     * @bodyParam user_id integer required Get the books on a member's shelf.
+     * @bodyParam user_id integer optional Get the books on a member's shelf.
      * @bodyParam shelf_name string required specified shelf`s name.
      * @response {
      * "status": "success",
      *"pages": [
      * {
      *     "book_id": 95,
-     *     "title": "9jT4WR"
-     * },
-     * {
-     *     "book_id": 17,
-     *     "title": "pNUWhb"
-     * },
-     * {
-     *     "book_id": 50,
-     *     "title": "ZPiAVs"
-     * },
-     * {
-     *     "book_id": 9,
-     *     "title": "3SrTCb"
-     * },
-     * {
-     *     "book_id": 35,
-     *     "title": "TVSXeR"
-     * },
-     * {
-     *     "book_id": 61,
-     *      "title": "gBpaYn"
-     * }
+     *     "title": "9jT4WR",
+     * "id": 3,
+      *      "isbn": "9780316449274",
+      *      "img_url": "https://images-na.ssl-images-amazon.com/images/I/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+      *      "reviews_count": 0,
+      *      "ratings_count": 0,
+      *      "author_id": 3
+     *  }
      *]
      *}
      */
 	public function getBooksOnShelf(Request $request)
 	{
-        //
         $Validations    = array(
-            "shelf_name"         => "required|int",
+            "shelf_name"      => "required|string",
             "user_id"         => "nullable|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-            /*if($request['shelf_name']=='read'){
-                $request['shelf_name']=0;
-            }
-            else if($request['shelf_name']=='wanttoread'){
-                $request['shelf_name']=2;
-            }
-            else{
-                $request['shelf_name']=1;
-            }*/
+            $results;
             if($request['user_id']!=NULL){
-                $results=Db::select('select s.book_id , b.title from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[$request['shelf_name'],$request['user_id']]);
+                $results=Db::select('select s.book_id , b.title ,b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[(int)$request['shelf_name'],$request['user_id']]);
             }
             else{
-                $results=Db::select('select s.book_id , b.title from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[$request['shelf_name'],$this->ID]);
+                $results=Db::select('select s.book_id , b.title , b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[(int)$request['shelf_name'],$this->ID]);
             }
-     if($results != NULL){
-        return Response::json(array(
-            'status' => 'success',
-            'pages' => $results),
-            200);
-    }
-    else{
-        return Response::json(array(
-            'status' => 'failed',
-            'pages' => $results),
-            400);
-    }
-}
-else{
-    return Response::json(array(
-        'status' => 'failed',
-        ),
-        400);
-}
-    }
+            if($results != NULL){
+                return Response::json(array(
+                    'status' => 'success',
+                    'pages' => $results),
+                    200);
+            }
+            else{
+                return Response::json(array(
+                    'status' => 'failed',
+                    'pages' => $results),
+                    400);
+            }
+        }
+        else{
+            return Response::json(array(
+                'status' => 'failed',
+                ),
+                400);
+            }
+        }
 }

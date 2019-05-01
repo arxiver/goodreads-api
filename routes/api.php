@@ -95,7 +95,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('reviwes','ReviewController@recentReviews');
     Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-    //
+
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
     

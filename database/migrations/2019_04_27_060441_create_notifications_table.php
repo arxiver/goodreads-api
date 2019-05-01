@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
             $table->unsignedInteger('n_id')->autoIncrement();
+            $table->unsignedInteger('read')->default(0);
         });
     }
 

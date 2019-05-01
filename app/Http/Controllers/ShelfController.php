@@ -128,6 +128,8 @@ class ShelfController extends Controller
                 ['type' => $shelfId]
             );
         }
+        $reviewUpdate = DB::update( 'update reviews set shelf_name = ? where user_id = ? and book_id= ?', [$shelfId,$this->ID,$bookId]);
+
         /**
          *  Checking query response
          */

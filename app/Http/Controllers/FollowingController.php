@@ -267,10 +267,7 @@ class FollowingController extends Controller
          */
 
         $data =
-            DB::select( ' SELECT  U.id , name , image_link
-	                        FROM followings F,users U
-	                        WHERE F.user_id = ? and
-                            F.follower_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
+            DB::select( ' SELECT  U.id , name , image_link FROM followings F,users U WHERE F.user_id = ? and F.follower_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
 
         $i=0;
@@ -278,10 +275,7 @@ class FollowingController extends Controller
         $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
 
         $_id = $data[$i]->id;
-        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading ,
-                                           B.img_url as book_image , B.pages_no as pages
-                                           FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1
-                                           and S.user_id = ? limit 1 ', [ $_id]);
+        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading , B.img_url as book_image , B.pages_no as pages FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1  and S.user_id = ? limit 1 ', [ $_id]);
         if(sizeof($currently_reading)>0)
         {
             $data[$i]->book_id = $currently_reading[0]->book_id;
@@ -399,10 +393,7 @@ class FollowingController extends Controller
          * Query returns the following users` details with currently_reading book for each of them.
          */
         $data =
-            DB::select(' SELECT  U.id , name , image_link
-	                        FROM followings F,users U
-	                        WHERE F.follower_id = ? and
-                            F.user_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
+            DB::select(' SELECT  U.id , name , image_link FROM followings F,users U WHERE F.follower_id = ? and F.user_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
         /**
          * Response paramaters and return
@@ -416,10 +407,7 @@ class FollowingController extends Controller
         $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
 
         $_id = $data[$i]->id;
-        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading ,
-                                           B.img_url as book_image , B.pages_no as pages
-                                           FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1
-                                           and S.user_id = ? limit 1 ', [ $_id]);
+        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading , B.img_url as book_image , B.pages_no as pages FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1  and S.user_id = ? limit 1 ', [ $_id]);
         if(sizeof($currently_reading)>0)
         {
             $data[$i]->book_id = $currently_reading[0]->book_id;

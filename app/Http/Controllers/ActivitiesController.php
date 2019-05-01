@@ -136,12 +136,38 @@ class ActivitiesController extends Controller
     $Data = validator::make($request->all(), $Validations);
     if(!($Data->fails())) 
     { 
-        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at',null)->get();
-        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at','!=',null)
+        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read','data')->where('read_at',null)->get();
+        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read','data')->where('read_at','!=',null)
         ->orderBy('read_at','desc')->get();
         $r = collect();
         $r = $r->merge($result);
         $r = $r->merge($result1);
+        /*foreach($r as $x)
+        {
+            $x->data['user_image_link']=$this ->GetUrl()."/".$x->data['user_image_link'] ;
+            $x->data->save();
+            if(array_key_exists('review_user_id',$x->data))
+            {
+                if($x->data['review_user_id']==$this->ID)
+                {
+                    $x->data['review_user_id']=0;
+                    $x->data->save();
+                }
+            }
+            //$x->save();
+            /*$temp = $r->pull('image_link');
+            $r ->put('image_link',$url . "/" .$temp );
+            if($r->has('followed_image_link'))
+            {
+                $temp = $r->pull('followed_image_link');
+                $r ->put('followed_image_link',$url . "/" .$temp );
+            }
+            if($r->has('rev_user_imageLink'))
+            {
+                $temp = $r->pull('rev_user_imageLink');
+                $r ->put('rev_user_imageLink',$url . "/" .$temp );
+            }
+        }*/
         $response = $r;
         $responseCode = 201;
 
@@ -185,6 +211,7 @@ class ActivitiesController extends Controller
         if($n)
         {
             $n->update(['read_at' => now()]);
+            $n->update(['read' => 1]);
             $response = array( "The notification was marked as read successfully.");
             $responseCode = 201;
         }else

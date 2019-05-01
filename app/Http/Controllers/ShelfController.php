@@ -6,6 +6,13 @@ use App\Shelf;
 use Illuminate\Http\Request;
 use Validator;
 use Response;
+use App\Review;
+use Route;
+use App\User;
+use App\Book;
+use App\Comment;
+use App\Likes;
+
 /**
  * @group Shelf
  * @authenticated
@@ -177,7 +184,7 @@ class ShelfController extends Controller
      * 2 -> Wants to Read
      */
 
-    public function removeBook(Request $request)
+  public function removeBook(Request $request)
     {
         /**
          *
@@ -192,22 +199,75 @@ class ShelfController extends Controller
         $bookId = $request->has(['book_id']) ? $request->book_id : abort(404);
         $shelfId = $request->has(['shelf_id']) ? $request->shelf_id : abort(404) ;
 
-        /**
-         *  Executing Query for the given data if it passed with non-aborting
-         */
-        $queryResult = Shelf::where('user_id', $userId)->where('book_id',$bookId)->where('type',$shelfId)->delete();
+
+        $reviewQuery=DB::select('select id from reviews where user_id = ? and book_id = ?', [$this->ID,$bookId]);
+        if(sizeof($reviewQuery)>0)
+        $reviewId= $reviewQuery[0]->id;
+        else
+        $reviewId=-1;
+        if ($reviewId != -1 ) {
+            $review = Review::findOrFail($reviewId);
+            $user = User::find($this->ID);
+            if ($this->ID == $review['user_id']) {
+                $review->delete();
+                $conutOfRatingUser = $user["rating_count"] - 1;
+                if ($conutOfRatingUser < 0) {
+                    $conutOfRatingUser = 0;
+                }
+                $avgUser = DB::table('reviews')->where('user_id', $this->ID)->avg('rating');
+                if ($avgUser == null) {
+                    $avgUser = 0.0;
+                }
+                DB::table('users')
+                    ->updateOrInsert(
+                        ['id' => $this->ID],
+                        ['rating_avg' => $avgUser, 'rating_count' => $conutOfRatingUser]
+                    );
+                $bookWanted = Book::findOrFail($review["book_id"]);
+                $conutOfReviews = $bookWanted["reviews_count"] - 1;
+                $conutOfRating = $bookWanted["ratings_count"] - 1;
+                if ($conutOfReviews < 0) {
+                    $conutOfReviews = 0;
+                }
+                if ($conutOfRating < 0) {
+                    $conutOfRating = 0;
+                }
+                $avg = DB::table('reviews')->where('book_id', $review["book_id"])->avg('rating');
+                if ($avg == null) {
+                    $avg = 0.0;
+                }
+                DB::table('books')
+                    ->updateOrInsert(
+                        ['id' => $review["book_id"]],
+                        ['ratings_avg' => $avg, 'reviews_count' => $conutOfReviews, 'ratings_count' => $conutOfRating]
+                    );
+
+                DB::table('comments')->where([
+                    ['resourse_id', $request["reviewId"]],
+                    ['resourse_type', 0],
+                ])->delete();
+
+                DB::table('likes')->where([
+                    ['resourse_id', $request["reviewId"]],
+                    ['resourse_type', 0],
+                ])->delete();
+            }
+        }
+
+        $queryResult = Shelf::where('user_id', $userId)->where('book_id', $bookId)->where('type', $shelfId)->delete();
 
         /**
          *  Checking query response
          */
         $response = $queryResult ?
-        ["true", "Successfully removed ." , 200] : ["false" , "Something gone wrong .", 400 ];
+            ["true", "Successfully removed .", 200] : ["false", "Something gone wrong .", 400];
 
         /**
          *  Responsing
          */
         return response()->json(array("status"=> $response[0],'message'=> $response[1]), $response[2]);
     }
+  
     /**
      * Get User`s shelves
      * @authenticated

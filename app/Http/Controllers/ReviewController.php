@@ -338,7 +338,7 @@ class ReviewController extends Controller
     public function destroy(Request $request)
     {
         $Validations    = array(
-            "reviewId"  => "required|integer",
+            "reviewId"  => "required|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {

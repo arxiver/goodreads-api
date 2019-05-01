@@ -544,7 +544,7 @@ class ActivitiesController extends Controller
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'Yes'));
-                    $results=Db::select('SELECT U.id,U.username,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
+                    $results=Db::select('SELECT U.username,U.image_link,C.id,C.user_id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'No'));

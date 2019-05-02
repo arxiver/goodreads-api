@@ -88,7 +88,7 @@ class ReviewController extends Controller
                     $shelfType = $request["shelf"];
                     DB::table('shelves')
                         ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ],
                             ['type' => 0,'updated_at'=>now()]
                         );
                     if (!empty($request["body"]))
@@ -438,7 +438,6 @@ class ReviewController extends Controller
      */
     public function getReviewsForListOfBooks()
     {
-        //
     }
 
 
@@ -550,19 +549,18 @@ class ReviewController extends Controller
      */
     public function listReviewOfUser()
     {
-        //
     }
 
-    /**
-     * @group [Review].show Review For Book
-     * get a specific review 
-     * 
-     * this function is responsible for showing details of a certain review by
-     * returning the (body,rating,comments counts, likes counts, user id ,book id )
-     * of a certain review and also it returns the shelf name of the book the review about
-     * all of that formed by sending the parameters which :-
-     * review id.
-     * @response {
+   /**
+    * @group [Review].show Review For Book
+    * get a specific review 
+    * 
+    * this function is responsible for showing details of a certain review by
+    * returning the (body,rating,comments counts, likes counts, user id ,book id )
+    * of a certain review and also it returns the shelf name of the book the review about
+    * all of that formed by sending the parameters which :-
+    * review id.
+    * @response {
     *"status": "success",
     *"pages": [
     *{

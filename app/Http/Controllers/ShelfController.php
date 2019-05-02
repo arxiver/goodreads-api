@@ -373,4 +373,65 @@ class ShelfController extends Controller
                 400);
             }
         }
+        /**
+    * @group [Shelf].Show Shelf
+    * showShelf
+    * give the functio the id of the book and return the shelf number for you 
+    *
+    * or told you that you don't have this book in nay shelf 
+    * @authenticated 
+    *
+    * @bodyParam bookId int required id of the book to get it's shelf
+    * @response 200
+    * {
+    *   "ShelfName": 0,
+    *   "status": "true"
+    * }
+    * @response 200
+    * {
+    *    "status": "true",
+    *    "Message": "The book not in a shelf for you"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "Message": "There is no book with this id"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "errors": "The id field is required."
+    * }
+    */
+    public function showShelf(Request $request)
+    {
+        $Validations    = array(
+            "bookId"        => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Book::find($request["bookId"]) )
+            {
+
+                $results=Db::select('SELECT s.type FROM shelves AS s WHERE s.user_id=? AND s.book_id=?',[$this->ID,$request['bookId']]);
+                if($results != NULL){
+                    return response()->json(["ShelfName"=>$results[0]->type,"status" => "true"]);
+                }
+                else{
+                    return response()->json([
+                        "status" => "true" , "Message" => "The book not in a shelf for you "
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "There is no book with this id"
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
+    }
 }

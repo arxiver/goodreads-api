@@ -334,6 +334,9 @@ class ShelfController extends Controller
       *      "reviews_count": 0,
       *      "ratings_count": 0,
       *      "author_id": 3
+      *      "author_name": "Meagan Spooner",
+      *      "ratings_avg": 0,
+      *      "created_at": "2019-05-03 00:15:55"
      *  }
      *]
      *}
@@ -348,10 +351,10 @@ class ShelfController extends Controller
         if (!($Data->fails())) {
             $results;
             if($request['user_id']!=NULL){
-                $results=Db::select('select s.book_id , b.title ,b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[$request['shelf_name'],$request['user_id']]);
+                $results=DB::select('select s.book_id , b.title ,b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id , a.author_name , b.ratings_avg , s.created_at from shelves s , authors a , books b where b.id = s.book_id and a.id = b.author_id and s.type=? and s.user_id=? ORDER BY s.created_at DESC',[$request['shelf_name'],$request['user_id']]);
             }
             else{
-                $results=Db::select('select s.book_id , b.title , b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[$request['shelf_name'],$this->ID]);
+                $results=DB::select('select s.book_id , b.title , b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id , a.author_name , b.ratings_avg , s.created_at from shelves s , books b , authors a where b.id = s.book_id and a.id = b.author_id and s.type=? and s.user_id=? ORDER BY s.created_at DESC',[$request['shelf_name'],$this->ID]);
             }
             if($results != NULL){
                 return Response::json(array(

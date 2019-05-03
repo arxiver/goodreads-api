@@ -88,7 +88,7 @@ class ReviewController extends Controller
                     $shelfType = $request["shelf"];
                     DB::table('shelves')
                         ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ],
                             ['type' => 0,'updated_at'=>now()]
                         );
                     if (!empty($request["body"]))
@@ -338,7 +338,7 @@ class ReviewController extends Controller
     public function destroy(Request $request)
     {
         $Validations    = array(
-            "reviewId"  => "required|integer",
+            "reviewId"  => "required|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
@@ -438,7 +438,6 @@ class ReviewController extends Controller
      */
     public function getReviewsForListOfBooks()
     {
-        //
     }
 
 
@@ -509,19 +508,6 @@ class ReviewController extends Controller
             else{
                  $rt=DB::select('select * from reviews r , books b where r.book_id = b.id and b.title= ?', [$request['title']]);
             }
-       /* foreach($rt as $res)
-            {
-                    if($res->shelf_name ==0){
-                        $res->shelf_name ='read';
-                    }
-                    else if($res->shelf_name ==1){
-                        $res->shelf_name ='currentlyRead';
-                    }
-                    else{
-                        $res->shelf_name ='WantToRead';
-
-                    }
-            }*/
         if($rt != NULL){
             return Response::json(array(
                 'status' => 'success',
@@ -563,19 +549,18 @@ class ReviewController extends Controller
      */
     public function listReviewOfUser()
     {
-        //
     }
 
-    /**
-     * @group [Review].show Review For Book
-     * get a specific review 
-     * 
-     * this function is responsible for showing details of a certain review by
-     * returning the (body,rating,comments counts, likes counts, user id ,book id )
-     * of a certain review and also it returns the shelf name of the book the review about
-     * all of that formed by sending the parameters which :-
-     * review id.
-     * @response {
+   /**
+    * @group [Review].show Review For Book
+    * get a specific review 
+    * 
+    * this function is responsible for showing details of a certain review by
+    * returning the (body,rating,comments counts, likes counts, user id ,book id )
+    * of a certain review and also it returns the shelf name of the book the review about
+    * all of that formed by sending the parameters which :-
+    * review id.
+    * @response {
     *"status": "success",
     *"pages": [
     *{
@@ -607,7 +592,8 @@ class ReviewController extends Controller
     *    {
     *         "author_name": "ahmed"
     *      }
-    *   ]
+    *   ],
+    * "if_liked": 1
     *}
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
@@ -637,29 +623,36 @@ class ReviewController extends Controller
                     $book=DB::select('select title as book_name,img_url as book_image from books where id=?',[$res->book_id]);
                     $author=DB::select('select a.author_name as author_name from authors a , books b where a.id=b.author_id and b.id=?',[$res->book_id]);
                 }
-                   /* if($res->shelf_name ==0){
-                        $res->shelf_name ='read';
-                    }
-                    else if($res->shelf_name ==1){
-                        $res->shelf_name ='currentlyRead';
-                    }
-                    else{
-                        $res->shelf_name ='WantToRead';
-
-                    }*/
             }
+        $myrev=DB::select('select id from likes where resourse_id=? and user_id=?',[$request['reviewId'],$this->ID]);
+       if($myrev != NULL){
+          $myrev= 'NO_LIKES';
+       }
         if($results != NULL){
+            if($myrev !=NULL){
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results,
                 'user' => $user,
                 'book' =>$book,
-                'auther'=>$author),
+                'auther'=>$author,
+                'if_liked'=>1),
                 200);
+            }
+            else{
+                return Response::json(array(
+                'status' => 'success',
+                'pages' => $results,
+                'user' => $user,
+                'book' =>$book,
+                'auther'=>$author,
+                'if_liked'=>0),
+                200);
+            }
         }
         else{
             return Response::json(array(
-                'status' => 'failed',
+                'status' => 'failed, no rev',
                 'pages' => $results),
                 400);
         }
@@ -685,17 +678,34 @@ class ReviewController extends Controller
      * book id and
      * user id
      * @response {
-     * "status": "success",
-     * "pages": [
-     *      {
-     *      "id": 1000010,
-    *       "rating": 2,
-    *       "shelf_name": 0,
-    *       "body": "Woooooooooooooow  it is a great booooook"
-    *       }
-     *    ]
-     * }
-     * @bodyParam userId required id of the of the user
+    *"status": "success",
+    *"pages": [
+    *    {
+    *        "id": 5,
+    *        "rating": 4,
+    *        "shelf_name": 0,
+    *        "body": "UnKo1M1dWG"
+    *    },
+    *    {
+    *        "id": 8,
+    *        "rating": 4,
+    *        "shelf_name": 0,
+    *        "body": "j598S8DmNG"
+    *    }
+    *],
+    *"user": [
+    *    {
+    *        "image_link": "default.jpg",
+    *        "name": "test"
+    *    }
+    *],
+    *"book_title": [
+    *    {
+    *        "title": "Sherwood"
+    *    }
+    *]
+    *   }
+     * @bodyParam userId optional id of the of the user
      * @bodyParam bookId required id of the of the book
      */
     public function showReviewForBookForUser(Request $request)
@@ -709,10 +719,13 @@ class ReviewController extends Controller
         if (!($Data->fails())) {
             if($request['userId'] != Null){
                 $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+                $rs=DB::select('select image_link , name from users where id = ?',[$request['userId']]);
             }
             else{
                 $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
+                $rs=DB::select('select image_link , name from users where id = ?',[$this->ID]);
             }
+           $book_title=DB::select('select title from books where id = ?',[$request['bookId']]);
         if($results != NULL){
            /* foreach($results as $res)
             {
@@ -729,7 +742,9 @@ class ReviewController extends Controller
             }*/
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'user' => $rs,
+                'book_title' =>$book_title),
                 200);
         }
         else{
@@ -741,7 +756,7 @@ class ReviewController extends Controller
     }
     else{
         return Response::json(array(
-            'status' => 'failed',
+            'status' => 'failed'
             ),
             400);
     }
@@ -800,6 +815,11 @@ class ReviewController extends Controller
       *      "username": "Esmeralda Ruecker",
       *      "userimagelink": "https://lorempixel.com/640/480/?10685"
      *   }
+     * ],
+     *  "liked_reviews": [
+      *  {
+     *       "id": 1
+     *   }
     *]
     * }
      * @bodyParam bookId integer required id of the of the book
@@ -812,19 +832,23 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
        $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,r.created_at,r.updated_at,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ? order by r.created_at DESC', [$request['bookId']]);
+       //if i make likes for this review
+       //$myrev=DB::select('select id from likes where resourse_id=? , user_id=?',[$results->id,$this->ID]);
        foreach($results as $res)
        {
             $res->userimagelink=$this->GetUrl()."/".$res->userimagelink;
        }
+       $myrev=DB::select('select r.id from likes l , reviews r ,books b where l.resourse_id=r.id and b.id=r.book_id and l.user_id=?',[$this->ID]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'liked_reviews'=>$myrev),
                 200);
         }
         else{
             return Response::json(array(
-                'status' => 'failed',
+                'status' => 'failed to find review for this book',
                 'pages' => $results),
                 400);
         }
@@ -836,4 +860,115 @@ class ReviewController extends Controller
             400);
     }
 }
+
+
+    /**
+     * @group  [Review].User`s all-reviews
+     *
+     *
+     * List the reviews for a specific user
+     * "id" as paramater if it is not given in the request
+     * it returns authenticated-user reviews
+     * @authenticated
+     * @bodyParam id int optional id of the user default authenticated-user id.
+     *
+     * @response
+     * {
+     *    "reviews": [
+     *        {
+     *            "review_id": 2,
+     *            "book_id": 2,
+     *            "title": "Sherwood",
+     *            "img_url": "https://kbimages1-a.akamaihd.net/6954f4cc-6e4e-46e3-8bc2-81b93f57a723/353/569/90/False/sherwood-7.jpg",
+     *            "pages_no": 0,
+     *            "body": "FTJ4PlC0Zq",
+     *            "shelf_id": 0,
+     *            "likes_count": 0,
+     *            "comments_count": 0,
+     *            "created_at": "2019-04-27 22:44:46",
+     *            "updated_at": "2019-04-27 22:44:46",
+     *            "comments": [
+     *                {
+     *                    "comment_id": 2,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedComment",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:37",
+     *                    "updated_at": "2019-04-28 08:33:37"
+     *                }
+     *            ]
+     *        },
+     *        {
+     *            "review_id": 16,
+     *            "book_id": 3,
+     *            "title": "Once & Future",
+     *            "img_url": "https://images-na.ssl-images-amazon.com/images/I/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+     *            "pages_no": 0,
+     *            "body": "HluxxIGc80",
+     *            "shelf_id": 2,
+     *            "likes_count": 0,
+     *            "comments_count": 0,
+     *            "created_at": "2019-04-27 22:44:46",
+     *            "updated_at": "2019-04-27 22:44:46",
+     *            "comments": [
+     *                {
+     *                    "comment_id": 1,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedComment",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:16",
+     *                    "updated_at": "2019-04-28 08:33:16"
+     *                },
+     *                {
+     *                    "comment_id": 3,
+     *                    "user_id": 7,
+     *                    "name": "Mohamed",
+     *                    "image_link": "http://127.0.0.1:8000/storage/avatars/default.jpg",
+     *                    "body": "mohamedCommentadsad",
+     *                    "have_the_comment": "No",
+     *                    "created_at": "2019-04-28 08:33:48",
+     *                    "updated_at": "2019-04-28 08:33:48"
+     *                }
+     *            ]
+     *        }
+     *    ]
+     *}
+     *
+     *
+     */
+
+    public function listUserReviews(Request $request)
+    {
+        $id = $request->has(['id']) ? $request->id : $this->ID;
+      //  $reviews = DB::select( 'select * from reviews R , books B where R.user_id = ? and B.id=R.book_id', [$id]);
+        $data = DB::select( 'select R.id as review_id ,R.book_id ,B.title,B.img_url,B.pages_no , R.body ,R.shelf_name as shelf_id ,
+                                     R.likes_count, R.comments_count , R.created_at ,R.updated_at
+                                     from reviews R , books B where R.user_id = ? and B.id=R.book_id', [$id]);
+        $i = 0;
+        $j=0;
+        while ($i < sizeof($data)) {
+            $_id = $data[$i]->review_id;
+            $data[$i]->comments = DB::select( 'select c.id as comment_id , user_id ,name ,  image_link ,
+                                                body ,have_the_comment ,c.created_at ,
+                                                c.updated_at from comments as c , users as u
+                                                where u.id = c.user_id and resourse_type=0 and resourse_id = ?',[$_id]);
+            $j=0;
+            while ($j<sizeof($data[$i]->comments)) {
+                $data[$i]->comments[$j]->image_link = $this->GetUrl() . "/" . $data[$i]->comments[$j]->image_link;
+                $j++;
+            }
+            $i++;
+        }
+
+        return response()->json([ 'reviews' => $data], 200);
+
+    }
+
+
+
+
 }

@@ -69,6 +69,7 @@ class commentsNotification extends Notification
             'review_id' =>$rev->id,
             'review_user_id'=>$revUser->id,
             'review_user_name'=>$revUser->name,
+            'book_id'=>$book->id,
             'book_title' =>$book->title,
             'type' =>0 //comment
             

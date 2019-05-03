@@ -56,7 +56,7 @@
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books" \
     -H "Content-Type: application/json" \
-    -d '{"page":16,"books_per_page":6}'
+    -d '{"page":19,"books_per_page":12}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books");
 
@@ -66,8 +66,8 @@ let headers = {
 }
 
 let body = {
-    "page": 16,
-    "books_per_page": 6
+    "page": 19,
+    "books_per_page": 12
 }
 
 fetch(url, {
@@ -126,35 +126,6 @@ fetch(url, {
 </table>
 <!-- END_c84ecb8d4fd02d9a637dac124b62c629 -->
 <h1>Review</h1>
-<!-- START_6747893efdb21a433cd9cc3b708804f1 -->
-<h2>List all reviews of the authenticated user</h2>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/myreviews" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/myreviews");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (405):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "errors": "You are not loged in"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET api/myreviews</code></p>
-<!-- END_6747893efdb21a433cd9cc3b708804f1 -->
 <!-- START_b7f52079bc658d3faea44274e95c9859 -->
 <h2>Recent reviews from all members.</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
@@ -194,7 +165,7 @@ and i will use it to get the review for one book array of one element</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/users/books" \
     -H "Content-Type: application/json" \
-    -d '{"isbns":"nWQr9ntMtxmHlIt7"}'
+    -d '{"isbns":"DfouTPi1iuYi3619"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/users/books");
 
@@ -204,7 +175,7 @@ let headers = {
 }
 
 let body = {
-    "isbns": "nWQr9ntMtxmHlIt7"
+    "isbns": "DfouTPi1iuYi3619"
 }
 
 fetch(url, {
@@ -250,7 +221,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listReviewOfUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"fS2OUeZrA7OIw5ZM"}'
+    -d '{"userId":"sSK1vZC8Urav58wO"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listReviewOfUser");
 
@@ -260,7 +231,7 @@ let headers = {
 }
 
 let body = {
-    "userId": "fS2OUeZrA7OIw5ZM"
+    "userId": "sSK1vZC8Urav58wO"
 }
 
 fetch(url, {
@@ -337,7 +308,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/shelfname" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_name":"NsY6Aqu3dE56BmS1"}'
+    -d '{"shelf_name":"pXgIe9LYzeQHDujk"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/shelfname");
 
@@ -347,7 +318,7 @@ let headers = {
 }
 
 let body = {
-    "shelf_name": "NsY6Aqu3dE56BmS1"
+    "shelf_name": "pXgIe9LYzeQHDujk"
 }
 
 fetch(url, {
@@ -393,7 +364,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/shelfid" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":11,"page":12,"books_per_page":16}'
+    -d '{"user_id":18,"page":18,"books_per_page":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/shelfid");
 
@@ -403,9 +374,9 @@ let headers = {
 }
 
 let body = {
-    "user_id": 11,
-    "page": 12,
-    "books_per_page": 16
+    "user_id": 18,
+    "page": 18,
+    "books_per_page": 20
 }
 
 fetch(url, {
@@ -482,7 +453,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/signup" \
     -H "Content-Type: application/json" \
-    -d '{"email":"uXDiELXHGkrc3kBE","password":"qIxEmsFbdt1cfYWl","password_confirmation":"XiS41oJ9yWunr8TL","name":"P4dlUpvzyjRUwFD2","gender":"Ui2NkhAlPMM889xo","birthday":"G3xQ0icBHKv5k1cB","country":"YysigQLblc08WIFC","city":"G8RRFNvTfstd0eB2"}'
+    -d '{"email":"FJX7g6BKZSLWYNSY","password":"8iYaULoGkpuqMXsB","password_confirmation":"C67BuJka4rsPReHo","name":"Gn93XRT6e7d7j31b","gender":"l8jkEVdQsW1f7szY","birthday":"COcj8KRWP1XDoABE","country":"ri8K7VmW9RHobzY8","city":"F9FeCyao9cYN3Pmj"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/signup");
 
@@ -492,14 +463,14 @@ let headers = {
 }
 
 let body = {
-    "email": "uXDiELXHGkrc3kBE",
-    "password": "qIxEmsFbdt1cfYWl",
-    "password_confirmation": "XiS41oJ9yWunr8TL",
-    "name": "P4dlUpvzyjRUwFD2",
-    "gender": "Ui2NkhAlPMM889xo",
-    "birthday": "G3xQ0icBHKv5k1cB",
-    "country": "YysigQLblc08WIFC",
-    "city": "G8RRFNvTfstd0eB2"
+    "email": "FJX7g6BKZSLWYNSY",
+    "password": "8iYaULoGkpuqMXsB",
+    "password_confirmation": "C67BuJka4rsPReHo",
+    "name": "Gn93XRT6e7d7j31b",
+    "gender": "l8jkEVdQsW1f7szY",
+    "birthday": "COcj8KRWP1XDoABE",
+    "country": "ri8K7VmW9RHobzY8",
+    "city": "F9FeCyao9cYN3Pmj"
 }
 
 fetch(url, {
@@ -601,13 +572,13 @@ fetch(url, {
 </table>
 <!-- END_90f45d502fd52fdc0b289e55ba3c2ec6 -->
 <!-- START_8bb89f67246d708dd6f24b433d204747 -->
-<h2>check token</h2>
+<h2>check token forgot password</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/checktoken" \
     -H "Content-Type: application/json" \
-    -d '{"token":"Xzx0nX85PiKpHbLV"}'
+    -d '{"token":"ImHvCqOZMJS2MxXG"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/checktoken");
 
@@ -617,7 +588,7 @@ let headers = {
 }
 
 let body = {
-    "token": "Xzx0nX85PiKpHbLV"
+    "token": "ImHvCqOZMJS2MxXG"
 }
 
 fetch(url, {
@@ -631,13 +602,13 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "valid token"
+    "userId": ""
 }</code></pre>
 <blockquote>
 <p>Example response (405):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Invalid token"
+    "error": "This url is old , please try to reset your password again"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/checktoken</code></p>
@@ -662,13 +633,13 @@ fetch(url, {
 </table>
 <!-- END_8bb89f67246d708dd6f24b433d204747 -->
 <!-- START_d82715c3696d1a68ee35375d85c9b58d -->
-<h2>forgotPassword</h2>
+<h2>forgot Password</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/forgotpassword" \
     -H "Content-Type: application/json" \
-    -d '{"email":"Z98uBeDOOzrgJli4"}'
+    -d '{"email":"PTygXiUJZdW8DsDt"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/forgotpassword");
 
@@ -678,7 +649,7 @@ let headers = {
 }
 
 let body = {
-    "email": "Z98uBeDOOzrgJli4"
+    "email": "PTygXiUJZdW8DsDt"
 }
 
 fetch(url, {
@@ -729,7 +700,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/resetpassword" \
     -H "Content-Type: application/json" \
-    -d '{"password":"rZ2EXLhL3eacVACw","password_confirmation":"pvSy2C5njplKqCWv","userId":7}'
+    -d '{"password":"Ub7KxAYZDw5TPzR7","password_confirmation":"4EpX34BfociGjIre","userId":6}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/resetpassword");
 
@@ -739,9 +710,9 @@ let headers = {
 }
 
 let body = {
-    "password": "rZ2EXLhL3eacVACw",
-    "password_confirmation": "pvSy2C5njplKqCWv",
-    "userId": 7
+    "password": "Ub7KxAYZDw5TPzR7",
+    "password_confirmation": "4EpX34BfociGjIre",
+    "userId": 6
 }
 
 fetch(url, {
@@ -805,7 +776,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changepassword" \
     -H "Content-Type: application/json" \
-    -d '{"password":"NOh4VoPgHMTp31s3","newPassword":"dMNUoabHbaXsQakZ","newPassword_confirmation":"Qf992fq79vCnBpG2"}'
+    -d '{"password":"fRs6zr8HwIe64nlm","newPassword":"uz6Uo0vU6rPuqdni","newPassword_confirmation":"UtmGJVm4SVOnaVkb"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changepassword");
 
@@ -815,9 +786,9 @@ let headers = {
 }
 
 let body = {
-    "password": "NOh4VoPgHMTp31s3",
-    "newPassword": "dMNUoabHbaXsQakZ",
-    "newPassword_confirmation": "Qf992fq79vCnBpG2"
+    "password": "fRs6zr8HwIe64nlm",
+    "newPassword": "uz6Uo0vU6rPuqdni",
+    "newPassword_confirmation": "UtmGJVm4SVOnaVkb"
 }
 
 fetch(url, {
@@ -885,7 +856,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changename" \
     -H "Content-Type: application/json" \
-    -d '{"newName":"9cPHjlFRzwZEc4vz"}'
+    -d '{"newName":"Se44bqRsYkMrVG5U"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changename");
 
@@ -895,7 +866,7 @@ let headers = {
 }
 
 let body = {
-    "newName": "9cPHjlFRzwZEc4vz"
+    "newName": "Se44bqRsYkMrVG5U"
 }
 
 fetch(url, {
@@ -950,7 +921,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/delete" \
     -H "Content-Type: application/json" \
-    -d '{"password":"0pPEhVNvCrlItYXG"}'
+    -d '{"password":"oQkY9mN8fjNcG8rA"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/delete");
 
@@ -960,7 +931,7 @@ let headers = {
 }
 
 let body = {
-    "password": "0pPEhVNvCrlItYXG"
+    "password": "oQkY9mN8fjNcG8rA"
 }
 
 fetch(url, {
@@ -1041,7 +1012,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changecountry" \
     -H "Content-Type: application/json" \
-    -d '{"newCountry":"vuGECehqSXajItAz"}'
+    -d '{"newCountry":"4aoiKIvhM6twslqY"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changecountry");
 
@@ -1051,7 +1022,7 @@ let headers = {
 }
 
 let body = {
-    "newCountry": "vuGECehqSXajItAz"
+    "newCountry": "4aoiKIvhM6twslqY"
 }
 
 fetch(url, {
@@ -1111,7 +1082,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changecity" \
     -H "Content-Type: application/json" \
-    -d '{"newCity":"VI7maoICyqsuUunE"}'
+    -d '{"newCity":"OPdt76FK5kY1YwAA"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changecity");
 
@@ -1121,7 +1092,7 @@ let headers = {
 }
 
 let body = {
-    "newCity": "VI7maoICyqsuUunE"
+    "newCity": "OPdt76FK5kY1YwAA"
 }
 
 fetch(url, {
@@ -1181,7 +1152,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/changebirthday" \
     -H "Content-Type: application/json" \
-    -d '{"newBirthday":"BVW5KWsi6YClC3pJ"}'
+    -d '{"newBirthday":"rhiEQPVcxwexrQWk"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changebirthday");
 
@@ -1191,7 +1162,7 @@ let headers = {
 }
 
 let body = {
-    "newBirthday": "BVW5KWsi6YClC3pJ"
+    "newBirthday": "rhiEQPVcxwexrQWk"
 }
 
 fetch(url, {
@@ -1251,7 +1222,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whocanseemybirthday" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyBirthday":"8zMetQBNwlwtLtHu"}'
+    -d '{"seeMyBirthday":"lbIEfKJ80YRzAWZr"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whocanseemybirthday");
 
@@ -1261,7 +1232,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyBirthday": "8zMetQBNwlwtLtHu"
+    "seeMyBirthday": "lbIEfKJ80YRzAWZr"
 }
 
 fetch(url, {
@@ -1307,7 +1278,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whocanseemycountry" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCountry":"4QM8c1KSMRfjetQp"}'
+    -d '{"seeMyCountry":"Ldgqu5Xg3dQd58pc"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whocanseemycountry");
 
@@ -1317,7 +1288,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCountry": "4QM8c1KSMRfjetQp"
+    "seeMyCountry": "Ldgqu5Xg3dQd58pc"
 }
 
 fetch(url, {
@@ -1363,7 +1334,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/whocanseemycity" \
     -H "Content-Type: application/json" \
-    -d '{"seeMyCity":"wcFZ7hrJJ2b06aCG"}'
+    -d '{"seeMyCity":"nyTR3ifriJ0uvQW9"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/whocanseemycity");
 
@@ -1373,7 +1344,7 @@ let headers = {
 }
 
 let body = {
-    "seeMyCity": "wcFZ7hrJJ2b06aCG"
+    "seeMyCity": "nyTR3ifriJ0uvQW9"
 }
 
 fetch(url, {
@@ -1419,7 +1390,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/changeimage" \
     -H "Content-Type: application/json" \
-    -d '{"Image":"KG65iyoVRwpz4mLl"}'
+    -d '{"Image":"Tx6vb2WAVftAP4sY"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/changeimage");
 
@@ -1429,7 +1400,7 @@ let headers = {
 }
 
 let body = {
-    "Image": "KG65iyoVRwpz4mLl"
+    "Image": "Tx6vb2WAVftAP4sY"
 }
 
 fetch(url, {
@@ -1468,13 +1439,14 @@ fetch(url, {
 </table>
 <!-- END_67d3904e1cf7117e71f186da21780889 -->
 <!-- START_cdc65eefa87b9a8f3fdcfe36ed62c436 -->
-<h2>check token</h2>
+<h2>check token verify</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/checktokenverify" \
     -H "Content-Type: application/json" \
-    -d '{"token":"a3WEcAqlxWGbsEH9"}'
+    -d '{"token":"qM234VzDwHM4Rkm7"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/checktokenverify");
 
@@ -1484,7 +1456,7 @@ let headers = {
 }
 
 let body = {
-    "token": "a3WEcAqlxWGbsEH9"
+    "token": "qM234VzDwHM4Rkm7"
 }
 
 fetch(url, {
@@ -1534,24 +1506,17 @@ fetch(url, {
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/verify" \
-    -H "Content-Type: application/json" \
-    -d '{"email":"DlzCrg0UzrIbb3qP"}'
-</code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/verify" </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/verify");
 
 let headers = {
     "Accept": "application/json",
-}
-
-let body = {
-    "email": "DlzCrg0UzrIbb3qP"
+    "Content-Type": "application/json",
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
-    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
@@ -1559,35 +1524,10 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Now , You can go to You email to reset the password"
-}</code></pre>
-<blockquote>
-<p>Example response (405):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "error": "The email is invalid"
+    "message": "Now , You can go to your account to reset the password"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/verify</code></p>
-<h4>Body Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>email</td>
-<td>string</td>
-<td>required</td>
-<td>.</td>
-</tr>
-</tbody>
-</table>
 <!-- END_d909d63b7e533d9efa8e8c0d296350a0 -->
 <!-- START_0bef4e738c9d6720ad43b062015d1078 -->
 <h2>api/test</h2>
@@ -1612,14 +1552,14 @@ fetch(url, {
 <p>Example response (500):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too few arguments to function App\\Mail\\testmail::__construct(), 0 passed in D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\UserController.php on line 907 and exactly 1 expected",
+    "message": "Too few arguments to function App\\Mail\\testmail::__construct(), 0 passed in D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\UserController.php on line 1067 and exactly 1 expected",
     "exception": "Symfony\\Component\\Debug\\Exception\\FatalThrowableError",
     "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Mail\\testmail.php",
     "line": 15,
     "trace": [
         {
             "file": "D:\\Programs\\PHP\\xampp\\xampp\\htdocs\\phase1\\goodreads-api\\app\\Http\\Controllers\\UserController.php",
-            "line": 907,
+            "line": 1067,
             "function": "__construct",
             "class": "App\\Mail\\testmail",
             "type": "-&gt;"
@@ -2097,7 +2037,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/deleteComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":13}'
+    -d '{"id":16}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/deleteComment");
 
@@ -2107,7 +2047,7 @@ let headers = {
 }
 
 let body = {
-    "id": 13
+    "id": 16
 }
 
 fetch(url, {
@@ -2191,7 +2131,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/LikeOrUnLike" \
     -H "Content-Type: application/json" \
-    -d '{"id":1}'
+    -d '{"id":6}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/LikeOrUnLike");
 
@@ -2201,7 +2141,7 @@ let headers = {
 }
 
 let body = {
-    "id": 1
+    "id": 6
 }
 
 fetch(url, {
@@ -2320,7 +2260,7 @@ and determine if the authenticated have this comment or Not having it</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/listComments" \
     -H "Content-Type: application/json" \
-    -d '{"id":13}'
+    -d '{"id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/listComments");
 
@@ -2330,7 +2270,7 @@ let headers = {
 }
 
 let body = {
-    "id": 13
+    "id": 15
 }
 
 fetch(url, {
@@ -2349,6 +2289,7 @@ fetch(url, {
             "username": "test",
             "image_link": "default.jpg",
             "id": 1,
+            "user_id": 1,
             "body": "I agree with you",
             "created_at": "2019-04-27 02:38:27",
             "updated_at": "2019-04-27 02:38:27",
@@ -2358,6 +2299,7 @@ fetch(url, {
             "username": "test",
             "image_link": "default.jpg",
             "id": 2,
+            "user_id": 1,
             "body": "I agree with you",
             "created_at": "2019-04-27 02:38:28",
             "updated_at": "2019-04-27 02:38:28",
@@ -2367,6 +2309,7 @@ fetch(url, {
             "username": "test",
             "image_link": "default.jpg",
             "id": 3,
+            "user_id": 1,
             "body": "I agree with you",
             "created_at": "2019-04-27 02:38:30",
             "updated_at": "2019-04-27 02:38:30",
@@ -2376,6 +2319,7 @@ fetch(url, {
             "username": "ta7a",
             "image_link": "default.jpg",
             "id": 4,
+            "user_id": 2,
             "body": "ahmed",
             "created_at": "2019-04-30 00:00:00",
             "updated_at": "2019-04-10 00:00:00",
@@ -2427,6 +2371,116 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_300ec40d807333984a76a264dac57b69 -->
+<h1>[Activities].ListLikes</h1>
+<p>list likes</p>
+<p>lists likes for a specific review</p>
+<p>and give you indication if alike is belong to you as authenticated user or not .</p>
+<!-- START_06b447ff2a11ad98e991c70ded4a0c5e -->
+<h2>api/listLikes</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/listLikes" \
+    -H "Content-Type: application/json" \
+    -d '{"id":7}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/listLikes");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 7
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "likes": [
+        {
+            "username": "test",
+            "image_link": "default.jpg",
+            "id": 1,
+            "user_id": 1,
+            "created_at": "2019-05-02 10:11:40",
+            "updated_at": "2019-05-02 10:11:40",
+            "have_the_like": "No"
+        },
+        {
+            "username": "ta7a",
+            "image_link": "default.jpg",
+            "id": 5,
+            "user_id": 2,
+            "created_at": "2019-05-02 10:18:25",
+            "updated_at": "2019-05-02 10:18:25",
+            "have_the_like": "No"
+        },
+        {
+            "username": "waleed",
+            "image_link": "default.jpg",
+            "id": 7,
+            "user_id": 3,
+            "created_at": "2019-05-02 13:13:07",
+            "updated_at": "2019-05-02 13:13:07",
+            "have_the_like": "Yes"
+        }
+    ],
+    "status": "true"
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "true",
+    "Message": "There is no likes on this review"
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "false",
+    "Message": "can't List the likes of this review becouse this review doesn't exists"
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "false",
+    "errors": "The id field is required."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/listLikes</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>required</td>
+<td>id of the liked review</td>
+</tr>
+</tbody>
+</table>
+<!-- END_06b447ff2a11ad98e991c70ded4a0c5e -->
 <h1>[Activities].Make Comment</h1>
 <p>makeComment function</p>
 <p>make a validation on the input to check that is satisfing the conditions. </p>
@@ -2442,7 +2496,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/makeComment" \
     -H "Content-Type: application/json" \
-    -d '{"id":8,"body":"AGja61eTq54BMy87"}'
+    -d '{"id":13,"body":"P40Zel7GC88b7FjD"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/makeComment");
 
@@ -2452,8 +2506,8 @@ let headers = {
 }
 
 let body = {
-    "id": 8,
-    "body": "AGja61eTq54BMy87"
+    "id": 13,
+    "body": "P40Zel7GC88b7FjD"
 }
 
 fetch(url, {
@@ -2612,7 +2666,7 @@ gets a user's notifications</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/notification" \
     -H "Content-Type: application/json" \
-    -d '{"page":2}'
+    -d '{"page":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/notification");
 
@@ -2622,7 +2676,7 @@ let headers = {
 }
 
 let body = {
-    "page": 2
+    "page": 20
 }
 
 fetch(url, {
@@ -2720,7 +2774,7 @@ way explained earlier in order to show it in this user's profile</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/updates" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":6,"max_updates":11}'
+    -d '{"user_id":16,"max_updates":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/updates");
 
@@ -2730,8 +2784,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 6,
-    "max_updates": 11
+    "user_id": 16,
+    "max_updates": 14
 }
 
 fetch(url, {
@@ -2910,7 +2964,7 @@ book_id.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books/show" \
     -H "Content-Type: application/json" \
-    -d '{"book_id":16}'
+    -d '{"book_id":3}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books/show");
 
@@ -2920,7 +2974,7 @@ let headers = {
 }
 
 let body = {
-    "book_id": 16
+    "book_id": 3
 }
 
 fetch(url, {
@@ -2952,7 +3006,7 @@ fetch(url, {
             "pages_no": 8,
             "created_at": "2019-03-21 00:00:00",
             "updated_at": "2019-03-21 00:00:00",
-            "genre": "action"
+            "genre": 0
         }
     ]
 }</code></pre>
@@ -2992,7 +3046,7 @@ author name</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_Authorname" \
     -H "Content-Type: application/json" \
-    -d '{"Author_name":"cF3YZUQSETgWc8Qw"}'
+    -d '{"Author_name":"PAOhVMQasRMlwrtY"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_Authorname");
 
@@ -3002,7 +3056,7 @@ let headers = {
 }
 
 let body = {
-    "Author_name": "cF3YZUQSETgWc8Qw"
+    "Author_name": "PAOhVMQasRMlwrtY"
 }
 
 fetch(url, {
@@ -3035,7 +3089,15 @@ fetch(url, {
             "pages_no": 8,
             "created_at": "2019-03-21 00:00:00",
             "updated_at": "2019-03-21 00:00:00",
-            "genre": "action"
+            "genre": 0
+        }
+    ],
+    "book info for me": [
+        {
+            "shelf_name": 0,
+            "rating": 2,
+            "id": 4,
+            "title": "Internment"
         }
     ]
 }</code></pre>
@@ -3075,7 +3137,7 @@ isbn.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_ISBN" \
     -H "Content-Type: application/json" \
-    -d '{"ISBN":11}'
+    -d '{"ISBN":19}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_ISBN");
 
@@ -3085,7 +3147,7 @@ let headers = {
 }
 
 let body = {
-    "ISBN": 11
+    "ISBN": 19
 }
 
 fetch(url, {
@@ -3105,6 +3167,7 @@ fetch(url, {
             "id": 1000000,
             "title": "ppp",
             "isbn": 1,
+            "author_name": "G. Willow Wilson",
             "img_url": "dsds",
             "publication_date": "2019-03-21",
             "publisher": "fgdg",
@@ -3117,7 +3180,15 @@ fetch(url, {
             "pages_no": 8,
             "created_at": "2019-03-21 00:00:00",
             "updated_at": "2019-03-21 00:00:00",
-            "genre": "action"
+            "genre": 0
+        }
+    ],
+    "book info for me": [
+        {
+            "shelf_name": 0,
+            "rating": 2,
+            "id": 1,
+            "title": "The Bird King"
         }
     ]
 }</code></pre>
@@ -3157,7 +3228,7 @@ genre type.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/books/genre" \
     -H "Content-Type: application/json" \
-    -d '{"genreName":"hjgmV1p4p9wXsWPt"}'
+    -d '{"genreName":"excgByrkl3cnuawz"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/books/genre");
 
@@ -3167,7 +3238,7 @@ let headers = {
 }
 
 let body = {
-    "genreName": "hjgmV1p4p9wXsWPt"
+    "genreName": "excgByrkl3cnuawz"
 }
 
 fetch(url, {
@@ -3199,7 +3270,17 @@ fetch(url, {
             "pages_no": 8,
             "created_at": "2019-03-21 00:00:00",
             "updated_at": "2019-03-21 00:00:00",
-            "genre": "action"
+            "genre": 0,
+            "author_name": "G. Willow Wilson"
+        }
+    ],
+    "books related to me": [
+        {
+            "shelf_name": 0,
+            "rating": 2,
+            "id": 1,
+            "title": "The Bird King",
+            "author_name": "G. Willow Wilson"
         }
     ]
 }</code></pre>
@@ -3239,7 +3320,7 @@ title.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/Books/book_title" \
     -H "Content-Type: application/json" \
-    -d '{"title":"waR6zGue8pBm6ISF"}'
+    -d '{"title":"25nNaZt7QVISTS69"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/Books/book_title");
 
@@ -3249,7 +3330,7 @@ let headers = {
 }
 
 let body = {
-    "title": "waR6zGue8pBm6ISF"
+    "title": "25nNaZt7QVISTS69"
 }
 
 fetch(url, {
@@ -3281,7 +3362,16 @@ fetch(url, {
             "pages_no": 8,
             "created_at": "2019-03-21 00:00:00",
             "updated_at": "2019-03-21 00:00:00",
-            "genre": "action"
+            "genre": "action",
+            "author_name": "G. Willow Wilson"
+        }
+    ],
+    "book info for me": [
+        {
+            "shelf_name": 0,
+            "rating": 2,
+            "id": 1,
+            "author_name": "G. Willow Wilson"
         }
     ]
 }</code></pre>
@@ -3401,7 +3491,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/followers" \
     -H "Content-Type: application/json" \
-    -d '{"page":13,"user_id":13}'
+    -d '{"page":19,"user_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/followers");
 
@@ -3411,8 +3501,8 @@ let headers = {
 }
 
 let body = {
-    "page": 13,
-    "user_id": 13
+    "page": 19,
+    "user_id": 15
 }
 
 fetch(url, {
@@ -3438,7 +3528,8 @@ fetch(url, {
             "book_id": 100,
             "currently_reading": "dummuybookName",
             "book_image": "http:\/\/treutel.biz\/",
-            "pages": 1200
+            "pages": 1200,
+            "is_followed": 0
         },
         {
             "id": 4,
@@ -3447,7 +3538,8 @@ fetch(url, {
             "book_id": null,
             "currently_reading": null,
             "book_image": null,
-            "pages": null
+            "pages": null,
+            "is_followed": 1
         },
         {
             "id": 5,
@@ -3456,7 +3548,8 @@ fetch(url, {
             "book_id": 10,
             "currently_reading": "dummuybookName",
             "book_image": "http:\/\/treutel.biz\/",
-            "pages": 1200
+            "pages": 1200,
+            "is_followed": 1
         }
     ],
     "_start": 1,
@@ -3506,7 +3599,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/following" \
     -H "Content-Type: application/json" \
-    -d '{"page":12,"user_id":16}'
+    -d '{"page":19,"user_id":11}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/following");
 
@@ -3516,8 +3609,8 @@ let headers = {
 }
 
 let body = {
-    "page": 12,
-    "user_id": 16
+    "page": 19,
+    "user_id": 11
 }
 
 fetch(url, {
@@ -3615,7 +3708,7 @@ if it is not existing it`s aborting .</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/unfollow" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":19}'
+    -d '{"user_id":1}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/unfollow");
 
@@ -3625,7 +3718,7 @@ let headers = {
 }
 
 let body = {
-    "user_id": 19
+    "user_id": 1
 }
 
 fetch(url, {
@@ -3688,7 +3781,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/reviwes/delete" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":16}'
+    -d '{"reviewId":7}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/delete");
 
@@ -3698,7 +3791,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": 16
+    "reviewId": 7
 }
 
 fetch(url, {
@@ -3785,7 +3878,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/reviwes/create" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":2,"shelf":7,"body":"0lCFqLwW5YgFoeTC","rating":1}'
+    -d '{"bookId":6,"shelf":1,"body":"Sdsb5fV6lb9aDNnG","rating":4}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/create");
 
@@ -3795,10 +3888,10 @@ let headers = {
 }
 
 let body = {
-    "bookId": 2,
-    "shelf": 7,
-    "body": "0lCFqLwW5YgFoeTC",
-    "rating": 1
+    "bookId": 6,
+    "shelf": 1,
+    "body": "Sdsb5fV6lb9aDNnG",
+    "rating": 4
 }
 
 fetch(url, {
@@ -3880,6 +3973,127 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_1521f8492a220ccff8293eeac79158d1 -->
+<h1>[Review].User`s all-reviews</h1>
+<p>List the reviews for a specific user
+&quot;id&quot; as paramater if it is not given in the request
+it returns authenticated-user reviews</p>
+<!-- START_da8699228d8799362aeee54ee0f6a556 -->
+<h2>api/user_reviews</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/user_reviews" \
+    -H "Content-Type: application/json" \
+    -d '{"id":6}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/user_reviews");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "id": 6
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "reviews": [
+        {
+            "review_id": 2,
+            "book_id": 2,
+            "title": "Sherwood",
+            "img_url": "https:\/\/kbimages1-a.akamaihd.net\/6954f4cc-6e4e-46e3-8bc2-81b93f57a723\/353\/569\/90\/False\/sherwood-7.jpg",
+            "pages_no": 0,
+            "body": "FTJ4PlC0Zq",
+            "shelf_id": 0,
+            "likes_count": 0,
+            "comments_count": 0,
+            "created_at": "2019-04-27 22:44:46",
+            "updated_at": "2019-04-27 22:44:46",
+            "comments": [
+                {
+                    "comment_id": 2,
+                    "user_id": 7,
+                    "name": "Mohamed",
+                    "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+                    "body": "mohamedComment",
+                    "have_the_comment": "No",
+                    "created_at": "2019-04-28 08:33:37",
+                    "updated_at": "2019-04-28 08:33:37"
+                }
+            ]
+        },
+        {
+            "review_id": 16,
+            "book_id": 3,
+            "title": "Once &amp; Future",
+            "img_url": "https:\/\/images-na.ssl-images-amazon.com\/images\/I\/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+            "pages_no": 0,
+            "body": "HluxxIGc80",
+            "shelf_id": 2,
+            "likes_count": 0,
+            "comments_count": 0,
+            "created_at": "2019-04-27 22:44:46",
+            "updated_at": "2019-04-27 22:44:46",
+            "comments": [
+                {
+                    "comment_id": 1,
+                    "user_id": 7,
+                    "name": "Mohamed",
+                    "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+                    "body": "mohamedComment",
+                    "have_the_comment": "No",
+                    "created_at": "2019-04-28 08:33:16",
+                    "updated_at": "2019-04-28 08:33:16"
+                },
+                {
+                    "comment_id": 3,
+                    "user_id": 7,
+                    "name": "Mohamed",
+                    "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+                    "body": "mohamedCommentadsad",
+                    "have_the_comment": "No",
+                    "created_at": "2019-04-28 08:33:48",
+                    "updated_at": "2019-04-28 08:33:48"
+                }
+            ]
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/user_reviews</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>optional</td>
+<td>optional id of the user default authenticated-user id.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_da8699228d8799362aeee54ee0f6a556 -->
 <h1>[Review].getReviewsByTitle</h1>
 <p>Get the reviews for a book given a title string.
 this function is responsible for showing certain review by
@@ -3897,7 +4111,7 @@ author -&gt;optional.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/reviwes/books" \
     -H "Content-Type: application/json" \
-    -d '{"title":"o4OLq7YFtDtXCCZk","author":"q161dZIcYvNP94vW","rating":17}'
+    -d '{"title":"Zlm5PvyhpfCM1aO6","author":"AwtzpJ9fattiVRbl","rating":9}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/reviwes/books");
 
@@ -3907,9 +4121,9 @@ let headers = {
 }
 
 let body = {
-    "title": "o4OLq7YFtDtXCCZk",
-    "author": "q161dZIcYvNP94vW",
-    "rating": 17
+    "title": "Zlm5PvyhpfCM1aO6",
+    "author": "AwtzpJ9fattiVRbl",
+    "rating": 9
 }
 
 fetch(url, {
@@ -4002,7 +4216,7 @@ user id</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewForBookForUser" \
     -H "Content-Type: application/json" \
-    -d '{"userId":"QyzNC8InnfbNsrLU","bookId":"r4pl9PpjAqyBy3s5"}'
+    -d '{"userId":"QP2Yj65K0CCacNub","bookId":"rjPL72BUtT9NuOj7"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewForBookForUser");
 
@@ -4012,8 +4226,8 @@ let headers = {
 }
 
 let body = {
-    "userId": "QyzNC8InnfbNsrLU",
-    "bookId": "r4pl9PpjAqyBy3s5"
+    "userId": "QP2Yj65K0CCacNub",
+    "bookId": "rjPL72BUtT9NuOj7"
 }
 
 fetch(url, {
@@ -4030,10 +4244,27 @@ fetch(url, {
     "status": "success",
     "pages": [
         {
-            "id": 1000010,
-            "rating": 2,
+            "id": 5,
+            "rating": 4,
             "shelf_name": 0,
-            "body": "Woooooooooooooow  it is a great booooook"
+            "body": "UnKo1M1dWG"
+        },
+        {
+            "id": 8,
+            "rating": 4,
+            "shelf_name": 0,
+            "body": "j598S8DmNG"
+        }
+    ],
+    "user": [
+        {
+            "image_link": "default.jpg",
+            "name": "test"
+        }
+    ],
+    "book_title": [
+        {
+            "title": "Sherwood"
         }
     ]
 }</code></pre>
@@ -4052,7 +4283,7 @@ fetch(url, {
 <tbody>
 <tr>
 <td>userId</td>
-<td>required</td>
+<td>optional</td>
 <td>optional</td>
 <td>id of the of the user</td>
 </tr>
@@ -4079,7 +4310,7 @@ review id.</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewOfBook" \
     -H "Content-Type: application/json" \
-    -d '{"reviewId":"oVo0frb1zLcjyIWD"}'
+    -d '{"reviewId":"L98i6EJG3k8fLBFh"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewOfBook");
 
@@ -4089,7 +4320,7 @@ let headers = {
 }
 
 let body = {
-    "reviewId": "oVo0frb1zLcjyIWD"
+    "reviewId": "L98i6EJG3k8fLBFh"
 }
 
 fetch(url, {
@@ -4134,7 +4365,8 @@ fetch(url, {
         {
             "author_name": "ahmed"
         }
-    ]
+    ],
+    "if_liked": 1
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/showReviewOfBook</code></p>
@@ -4172,7 +4404,7 @@ book id</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showReviewsForABook" \
     -H "Content-Type: application/json" \
-    -d '{"bookId":15}'
+    -d '{"bookId":18}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showReviewsForABook");
 
@@ -4182,7 +4414,7 @@ let headers = {
 }
 
 let body = {
-    "bookId": 15
+    "bookId": 18
 }
 
 fetch(url, {
@@ -4240,6 +4472,11 @@ fetch(url, {
             "username": "Esmeralda Ruecker",
             "userimagelink": "https:\/\/lorempixel.com\/640\/480\/?10685"
         }
+    ],
+    "liked_reviews": [
+        {
+            "id": 1
+        }
     ]
 }</code></pre>
 <h3>HTTP Request</h3>
@@ -4280,7 +4517,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/shelf/add_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_id":17,"book_id":19}'
+    -d '{"shelf_id":7,"book_id":13}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/add_book");
 
@@ -4290,8 +4527,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_id": 17,
-    "book_id": 19
+    "shelf_id": 7,
+    "book_id": 13
 }
 
 fetch(url, {
@@ -4363,7 +4600,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE "http://localhost/api/shelf/remove_book" \
     -H "Content-Type: application/json" \
-    -d '{"shelf_id":6,"book_id":6}'
+    -d '{"shelf_id":11,"book_id":10}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/remove_book");
 
@@ -4373,8 +4610,8 @@ let headers = {
 }
 
 let body = {
-    "shelf_id": 6,
-    "book_id": 6
+    "shelf_id": 11,
+    "book_id": 10
 }
 
 fetch(url, {
@@ -4430,6 +4667,88 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_06eb9d0211faabac28f877685cb3e0d9 -->
+<h1>[Shelf].Show Shelf</h1>
+<p>showShelf
+give the functio the id of the book and return the shelf number for you </p>
+<p>or told you that you don't have this book in nay shelf</p>
+<!-- START_71a5abf0cc54df4f7a1cf5d23a346437 -->
+<h2>api/showShelf</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/showShelf" \
+    -H "Content-Type: application/json" \
+    -d '{"bookId":3}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/showShelf");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "bookId": 3
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "ShelfName": 0,
+    "status": "true"
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "true",
+    "Message": "The book not in a shelf for you"
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "false",
+    "Message": "There is no book with this id"
+}</code></pre>
+<blockquote>
+<p>Example response (404):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "false",
+    "errors": "The id field is required."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/showShelf</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bookId</td>
+<td>integer</td>
+<td>required</td>
+<td>id of the book to get it's shelf</td>
+</tr>
+</tbody>
+</table>
+<!-- END_71a5abf0cc54df4f7a1cf5d23a346437 -->
 <h1>[Shelf].getBooksOnShelf</h1>
 <p>show books on the shelf
 this function is responsible for showing books on the user's shelf by
@@ -4444,7 +4763,7 @@ user id</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":13,"shelf_name":"YQ7Yp9HpRBtsLjaI"}'
+    -d '{"user_id":6,"shelf_name":3}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf");
 
@@ -4454,8 +4773,8 @@ let headers = {
 }
 
 let body = {
-    "user_id": 13,
-    "shelf_name": "YQ7Yp9HpRBtsLjaI"
+    "user_id": 6,
+    "shelf_name": 3
 }
 
 fetch(url, {
@@ -4473,27 +4792,16 @@ fetch(url, {
     "pages": [
         {
             "book_id": 95,
-            "title": "9jT4WR"
-        },
-        {
-            "book_id": 17,
-            "title": "pNUWhb"
-        },
-        {
-            "book_id": 50,
-            "title": "ZPiAVs"
-        },
-        {
-            "book_id": 9,
-            "title": "3SrTCb"
-        },
-        {
-            "book_id": 35,
-            "title": "TVSXeR"
-        },
-        {
-            "book_id": 61,
-            "title": "gBpaYn"
+            "title": "9jT4WR",
+            "id": 3,
+            "isbn": "9780316449274",
+            "img_url": "https:\/\/images-na.ssl-images-amazon.com\/images\/I\/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+            "reviews_count": 0,
+            "ratings_count": 0,
+            "author_id": 3,
+            "author_name": "Meagan Spooner",
+            "ratings_avg": 0,
+            "created_at": "2019-05-03 00:15:55"
         }
     ]
 }</code></pre>
@@ -4513,12 +4821,12 @@ fetch(url, {
 <tr>
 <td>user_id</td>
 <td>integer</td>
-<td>required</td>
-<td>Get the books on a member's shelf.</td>
+<td>optional</td>
+<td>optional Get the books on a member's shelf.</td>
 </tr>
 <tr>
 <td>shelf_name</td>
-<td>string</td>
+<td>integer</td>
 <td>required</td>
 <td>specified shelf`s name.</td>
 </tr>
@@ -4532,7 +4840,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/shelf/getbook" \
     -H "Content-Type: application/json" \
-    -d '{"user_id":15,"shelf_name":"wNr5ZltSYrtaRL1P"}'
+    -d '{"user_id":15,"shelf_name":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/shelf/getbook");
 
@@ -4543,7 +4851,7 @@ let headers = {
 
 let body = {
     "user_id": 15,
-    "shelf_name": "wNr5ZltSYrtaRL1P"
+    "shelf_name": 14
 }
 
 fetch(url, {
@@ -4561,27 +4869,16 @@ fetch(url, {
     "pages": [
         {
             "book_id": 95,
-            "title": "9jT4WR"
-        },
-        {
-            "book_id": 17,
-            "title": "pNUWhb"
-        },
-        {
-            "book_id": 50,
-            "title": "ZPiAVs"
-        },
-        {
-            "book_id": 9,
-            "title": "3SrTCb"
-        },
-        {
-            "book_id": 35,
-            "title": "TVSXeR"
-        },
-        {
-            "book_id": 61,
-            "title": "gBpaYn"
+            "title": "9jT4WR",
+            "id": 3,
+            "isbn": "9780316449274",
+            "img_url": "https:\/\/images-na.ssl-images-amazon.com\/images\/I\/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
+            "reviews_count": 0,
+            "ratings_count": 0,
+            "author_id": 3,
+            "author_name": "Meagan Spooner",
+            "ratings_avg": 0,
+            "created_at": "2019-05-03 00:15:55"
         }
     ]
 }</code></pre>
@@ -4601,12 +4898,12 @@ fetch(url, {
 <tr>
 <td>user_id</td>
 <td>integer</td>
-<td>required</td>
-<td>Get the books on a member's shelf.</td>
+<td>optional</td>
+<td>optional Get the books on a member's shelf.</td>
 </tr>
 <tr>
 <td>shelf_name</td>
-<td>string</td>
+<td>integer</td>
 <td>required</td>
 <td>specified shelf`s name.</td>
 </tr>
@@ -4625,7 +4922,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/login" \
     -H "Content-Type: application/json" \
-    -d '{"email":"vSKKqQlZfpHRWXIw","password":"TMg8CjqvqZvKRiAU"}'
+    -d '{"email":"IG0dyg2zQu72kkPG","password":"4of9i37cG9tI9TZZ"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/login");
 
@@ -4635,8 +4932,8 @@ let headers = {
 }
 
 let body = {
-    "email": "vSKKqQlZfpHRWXIw",
-    "password": "TMg8CjqvqZvKRiAU"
+    "email": "IG0dyg2zQu72kkPG",
+    "password": "4of9i37cG9tI9TZZ"
 }
 
 fetch(url, {
@@ -4743,6 +5040,249 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>DELETE api/logout</code></p>
 <!-- END_bfd94d52f65d7e0282e0634b79e28c7b -->
+<h1>[User].Search by name or username</h1>
+<p>searchByName function</p>
+<!-- START_0094660cf4cae52e13841e9edd811ab6 -->
+<h2>api/search_by_name_username</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/search_by_name_username" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"NFl45rDMDSBEu7TU"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/search_by_name_username");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "NFl45rDMDSBEu7TU"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "users": [
+        {
+            "id": 7,
+            "username": "Mido",
+            "name": "Mohamed",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "male",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/search_by_name_username</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>name/username of person you`r looking for .</td>
+</tr>
+</tbody>
+</table>
+<!-- END_0094660cf4cae52e13841e9edd811ab6 -->
+<h1>[User].Search by name</h1>
+<p>searchByName function</p>
+<!-- START_d0846f4ae0e2ba4029cad641f7140c0a -->
+<h2>api/search_by_name</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/search_by_name" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"dxyj4FQTBMdZYKKd"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/search_by_name");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "dxyj4FQTBMdZYKKd"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "users": [
+        {
+            "id": 4,
+            "username": "Nour",
+            "name": "Nour",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "female",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        },
+        {
+            "id": 7,
+            "username": "Mido",
+            "name": "Mohamed",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "male",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/search_by_name</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>name of person you`r looking for .</td>
+</tr>
+</tbody>
+</table>
+<!-- END_d0846f4ae0e2ba4029cad641f7140c0a -->
+<h1>[User].Search by username</h1>
+<p>searchByName function</p>
+<!-- START_87bc03cf100734f9a389b83b16b09425 -->
+<h2>api/search_by_username</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/search_by_username" \
+    -H "Content-Type: application/json" \
+    -d '{"username":"5gXSHZXhrpcXWzpM"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/search_by_username");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "username": "5gXSHZXhrpcXWzpM"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "users": [
+        {
+            "id": 4,
+            "username": "Nour",
+            "name": "Nour",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "female",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        },
+        {
+            "id": 6,
+            "username": "LoLo",
+            "name": "TheLeader",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "male",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        },
+        {
+            "id": 7,
+            "username": "Mido",
+            "name": "Mohamed",
+            "image_link": "http:\/\/127.0.0.1:8000\/storage\/avatars\/default.jpg",
+            "gender": "male",
+            "country": "Egypt",
+            "city": "Cairo",
+            "followers_count": 0,
+            "following_count": 0
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/search_by_username</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>required</td>
+<td>username of person you`r looking for .</td>
+</tr>
+</tbody>
+</table>
+<!-- END_87bc03cf100734f9a389b83b16b09425 -->
 <h1>[User].show Profile</h1>
 <p>showProfile function</p>
 <p>checking the request given paramaters if user_id exists </p>
@@ -4756,7 +5296,7 @@ fetch(url, {
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/showProfile" \
     -H "Content-Type: application/json" \
-    -d '{"id":15}'
+    -d '{"id":19}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/showProfile");
 
@@ -4766,7 +5306,7 @@ let headers = {
 }
 
 let body = {
-    "id": 15
+    "id": 19
 }
 
 fetch(url, {
@@ -4802,7 +5342,8 @@ fetch(url, {
     "books_count": null,
     "birthday": null,
     "created_at": null,
-    "updated_at": null
+    "updated_at": null,
+    "is_followed": 1
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/showProfile</code></p>
@@ -6510,6 +7051,35 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET _dusk/user/{guard?}</code></p>
 <!-- END_09dcf3e9a9b6585fa40e4ead6c3c858a -->
+<!-- START_66df3678904adde969490f2278b8f47f -->
+<h2>Authenticate the request for channel access.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/broadcasting/auth" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/broadcasting/auth");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET broadcasting/auth</code></p>
+<p><code>POST broadcasting/auth</code></p>
+<!-- END_66df3678904adde969490f2278b8f47f -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

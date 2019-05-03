@@ -78,7 +78,7 @@ class BookController extends Controller
      *"pages_no": 8,
      *"created_at": "2019-03-21 00:00:00",
      *"updated_at": "2019-03-21 00:00:00",
-     *"genre": "action"
+     *"genre": 0
      * }
      * ]
      * }
@@ -102,7 +102,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this id',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
@@ -129,22 +129,32 @@ class BookController extends Controller
      * "pages" :[
      * {
     * "id": 1000000,
-     *       "title": "ppp",
-      *      "isbn": 1,
-       *     "img_url": "dsds",
-        *    "publication_date": "2019-03-21",
-         *   "publisher": "fgdg",
-          *  "language": "dfgdg",
-           * "description": "fdgd",
-            *"reviews_count": 4,
-            *"ratings_count": 5,
-            *"ratings_avg": 9,
-            *"author_id": 1000000,
-            *"pages_no": 8,
-            *"created_at": "2019-03-21 00:00:00",
-            *"updated_at": "2019-03-21 00:00:00",
-            *"genre": "action"
+    *  "title": "ppp",
+    *  "isbn": 1,
+    *  "img_url": "dsds",
+    *  "publication_date": "2019-03-21",
+    *  "publisher": "fgdg",
+    *  "language": "dfgdg",
+    *  "description": "fdgd",
+    *  "reviews_count": 4,
+    *  "ratings_count": 5,
+    *  "ratings_avg": 9,
+    *  "author_id": 1000000,
+    *  "pages_no": 8,
+    *  "created_at": "2019-03-21 00:00:00",
+    *  "updated_at": "2019-03-21 00:00:00",
+    *  "genre": 0,
+    *  "author_name": "G. Willow Wilson"
      * }
+     * ],
+     * "books related to me": [
+     *   {
+     *       "shelf_name": 0,
+     *       "rating": 2,
+     *       "id": 1,
+     *       "title": "The Bird King",
+     *      "author_name": "G. Willow Wilson"
+     *   }
      * ]
      * }
      */
@@ -156,23 +166,28 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [$request['genreName']]);
+        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [(int)$request['genreName']]);
+        $rs=DB::select('select r.shelf_name , r.rating , b.id , b.title , a.author_name from reviews r , books b , genre g , authors a where b.id = g.book_id and b.author_id=a.id and g.type=? and r.user_id =?',[(int)$request['genreName'],$this->ID] );
         if($results != NULL){
+            if($rs ==NULL){
+                $rs='NO books found for me';
+            }
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'books related to me'=>$rs),
                 200);
         }
         else{
             return Response::json(array(
-                'status' => 'failed, may be there is no books by this title',
+                'status' => 'failed, may be there is no books by this genre',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this title',
+            'status' => 'failed',
             ),
             400);
     }
@@ -206,7 +221,16 @@ class BookController extends Controller
             *"pages_no": 8,
             *"created_at": "2019-03-21 00:00:00",
             *"updated_at": "2019-03-21 00:00:00",
-            *"genre": "action"
+            *"genre": "action",
+            *"author_name": "G. Willow Wilson"
+     *   }
+     * ],
+     * "book info for me": [
+     *   {
+      *      "shelf_name": 0,
+     *       "rating": 2,
+     *       "id": 1,
+     *       "author_name": "G. Willow Wilson"
      *   }
      *  ]
      * }
@@ -219,17 +243,22 @@ class BookController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
         $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.title = ?', [$request['title']]);
+        $rs=DB::select('select r.shelf_name , r.rating , b.id , a.author_name from reviews r , books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.title = ? and r.user_id =?',[$request['title'],$this->ID] );
         if($results != NULL){
+            if($rs ==NULL){
+                $rs='NO found for me';
+            }
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'book info for me'=>$rs),
                 200);
         }
         else{
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this title',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
@@ -255,7 +284,8 @@ class BookController extends Controller
      * {
      * "id": 1000000,
      *       "title": "ppp",
-      *      "isbn": 1,
+     *      "isbn": 1,
+     * "author_name": "G. Willow Wilson",
        *     "img_url": "dsds",
         *    "publication_date": "2019-03-21",
          *   "publisher": "fgdg",
@@ -268,8 +298,16 @@ class BookController extends Controller
             *"pages_no": 8,
             *"created_at": "2019-03-21 00:00:00",
             *"updated_at": "2019-03-21 00:00:00",
-            *"genre": "action"
+            *"genre": 0
      * }
+     * ],
+     *  "book info for me": [
+     *   {
+     *       "shelf_name": 0,
+     *       "rating": 2,
+     *       "id": 1,
+     *       "title": "The Bird King"
+     *   }
      * ]
      * }
      */
@@ -277,27 +315,32 @@ class BookController extends Controller
     {
         //
         $Validations    = array(
-            "ISBN"         => "required|integer"
+            "ISBN"         => "required|digits_between:1,15"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
         $results = DB::select('select b.id,a.author_name,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.isbn = ?', [$request['ISBN']]);
+        $rs=DB::select('select r.shelf_name , r.rating , b.id , b.title  from reviews r , books b , genre g , authors a where b.id = g.book_id and a.id=b.author_id and b.isbn = ? and r.user_id =?',[$request['ISBN'],$this->ID]);
         if($results != NULL){
+            if($rs ==NULL){
+                $rs='i have not got this book';
+            }
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'book info for me'=>$rs),
                 200);
         }
         else{
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this isbn',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this isbn or no genre for it',
+            'status' => 'failed',
             ),
             400);
     }
@@ -332,8 +375,16 @@ class BookController extends Controller
      *       "pages_no": 8,
      *       "created_at": "2019-03-21 00:00:00",
      *       "updated_at": "2019-03-21 00:00:00",
-     *       "genre": "action"
+     *       "genre": 0
      *  }
+     * ],
+     * "book info for me": [
+     *   {
+     *       "shelf_name": 0,
+     *       "rating": 2,
+     *       "id": 4,
+     *       "title": "Internment"
+     *   }
      * ]
      * }
      */
@@ -346,22 +397,27 @@ class BookController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
         $results = DB::select('select b.id,b.title,b.isbn,b.img_url,b.publication_date,b.publisher,b.language,b.description,b.reviews_count,b.ratings_count,b.ratings_avg,b.author_id,b.pages_no,b.created_at,b.updated_at,g.type as genre from books b , genre g , authors a where b.id = g.book_id and a.id = b.author_id and a.author_name=?', [$request['Author_name']]);
+        $rs=DB::select('select r.shelf_name , r.rating , b.id , b.title  from reviews r , books b , genre g , authors a where b.id = g.book_id and a.id = b.author_id and a.author_name=? and r.user_id =?',[$request['Author_name'],$this->ID]);
         if($results != NULL){
+            if($rs ==NULL){
+                $rs='i have not got book for this author';
+            }
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'book info for me'=>$rs),
                 200);
         }
         else{
             return Response::json(array(
                 'status' => 'failed, may be there is no books have this author name',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books have this author name',
+            'status' => 'failed',
             ),
             400);
     }

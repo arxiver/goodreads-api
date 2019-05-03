@@ -136,12 +136,38 @@ class ActivitiesController extends Controller
     $Data = validator::make($request->all(), $Validations);
     if(!($Data->fails())) 
     { 
-        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at',null)->get();
-        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read_at','data')->where('read_at','!=',null)
+        $result = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read','data')->where('read_at',null)->get();
+        $result1 = \App\Notification::where('notifiable_id',$this->ID)->select('n_id','read','data')->where('read_at','!=',null)
         ->orderBy('read_at','desc')->get();
         $r = collect();
         $r = $r->merge($result);
         $r = $r->merge($result1);
+        /*foreach($r as $x)
+        {
+            $x->data['user_image_link']=$this ->GetUrl()."/".$x->data['user_image_link'] ;
+            $x->data->save();
+            if(array_key_exists('review_user_id',$x->data))
+            {
+                if($x->data['review_user_id']==$this->ID)
+                {
+                    $x->data['review_user_id']=0;
+                    $x->data->save();
+                }
+            }
+            //$x->save();
+            /*$temp = $r->pull('image_link');
+            $r ->put('image_link',$url . "/" .$temp );
+            if($r->has('followed_image_link'))
+            {
+                $temp = $r->pull('followed_image_link');
+                $r ->put('followed_image_link',$url . "/" .$temp );
+            }
+            if($r->has('rev_user_imageLink'))
+            {
+                $temp = $r->pull('rev_user_imageLink');
+                $r ->put('rev_user_imageLink',$url . "/" .$temp );
+            }
+        }*/
         $response = $r;
         $responseCode = 201;
 
@@ -185,6 +211,7 @@ class ActivitiesController extends Controller
         if($n)
         {
             $n->update(['read_at' => now()]);
+            $n->update(['read' => 1]);
             $response = array( "The notification was marked as read successfully.");
             $responseCode = 201;
         }else
@@ -312,7 +339,6 @@ class ActivitiesController extends Controller
             $Create = array(
                 "user_id" => $this->ID,
                 "resourse_id" => $request["id"],
-                "resourse_type"  => $request["type"],
                 "body" =>$request["body"],
                 'updated_at'=>now(),
                 'created_at'=>now()
@@ -335,7 +361,7 @@ class ActivitiesController extends Controller
 
             
             return response()->json([
-                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] , "resourse_type"  => $request["type"]
+                "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] 
                 ,"comment_body" => $request["body"]
             ]);
         }
@@ -478,6 +504,7 @@ class ActivitiesController extends Controller
     *    "username": "test",
     *    "image_link": "default.jpg",
     *    "id": 1,
+    *    "user_id": 1,
     *    "body": "I agree with you",
     *    "created_at": "2019-04-27 02:38:27",
     *    "updated_at": "2019-04-27 02:38:27",
@@ -487,6 +514,7 @@ class ActivitiesController extends Controller
     *    "username": "test",
     *    "image_link": "default.jpg",
     *    "id": 2,
+    *    "user_id": 1,
     *    "body": "I agree with you",
     *    "created_at": "2019-04-27 02:38:28",
     *    "updated_at": "2019-04-27 02:38:28",
@@ -496,6 +524,7 @@ class ActivitiesController extends Controller
     *    "username": "test",
     *    "image_link": "default.jpg",
     *    "id": 3,
+    *    "user_id": 1,
     *    "body": "I agree with you",
     *    "created_at": "2019-04-27 02:38:30",
     *    "updated_at": "2019-04-27 02:38:30",
@@ -505,6 +534,7 @@ class ActivitiesController extends Controller
     *     "username": "ta7a",
     *     "image_link": "default.jpg",
     *     "id": 4,
+    *     "user_id": 2,
     *     "body": "ahmed",
     *     "created_at": "2019-04-30 00:00:00",
     *     "updated_at": "2019-04-10 00:00:00",
@@ -545,7 +575,7 @@ class ActivitiesController extends Controller
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'Yes'));
-                    $results=Db::select('SELECT U.id,U.username,U.image_link,C.id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND c.resourse_id =?',[$request['id']]);
+                    $results=Db::select('SELECT U.username,U.image_link,C.id,C.user_id,C.body,C.created_at,C.updated_at,C.have_the_comment FROM users AS U , comments AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
                     DB::table('comments')
                     ->where('user_id', $this->ID)
                     ->update(array('have_the_comment' => 'No'));
@@ -917,34 +947,100 @@ class ActivitiesController extends Controller
 	}*/
 
     /**
-     * list likes
-     * lists likes for a specific resource(review,update)
-     * @bodyParam id int required id of the liked resource
-	 * @bodyParam type int required type of the resource (1 for user status and 2 for review)
-     * @authenticated
-     * @response
-     * {
-     * likes[
-	 *"like": {
-	 *	"id": "0000000",
-	 *	"user": {
-	 *		"id": "000000",
-	 *		"name": "aa",
-	 *		"location": "The United States",
-	 *		"link": "\nhttps://www.goodreads.com/user/show/000000-aa\n",
-	 *		"image_url": "\nhttps://s.gr-assets.png\n",
-	 *		"has_image": "false"
-	 *	},
-	 *
-	 *	"date_added": "Fri Mar 08 16:25:10 -0800 2019",
-	 *	"date_updated": "Fri Mar 08 16:25:22 -0800 2019",
-	 *	"link": "\nhttps://www.goodreads.comshow/00000\n",
-	 *  }
-     * ]
-     *}
+    * @group [Activities].ListLikes
+    * list likes
+    *
+    * lists likes for a specific review
+    *
+    * and give you indication if alike is belong to you as authenticated user or not .
+    * @bodyParam id int required id of the liked review
+    * @authenticated
+    * @response 200
+    *{
+    *   "likes": [
+    *       {
+    *           "username": "test",
+    *           "image_link": "default.jpg",
+    *           "id": 1,
+    *           "user_id": 1,
+    *           "created_at": "2019-05-02 10:11:40",
+    *           "updated_at": "2019-05-02 10:11:40",
+    *           "have_the_like": "No"
+    *       },
+    *       {
+    *           "username": "ta7a",
+    *           "image_link": "default.jpg",
+    *           "id": 5,
+    *           "user_id": 2,
+    *           "created_at": "2019-05-02 10:18:25",
+    *           "updated_at": "2019-05-02 10:18:25",
+    *           "have_the_like": "No"
+    *       },
+    *       {
+    *           "username": "waleed",
+    *           "image_link": "default.jpg",
+    *           "id": 7,
+    *           "user_id": 3,
+    *           "created_at": "2019-05-02 13:13:07",
+    *          "updated_at": "2019-05-02 13:13:07",
+    *           "have_the_like": "Yes"
+    *       }
+    *   ],
+    *   "status": "true"
+    *   }
+    * @response 200
+    * {
+    *    "status": "true",
+    *    "Message": "There is no likes on this review"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "Message": "can't List the likes of this review becouse this review doesn't exists"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "errors": "The id field is required."
+    * }
      */
-    public function listLikes()
+    public function listLikes(Request $request)
     {
+        $Validations    = array(
+            "id"        => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Review::find($request["id"]) )
+            {
 
+                $results=Db::select('SELECT U.name,U.username,U.email,U.image_link,C.id,C.created_at,C.updated_at,C.have_the_like FROM users AS U , likes AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
+
+                if($results != NULL){
+                    DB::table('likes')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_like' => 'Yes'));
+                    $results=Db::select('SELECT U.username,U.image_link,C.id,C.user_id,C.created_at,C.updated_at,C.have_the_like FROM users AS U , likes AS C WHERE U.id=C.user_id AND C.resourse_id =?',[$request['id']]);
+                    DB::table('likes')
+                    ->where('user_id', $this->ID)
+                    ->update(array('have_the_like' => 'No'));
+                    return response()->json(["likes"=>$results,"status" => "true"]);
+                }
+                else{
+                    return response()->json([
+                        "status" => "true" , "Message" => "There is no likes on this review"
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "can't List the likes of this review becouse this review doesn't exists"
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
     }
 }

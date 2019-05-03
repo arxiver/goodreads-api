@@ -128,6 +128,8 @@ class ShelfController extends Controller
                 ['type' => $shelfId]
             );
         }
+        $reviewUpdate = DB::update( 'update reviews set shelf_name = ? where user_id = ? and book_id= ?', [$shelfId,$this->ID,$bookId]);
+
         /**
          *  Checking query response
          */
@@ -319,19 +321,22 @@ class ShelfController extends Controller
      * shelf name
      * user id
      * @bodyParam user_id integer optional Get the books on a member's shelf.
-     * @bodyParam shelf_name string required specified shelf`s name.
+     * @bodyParam shelf_name integer required specified shelf`s name.
      * @response {
      * "status": "success",
      *"pages": [
      * {
      *     "book_id": 95,
      *     "title": "9jT4WR",
-     * "id": 3,
+     *      "id": 3,
       *      "isbn": "9780316449274",
       *      "img_url": "https://images-na.ssl-images-amazon.com/images/I/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
       *      "reviews_count": 0,
       *      "ratings_count": 0,
-      *      "author_id": 3
+      *      "author_id": 3,
+      *      "author_name": "Meagan Spooner",
+      *      "ratings_avg": 0,
+      *      "created_at": "2019-05-03 00:15:55"
      *  }
      *]
      *}
@@ -339,17 +344,17 @@ class ShelfController extends Controller
 	public function getBooksOnShelf(Request $request)
 	{
         $Validations    = array(
-            "shelf_name"      => "required|string",
+            "shelf_name"      => "required|integer",
             "user_id"         => "nullable|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
             $results;
             if($request['user_id']!=NULL){
-                $results=Db::select('select s.book_id , b.title ,b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[(int)$request['shelf_name'],$request['user_id']]);
+                $results=DB::select('select s.book_id , b.title ,b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id , a.author_name , b.ratings_avg , s.created_at from shelves s , authors a , books b where b.id = s.book_id and a.id = b.author_id and s.type=? and s.user_id=? ORDER BY s.created_at DESC',[$request['shelf_name'],$request['user_id']]);
             }
             else{
-                $results=Db::select('select s.book_id , b.title , b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id from shelves s , books b where b.id = s.book_id and s.type=? and s.user_id=?',[(int)$request['shelf_name'],$this->ID]);
+                $results=DB::select('select s.book_id , b.title , b.id , b.isbn , b.img_url , b.reviews_count , b.ratings_count , b.author_id , a.author_name , b.ratings_avg , s.created_at from shelves s , books b , authors a where b.id = s.book_id and a.id = b.author_id and s.type=? and s.user_id=? ORDER BY s.created_at DESC',[$request['shelf_name'],$this->ID]);
             }
             if($results != NULL){
                 return Response::json(array(
@@ -359,7 +364,7 @@ class ShelfController extends Controller
             }
             else{
                 return Response::json(array(
-                    'status' => 'failed',
+                    'status' => 'failed, no returned results for the input',
                     'pages' => $results),
                     400);
             }
@@ -371,4 +376,65 @@ class ShelfController extends Controller
                 400);
             }
         }
+        /**
+    * @group [Shelf].Show Shelf
+    * showShelf
+    * give the functio the id of the book and return the shelf number for you 
+    *
+    * or told you that you don't have this book in nay shelf 
+    * @authenticated 
+    *
+    * @bodyParam bookId int required id of the book to get it's shelf
+    * @response 200
+    * {
+    *   "ShelfName": 0,
+    *   "status": "true"
+    * }
+    * @response 200
+    * {
+    *    "status": "true",
+    *    "Message": "The book not in a shelf for you"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "Message": "There is no book with this id"
+    * }
+    * @response 404
+    * {
+    *    "status": "false",
+    *    "errors": "The id field is required."
+    * }
+    */
+    public function showShelf(Request $request)
+    {
+        $Validations    = array(
+            "bookId"        => "required|integer",
+        );
+        $Data = validator::make($request->all(), $Validations);
+        if (!($Data->fails())) {
+            if ( Book::find($request["bookId"]) )
+            {
+
+                $results=Db::select('SELECT s.type FROM shelves AS s WHERE s.user_id=? AND s.book_id=?',[$this->ID,$request['bookId']]);
+                if($results != NULL){
+                    return response()->json(["ShelfName"=>$results[0]->type,"status" => "true"]);
+                }
+                else{
+                    return response()->json([
+                        "status" => "true" , "Message" => "The book not in a shelf for you "
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    "status" => "false" , "Message" => "There is no book with this id"
+                ]);
+            }
+        }
+        else
+        {
+            return response(["status" => "false" , "errors"=> $Data->messages()->first()]);
+        }
+    }
 }

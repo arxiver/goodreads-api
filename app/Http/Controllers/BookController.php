@@ -102,7 +102,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this id',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
@@ -154,7 +154,7 @@ class BookController extends Controller
      *       "id": 1,
      *       "title": "The Bird King",
      *      "author_name": "G. Willow Wilson"
-     *   },
+     *   }
      * ]
      * }
      */
@@ -182,12 +182,12 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this genre',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this genre',
+            'status' => 'failed',
             ),
             400);
     }
@@ -224,7 +224,7 @@ class BookController extends Controller
             *"genre": "action",
             *"author_name": "G. Willow Wilson"
      *   }
-     * },
+     * ],
      * "book info for me": [
      *   {
       *      "shelf_name": 0,
@@ -258,7 +258,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this title',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
@@ -307,7 +307,7 @@ class BookController extends Controller
      *       "rating": 2,
      *       "id": 1,
      *       "title": "The Bird King"
-     *   },
+     *   }
      * ]
      * }
      */
@@ -335,7 +335,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this isbn',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{
@@ -384,7 +384,7 @@ class BookController extends Controller
      *       "rating": 2,
      *       "id": 4,
      *       "title": "Internment"
-     *   },
+     *   }
      * ]
      * }
      */
@@ -412,7 +412,7 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books have this author name',
                 'pages' => $results),
-                400);
+                200);
         }
     }
     else{

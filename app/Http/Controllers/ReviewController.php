@@ -88,7 +88,7 @@ class ReviewController extends Controller
                     $shelfType = $request["shelf"];
                     DB::table('shelves')
                         ->updateOrInsert(
-                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ,'type' => $shelfType],
+                            ['user_id' => $this->ID, 'book_id' => $request["bookId"] ],
                             ['type' => 0,'updated_at'=>now()]
                         );
                     if (!empty($request["body"]))
@@ -338,7 +338,7 @@ class ReviewController extends Controller
     public function destroy(Request $request)
     {
         $Validations    = array(
-            "reviewId"  => "required|integer",
+            "reviewId"  => "required|integer"
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
@@ -438,7 +438,6 @@ class ReviewController extends Controller
      */
     public function getReviewsForListOfBooks()
     {
-        //
     }
 
 
@@ -550,19 +549,18 @@ class ReviewController extends Controller
      */
     public function listReviewOfUser()
     {
-        //
     }
 
-    /**
-     * @group [Review].show Review For Book
-     * get a specific review 
-     * 
-     * this function is responsible for showing details of a certain review by
-     * returning the (body,rating,comments counts, likes counts, user id ,book id )
-     * of a certain review and also it returns the shelf name of the book the review about
-     * all of that formed by sending the parameters which :-
-     * review id.
-     * @response {
+   /**
+    * @group [Review].show Review For Book
+    * get a specific review 
+    * 
+    * this function is responsible for showing details of a certain review by
+    * returning the (body,rating,comments counts, likes counts, user id ,book id )
+    * of a certain review and also it returns the shelf name of the book the review about
+    * all of that formed by sending the parameters which :-
+    * review id.
+    * @response {
     *"status": "success",
     *"pages": [
     *{
@@ -594,7 +592,8 @@ class ReviewController extends Controller
     *    {
     *         "author_name": "ahmed"
     *      }
-    *   ]
+    *   ],
+    * "if_liked": 1
     *}
      * @bodyParam reviewId required id of the of the review to get it's body when notification happens
      */
@@ -624,29 +623,36 @@ class ReviewController extends Controller
                     $book=DB::select('select title as book_name,img_url as book_image from books where id=?',[$res->book_id]);
                     $author=DB::select('select a.author_name as author_name from authors a , books b where a.id=b.author_id and b.id=?',[$res->book_id]);
                 }
-                   /* if($res->shelf_name ==0){
-                        $res->shelf_name ='read';
-                    }
-                    else if($res->shelf_name ==1){
-                        $res->shelf_name ='currentlyRead';
-                    }
-                    else{
-                        $res->shelf_name ='WantToRead';
-
-                    }*/
             }
+        $myrev=DB::select('select id from likes where resourse_id=? and user_id=?',[$request['reviewId'],$this->ID]);
+       if($myrev != NULL){
+          $myrev= 'NO_LIKES';
+       }
         if($results != NULL){
+            if($myrev !=NULL){
             return Response::json(array(
                 'status' => 'success',
                 'pages' => $results,
                 'user' => $user,
                 'book' =>$book,
-                'auther'=>$author),
+                'auther'=>$author,
+                'if_liked'=>1),
                 200);
+            }
+            else{
+                return Response::json(array(
+                'status' => 'success',
+                'pages' => $results,
+                'user' => $user,
+                'book' =>$book,
+                'auther'=>$author,
+                'if_liked'=>0),
+                200);
+            }
         }
         else{
             return Response::json(array(
-                'status' => 'failed',
+                'status' => 'failed, no rev',
                 'pages' => $results),
                 400);
         }
@@ -672,17 +678,34 @@ class ReviewController extends Controller
      * book id and
      * user id
      * @response {
-     * "status": "success",
-     * "pages": [
-     *      {
-     *      "id": 1000010,
-    *       "rating": 2,
-    *       "shelf_name": 0,
-    *       "body": "Woooooooooooooow  it is a great booooook"
-    *       }
-     *    ]
-     * }
-     * @bodyParam userId required id of the of the user
+    *"status": "success",
+    *"pages": [
+    *    {
+    *        "id": 5,
+    *        "rating": 4,
+    *        "shelf_name": 0,
+    *        "body": "UnKo1M1dWG"
+    *    },
+    *    {
+    *        "id": 8,
+    *        "rating": 4,
+    *        "shelf_name": 0,
+    *        "body": "j598S8DmNG"
+    *    }
+    *],
+    *"user": [
+    *    {
+    *        "image_link": "default.jpg",
+    *        "name": "test"
+    *    }
+    *],
+    *"book_title": [
+    *    {
+    *        "title": "Sherwood"
+    *    }
+    *]
+    *   }
+     * @bodyParam userId optional id of the of the user
      * @bodyParam bookId required id of the of the book
      */
     public function showReviewForBookForUser(Request $request)
@@ -696,10 +719,13 @@ class ReviewController extends Controller
         if (!($Data->fails())) {
             if($request['userId'] != Null){
                 $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$request['userId'],$request['bookId']]);
+                $rs=DB::select('select image_link , name from users where id = ?',[$request['userId']]);
             }
             else{
                 $results =DB::select('select id,rating ,shelf_name , body from reviews where user_id = ? and book_id = ?', [$this->ID,$request['bookId']]);
+                $rs=DB::select('select image_link , name from users where id = ?',[$this->ID]);
             }
+           $book_title=DB::select('select title from books where id = ?',[$request['bookId']]);
         if($results != NULL){
            /* foreach($results as $res)
             {
@@ -716,7 +742,9 @@ class ReviewController extends Controller
             }*/
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'user' => $rs,
+                'book_title' =>$book_title),
                 200);
         }
         else{
@@ -728,7 +756,7 @@ class ReviewController extends Controller
     }
     else{
         return Response::json(array(
-            'status' => 'failed',
+            'status' => 'failed'
             ),
             400);
     }
@@ -787,6 +815,11 @@ class ReviewController extends Controller
       *      "username": "Esmeralda Ruecker",
       *      "userimagelink": "https://lorempixel.com/640/480/?10685"
      *   }
+     * ],
+     *  "liked_reviews": [
+      *  {
+     *       "id": 1
+     *   }
     *]
     * }
      * @bodyParam bookId integer required id of the of the book
@@ -799,19 +832,23 @@ class ReviewController extends Controller
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
        $results = DB::select('select r.id,r.book_id,r.body,r.rating,r.shelf_name,r.likes_count,r.comments_count,r.user_id,r.created_at,r.updated_at,u.name as username, u.image_link as userimagelink from reviews r, users u where r.user_id = u.id and r.book_id = ? order by r.created_at DESC', [$request['bookId']]);
+       //if i make likes for this review
+       //$myrev=DB::select('select id from likes where resourse_id=? , user_id=?',[$results->id,$this->ID]);
        foreach($results as $res)
        {
             $res->userimagelink=$this->GetUrl()."/".$res->userimagelink;
        }
+       $myrev=DB::select('select r.id from likes l , reviews r ,books b where l.resourse_id=r.id and b.id=r.book_id and l.user_id=?',[$this->ID]);
         if($results != NULL){
             return Response::json(array(
                 'status' => 'success',
-                'pages' => $results),
+                'pages' => $results,
+                'liked_reviews'=>$myrev),
                 200);
         }
         else{
             return Response::json(array(
-                'status' => 'failed',
+                'status' => 'failed to find review for this book',
                 'pages' => $results),
                 400);
         }

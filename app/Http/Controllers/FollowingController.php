@@ -174,7 +174,7 @@ class FollowingController extends Controller
         return response()->json(array("status"=>'true','message'=>"Successfully stopped following".' '.$user->username));
     }
 
-    /**
+      /**
      * @group [Following].Followers List
      *
      * followersUser function .
@@ -205,7 +205,8 @@ class FollowingController extends Controller
      *             "book_id": 100,
      *             "currently_reading": "dummuybookName",
      *             "book_image": "http:\/\/treutel.biz\/",
-     *             "pages": 1200
+     *             "pages": 1200,
+	 *			  "is_followed":0
 	 *        },
 	 *        {
 	 *            "id": 4,
@@ -214,7 +215,8 @@ class FollowingController extends Controller
 	 *            "book_id": null,
      *            "currently_reading": null,
      *            "book_image": null,
-     *            "pages": null
+     *            "pages": null,
+	 *			  "is_followed":1
 	 *        },
 	 *        {
 	 *            "id": 5,
@@ -223,7 +225,8 @@ class FollowingController extends Controller
 	 *            "book_id": 10,
      *            "currently_reading": "dummuybookName",
      *            "book_image": "http:\/\/treutel.biz\/",
-     *            "pages": 1200
+     *            "pages": 1200,
+	 *			  "is_followed":1
 	 *        }
 	 *    ],
 	 *    "_start": 1,
@@ -262,22 +265,32 @@ class FollowingController extends Controller
         /**
          * Query getting followers list with each user has a book currently_reading .
          */
+
         $data =
-            DB::select( '   SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
-							FROM
-							( SELECT follower_id as id , name , image_link
-	                        FROM followings F,users U
-	                        WHERE F.user_id = ? and F.follower_id = U.id ) as t1
-							LEFT JOIN
-							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
-                                       B.img_url as book_image , B.pages_no as pages
-							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2
-                            ON user_id=id GROUP BY id  limit ? offset ?', [$userId,$listSize,$skipCount]);
+            DB::select( ' SELECT  U.id , name , image_link FROM followings F,users U WHERE F.user_id = ? and F.follower_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
 
         $i=0;
         while($i<sizeof($data)){
         $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+
+        $_id = $data[$i]->id;
+        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading , B.img_url as book_image , B.pages_no as pages FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1  and S.user_id = ? limit 1 ', [ $_id]);
+        if(sizeof($currently_reading)>0)
+        {
+            $data[$i]->book_id = $currently_reading[0]->book_id;
+            $data[$i]->currently_reading = $currently_reading[0]->currently_reading;
+            $data[$i]->book_image = $currently_reading[0]->book_image;
+            $data[$i]->pages = $currently_reading[0]->pages;
+        }
+        else
+        {
+            $data[$i]->book_id = null;
+            $data[$i]->currently_reading = null;
+            $data[$i]->book_image = null;
+            $data[$i]->pages = null;
+        }
+
         $data[$i]->is_followed =Following::where('follower_id',$this->ID)->where('user_id',$data[$i]->id)->count() ;
         $i++;}
         /**
@@ -380,15 +393,7 @@ class FollowingController extends Controller
          * Query returns the following users` details with currently_reading book for each of them.
          */
         $data =
-            DB::select(' SELECT  id , name , image_link , book_id , currently_reading, book_image , pages
-							FROM
-							( SELECT F.user_id as id , name , image_link
-	                        FROM followings F,users U
-	                        WHERE F.follower_id = ? and F.user_id = U.id ) as t1
-							LEFT JOIN
-							( SELECT  S.user_id as user_id , B.id as book_id , B.title as currently_reading ,
-                                       B.img_url as book_image , B.pages_no as pages
-							FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1 ) as t2 ON user_id=id GROUP BY id limit ? offset ?', [$userId, $listSize, $skipCount]);
+            DB::select(' SELECT  U.id , name , image_link FROM followings F,users U WHERE F.follower_id = ? and F.user_id = U.id limit ? offset ?', [$userId, $listSize, $skipCount]);
 
         /**
          * Response paramaters and return
@@ -400,9 +405,25 @@ class FollowingController extends Controller
         $i=0;
         while ($i < sizeof($data)) {
         $data[$i]->image_link = $this->GetUrl() . "/" . $data[$i]->image_link;
+
+        $_id = $data[$i]->id;
+        $currently_reading = DB::select( 'select B.id as book_id ,  B.title as currently_reading , B.img_url as book_image , B.pages_no as pages FROM shelves S , books B WHERE S.book_id = B.id  and S.type = 1  and S.user_id = ? limit 1 ', [ $_id]);
+        if(sizeof($currently_reading)>0)
+        {
+            $data[$i]->book_id = $currently_reading[0]->book_id;
+            $data[$i]->currently_reading = $currently_reading[0]->currently_reading;
+            $data[$i]->book_image = $currently_reading[0]->book_image;
+            $data[$i]->pages = $currently_reading[0]->pages;
+        }
+        else
+        {
+            $data[$i]->book_id = null;
+            $data[$i]->currently_reading = null;
+            $data[$i]->book_image = null;
+            $data[$i]->pages = null;
+        }
         $i++;
-        } 
-        
+        }
         $_start = sizeof($data) == 0 ? 0 : ($page - 1) * $listSize + 1;
         $_end = sizeof($data) == 0 ? 0: ($page  - 1) * $listSize + sizeof($data) ;
         return response()->json(['following'=>$data,'_start'=>$_start,'_end'=>$_end,'_total'=>sizeof($data)],200);

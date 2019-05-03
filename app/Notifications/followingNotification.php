@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Events\BroadcastNotificationCreated as br;
 use App\User;
 class followingNotification extends Notification
 {
@@ -80,5 +82,17 @@ class followingNotification extends Notification
             
         ];
         return  $arr;
+    }
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message'=>$this->follower->name . " started following you."
+        ]);
     }
 }

@@ -46,7 +46,9 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::delete('deleteComment','ActivitiesController@deleteComment');                        //auth            
     //Route::delete('unlike','ActivitiesController@unlike');                                    //auth
     Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');                        //auth  
-    Route::get('listComments','ActivitiesController@listComments');               //auth          
+    Route::get('listComments','ActivitiesController@listComments');                             //auth
+    Route::get('listLikes','ActivitiesController@listLikes');                             //auth     
+    Route::get('showShelf','ShelfController@showShelf');                                        //auth
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////           
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +97,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('reviwes','ReviewController@recentReviews');
     Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-    //
+
     Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
     

@@ -321,19 +321,19 @@ class ShelfController extends Controller
      * shelf name
      * user id
      * @bodyParam user_id integer optional Get the books on a member's shelf.
-     * @bodyParam shelf_name string required specified shelf`s name.
+     * @bodyParam shelf_name integer required specified shelf`s name.
      * @response {
      * "status": "success",
      *"pages": [
      * {
      *     "book_id": 95,
      *     "title": "9jT4WR",
-     * "id": 3,
+     *      "id": 3,
       *      "isbn": "9780316449274",
       *      "img_url": "https://images-na.ssl-images-amazon.com/images/I/51Jb2iLFuXL._SX329_BO1,204,203,200_.jpg",
       *      "reviews_count": 0,
       *      "ratings_count": 0,
-      *      "author_id": 3
+      *      "author_id": 3,
       *      "author_name": "Meagan Spooner",
       *      "ratings_avg": 0,
       *      "created_at": "2019-05-03 00:15:55"

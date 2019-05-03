@@ -18,6 +18,7 @@ use Validator;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
+use App\Events\notify;
 /**
  * @group Activities
  *
@@ -358,7 +359,8 @@ class ActivitiesController extends Controller
             //rest of notification
             $l = Comment::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
             Notification::send($users, new commentsNotification($l->id));
-
+            $n = \App\Notification::orderby('n_id', 'desc')->first(); 
+            //event (new notify($n->data,$n->notifiable_id));
             
             return response()->json([
                 "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] 
@@ -814,7 +816,8 @@ class ActivitiesController extends Controller
                 //rest of notification
                 $l = Likes::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
                 Notification::send($users, new likesNotification($l->id));
-
+                $n = \App\Notification::orderby('n_id', 'desc')->first(); 
+                //event (new notify($n->data,$n->notifiable_id));
                 return response()->json([
                     "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] 
                 ]);

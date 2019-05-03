@@ -7,6 +7,7 @@ use App\User;
 use App\Following;
 use Illuminate\Http\Request;
 use App\Notifications\followingNotification;
+use App\Events\notify;
 class FollowingController extends Controller
 {
 
@@ -97,6 +98,9 @@ class FollowingController extends Controller
             $responseCode = 201;
              //send notification
              User::find($userId)->notify(new followingNotification(User::find($followerId)));
+             //$n = DB::table('notifications')->orderBy('n_id', 'desc')->first();
+             $n = \App\Notification::orderby('n_id', 'desc')->first(); 
+             //event (new notify($n->data,$n->notifiable_id));
         }
     return response()->json($response, $responseCode);
     }

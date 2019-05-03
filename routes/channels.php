@@ -10,7 +10,15 @@
 | used to check if an authenticated user can listen to the channel.
 |
 */
+/*Broadcast::channel('channel', function() {
+    // ...
+    return true;
+}, ['guards' => ['api']]);*/
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
-});
+}/*, ['guards' => ['api']]*/);
+
+Broadcast::channel('user.{id}',function(){
+    return true;
+}, ['guards' => ['api']]);

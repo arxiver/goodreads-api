@@ -62,7 +62,7 @@ class LikesTest extends TestCase
        // then create a record in the reviews table 
        // update some atributes in the tables of users & book 
        $response = $this->json('POST', 'api/LikeOrUnLike', [ 'token'=> $token ,'token_type' =>'bearer' ,
-       'id'=> $reviewId ,'type'=>0]);
+       'id'=> $reviewId ]);
        // Show the response in the cmd
        /*echo "\n";
        echo $response->content();
@@ -72,8 +72,7 @@ class LikesTest extends TestCase
            'status',
            'Message',
            'user',
-           'resourse_id',
-           'resourse_type'
+           'resourse_id'    
     ]);
      // Get the record of this Review
      $reviewtwo = Review::find($reviewId );

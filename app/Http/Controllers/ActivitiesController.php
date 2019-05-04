@@ -18,6 +18,7 @@ use Validator;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
+use App\Events\notify;
 /**
  * @group Activities
  *
@@ -142,32 +143,13 @@ class ActivitiesController extends Controller
         $r = collect();
         $r = $r->merge($result);
         $r = $r->merge($result1);
-        /*foreach($r as $x)
+        foreach($r as $x)
         {
-            $x->data['user_image_link']=$this ->GetUrl()."/".$x->data['user_image_link'] ;
-            $x->data->save();
-            if(array_key_exists('review_user_id',$x->data))
-            {
-                if($x->data['review_user_id']==$this->ID)
-                {
-                    $x->data['review_user_id']=0;
-                    $x->data->save();
-                }
-            }
-            //$x->save();
-            /*$temp = $r->pull('image_link');
-            $r ->put('image_link',$url . "/" .$temp );
-            if($r->has('followed_image_link'))
-            {
-                $temp = $r->pull('followed_image_link');
-                $r ->put('followed_image_link',$url . "/" .$temp );
-            }
-            if($r->has('rev_user_imageLink'))
-            {
-                $temp = $r->pull('rev_user_imageLink');
-                $r ->put('rev_user_imageLink',$url . "/" .$temp );
-            }
-        }*/
+            $img=$x->data['user_image_link'];
+            $x->data=array_diff($x->data,['user_image_link'=>$img]);
+            $x->data+=['user_image_link'=>$this->GetUrl()."/".$img];
+        }
+        
         $response = $r;
         $responseCode = 201;
 
@@ -216,7 +198,7 @@ class ActivitiesController extends Controller
             $responseCode = 201;
         }else
         {
-            $response = array( "There is no notification with this id.");
+            $response = array("There is no notification with this id.");
             $responseCode = 401;
 
         }
@@ -345,12 +327,12 @@ class ActivitiesController extends Controller
             );
             //send notification
             $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
-            $x1= Review::find($request["id"])->select('user_id')->first();
+            $x1= Review::where('id',$request["id"])->select('user_id')->first();
              
             $r = collect();
             $r = $r->merge($x);
             $r = $r->merge($x1);
-            
+            $r = array_diff($r,[$this->ID]);
             $users = User::whereIn('id',$r)->get();
             //echo $r;
             //end of part1 notifications
@@ -358,7 +340,14 @@ class ActivitiesController extends Controller
             //rest of notification
             $l = Comment::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
             Notification::send($users, new commentsNotification($l->id));
-
+            $n = \App\Notification::orderby('n_id', 'desc')->limit(count($r))->get(); 
+            foreach($n as $x)
+            {
+                $img=$x->data['user_image_link'];
+                $x->data=array_diff($x->data,['user_image_link'=>$img]);
+                $x->data+=['user_image_link'=>$this->GetUrl()."/".$img];
+                event (new notify($x->data,$x->notifiable_id));
+            }
             
             return response()->json([
                 "status" => "true" , "user" => $this->ID, "resourse_id" => $request["id"] 
@@ -805,12 +794,13 @@ class ActivitiesController extends Controller
                 );
                 //send notification
                 $x = Comment::where('resourse_id',$request["id"])->select('user_id')->get();
-                $x1= Review::find($request["id"])->select('user_id')->first();
+                $x1= Review::where('id',$request["id"])->select('user_id')->first();
                  
                 $r = collect();
                 $r = $r->merge($x);
                 $r = $r->merge($x1);
-                
+                $r = array_diff($r,[$this->ID]);
+
                 $users = User::whereIn('id',$r)->get();
                 //echo $r;
                 //end of part1 notifications
@@ -818,7 +808,15 @@ class ActivitiesController extends Controller
                 //rest of notification
                 $l = Likes::where('resourse_id',$request["id"])->where('user_id',$this->ID)->first();
                 Notification::send($users, new likesNotification($l->id));
-
+                $n = \App\Notification::orderby('n_id', 'desc')->limit(count($r))->get(); 
+                foreach($n as $x)
+                {
+                    $img=$x->data['user_image_link'];
+                    $x->data=array_diff($x->data,['user_image_link'=>$img]);
+                    $x->data+=['user_image_link'=>$this->GetUrl()."/".$img];
+                    event (new notify($x->data,$x->notifiable_id));
+                }
+                
                 return response()->json([
                     "status" => "true" , "Message" => "Like is Done ", "user" => $this->ID, "resourse_id" => $request["id"] 
                 ]);

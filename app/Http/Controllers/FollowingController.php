@@ -100,7 +100,7 @@ class FollowingController extends Controller
              User::find($userId)->notify(new followingNotification(User::find($followerId)));
              //$n = DB::table('notifications')->orderBy('n_id', 'desc')->first();
              $n = \App\Notification::orderby('n_id', 'desc')->first(); 
-             //event (new notify($n->data,$n->notifiable_id));
+             event (new notify($n->data,$n->notifiable_id));
         }
     return response()->json($response, $responseCode);
     }

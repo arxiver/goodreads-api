@@ -2,6 +2,9 @@
 
 namespace Tests\Unit;
 
+
+use Storage;
+use Illuminate\Http\UploadedFile;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -78,10 +81,22 @@ Who can see my city
 [2] who can see my city with empty input                      Done                                              
 [3] who can see my city with input Only me                    Done                                              
 [4] who can see my city with Friends                          Done                                          
-[5] who can see my city with Everyone                         Done                                        
+[5] who can see my city with Everyone                         Done   
 
-=======================
-[1]  DataBase                                                 UnDone
+
+Show setting
+[1] Show setting with non authorized user
+[2] Show setting with authorized user
+
+Change Image
+[1] Change image with non authorized user                  Done
+[2] Change image with empty image                          Done                           
+[3] Change image with non file image                       Done                                                          
+[4] Successful Changing image                              Done
+
+Delete account
+[1] Delete account with invalid email                      Done
+[2] Delete account with valid email                        Done                           
 
 
 
@@ -99,6 +114,7 @@ class settingTest extends TestCase
     private $Random;
     private $YoungerThan;
     private $OlderThan;
+    private $table;
 
     public function setUp(): void
     {
@@ -128,12 +144,15 @@ class settingTest extends TestCase
                                 "Only me" => "onlyMe",
                                 "Everyone" => "Everyone",
                                 "Friends" => "Friends",
+                                "Invalid file" => UploadedFile::fake()->create('file.pdf'),
+                                "Image file" => UploadedFile::fake()->image('test.jpg') 
 
                             );
         $this->ErrorStatus = 405;
         $this->SuccessfulStatus = 200;
         $this->YoungerThan = 100;
         $this->OlderThan = 3;
+        $this->table = "users";
     }
 
 
@@ -200,6 +219,35 @@ class settingTest extends TestCase
         $response
             ->assertStatus($Status)
             ->assertJson($ReceivingData);
+    }
+
+    private function Showsetting($Status, $SendingData, $ReceivingData)
+    {
+        $respnose = $this->json("GET" , "api/showsetting" , $SendingData);
+        $respnose
+            ->assertStatus($Status)
+            ->assertJsonFragment($ReceivingData);
+    }
+
+    private function ChangeImage($Status, $SendingData, $ReceivingData)
+    {
+        $respnose = $this->json("POST" , "api/changeimage" , $SendingData);
+        $respnose
+            ->assertStatus($Status)
+            ->assertJsonFragment($ReceivingData);
+    }
+
+    private function Database($RecievingData , $table)
+    {
+            $this->assertDatabaseHas($table, $RecievingData);
+    }
+
+    private function DeleteAccount($Status, $SendingData, $ReceivingData)
+    {
+        $respnose = $this->json("POST" , "api/delete" , $SendingData);
+        $respnose
+            ->assertStatus($Status)
+            ->assertJsonFragment($ReceivingData);
     }
 
 
@@ -483,12 +531,18 @@ class settingTest extends TestCase
                                     "message" => "You have changed your name"
                                 );
         $this->changeName($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "name" => $this->User->name,
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
     /**
      * @group sofyan
      */
-    //[1] Change city with Unauthorized user
+    //[1] Change country with Unauthorized user
     public function test16()
     {
         $this->token = null;
@@ -583,6 +637,12 @@ class settingTest extends TestCase
                                     "message" => "You have changed your country"
                                 );
         $this->changeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "country" => $this->User->country,
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
     /**
@@ -684,6 +744,12 @@ class settingTest extends TestCase
                                 );
         $this->changeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
         $this->assertjson(true);
+
+        $database = array   (
+                                "city" => $this->User->city,
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -787,6 +853,12 @@ class settingTest extends TestCase
                                     "message" => "You have changed your birthday"
                                 );
         $this->changeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "birthday" => $this->User->birthday,
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -841,6 +913,12 @@ class settingTest extends TestCase
                                     "message" => "Now, Just you can see your birthday"
                                 );
         $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_birthday" => $this->Array["Only me"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -859,6 +937,12 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Everyone"] ." can see your birthday"
                                 );
         $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_birthday" => $this->Array["Everyone"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -877,6 +961,12 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Friends"] ." can see your birthday"
                                 );
         $this->whoCanSeeBirthday($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_birthday" => $this->Array["Friends"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -932,6 +1022,14 @@ class settingTest extends TestCase
                                     "message" => "Now, Just you can see your country"
                                 );
         $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_country" => $this->Array["Only me"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
+
+    
     }
 
 
@@ -950,6 +1048,12 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Everyone"] ." can see your country"
                                 );
         $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_country" => $this->Array["Everyone"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -968,6 +1072,12 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Friends"] ." can see your country"
                                 );
         $this->whoCanSeeCountry($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_country" => $this->Array["Friends"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -1023,6 +1133,12 @@ class settingTest extends TestCase
                                     "message" => "Now, Just you can see your city"
                                 );
         $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_city" => $this->Array["Only me"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -1041,6 +1157,12 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Everyone"] ." can see your city"
                                 );
         $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_city" => $this->Array["Everyone"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
 
 
@@ -1059,6 +1181,209 @@ class settingTest extends TestCase
                                     "message" => "Now, " . $this->Array["Friends"] ." can see your city"
                                 );
         $this->whoCanSeeCity($this->SuccessfulStatus, $SendingData, $ReceivingData);
+
+        $database = array   (
+                                "see_my_city" => $this->Array["Friends"],
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
     }
-    
+
+
+    // Show setting
+    //[1] Show setting with non authorized user
+    /**
+     * @group sofyan
+     */
+    public function test49()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                // Empty
+                            );
+        $ReceivingData = array  (
+                                    "errors" => "You are not loged in"
+                                );
+        $this->Showsetting($this->ErrorStatus, $SendingData , $ReceivingData);
+    }
+
+
+    //[2] Show setting with authorized user
+    /**
+     * @group sofyan
+     */
+    public function test50()
+    {
+        $SendingData = array(
+                                'token'             => $this->token,
+                                'token_type'        => $this->tokenType
+                            );
+        $ReceivingData = array  (
+                                    "id"                => $this->User["id"],
+                                    "name"              => $this->User["name"],
+                                    "username"          => $this->User["username"],
+                                    "email"             => $this->User["email"],
+                                    "email_verified_at" => $this->User["email_verified_at"],
+                                    "link"              => $this->User["link"],
+                                    "image_link"        => asset("storage/avatars/".$this->User["image_link"]),
+                                    "small_image_link"  => $this->User["small_image_link"],
+                                    "about"             => $this->User["about"],
+                                    "age"               => $this->User["age"],
+                                    "gender"            => $this->User["gender"],
+                                    "country"           => $this->User["country"],
+                                    "city"              => $this->User["city"],
+                                    "joined_at"         => $this->User["joined_at"],
+                                    "followers_count"   => $this->User["followers_count"],
+                                    "following_count"   => $this->User["following_count"],
+                                    "rating_avg"        => $this->User["rating_avg"],
+                                    "rating_count"      => $this->User["rating_count"],
+                                    "book_count"        => $this->User["book_count"],
+                                    "birthday"          => $this->User["birthday"],
+                                    "see_my_birthday"   => $this->User["see_my_birthday"],
+                                    "see_my_country"    => $this->User["see_my_country"],
+                                    "see_my_city"       => $this->User["see_my_city"],
+                                    "verified"          => $this->User["verified"],
+                                    
+                                );
+        $this->Showsetting($this->SuccessfulStatus, $SendingData , $ReceivingData);
+        $ReceivingData["image_link"] = $this->User["image_link"];
+        $this->Database($ReceivingData,$this->table);
+    }
+
+
+    //Change Image
+    //[1] Change image with non authorized user
+    /**
+     * @group sofyan
+     */
+    public function test51()
+    {
+        $this->token = null;
+        $SendingData = array(
+                                "image"         => $this->Array["Empty input"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "You are not loged in"
+                                );
+        $this->ChangeImage($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+    //[2] Change image with empty image 
+    /**
+     * @group sofyan
+     */
+    public function test52()
+    {
+        $SendingData = array(
+                                "image"         => $this->Array["Empty input"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "You haven't uploaded your photo"
+                                );
+        $this->ChangeImage($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+    //[3] Change image with non file image     
+    /**
+     * @group sofyan
+     */  
+    public function test53()
+    {
+        $SendingData = array(
+                                "image"         => $this->Array["Invalid file"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "You must select only photos"
+                                );
+        $this->ChangeImage($this->ErrorStatus, $SendingData, $ReceivingData);
+    }
+    //[4] Successful Changing image   
+    /**
+     * @group sofyan
+     */      
+    public function test54()
+    {
+        $SendingData = array(
+                                "image"         => $this->Array["Image file"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "You have changed your profile picture"
+                                );
+        $this->ChangeImage($this->SuccessfulStatus, $SendingData, $ReceivingData);
+        if($this->User->image_link != "default.jpg")
+        {
+            Storage::disk('public')->assertMissing("avatars/".$this->User->image_link);
+        }
+        $this->User = User::find($this->User->id);
+        $database = array   (
+                                "image_link" => $this->User->image_link,
+                                "id"   => $this->User->id
+                            );
+        $this->Database($database,$this->table);
+        Storage::disk('public')->assertExists("avatars/".$this->User->image_link);
+    }   
+
+
+    // Delete account
+    //[1] Delete account with invalid email   
+    /**
+     * @group sofyan
+     */      
+    public function test55()
+    {
+        $SendingData = array(
+                                "password"      => $this->Array["Invalid password"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "errors" => "The password is invalid."
+                                );
+        $this->DeleteAccount($this->ErrorStatus, $SendingData, $ReceivingData);
+    }   
+
+
+    //[2] Delete account with valid email   
+    /**
+     * @group sofyan
+     */      
+    public function test56()
+    {
+        // making signup to remove this account 
+        $Create = array(
+            "email"         => "remove@yahoo.com",
+            "password"      => "password",
+            "name"          => "test",
+            "gender"        => "female",
+            "username"      => "remove",
+            "age"           => 21,
+            "birthday"      => date("Y-n-j", strtotime("1998-2-21")),
+            "country"       => "Canada",
+            "city"          => "Atawwa",
+            "image_link"    => "default.jpg"
+        );
+        $this->User = User::create($Create);
+        $this->token = JWTAuth::fromUser($this->User);
+
+        $SendingData = array(
+                                "password"      => $this->Array["Valid password"],
+                                'token'         => $this->token ,
+                                'token_type'    => $this->tokenType
+                            );
+        $ReceivingData = array(
+                                    "message" => "You have deleted your account"
+                                );
+        $this->DeleteAccount($this->SuccessfulStatus, $SendingData, $ReceivingData);
+        if($this->User->image_link != "default.jpg")
+        {
+            Storage::disk('public')->assertMissing("avatars/".$this->User->image_link);
+        }
+        $this->assertDatabaseMissing($this->table , ["id" => $this->User->id]);
+    }   
 }

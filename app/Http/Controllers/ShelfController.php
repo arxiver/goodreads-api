@@ -57,22 +57,22 @@ class ShelfController extends Controller
 
     /**
      * @group [Shelf].Add Book
-     * addBook function . 
-     * 
+     * addBook function .
+     *
      * Add a book to a shelf
-     * 
-     * 
+     *
+     *
      * given request paramters (book_id , shelf_id=0)
-     * 
+     *
      * checking the existance of the given book on the shelf if it already exists it`s being update
-     * 
-     * if it`s new entry creating new record and responses successfully add 
-     * 
+     *
+     * if it`s new entry creating new record and responses successfully add
+     *
      * in-case of the book is already exists and the user trying to add it onto the same shelf
-     * 
+     *
      * it returnd an error message ( Something gone wrong).
-     * 
-     * 
+     *
+     *
      *
      * @bodyParam shelf_id int required shelf_id { read:0 ,currently_reading:1, to_read:2 } default is read.
      * @bodyParam book_id int required The id of the book.
@@ -93,7 +93,7 @@ class ShelfController extends Controller
      * {
      * }
      * @authenticated
-     * 
+     *
      */
     public function addBook(Request $request)
     {
@@ -108,7 +108,10 @@ class ShelfController extends Controller
          * Checking request paramaters [ book_id , shelf_id ]
          */
         $bookId = $request->has(['book_id']) ? $request->book_id : abort(404);
-        $shelfId = $request->has(['shelf_id']) ? $request->shelf_id : 0 ;
+        $shelfId = $request->has(['shelf_id']) ? $request->shelf_id : 0;
+        if (!(is_numeric($shelfId))) abort(404);
+        if ($shelfId < 0  || $shelfId > 2) abort(404);
+        Book::findOrfail($bookId);
 
         /**
          *  Executing Query for the given data if it passed with non-aborting
@@ -117,8 +120,8 @@ class ShelfController extends Controller
          */
         $bookOnShelf = Shelf::where('user_id',$userId)->where('book_id',$bookId);
         if ( sizeof($bookOnShelf->get()) ) {
-            
-            $queryResult = 
+
+            $queryResult =
             DB::update('update shelves set type = ? where user_id = ? and book_id = ? ',
                 [ $shelfId , $userId , $bookId ]);
         }
@@ -144,22 +147,22 @@ class ShelfController extends Controller
 
 
     /**
-     * 
+     *
      * @group [Shelf].Remove Book
      * removeBook function
-     * 
+     *
      * Remove a book from a shelf
-     * 
+     *
      * it is required (book_id,shelf_id) in the request
-     * 
+     *
      * Validate the existance of these paramaters in the request
-     * 
+     *
      * Then searching for them in the DB . deleting them if exists
-     * 
-     * returns successfully removed when it is deleted 
-     * 
+     *
+     * returns successfully removed when it is deleted
+     *
      * otherwise it respones with error message .
-     * 
+     *
      * @bodyParam shelf_id int required shelf_id { read:0 ,currently_reading:1, to_read:2 } default is read.
      * @bodyParam book_id int required The id of the book.
      *
@@ -180,7 +183,7 @@ class ShelfController extends Controller
      * }
      *
      * @authenticated
-     * 
+     *
      * 0 -> Read
      * 1 -> Currently Read
      * 2 -> Wants to Read
@@ -269,7 +272,7 @@ class ShelfController extends Controller
          */
         return response()->json(array("status"=> $response[0],'message'=> $response[1]), $response[2]);
     }
-  
+
     /**
      * Get User`s shelves
      * @authenticated
@@ -379,10 +382,10 @@ class ShelfController extends Controller
         /**
     * @group [Shelf].Show Shelf
     * showShelf
-    * give the functio the id of the book and return the shelf number for you 
+    * give the functio the id of the book and return the shelf number for you
     *
-    * or told you that you don't have this book in nay shelf 
-    * @authenticated 
+    * or told you that you don't have this book in nay shelf
+    * @authenticated
     *
     * @bodyParam bookId int required id of the book to get it's shelf
     * @response 200

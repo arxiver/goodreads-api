@@ -38,8 +38,8 @@ class Book extends Model
     public function setshelves($a,$b,$c,$d){
         $res = DB::insert('insert into shelves(id,book_id,user_id,type) values(?,?,?,?)',[$a,$b,$c,$d]);
     }
-    public function setuser($a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$M,$N,$o,$p,$q,$r,$s,$t,$u,$v,$w,$x,$y){
-        $res = DB::insert('INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `link`, `image_link`, `small_image_link`, `about`, `age`, `gender`, `country`, `city`, `joined_at`, `last_active`, `followers_count`, `following_count`, `rating_avg`, `rating_count`, `books_count`, `birthday`, `remember_token`, `created_at`, `updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$M,$N,$o,$p,$q,$r,$s,$t,$u,$v,$w,$x,$y]);
+    public function setuser($a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$M,$N,$o,$p,$q,$r,$s,$t,$u,$v,$w){
+        $res = DB::insert('INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `link`, `image_link`, `small_image_link`, `about`, `age`, `gender`, `country`, `city`, `joined_at`, `followers_count`, `following_count`, `rating_avg`, `rating_count`, `birthday`, `remember_token`, `created_at`, `updated_at`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l,$M,$N,$o,$p,$q,$r,$s,$t,$u,$v,$w]);
     }
     public function deleteBook($a){
         $res = DB::delete('delete from books where id=?',[$a]);

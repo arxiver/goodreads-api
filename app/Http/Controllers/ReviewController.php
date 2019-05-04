@@ -523,7 +523,7 @@ class ReviewController extends Controller
     else{
         return Response::json(array(
             'status' => 'failed'),
-            400);
+            404);
     }
     }
 
@@ -661,7 +661,7 @@ class ReviewController extends Controller
             return Response::json(array(
                 'status' => 'failed',
                 ),
-                400);
+                404);
         }
     }
 
@@ -758,7 +758,7 @@ class ReviewController extends Controller
         return Response::json(array(
             'status' => 'failed'
             ),
-            400);
+            404);
     }
     }
     /**
@@ -857,7 +857,7 @@ class ReviewController extends Controller
         return Response::json(array(
             'status' => 'failed'
             ),
-            400);
+            404);
     }
 }
 

@@ -102,14 +102,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this id',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this id',
+            'status' => 'failed',
             ),
-            400);
+            404);
     }
 
     }
@@ -166,8 +166,8 @@ class BookController extends Controller
         );
         $Data = validator::make($request->all(), $Validations);
         if (!($Data->fails())) {
-        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [(int)$request['genreName']]);
-        $rs=DB::select('select r.shelf_name , r.rating , b.id , b.title , a.author_name from reviews r , books b , genre g , authors a where b.id = g.book_id and b.author_id=a.id and g.type=? and r.user_id =?',[(int)$request['genreName'],$this->ID] );
+        $results = DB::select('select * from books b , genre g , authors a  where b.id = g.book_id and b.author_id=a.id and g.type = ?', [$request['genreName']]);
+        $rs=DB::select('select r.shelf_name , r.rating , b.id , b.title , a.author_name from reviews r , books b , genre g , authors a where b.id = g.book_id and b.author_id=a.id and g.type=? and r.user_id =?',[$request['genreName'],$this->ID] );
         if($results != NULL){
             if($rs ==NULL){
                 $rs='NO books found for me';
@@ -182,14 +182,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this genre',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed',
             ),
-            400);
+            404);
     }
     }
     /**
@@ -258,14 +258,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this title',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
-            'status' => 'failed, may be there is no books by this title',
+            'status' => 'failed',
             ),
-            400);
+            404);
     }
     }
     /**
@@ -335,14 +335,14 @@ class BookController extends Controller
             return Response::json(array(
                 'status' => 'failed, may be there is no books by this isbn',
                 'pages' => $results),
-                200);
+                400);
         }
     }
     else{
         return Response::json(array(
             'status' => 'failed',
             ),
-            400);
+            404);
     }
     }
     /**
@@ -419,7 +419,7 @@ class BookController extends Controller
         return Response::json(array(
             'status' => 'failed',
             ),
-            400);
+            404);
     }
     }
 }

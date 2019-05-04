@@ -149,8 +149,8 @@ class finalTest extends TestCase
         $this->User = User::where("email" , "test@yahoo.com")->first();
         $Status = 200;
         $SendingData = array(
-            'email' => 'test@yahoo.com' ,
-            'password' => 'password'
+                                'email' => 'test@yahoo.com' ,
+                                'password' => 'password'
         );
         $ReceivingData = array  (
                                     "token_type"    => "bearer" ,

@@ -64,7 +64,7 @@ class CommentsTest extends TestCase
         // Get the number of users in the database
         $usersCount = User::all()->count();
         // Get id for a user in the databas eto login with it 
-        $randomUserId = rand(1, $usersCount);
+        $randomUserId = 7;//rand(1, $usersCount);
         // Get the record of this user
         $user = User::find($randomUserId);
         

@@ -33,18 +33,13 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('whocanseemycity', "UserController@whoCanSeeMyCity");                //auth
     Route::post('changeimage', "UserController@changeImage");                       //auth
     Route::get('verify', "UserController@verify");
-
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                        Ahmed Waleed Section                                     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::post('reviwes/create','ReviewController@createReview');                              //auth
-    //Route::put('reviwes/edit', 'ReviewController@editReview');                                //auth
     Route::delete('reviwes/delete', 'ReviewController@destroy');                                //auth
     Route::post('makeComment','ActivitiesController@makeComment');                              //auth
     Route::delete('deleteComment','ActivitiesController@deleteComment');                        //auth
-    //Route::delete('unlike','ActivitiesController@unlike');                                    //auth
     Route::post('LikeOrUnLike','ActivitiesController@makeLikeOrUnlike');                        //auth
     Route::get('listComments','ActivitiesController@listComments');                             //auth
     Route::get('listLikes','ActivitiesController@listLikes');                             //auth
@@ -52,31 +47,14 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('showProfile', "UserController@showProfile");                                    //auth
     Route::post('follow','FollowingController@followUser');                                     //auth
     Route::delete('unfollow','FollowingController@unfollowUser');                               //auth
     Route::get('followers','FollowingController@userFollowers');                                //auth
     Route::get('following','FollowingController@userFollowing');                                //auth
-
     Route::post('shelf/add_book', 'ShelfController@addBook');                        // auth
     Route::delete('shelf/remove_book', 'ShelfController@removeBook');                // auth
-
     Route::get('user_reviews', 'ReviewController@listUserReviews');
-
-
-    // Book Section
-    Route::get('books','BookController@index');
-
-
-
-    // Shelf Section
-    Route::get('shlef/list', 'ShelfController@index');                               // auth
-    Route::get('shelf/shelfname', 'ShelfController@show');                           // auth
-    Route::get('shelf/shelfid','ShelfController@userShelves');                       // auth
     Route::get('shelf','ShelfController@getBooksOnShelf');                           // auth
-
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Nour section                                                              ////////                                                                                                             ////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,21 +64,9 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Ahmed Hamdy section                                                              ////////                                                                                                             ////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   /* Route::get('reviwes','ReviewController@recentReviews');
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
-    Route::get( 'books/show', 'BookController@show');
-    Route::get('showReviewsForABook','ReviewController@showReviewsForBook');*/
-
-    Route::get('reviwes','ReviewController@recentReviews');
-    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');
-
-    Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
     Route::get('showReviewOfBook','ReviewController@showReviewOfBook');
-
     Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
-
-
     Route::get('books/genre', 'BookController@showByGenre');
     Route::get('Books/book_title','BookController@getBookByTitle');
     Route::get('Books/book_ISBN','BookController@getBookByIsbn');
@@ -108,10 +74,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get( 'books/show', 'BookController@show');
     Route::get('shelf/getbook', 'ShelfController@getBooksOnShelf');                         // auth
     Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');     // Non auth
-    Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');        // Non auth
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');                     // Non auth
-    /////////////////////////////////////////////////////////////////////
-
 });
 
 Route::get('books/genre', 'BookController@showByGenre');                         // Non auth
@@ -120,18 +83,37 @@ Route::get('Books/book_ISBN','BookController@getBookByIsbn');                   
 Route::get('Books/book_Authorname','BookController@getBookByAuthorName');        // Non auth
 Route::get( 'books/show', 'BookController@show');
 
-
-
-
 Route::get( 'test', 'UserController@test');                                // Non auth
 
-
-
+Route::get('showProfile', "UserController@showProfile");                                    
 
 Route::get('search_by_name', 'UserController@searchByName');
 Route::get('search_by_username', 'UserController@searchByUsername');
 Route::get('search_by_name_username', 'UserController@searchByNameOrUsername');
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////      Deprecated       /////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+/*
+    //Book Section
+    //Route::get('books','BookController@index');
+    // Shelf Section
+    //Route::get('shlef/list', 'ShelfController@index');                               // auth
+    //Route::get('shelf/shelfname', 'ShelfController@show');                           // auth
+    //Route::get('shelf/shelfid','ShelfController@userShelves');                       // auth
+    //Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');        // Non auth
+    //Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+      Route::get('reviwes','ReviewController@recentReviews');
+      Route::get('listReviewOfUser','ReviewController@listReviewOfUser');
+      Route::get( 'books/show', 'BookController@show');
+      Route::get('showReviewsForABook','ReviewController@showReviewsForBook');
+
+    //Route::get('reviwes','ReviewController@recentReviews');
+    //Route::get( 'reviwes/users/books', 'ReviewController@getReviewsForListOfBooks');
+
+*/
 
 
 

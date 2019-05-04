@@ -672,7 +672,7 @@ class userController extends Controller
     {
 
         $Validation = array (
-                                "email" => "required|exists:users,email"
+                                "email" => "required|email|exists:users,email"
                             );
 
         $Messages = array   (
@@ -779,7 +779,6 @@ class userController extends Controller
      */
     public function verify(Request $request)
     {
-        //return response()->json(["message"=>"mariam"],200);
         $token = Crypt::encryptString(time());
         $User = User::find($this->ID);
         $User->verified_token = $token;

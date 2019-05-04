@@ -61,7 +61,7 @@ class Review extends Model
         public function deleteshowReviewOfBook($a){
             $res = DB::delete('delete from reviews where id=?',[$a]);
         }
-        public function getuser(){
+        public function getuserMax(){
              $res = DB::select('select MAX(id) from users');
              return (int)$res;
           }

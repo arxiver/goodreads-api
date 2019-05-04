@@ -373,7 +373,7 @@ class ShelfController extends Controller
             return Response::json(array(
                 'status' => 'failed',
                 ),
-                400);
+                404);
             }
         }
         /**

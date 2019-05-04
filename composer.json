@@ -17,7 +17,8 @@
         "mpociot/laravel-apidoc-generator": "^3.4",
         "pusher/pusher-php-server": "~3.0",
         "tymon/jwt-auth": "^1.0.0-rc.2",
-        "wildbit/swiftmailer-postmark": "^3.0"
+        "wildbit/swiftmailer-postmark": "^3.0",
+        "sendgrid/sendgrid": "~7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

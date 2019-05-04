@@ -120,7 +120,8 @@ class userController extends Controller
                                     "name" ,
                                     "username" ,
                                     "image_link",
-                                    "verified"
+                                    "verified",
+                                    "id"
                                 );
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
@@ -194,7 +195,8 @@ class userController extends Controller
                                         "name" ,
                                         "username" ,
                                         "image_link",
-                                        "verified"
+                                        "verified",
+                                        "id"
                                     );
                 $user = User::where("email" , $request["email"])->first();
                 $show = User::find($user->id,$gettingdata);
@@ -678,7 +680,7 @@ class userController extends Controller
             $User = User::where("email" , $request["email"])->first();
             $User->forgot_password_token = $token;
             $User->save();
-            $Url = asset($this->ForgotPasswordRoute . $token);
+            $Url = asset($this->ForgotPasswordRouteFront . $token . "&type=forgot");
             Mail::to($request["email"])->send(new ForgotPassword($Url));
             return response()->json(["message" => "Now , you can go to " .$request["email"]. " to reset your password"],200);
         }
@@ -772,11 +774,12 @@ class userController extends Controller
      */
     public function verify(Request $request)
     {
+        //return response()->json(["message"=>"mariam"],200);
         $token = Crypt::encryptString(time());
         $User = User::find($this->ID);
         $User->verified_token = $token;
         $User->save();
-        $Url = asset($this->VerifyRoute . $token);
+        $Url = asset($this->ForgotPasswordRouteFront . $token . "&type=verify");
         Mail::to($User->email)->send(new VerifiedAccount($Url));
         return response()->json(["message" => "Now , you can go to " .$User->email. " to verify your account"],200);
     }
@@ -798,19 +801,31 @@ class userController extends Controller
      */
     public function checkTokenVerify(Request $request)
     {
-        $token = Crypt::decryptString($request["token"]);
-        if(time() - $token < $this->TokenLife)
+        $Validation = array (
+                                "token" => "required|exists:users,verified_token"
+                            );
+        $Validate = validator::make($request->all() , $Validation);
+        if(!$Validate->fails())
         {
-            $User = User::where("verify_token" , $request["token"])->first();
-            $User->verify_token = null;
-            $User->verified = 1;
-            $User->save();
-            return response()->json(["message" => "You have verified your account"],200);
+            $token = Crypt::decryptString($request["token"]);
+            if(time() - $token < $this->TokenLife)
+            {
+                $User = User::where("verified_token" , $request["token"])->first();
+                $User->verified_token = null;
+                $User->verified = 1;
+                $User->save();
+                return response()->json(["message" => "You have verified your account"],200);
+            }
+            else
+            {
+                return response()->json(["error" => "This url is old , please try to verify your account again"],405);
+            }
         }
         else
         {
             return response()->json(["error" => "This url is old , please try to verify your account again"],405);
         }
+        
     }
 
 

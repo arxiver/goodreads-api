@@ -52,7 +52,6 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////                               Mohamed Mokhtar section                                                                          ////////                                                                                                             ////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('showProfile', "UserController@showProfile");                                    //auth
     Route::post('follow','FollowingController@followUser');                                     //auth
     Route::delete('unfollow','FollowingController@unfollowUser');                               //auth
     Route::get('followers','FollowingController@userFollowers');                                //auth
@@ -127,6 +126,7 @@ Route::get( 'test', 'UserController@test');                                // No
 
 
 
+Route::get('showProfile', "UserController@showProfile");                                    
 
 Route::get('search_by_name', 'UserController@searchByName');
 Route::get('search_by_username', 'UserController@searchByUsername');

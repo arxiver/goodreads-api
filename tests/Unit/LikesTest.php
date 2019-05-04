@@ -14,18 +14,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LikesTest extends TestCase
 {
-
-    /**
-     * test
-     * @return void
-     */
-    public function DeleteReview($review_id,$token)
+    public function DeleteReview($token,$review_id)
     {
-        $review = Review::find($review_id);
-        //get reviewid
-        $reviewId = $review['id'];
         $response = $this->json('DELETE', 'api/reviwes/delete', [ 'token'=> $token ,
-        'token_type' =>'bearer' , 'reviewId' =>$reviewId ]);
+        'token_type' =>'bearer' , 'reviewId' =>$review_id ]);
     }
 
    public function CreateReview($token)
@@ -42,12 +34,6 @@ class LikesTest extends TestCase
         'body' =>'Woooooooooooooow  it is a great booooook']);
     }
 
-
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
     public function Unlike($token,$review_id)
     {
         $review = Review::find($review_id);
@@ -59,10 +45,13 @@ class LikesTest extends TestCase
             'status',
             'Message'
      ]);
-      // Get the record of this Review
-      $reviewtwo = Review::find($review_id);
-      $numberLikestwo =$reviewtwo['likes_count'];
-      $this->assertGreaterThan($numberLikestwo, $numberLikes);
+     $numberLikes-=1;
+     if ($numberLikes < 0){$numberLikes=0;}
+     // Get the record of this Review
+     $reviewtwo = Review::find($review_id);
+     $numberLikestwo =$reviewtwo['likes_count'];
+     if ($numberLikestwo < 0){$numberLikestwo=0;}
+     $this->assertEquals($numberLikes,$numberLikestwo );
     }
 
     /**
@@ -75,7 +64,7 @@ class LikesTest extends TestCase
        // Get the number of users in the database
        $usersCount = User::all()->count();
        // Get id for a user in the databas eto login with it 
-       $randomUserId = 1;//rand(1, $usersCount);
+       $randomUserId = rand(1, $usersCount);
        // Get the record of this user
        $user = User::find($randomUserId);
        // Post request for login 
@@ -85,7 +74,7 @@ class LikesTest extends TestCase
        // store the token in the variable  $token
        $token = $jsonArray['token'];
        $this->CreateReview($token);
-       $reviewsCount = Review::all()->count();
+       $reviewsCount = Review::all()->max('id');
        $review = Review::find($reviewsCount);
        
        $numberLikes =$review['likes_count'];
@@ -106,12 +95,13 @@ class LikesTest extends TestCase
            'user',
            'resourse_id'    
     ]);
+    $numberLikes+=1;
      // Get the record of this Review
      $reviewtwo = Review::find($reviewsCount);
      $numberLikestwo =$reviewtwo['likes_count'];
-     $this->assertGreaterThan($numberLikes,$numberLikestwo );
+     $this->assertEquals($numberLikes,$numberLikestwo );
      $review_id=$reviewtwo['id'];
      $this->Unlike($token,$review_id);
-     $this->DeleteReview($review_id,$token);
+     $this->DeleteReview($token,$review_id);
     }
 }

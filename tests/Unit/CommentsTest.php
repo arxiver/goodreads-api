@@ -60,7 +60,7 @@ class CommentsTest extends TestCase
         // then create a record in the reviews table 
         // update some atributes in the tables of users & book 
         $response = $this->json('POST', 'api/makeComment', [ 'token'=> $token ,'token_type' =>'bearer' ,
-        'id'=> $reviewId ,'type'=>0,'body' =>'Woooooooooooooow  it is a great booooook']);
+        'id'=> $reviewId,'body' =>'Woooooooooooooow  it is a great booooook']);
         // Show the response in the cmd
         /*echo "\n";
         echo $response->content();
@@ -70,7 +70,6 @@ class CommentsTest extends TestCase
             'status',
             'user',
             'resourse_id',
-            'resourse_type',
             'comment_body'
      ]);
       // Get the record of this Review

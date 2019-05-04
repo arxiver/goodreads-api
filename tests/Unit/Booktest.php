@@ -7,16 +7,14 @@ use App\User;
 use App\Http\Controllers\ReviewController;
 use Tests\TestCase;
 use Illuminate\App\Http\Request;
-use DB;
-use Validator;
-use Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookTest extends TestCase
 {
     /**
-     * A basic unit test example.
+     * 
      * @test
      * @return void
      */
@@ -34,7 +32,11 @@ class BookTest extends TestCase
        $this->assertTrue(true);
 
     }
-    public function test1()
+    /**
+     * test
+     * @return void
+     */
+    public function testA()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -65,7 +67,11 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][ $indicator]['title']);
         $this->assertEquals(1 , $data['pages'][ $indicator]['isbn']);
     }
-    public function test2()
+    /**
+     * test
+     * @return void
+     */
+    public function testB()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -83,7 +89,11 @@ class BookTest extends TestCase
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
     }
-    public function test3()
+    /**
+     * test
+     * @return void
+     */
+    public function testC()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -102,7 +112,11 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
-    public function test4()
+    /**
+     * test
+     * @return void
+     */
+    public function testD()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -126,7 +140,11 @@ class BookTest extends TestCase
          $this->assertEquals('ppp',$data['pages'][$indicator]['title']);
         $this->assertEquals(1 , $data['pages'][$indicator]['isbn']);
     }
-    public function test5()
+    /**
+     * test
+     * @return void
+     */
+    public function testF()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -145,7 +163,11 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
-    public function test6()
+    /**
+     * test
+     * @return void
+     */
+    public function testR()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -162,6 +184,10 @@ class BookTest extends TestCase
         $data = json_decode($res->getContent(),true);
         $this->assertEquals(1000000 , $data['pages'][0]['book_id']);
     }
+    /**
+     * test
+     * @return void
+     */
     public function testdeletion()
     {
         $tt1 = new Review;

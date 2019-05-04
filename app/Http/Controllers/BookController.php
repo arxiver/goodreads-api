@@ -45,10 +45,10 @@ class BookController extends Controller
      * }
      *
      */
-    public function index()
+    /*public function index()
     {
         //
-    }
+    }*/
     /**
      * @group [Book].Show
      *   Show books by id

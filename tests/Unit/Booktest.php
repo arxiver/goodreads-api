@@ -1,7 +1,6 @@
 <?php
 
 namespace Tests\Unit;
-namespace Tests\Unit;
 use App\Review;
 use App\Book;
 use App\User;
@@ -21,7 +20,7 @@ class BookTest extends TestCase
      * @test
      * @return void
      */
-    public function createtest()
+    public function testcreate()
     {
         $tt1 = new Review;
         $tt3 = new Book;
@@ -35,7 +34,7 @@ class BookTest extends TestCase
        $this->assertTrue(true);
 
     }
-    public function testExample1()
+    public function test1()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -66,7 +65,7 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][ $indicator]['title']);
         $this->assertEquals(1 , $data['pages'][ $indicator]['isbn']);
     }
-    public function testExample2()
+    public function test2()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -84,7 +83,7 @@ class BookTest extends TestCase
         $this->assertEquals('action' , $data['pages'][0]['genre']);
         $this->assertEquals('ppp',$data['pages'][0]['title']);
     }
-    public function testExample3()
+    public function test3()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -103,7 +102,7 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
-    public function testExample4()
+    public function test4()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -127,7 +126,7 @@ class BookTest extends TestCase
          $this->assertEquals('ppp',$data['pages'][$indicator]['title']);
         $this->assertEquals(1 , $data['pages'][$indicator]['isbn']);
     }
-    public function testExample5()
+    public function test5()
     {
         ///////////////////////////////////
         // Get the number of users in the database
@@ -146,7 +145,7 @@ class BookTest extends TestCase
         $this->assertEquals('ppp',$data['pages'][0]['title']);
         $this->assertEquals(1 , $data['pages'][0]['isbn']);
     }
-    public function testExample6()
+    public function test6()
     {
         ///////////////////////////////////
         // Get the number of users in the database

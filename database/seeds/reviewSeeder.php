@@ -330,7 +330,7 @@ class reviewSeeder extends Seeder
             );
         Review::create($Create24);
 
-        $Create25 = array(
+        /*$Create25 = array(
             'user_id' =>7,
             'book_id'=>1,
             'body'=> Str::random(10),
@@ -383,6 +383,6 @@ class reviewSeeder extends Seeder
             'updated_at' =>now(),
             'created_at'=>now(),
             );
-        Review::create($Create28);
+        Review::create($Create28);*/
     }
 }

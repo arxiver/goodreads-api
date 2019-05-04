@@ -845,10 +845,10 @@ class userController extends Controller
      *	}
      *}
      */
-    public function getUser()
+    /*public function getUser()
     {
         // to do
-    }
+    }*/
     /**
      * @group [User].show Profile
      *

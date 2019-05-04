@@ -29,20 +29,20 @@ class ShelfController extends Controller
      * "books_count" : 4
      * }
      */
-    public function index()
+    /*public function index()
     {
         //
-    }
+    }*/
 
     /**
      * Create a new book shelf
      * @authenticated
      * @bodyParam shelf_name string required The name of the new shelf.
      */
-    public function create()
+    /*public function create()
     {
         //
-    }
+    }*/
 
     /**
      * Show a shelf
@@ -50,10 +50,10 @@ class ShelfController extends Controller
      * @bodyParam shelf_name string required The name of the shelf.
      * @return \Illuminate\Http\Response
      */
-    public function show(Shelf $shelf)
+    /*public function show(Shelf $shelf)
     {
         //
-    }
+    }*/
 
     /**
      * @group [Shelf].Add Book
@@ -302,19 +302,19 @@ class ShelfController extends Controller
 	 * }
      *}
      */
-    public function userShelves($user_id)
+    /*public function userShelves($user_id)
     {
 
-    }
+    }*/
     /**
      * Destroy a shelf
      * @authenticated
      * @bodyParam shelf_name string required The name of the shelf.
      */
-    public function destroy(Shelf $shelf)
+    /*public function destroy(Shelf $shelf)
     {
         //
-    }
+    }*/
     /**
      * @group [Shelf].getBooksOnShelf
      * show books on the shelf

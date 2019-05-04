@@ -694,16 +694,7 @@ class signupTest extends TestCase
     {
         $Status = 200;
         $SendingData = array(
-                                "email"                 => $this->Array["Valid email"],
-                                "password"              => $this->Array["Valid password"],
-                                "password_confirmation" => $this->Array["Valid password"],
-                                "name"                  => $this->Array["Valid name"],
-                                "gender"                => $this->Array["Valid gender"],
-                                "birthday"              => $this->Array["Valid birthday"],
-                                "country"               => $this->Array["Valid country"],
-                                "city"                  => $this->Array["Valid city"],
-                                "token" => $this->token,
-                                "token_type" => $this->tokenType
+                                // empty
                             );
                         
         $hashedPassword = Hash::make($this->Array["Valid password"]);

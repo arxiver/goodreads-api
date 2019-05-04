@@ -253,7 +253,6 @@ class userController extends Controller
                                 "username",
                                 "email",
                                 "email_verified_at",
-                                "password",
                                 "link",
                                 "image_link",
                                 "small_image_link",
@@ -611,7 +610,10 @@ class userController extends Controller
             $OldUrl = $User->image_link;
             $User->image_link = $URL;
             $User->save();
-            Storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory . $OldUrl);
+            if($OldUrl != "default.jpg")
+            {
+                Storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory . $OldUrl);
+            }
             return response()->json(["message" => "You have changed your profile picture"]);
         }
         else
@@ -640,7 +642,10 @@ class userController extends Controller
         {
             auth()->logout();
             $User = User::find($this->ID); 
-            storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory .$User->image_link);
+            if($User->image_link != "default.jpg")
+            {
+                storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory .$User->image_link);
+            }
             $User->delete();
             return response()->json(["message" => "You have deleted your account"],200);
         }
@@ -1079,8 +1084,7 @@ class userController extends Controller
 
     public function test(Request $request)
     {
-        Mail::to("mrehab745@gmail.com")->send(new testmail());
-        return response()->json(["message" => "Good you have sent your message"],200);
+        echo phpinfo();
     }
 
 }

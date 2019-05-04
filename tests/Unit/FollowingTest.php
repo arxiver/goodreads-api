@@ -26,25 +26,44 @@ class FollowingTest extends TestCase
         /**
          * Login assertion
          */
-        $loginResponse = $this->json('POST', 'api/login', ['email' =>$user['email'], 'password' => 'password']);
+        $loginResponse = $this->json('POST', 'api/login', ['email' => $user['email'], 'password' => 'password']);
         $loginResponse->assertSee("token")->assertStatus(200);
 
         /**
          * Getting the token
          */
-        $jsonArray = json_decode($loginResponse->content(),true);
+        $jsonArray = json_decode($loginResponse->content(), true);
         $token = $jsonArray['token'];
 
         /**
          * Following assertion for GET following method
          */
-        $response = $this->json('GET', 'api/following', [ 'token'=> $token ,'token_type' =>'bearer']);
+        $response = $this->json('GET', 'api/following', ['token' => $token, 'token_type' => 'bearer']);
+        $response->assertStatus(200)->assertSee('following');
+        $followingArray = json_decode($response->content(), true);
+        $i = 0;
+        while ($i < sizeof($followingArray["following"])) {
+            $this->assertDatabaseHas('followings', [
+                'user_id' => $followingArray["following"][$i]["id"],
+                'follower_id' => $randomUserId
+            ]);
+            $i++;
+        }
+        $anoterUserId = (DB::select('SELECT id FROM users ORDER BY RAND() LIMIT 1'))[0]->id;
+        $response = $this->json('GET', 'api/following', ['token' => $token, 'token_type' => 'bearer', 'user_id' => $anoterUserId]);
         $response->assertStatus(200)->assertSee('following');
 
+        $followingArray = json_decode($response->content(), true);
+        $i = 0;
+        while ($i < sizeof($followingArray["following"])) {
+            $this->assertDatabaseHas('followings', [
+                'user_id' => $followingArray["following"][$i]["id"],
+                'follower_id' => $anoterUserId
+            ]);
+            $i++;
+        }
         // bad request with negative id
-        $response = $this->json('GET', 'api/following', ['token' => $token, 'token_type' => 'bearer' , 'user_id'=> -1 ]);
+        $response = $this->json('GET', 'api/following', ['token' => $token, 'token_type' => 'bearer', 'user_id' => -1]);
         $response->assertStatus(404);
-
-
     }
 }

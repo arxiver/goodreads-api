@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for D:\Programs\PHP\xampp\xampp\htdocs\phase1\goodreads-api\app\Mail</title>
+  <title>Dashboard for D:\Programs\PHP\xampp\xampp\htdocs\phase1\goodreads-api\app\Events</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">D:\Programs\PHP\xampp\xampp\htdocs\phase1\goodreads-api\app</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Mail</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Events</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -58,9 +58,6 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="ForgotPassword.php.html#10">App\Mail\ForgotPassword</a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="VerifiedAccount.php.html#10">App\Mail\VerifiedAccount</a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="testmail.php.html#10">App\Mail\testmail</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -114,12 +111,6 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="ForgotPassword.php.html#14"><abbr title="App\Mail\ForgotPassword::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="ForgotPassword.php.html#19"><abbr title="App\Mail\ForgotPassword::build">build</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="VerifiedAccount.php.html#15"><abbr title="App\Mail\VerifiedAccount::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="VerifiedAccount.php.html#20"><abbr title="App\Mail\VerifiedAccount::build">build</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="testmail.php.html#15"><abbr title="App\Mail\testmail::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="testmail.php.html#20"><abbr title="App\Mail\testmail::build">build</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -164,7 +155,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([3,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -182,7 +173,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([6,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,3], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -232,7 +223,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[0,2,"<a href=\"ForgotPassword.php.html#10\">App\\Mail\\ForgotPassword<\/a>"],[0,2,"<a href=\"VerifiedAccount.php.html#10\">App\\Mail\\VerifiedAccount<\/a>"],[0,2,"<a href=\"testmail.php.html#10\">App\\Mail\\testmail<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,3,"<a href=\"notify.php.html#13\">App\\Events\\notify<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -256,7 +247,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[0,1,"<a href=\"ForgotPassword.php.html#14\">App\\Mail\\ForgotPassword::__construct<\/a>"],[0,1,"<a href=\"ForgotPassword.php.html#19\">App\\Mail\\ForgotPassword::build<\/a>"],[0,1,"<a href=\"VerifiedAccount.php.html#15\">App\\Mail\\VerifiedAccount::__construct<\/a>"],[0,1,"<a href=\"VerifiedAccount.php.html#20\">App\\Mail\\VerifiedAccount::build<\/a>"],[0,1,"<a href=\"testmail.php.html#15\">App\\Mail\\testmail::__construct<\/a>"],[0,1,"<a href=\"testmail.php.html#20\">App\\Mail\\testmail::build<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"notify.php.html#24\">App\\Events\\notify::__construct<\/a>"],[100,1,"<a href=\"notify.php.html#36\">App\\Events\\notify::broadcastOn<\/a>"],[100,1,"<a href=\"notify.php.html#40\">App\\Events\\notify::broadcastAs<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

@@ -332,7 +332,7 @@ class ActivitiesController extends Controller
             $r = collect();
             $r = $r->merge($x);
             $r = $r->merge($x1);
-            $r = array_diff($r,[$this->ID]);
+            $r = array_diff(array($r),[$this->ID]);
             $users = User::whereIn('id',$r)->get();
             //echo $r;
             //end of part1 notifications
@@ -343,6 +343,7 @@ class ActivitiesController extends Controller
             $n = \App\Notification::orderby('n_id', 'desc')->limit(count($r))->get(); 
             foreach($n as $x)
             {
+                
                 $img=$x->data['user_image_link'];
                 $x->data=array_diff($x->data,['user_image_link'=>$img]);
                 $x->data+=['user_image_link'=>$this->GetUrl()."/".$img];
@@ -799,7 +800,7 @@ class ActivitiesController extends Controller
                 $r = collect();
                 $r = $r->merge($x);
                 $r = $r->merge($x1);
-                $r = array_diff($r,[$this->ID]);
+                $r = array_diff(array($r),[$this->ID]);
 
                 $users = User::whereIn('id',$r)->get();
                 //echo $r;

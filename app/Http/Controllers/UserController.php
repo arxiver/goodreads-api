@@ -19,12 +19,12 @@ use Crypt;
 /**
  * [2] The verification
  *      [1] I will use the same column for the token of the verification and reset password
- * 
+ *
  * [3] Guest
- *      [1] I will divide all function into 3 types and make the common type without middleware and return with every response a paramater determine if it is guest or user 
+ *      [1] I will divide all function into 3 types and make the common type without middleware and return with every response a paramater determine if it is guest or user
  */
 /**
- * @group User 
+ * @group User
  *
  * APIs for managing users (Sofyan)
  */
@@ -41,7 +41,7 @@ class userController extends Controller
     private $ForgotPasswordRouteFront = "http://ec2-52-90-5-77.compute-1.amazonaws.com/app/#/forgetPassword?token=";
     private $VerifyRouteFront="";
     private $TokenLife = 60*60;     // The life of the token
-    
+
     //
     /**
      * Sign Up
@@ -65,8 +65,8 @@ class userController extends Controller
      *}
      * @response 200{
      * "status": "true",
-     * "user": {   
-     *    "name": "", 
+     * "user": {
+     *    "name": "",
      *    "username": "",
      *    "image_link": ""
      *},
@@ -126,11 +126,11 @@ class userController extends Controller
             $show = User::find($user->id,$gettingdata);
             $show["image_link"] = asset($this->PublicUrl . $this->AvatarDirectory . $show["image_link"]);
             return response()->json(["user" => $show , "token" => $token , "token_type" => "bearer" , "expires_in" => auth()->factory()->getTTL() * 60],200);
-        } 
-        else 
+        }
+        else
         {
             return response()->json(["errors"=> $data->messages()->first()], 405);
-        } 
+        }
     }
 
 
@@ -139,13 +139,13 @@ class userController extends Controller
     /**
      * @group [User].Login
      * logIn function
-     * 
+     *
      * Take the request has [email , password] and check that the email is email type and exists in database and also the password
-     * 
-     * if all is correct return a response with status 200 and json file has [name , username , image_link] 
-     * 
+     *
+     * if all is correct return a response with status 200 and json file has [name , username , image_link]
+     *
      * if there are any errors, return a response with status 405 has the message describe the error
-     * 
+     *
      * @bodyParam email string required .
      * @bodyParam password string required .
      * @response 405 {
@@ -159,8 +159,8 @@ class userController extends Controller
      *}
      * @response 200{
      * "status": "true",
-     * "user": {   
-     *    "name": "", 
+     * "user": {
+     *    "name": "",
      *    "username": "",
      *    "image_link": ""
      *},
@@ -247,7 +247,7 @@ class userController extends Controller
     public function showSetting(Request $request)
     {
         $gettingData = array
-                            (   
+                            (
                                 "id",
                                 "name",
                                 "username",
@@ -282,16 +282,16 @@ class userController extends Controller
     /**
      * @group [User].Logout
      * logOut function
-     * 
-     * Take the request has [Authorization] in the header and this paramater is checked in middleware 
-     * 
+     *
+     * Take the request has [Authorization] in the header and this paramater is checked in middleware
+     *
      * if it valid one the function return it into invalid and return response with status 200 with message [you have logged out]
-     * 
+     *
      * if this [Authorization] is invalid the middleware return a response with status 405 has a message [UnAuthorized].
-     * 
+     *
      * @authenticated
-     * 
-     * 
+     *
+     *
      * @response 200{
      * "message": "You have logged out"
      *}
@@ -416,7 +416,7 @@ class userController extends Controller
         {
             return response()->json(["errors"=> $valid->messages()->first()] , 405);
         }
-        
+
     }
 
     /**
@@ -470,7 +470,7 @@ class userController extends Controller
      */
     public function changeBirthday(Request $request)
     {
-        
+
         $validation = array("newBirthday" => "required|date|after:-" . $this->youngerThan . "years|before:-" . $this->olderThan . "years");
         $messages       = array(
                                     "newBirthday.before" => "You must be older than ". $this->olderThan,
@@ -518,7 +518,7 @@ class userController extends Controller
         {
             return response()->json(["errors" => $Valid->messages()->first()],405);
         }
-        
+
 
     }
 
@@ -590,7 +590,7 @@ class userController extends Controller
      */
     public function changeImage(Request $request)
     {
-        $Validatoin = array 
+        $Validatoin = array
                             (
                                 "image" => "required|image"
                             );
@@ -641,7 +641,7 @@ class userController extends Controller
         if(Auth::attempt(["id" => $this->ID , "password" => $request["password"]]))
         {
             auth()->logout();
-            $User = User::find($this->ID); 
+            $User = User::find($this->ID);
             if($User->image_link != "default.jpg")
             {
                 storage::disk("public")->delete($this->PrivateUrl . $this->AvatarDirectory .$User->image_link);
@@ -652,7 +652,7 @@ class userController extends Controller
         else
         {
             return response()->json(["errors" => "The password is invalid."],405);
-        }  
+        }
     }
 
 
@@ -830,7 +830,7 @@ class userController extends Controller
         {
             return response()->json(["error" => "This url is old , please try to verify your account again"],405);
         }
-        
+
     }
 
 
@@ -845,25 +845,25 @@ class userController extends Controller
      *	}
      *}
      */
-    public function getUser()
+    /*public function getUser()
     {
         // to do
-    }
+    }*/
     /**
      * @group [User].show Profile
-     * 
+     *
      * showProfile function
-     * 
-     * checking the request given paramaters if user_id exists 
-     * 
+     *
+     * checking the request given paramaters if user_id exists
+     *
      * it returns his profile-details
-     * 
+     *
      * other-wise it returns authenticated user`s profile from database user table .
-     * 
+     *
      * @bodyParam id int optional this parameter to show the info of the other user (default authenticated user) .
      *
      * @authenticated
-     * 
+     *
      * @response 200
      *  {
      *     "id": 1,
@@ -905,7 +905,7 @@ class userController extends Controller
 
         /**
          * Query finding user data
-         */      
+         */
 
         $data = User::where('id',$userId)->get()[0];
         if( $request->has(['id']) && ( $request->id != $this->ID ) )
@@ -962,6 +962,9 @@ class userController extends Controller
     public function searchByName(Request $request)
     {
         $name = $request->has(['name']) ? $request->name : abort(404);
+        $emptyStr = str_replace(' ', '', $name);
+        if (empty($emptyStr) == 1) abort(404);
+
         $query = "select id , username , name ,image_link , gender , country ,
                     city ,followers_count ,following_count from users where name like "."'%".$name."%'" ;
         $data = DB::select($query);
@@ -1027,6 +1030,9 @@ class userController extends Controller
     public function searchByUsername(Request $request)
     {
         $username = $request->has(['username']) ? $request->username : abort(404);
+        $emptyStr = str_replace(' ', '', $username);
+        if (empty($emptyStr) == 1) abort(404);
+
         $query = "select id , username , name ,image_link , gender , country ,
                     city ,followers_count ,following_count from users where username like " . "'%" . $username . "%'";
         $data = DB::select($query);
@@ -1069,6 +1075,9 @@ class userController extends Controller
     public function searchByNameOrUsername(Request $request)
     {
         $name = $request->has(['name']) ? $request->name : abort(404);
+        $emptyStr = str_replace(' ', '', $name);
+        if (empty($emptyStr) == 1) abort(404);
+
         $query = "select id , username , name ,image_link , gender , country ,
                     city ,followers_count ,following_count from users
                     where name like " . "'%" . $name . "%' or username like "."'%".$name."%' " ;

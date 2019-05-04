@@ -28,7 +28,7 @@ class userTest extends TestCase
         $tt3->setauthor(1000000,'a7med7amdy','2019-03-21 00:00:00','2019-03-21 00:00:00');
         $tt3->setBook(1000000,'ppp',1,'dsds','2019-03-21 00:00:00','fgdg','dfgdg','fdgd',4,5,9,1000000,8,'2019-03-21 00:00:00','2019-03-21 00:00:00');
         $tt3->setgenre(1000000,1000000,'action');
-        $user=$tt1->getuser(); 
+        $user=$tt1->getuserMax(); 
        $tt1->setshowReviewOfBook(1000000,((int)$user),1000000,'dsds',0,5,4,4,'2019-03-21 00:00:00','2019-03-21 00:00:00');
         $this->assertTrue(true);
 
@@ -120,7 +120,7 @@ class userTest extends TestCase
         $token = $jsonArray['token'];
         ////////////////////////////////////////
         $tt1 = new Review;
-        $resp=$tt1->getuser();
+        $resp=$tt1->getuserMax();
         $res=$this->json('get','api/showReviewForBookForUser',['userId'=>(string)$resp,'bookId'=>'1000000','token'=>$token,'token_type'=>'bearer']);
       //  $res= $tt2->showReviewForBookForUser(2,1000000)->getContent();
         $data = json_decode($res->getContent(),true);

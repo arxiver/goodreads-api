@@ -10,7 +10,6 @@ Route::group(["middleware" => "guest"] , function(){       // This middleware is
     Route::post('signup', "UserController@signUp");
     Route::post('login', "UserController@logIn");
     Route::get('checktoken', "UserController@checkToken");
-    Route::get('checktokenverify', "UserController@checkTokenVerify");
     Route::post('forgotpassword', "UserController@forgotPassword");
     Route::post('resetpassword', "UserController@resetPassword");
 });
@@ -76,7 +75,7 @@ Route::group(["middleware" => "authorized"], function(){     // This middleware 
     Route::get('showReviewForBookForUser','ReviewController@showReviewForBookForUser');     // Non auth
     Route::get( 'reviwes/books', 'ReviewController@getReviewsByTitle');                     // Non auth
 });
-
+Route::get('checktokenverify', "UserController@checkTokenVerify");
 Route::get('books/genre', 'BookController@showByGenre');                         // Non auth
 Route::get('Books/book_title','BookController@getBookByTitle');                  // Non auth
 Route::get('Books/book_ISBN','BookController@getBookByIsbn');                    // Non auth

@@ -22,7 +22,7 @@ class updatesTest extends TestCase
     /**
      * A basic unit test example.
      * @test
-     * @group nour
+     * 
      * @return void
      */
     public function testUpdates()

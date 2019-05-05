@@ -11,27 +11,27 @@ class GenreSeeder extends Seeder
      */
     public function run()
     {
-        $Create = array(
+        $Create1 = array(
             'book_id'=>1,
-            'type' =>"Young Adult,Historical,Fiction,Adult"
+            'type' =>"Historical"
         );
-        Genre::create($Create);
+        Genre::create($Create1);
 
         $Create2 = array(
             'book_id'=>2,
-            'type' =>"Young Adult,Retellings,Fantacy"
+            'type' =>"Fantacy"
         );
         Genre::create($Create2);
 
         $Create3 = array(
             'book_id'=>3,
-            'type' =>"Young Adult,Contemporary,Fiction,"
+            'type' =>"Young Adult"
         );
         Genre::create($Create3);
 
         $Create4 = array(
             'book_id'=>4,
-            'type' =>"Young Adult,Contemporary,Fiction,Science Fiction > Dystopia"
+            'type' =>"Fiction"
         );
         Genre::create($Create4);
     }

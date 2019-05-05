@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GenreSeeder::class);
         $this->call(FollowSeeder::class);
         factory(App\Shelf::class,4)->create();
-        factory(App\Review::class,20)->create();
+        $this->call(reviewSeeder::class);
+        //factory(App\Review::class,1)->create();
         /*factory(App\User::class, 50)->create();
         factory(App\Author::class, 20)->create();
         factory(App\Book::class, 50)->create();

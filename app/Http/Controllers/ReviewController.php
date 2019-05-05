@@ -279,8 +279,8 @@ class ReviewController extends Controller
      * Recent reviews from all members.
      * @authenticated
      */
-    public function recentReviews()
-    { }
+    /*public function recentReviews()
+    { }*/
     /**
      * @group [Review].Delete Review
      * removeReview function
@@ -436,9 +436,9 @@ class ReviewController extends Controller
      * @bodyParam isbns ArrayofInt required  Array of ISBNs(1000 ISBNs per request max.).
      *
      */
-    public function getReviewsForListOfBooks()
+    /*public function getReviewsForListOfBooks()
     {
-    }
+    }*/
 
 
     /**
@@ -523,7 +523,7 @@ class ReviewController extends Controller
     else{
         return Response::json(array(
             'status' => 'failed'),
-            400);
+            404);
     }
     }
 
@@ -532,13 +532,13 @@ class ReviewController extends Controller
      * @authenticated
      *
      */
-    public function listMyReviews()
+    /*public function listMyReviews()
     {
         $userId = $this->ID;
         User::findOrFail($userId);
         $data = Review::where('user_id', $userId)->get();
         return response()->json(array('my_reviews' => $data), 200);
-    }
+    }*/
 
 
 
@@ -547,9 +547,9 @@ class ReviewController extends Controller
      * @authenticated
      * @bodyParam userId required id of the user
      */
-    public function listReviewOfUser()
+    /*public function listReviewOfUser()
     {
-    }
+    }*/
 
    /**
     * @group [Review].show Review For Book
@@ -661,7 +661,7 @@ class ReviewController extends Controller
             return Response::json(array(
                 'status' => 'failed',
                 ),
-                400);
+                404);
         }
     }
 
@@ -758,7 +758,7 @@ class ReviewController extends Controller
         return Response::json(array(
             'status' => 'failed'
             ),
-            400);
+            404);
     }
     }
     /**
@@ -857,7 +857,7 @@ class ReviewController extends Controller
         return Response::json(array(
             'status' => 'failed'
             ),
-            400);
+            404);
     }
 }
 

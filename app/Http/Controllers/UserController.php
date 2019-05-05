@@ -807,7 +807,7 @@ class userController extends Controller
     public function checkTokenVerify(Request $request)
     {
         $Validation = array (
-                                "token" => "required|exists:users,verified_token"
+                                "token" => "required"
                             );
         $Validate = validator::make($request->all() , $Validation);
         if(!$Validate->fails())

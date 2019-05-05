@@ -39,6 +39,7 @@ class userController extends Controller
     private $ForgotPasswordRoute = "api/checktoken?token=";
     private $VerifyRoute = "api/checktokenverify?token=";
     private $ForgotPasswordRouteFront = "http://ec2-52-90-5-77.compute-1.amazonaws.com/app/#/forgetPassword?token=";
+    //private $ForgotPasswordRouteFront ="http://localhost:4200/#/forgetPassword?token=";
     private $VerifyRouteFront="";
     private $TokenLife = 60*60;     // The life of the token
 
@@ -827,7 +828,7 @@ class userController extends Controller
         }
         else
         {
-            return response()->json(["error" => $Validate->messages()->first()],405);
+            return response()->json(["errors" => "This url is old , please try to verify your account again"],405);
         }
 
     }

@@ -827,7 +827,7 @@ class userController extends Controller
         }
         else
         {
-            return response()->json(["error" => "This url is old , please try to verify your account again"],405);
+            return response()->json(["error" => $Validate->messages()->first()],405);
         }
 
     }

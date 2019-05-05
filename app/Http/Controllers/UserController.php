@@ -784,7 +784,6 @@ class userController extends Controller
         $User = User::find($this->ID);
         $User->verified_token = $token;
         $User->save();
-        return response()->json(["test" => $User->verified_token],200);
         $Url = asset($this->ForgotPasswordRouteFront . $token . "&type=verify");
         Mail::to($User->email)->send(new VerifiedAccount($Url));
         return response()->json(["message" => "Now , you can go to " .$User->email. " to verify your account"],200);
@@ -829,7 +828,7 @@ class userController extends Controller
         }
         else
         {
-            return response()->json(["errors" => "This url is old , please try to verify your account again"],405);
+            return response()->json(["error" => "This url is old , please try to verify your account again"],405);
         }
 
     }
